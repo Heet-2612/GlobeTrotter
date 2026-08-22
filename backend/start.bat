@@ -14,7 +14,8 @@ set SPRING_DATASOURCE_USERNAME=postgres
 set SPRING_DATASOURCE_PASSWORD=GlobeTrotter@2026
 set SPRING_DATASOURCE_DRIVER=org.postgresql.Driver
 
-:: JPA / Flyway
+:: JPA manages schema automatically (ddl-auto=update)
+:: No Flyway needed for local dev
 set SPRING_JPA_HIBERNATE_DDL_AUTO=update
 set SPRING_JPA_SHOW_SQL=false
 set SPRING_FLYWAY_ENABLED=false
@@ -36,6 +37,7 @@ if errorlevel 1 (
 )
 
 echo [2] Starting GlobeTrotter Backend on port 8080...
+echo [INFO] JPA will auto-manage the database schema on startup.
 echo.
 java -jar "%~dp0target\globetrotter-backend-0.0.1-SNAPSHOT.jar"
 pause
