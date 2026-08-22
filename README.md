@@ -27,7 +27,7 @@ Planning multi-city travel often involves juggling disparate tools for destinati
 
 ---
 
-## 🛠 Recommended Tech Stack `[Technical Recommendation]`
+## 🛠 Tech Stack
 
 - **Frontend**: React (Vite SPA), React Router, TailwindCSS / Custom CSS
 - **Backend**: Java Spring Boot (REST API), Spring Security (JWT), Spring Data JPA
@@ -39,7 +39,7 @@ Planning multi-city travel often involves juggling disparate tools for destinati
 ## 📂 Repository Structure
 
 ```text
-GlobeTrotter_Hackathon/
+GlobeTrotter/
 ├── README.md                   # Project overview & documentation index
 ├── docs/                       # Official project documentation
 │   ├── PRD.md                  # Product Requirements Document
@@ -58,12 +58,12 @@ GlobeTrotter_Hackathon/
 ## 📖 Documentation Index
 
 For detailed specifications, refer to the documentation files:
-- [Product Requirements Document (PRD)](file:///c:/VScode/GlobeTrotter_Hackathon/docs/PRD.md)
-- [Technical Architecture](file:///c:/VScode/GlobeTrotter_Hackathon/docs/ARCHITECTURE.md)
-- [Database Schema & ER Diagram](file:///c:/VScode/GlobeTrotter_Hackathon/docs/DATABASE.md)
-- [REST API Specifications](file:///c:/VScode/GlobeTrotter_Hackathon/docs/API.md)
-- [Hackathon Implementation Plan](file:///c:/VScode/GlobeTrotter_Hackathon/docs/IMPLEMENTATION_PLAN.md)
-- [Live Demo Script](file:///c:/VScode/GlobeTrotter_Hackathon/docs/DEMO.md)
+- [Product Requirements Document (PRD)](docs/PRD.md)
+- [Technical Architecture](docs/ARCHITECTURE.md)
+- [Database Schema & ER Diagram](docs/DATABASE.md)
+- [REST API Specifications](docs/API.md)
+- [Hackathon Implementation Plan](docs/IMPLEMENTATION_PLAN.md)
+- [Live Demo Script](docs/DEMO.md)
 
 ---
 
@@ -80,3 +80,34 @@ Login / Signup
   ➔ Share Public URL 
   ➔ Clone Trip ("Copy Trip")
 ```
+
+---
+
+## 💻 How to Run Locally
+
+### Prerequisites
+- Node.js (v18+)
+- Java 17+
+- Maven
+- PostgreSQL
+
+### 1. Database Setup
+1. Ensure PostgreSQL is running.
+2. Create a database named `globetrotter`.
+3. Configure the database credentials in `backend/.env` or `backend/src/main/resources/application.properties`.
+
+### 2. Backend Setup
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+The backend server will run on `http://localhost:8080`.
+
+### 3. Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+The frontend app will run on `http://localhost:5173`.
