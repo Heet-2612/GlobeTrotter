@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   MapPin, Calendar, Clock, DollarSign, Plus, 
   Trash2, ArrowUp, ArrowDown, Sparkles, ChevronRight, 
-  AlertCircle, CheckCircle2, Search, Eye, Share2, Info
+  AlertCircle, CheckCircle2, Search, Eye, Share2, Info, Edit3
 } from 'lucide-react';
 import { useTrip } from '../context/TripContext';
 import { cityService } from '../services/cityService';
@@ -18,7 +18,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
   onSelectTab, onOpenShareModal 
 }) => {
   const { 
-    activeTrip, addStop, deleteStop, reorderStops, 
+    activeTrip, addStop, updateStop, deleteStop, reorderStops, 
     assignActivity, deleteTripActivity 
   } = useTrip();
 
@@ -28,6 +28,14 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
   const [stopStartDate, setStopStartDate] = useState('');
   const [stopEndDate, setStopEndDate] = useState('');
   const [stopNotes, setStopNotes] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  // Edit Stop Modal State
+  const [editingStop, setEditingStop] = useState<TripStop | null>(null);
+  const [editStartDate, setEditStartDate] = useState('');
+  const [editEndDate, setEditEndDate] = useState('');
+  const [editNotes, setEditNotes] = useState('');
+  const [editError, setEditError] = useState<string | null>(null);
 
   // Activity Assignment Modal State
   const [assigningStop, setAssigningStop] = useState<TripStop | null>(null);
@@ -52,16 +60,18 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
     }
   }, [activeTrip]);
 
-  // Load activities when assigning stop changes
   useEffect(() => {
     if (assigningStop) {
-      cityService.getActivitiesForCity(assigningStop.cityId).then(acts => {
-        setAvailableActivities(acts);
-        if (acts.length > 0) {
-          setSelectedActivityId(acts[0].id);
-          setActivityCost(acts[0].estimatedCost);
-        }
-      });
+      const cityId = assigningStop.cityId || (assigningStop.city ? assigningStop.city.id : 0);
+      if (cityId) {
+        cityService.getActivitiesForCity(cityId).then(acts => {
+          setAvailableActivities(acts);
+          if (acts.length > 0) {
+            setSelectedActivityId(acts[0].id);
+            setActivityCost(acts[0].estimatedCost);
+          }
+        });
+      }
       setActivityDate(assigningStop.startDate);
     }
   }, [assigningStop]);
@@ -86,17 +96,52 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
 
   const handleAddStopSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedCityId) return;
+    setError(null);
 
-    await addStop(activeTrip.id, {
-      cityId: Number(selectedCityId),
-      startDate: stopStartDate || activeTrip.startDate,
-      endDate: stopEndDate || activeTrip.endDate,
-      notes: stopNotes.trim(),
-    });
+    if (!selectedCityId) {
+      setError('Please select a destination city.');
+      return;
+    }
+    if (new Date(stopEndDate) < new Date(stopStartDate)) {
+      setError('Departure date cannot be earlier than arrival date.');
+      return;
+    }
 
-    setIsAddStopModalOpen(false);
-    setStopNotes('');
+    try {
+      await addStop(activeTrip.id, {
+        cityId: Number(selectedCityId),
+        startDate: stopStartDate || activeTrip.startDate,
+        endDate: stopEndDate || activeTrip.endDate,
+        notes: stopNotes.trim(),
+      });
+
+      setIsAddStopModalOpen(false);
+      setStopNotes('');
+    } catch (err: any) {
+      setError(err?.message || 'Failed to add city stop.');
+    }
+  };
+
+  const handleEditStopSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingStop) return;
+    setEditError(null);
+
+    if (new Date(editEndDate) < new Date(editStartDate)) {
+      setEditError('Departure date cannot be earlier than arrival date.');
+      return;
+    }
+
+    try {
+      await updateStop(activeTrip.id, editingStop.id, {
+        startDate: editStartDate,
+        endDate: editEndDate,
+        notes: editNotes.trim(),
+      });
+      setEditingStop(null);
+    } catch (err: any) {
+      setEditError(err?.message || 'Failed to update stop dates or notes.');
+    }
   };
 
   const handleMoveStop = async (index: number, direction: 'UP' | 'DOWN') => {
@@ -149,7 +194,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
             <span>•</span>
             <span>{stops.length} City Stops</span>
             <span>•</span>
-            <span className="font-bold text-emerald-700">${(activeTrip.estimatedTotalCost || 0).toLocaleString()} Total</span>
+            <span className="font-bold text-emerald-700">${(activeTrip.budget || activeTrip.budgetThreshold || 0).toLocaleString()} Budget</span>
           </p>
         </div>
 
@@ -239,8 +284,21 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                       </div>
                     </div>
 
-                    {/* Move Up/Down & Delete */}
+                    {/* Move Up/Down, Edit & Delete */}
                     <div className="flex items-center space-x-1">
+                      <button
+                        onClick={() => {
+                          setEditingStop(stop);
+                          setEditStartDate(stop.startDate);
+                          setEditEndDate(stop.endDate);
+                          setEditNotes(stop.notes || '');
+                        }}
+                        className="p-1.5 rounded-lg bg-black/40 hover:bg-black/60 text-white backdrop-blur-md transition"
+                        title="Edit Stop Dates & Notes"
+                      >
+                        <Edit3 className="w-3.5 h-3.5" />
+                      </button>
+
                       <button
                         onClick={() => handleMoveStop(index, 'UP')}
                         disabled={isFirst}
@@ -274,7 +332,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                   </div>
                 </div>
 
-                {/* Stop Body & Activities */}
+                {/* Stop Body */}
                 <div className="p-5 space-y-4">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-bold text-slate-800 flex items-center space-x-1.5">
@@ -315,7 +373,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                             <p className="text-[11px] text-slate-500 flex items-center space-x-3">
                               <span className="flex items-center space-x-1">
                                 <Calendar className="w-3 h-3 text-slate-400" />
-                                <span>{act.activityDate}</span>
+                                <span>{act.scheduledDate || act.activityDate}</span>
                               </span>
                               <span className="flex items-center space-x-1">
                                 <Clock className="w-3 h-3 text-slate-400" />
@@ -332,7 +390,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
 
                           <div className="flex flex-col items-end justify-between self-stretch">
                             <span className="text-xs font-black text-emerald-700">
-                              ${Number(act.estimatedCost || 0).toFixed(2)}
+                              ${Number(act.customCost ?? act.estimatedCost ?? 0).toFixed(2)}
                             </span>
                             <button
                               onClick={() => deleteTripActivity(activeTrip.id, act.id)}
@@ -374,6 +432,13 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                 <h3 className="text-base font-bold text-slate-900 font-['Outfit']">Add City Destination Stop</h3>
                 <button onClick={() => setIsAddStopModalOpen(false)} className="text-slate-400 hover:text-slate-600">✕</button>
               </div>
+
+              {error && (
+                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center space-x-2">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <span>{error}</span>
+                </div>
+              )}
 
               <form onSubmit={handleAddStopSubmit} className="space-y-3.5 text-xs">
                 <div>
@@ -446,6 +511,91 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
         )}
       </AnimatePresence>
 
+      {/* Modal: Edit City Stop */}
+      <AnimatePresence>
+        {editingStop && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setEditingStop(null)}
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-slate-100 z-10 space-y-4"
+            >
+              <div className="flex justify-between items-center pb-2 border-b border-slate-100">
+                <h3 className="text-base font-bold text-slate-900 font-['Outfit']">Edit Stop Details ({editingStop.city?.name})</h3>
+                <button onClick={() => setEditingStop(null)} className="text-slate-400 hover:text-slate-600">✕</button>
+              </div>
+
+              {editError && (
+                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center space-x-2">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <span>{editError}</span>
+                </div>
+              )}
+
+              <form onSubmit={handleEditStopSubmit} className="space-y-3.5 text-xs">
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Arrival Date</label>
+                    <input
+                      type="date"
+                      value={editStartDate}
+                      onChange={(e) => setEditStartDate(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Departure Date</label>
+                    <input
+                      type="date"
+                      value={editEndDate}
+                      onChange={(e) => setEditEndDate(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Notes</label>
+                  <textarea
+                    rows={3}
+                    value={editNotes}
+                    onChange={(e) => setEditNotes(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 resize-none"
+                    placeholder="Notes or hotel details..."
+                  />
+                </div>
+
+                <div className="flex space-x-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setEditingStop(null)}
+                    className="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 py-2 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Modal: Assign Activity */}
       <AnimatePresence>
         {assigningStop && (
@@ -488,7 +638,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                   >
                     {availableActivities.map(a => (
                       <option key={a.id} value={a.id}>
-                        {a.name} (${a.estimatedCost} • {a.durationMin}m • {a.type})
+                        {a.name} (${a.estimatedCost} • {a.estimatedDurationMinutes || a.durationMin}m • {a.category || a.type})
                       </option>
                     ))}
                   </select>

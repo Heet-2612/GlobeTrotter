@@ -14,6 +14,7 @@ interface TripContextType {
   updateTrip: (tripId: number, updates: Partial<Trip>) => Promise<Trip>;
   deleteTrip: (tripId: number) => Promise<void>;
   addStop: (tripId: number, stopData: { cityId: number; startDate: string; endDate: string; notes?: string }) => Promise<TripStop>;
+  updateStop: (tripId: number, stopId: number, updates: { startDate?: string; endDate?: string; notes?: string }) => Promise<TripStop>;
   deleteStop: (tripId: number, stopId: number) => Promise<void>;
   reorderStops: (tripId: number, stopIds: number[]) => Promise<TripStop[]>;
   assignActivity: (tripId: number, stopId: number, data: { activityId: number; activityDate: string; startTime?: string; estimatedCost?: number; notes?: string }) => Promise<TripActivity>;
@@ -70,7 +71,6 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     if (activeTrip) {
       const refreshed = await tripService.getTripById(activeTrip.id);
       setActiveTrip(refreshed);
-      // Also update in trips list
       const updatedList = await tripService.getTrips();
       setTrips(updatedList);
     }
@@ -99,6 +99,12 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const addStop = async (tripId: number, stopData: { cityId: number; startDate: string; endDate: string; notes?: string }) => {
     const stop = await tripService.addStop(tripId, stopData);
+    await refreshActiveTrip();
+    return stop;
+  };
+
+  const updateStop = async (tripId: number, stopId: number, updates: { startDate?: string; endDate?: string; notes?: string }) => {
+    const stop = await tripService.updateStop(tripId, stopId, updates);
     await refreshActiveTrip();
     return stop;
   };
@@ -153,6 +159,7 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         updateTrip,
         deleteTrip,
         addStop,
+        updateStop,
         deleteStop,
         reorderStops,
         assignActivity,

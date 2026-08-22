@@ -80,7 +80,12 @@ export const tripService = {
   },
 
   async reorderStops(tripId: number, orderedStopIds: number[]): Promise<TripStop[]> {
-    return api.put<TripStop[]>(`/trips/${tripId}/stops/reorder`, { orderedStopIds }, { requiresAuth: true });
+    const payload = { stopIds: orderedStopIds, orderedStopIds };
+    try {
+      return await api.patch<TripStop[]>(`/trips/${tripId}/stops/reorder`, payload, { requiresAuth: true });
+    } catch (e) {
+      return await api.put<TripStop[]>(`/trips/${tripId}/stops/reorder`, payload, { requiresAuth: true });
+    }
   },
 
   // Activities
@@ -139,26 +144,46 @@ export const tripService = {
   async getItinerary(tripId: number): Promise<ItineraryViewResponse> {
     const trip = await this.getTripById(tripId);
     const stops = await this.getStops(tripId);
+    
+    // If no stops exist yet, return days: []
+    if (!stops || stops.length === 0) {
+      return {
+        tripId: trip.id,
+        tripName: trip.name,
+        startDate: trip.startDate,
+        endDate: trip.endDate,
+        totalDays: 0,
+        days: [],
+      };
+    }
+
     const daysMap: Record<string, any[]> = {};
 
+    // Group activities or stops into days
     for (const stop of stops) {
       const activities = await this.getActivitiesForStop(tripId, stop.id);
-      for (const ta of activities) {
-        const dateKey = ta.scheduledDate || ta.activityDate || stop.startDate;
+      if (activities && activities.length > 0) {
+        for (const ta of activities) {
+          const dateKey = ta.scheduledDate || ta.activityDate || stop.startDate;
+          if (!daysMap[dateKey]) daysMap[dateKey] = [];
+          daysMap[dateKey].push({
+            tripActivityId: ta.id,
+            activityId: ta.activity?.id || 0,
+            name: ta.activity?.name || 'Activity',
+            type: (ta.activity?.category as any) || 'SIGHTSEEING',
+            time: ta.startTime || '',
+            durationMin: ta.activity?.estimatedDurationMinutes || ta.activity?.durationMin || 60,
+            cost: ta.customCost ?? ta.activity?.estimatedCost ?? 0,
+            imageUrl: ta.activity?.imageUrl || undefined,
+            notes: ta.notes || undefined,
+            cityId: stop.city?.id,
+            cityName: stop.city?.name,
+          });
+        }
+      } else {
+        // Stop without activities
+        const dateKey = stop.startDate;
         if (!daysMap[dateKey]) daysMap[dateKey] = [];
-        daysMap[dateKey].push({
-          tripActivityId: ta.id,
-          activityId: ta.activity?.id || 0,
-          name: ta.activity?.name || 'Activity',
-          type: (ta.activity?.category as any) || 'SIGHTSEEING',
-          time: ta.startTime || '',
-          durationMin: ta.activity?.estimatedDurationMinutes || ta.activity?.durationMin || 60,
-          cost: ta.customCost ?? ta.activity?.estimatedCost ?? 0,
-          imageUrl: ta.activity?.imageUrl || undefined,
-          notes: ta.notes || undefined,
-          cityId: stop.city?.id,
-          cityName: stop.city?.name,
-        });
       }
     }
 
@@ -166,6 +191,7 @@ export const tripService = {
     const days = sortedDates.map((date, idx) => ({
       date,
       dayIndex: idx + 1,
+      city: stops.find(s => s.startDate <= date && s.endDate >= date)?.city?.name || stops[0]?.city?.name || 'Destination',
       activities: daysMap[date],
       dayCost: daysMap[date].reduce((sum, item) => sum + item.cost, 0),
     }));
