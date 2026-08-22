@@ -18,8 +18,13 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserResponse getUserResponseByEmail(String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
+        User user = getUserByEmail(email);
         return UserResponse.fromEntity(user);
+    }
+
+    @Transactional(readOnly = true)
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
     }
 }
