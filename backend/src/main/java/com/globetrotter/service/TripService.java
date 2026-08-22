@@ -10,6 +10,7 @@ import com.globetrotter.repository.TripRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,10 @@ public class TripService {
             throw new IllegalArgumentException("Start date cannot be after end date");
         }
 
+        if (request.getBudget() != null && request.getBudget().compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Budget must not be negative");
+        }
+
         Trip trip = Trip.builder()
                 .user(currentUser)
                 .name(request.getName())
@@ -35,6 +40,7 @@ public class TripService {
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
                 .coverPhoto(request.getCoverPhoto())
+                .budget(request.getBudget())
                 .build();
 
         Trip savedTrip = tripRepository.save(trip);
@@ -65,11 +71,16 @@ public class TripService {
             throw new IllegalArgumentException("Start date cannot be after end date");
         }
 
+        if (request.getBudget() != null && request.getBudget().compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Budget must not be negative");
+        }
+
         trip.setName(request.getName());
         trip.setDescription(request.getDescription());
         trip.setStartDate(request.getStartDate());
         trip.setEndDate(request.getEndDate());
         trip.setCoverPhoto(request.getCoverPhoto());
+        trip.setBudget(request.getBudget());
 
         Trip updatedTrip = tripRepository.save(trip);
         return TripResponse.fromEntity(updatedTrip);

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -34,6 +35,9 @@ public class Trip {
     @Column(name = "cover_photo", length = 500)
     private String coverPhoto;
 
+    @Column(precision = 12, scale = 2)
+    private BigDecimal budget;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -45,7 +49,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(Long id, User user, String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Trip(Long id, User user, String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto, BigDecimal budget, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -53,6 +57,7 @@ public class Trip {
         this.startDate = startDate;
         this.endDate = endDate;
         this.coverPhoto = coverPhoto;
+        this.budget = budget;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -82,6 +87,9 @@ public class Trip {
     public String getCoverPhoto() { return coverPhoto; }
     public void setCoverPhoto(String coverPhoto) { this.coverPhoto = coverPhoto; }
 
+    public BigDecimal getBudget() { return budget; }
+    public void setBudget(BigDecimal budget) { this.budget = budget; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
@@ -96,6 +104,7 @@ public class Trip {
         private LocalDate startDate;
         private LocalDate endDate;
         private String coverPhoto;
+        private BigDecimal budget;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
@@ -106,11 +115,12 @@ public class Trip {
         public TripBuilder startDate(LocalDate startDate) { this.startDate = startDate; return this; }
         public TripBuilder endDate(LocalDate endDate) { this.endDate = endDate; return this; }
         public TripBuilder coverPhoto(String coverPhoto) { this.coverPhoto = coverPhoto; return this; }
+        public TripBuilder budget(BigDecimal budget) { this.budget = budget; return this; }
         public TripBuilder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
         public TripBuilder updatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public Trip build() {
-            return new Trip(id, user, name, description, startDate, endDate, coverPhoto, createdAt, updatedAt);
+            return new Trip(id, user, name, description, startDate, endDate, coverPhoto, budget, createdAt, updatedAt);
         }
     }
 }

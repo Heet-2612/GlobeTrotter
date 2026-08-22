@@ -1,9 +1,11 @@
 package com.globetrotter.dto;
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class UpdateTripRequest {
@@ -23,15 +25,23 @@ public class UpdateTripRequest {
     @Size(max = 500, message = "Cover photo URL must not exceed 500 characters")
     private String coverPhoto;
 
+    @DecimalMin(value = "0.0", message = "Budget must not be negative")
+    private BigDecimal budget;
+
     public UpdateTripRequest() {
     }
 
     public UpdateTripRequest(String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto) {
+        this(name, description, startDate, endDate, coverPhoto, null);
+    }
+
+    public UpdateTripRequest(String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto, BigDecimal budget) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.coverPhoto = coverPhoto;
+        this.budget = budget;
     }
 
     public String getName() { return name; }
@@ -48,4 +58,7 @@ public class UpdateTripRequest {
 
     public String getCoverPhoto() { return coverPhoto; }
     public void setCoverPhoto(String coverPhoto) { this.coverPhoto = coverPhoto; }
+
+    public BigDecimal getBudget() { return budget; }
+    public void setBudget(BigDecimal budget) { this.budget = budget; }
 }
