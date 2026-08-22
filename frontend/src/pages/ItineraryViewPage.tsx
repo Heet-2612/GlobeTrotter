@@ -28,9 +28,10 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({
       getItinerary(activeTrip.id)
         .then(res => {
           setItinerary(res);
-          // Expand all by default
           const exp: Record<number, boolean> = {};
-          res.days.forEach(d => { exp[d.dayIndex] = true; });
+          if (res && res.days) {
+            res.days.forEach(d => { exp[d.dayIndex] = true; });
+          }
           setExpandedDays(exp);
         })
         .catch(err => console.error('Failed to load itinerary', err))
@@ -98,7 +99,6 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            {/* View Mode Toggle */}
             <div className="flex rounded-xl bg-white/10 p-1 backdrop-blur-md">
               <button
                 onClick={() => setViewMode('CARDS')}
@@ -144,8 +144,24 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({
         </div>
       )}
 
-      {/* Days Timeline Accordion */}
-      {!loading && itinerary && (
+      {/* Days Timeline Accordion or Empty State */}
+      {!loading && itinerary && itinerary.days.length === 0 && (
+        <div className="p-12 text-center rounded-3xl bg-white border border-dashed border-slate-300 space-y-4">
+          <MapPin className="w-12 h-12 text-slate-300 mx-auto" />
+          <h3 className="text-base font-bold text-slate-800 font-['Outfit']">Add destinations to build your itinerary.</h3>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto">
+            You have not added any city stops to this trip yet. Use the itinerary builder or city search to add destination stops.
+          </p>
+          <button
+            onClick={() => onSelectTab('city-search')}
+            className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition"
+          >
+            Explore Cities & Add Stops
+          </button>
+        </div>
+      )}
+
+      {!loading && itinerary && itinerary.days.length > 0 && (
         <div className="space-y-4">
           {itinerary.days.map((day) => {
             const isExpanded = expandedDays[day.dayIndex] ?? true;
@@ -154,13 +170,11 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({
                 key={day.date}
                 className="rounded-3xl bg-white border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-md transition"
               >
-                {/* Day Header Bar */}
                 <div
                   onClick={() => toggleDay(day.dayIndex)}
                   className="p-4 sm:p-5 flex items-center justify-between cursor-pointer select-none bg-gradient-to-r from-slate-50/80 to-white hover:bg-slate-100/50 transition border-b border-slate-100"
                 >
                   <div className="flex items-center space-x-4">
-                    {/* Day Pill */}
                     <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex flex-col items-center justify-center font-['Outfit'] shadow-md shadow-emerald-600/20 flex-shrink-0">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-200">DAY</span>
                       <span className="text-base font-black leading-none">{day.dayIndex}</span>
@@ -202,7 +216,6 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({
                   </div>
                 </div>
 
-                {/* Day Content */}
                 <AnimatePresence>
                   {isExpanded && (
                     <motion.div
@@ -224,7 +237,7 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({
                         </div>
                       ) : (
                         <div className={viewMode === 'CARDS' ? 'grid grid-cols-1 md:grid-cols-2 gap-4' : 'space-y-2.5'}>
-                          {day.activities.map((act, aIdx) => (
+                          {day.activities.map((act) => (
                             <div
                               key={act.tripActivityId}
                               className={`rounded-2xl border transition ${

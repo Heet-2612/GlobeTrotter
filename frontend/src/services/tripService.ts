@@ -32,7 +32,21 @@ export const tripService = {
   },
 
   async updateTrip(tripId: number, updates: Partial<Trip>): Promise<Trip> {
-    return api.put<Trip>(`/trips/${tripId}`, updates, { requiresAuth: true });
+    let currentTrip: Trip | null = null;
+    if (!updates.name || !updates.startDate || !updates.endDate) {
+      currentTrip = await this.getTripById(tripId);
+    }
+
+    const payload = {
+      name: updates.name ?? currentTrip?.name ?? '',
+      description: updates.description ?? currentTrip?.description ?? '',
+      startDate: updates.startDate ?? currentTrip?.startDate ?? '',
+      endDate: updates.endDate ?? currentTrip?.endDate ?? '',
+      coverPhoto: updates.coverPhoto ?? currentTrip?.coverPhoto ?? '',
+      budget: updates.budget ?? updates.budgetThreshold ?? currentTrip?.budget ?? currentTrip?.budgetThreshold ?? null,
+    };
+
+    return api.put<Trip>(`/trips/${tripId}`, payload, { requiresAuth: true });
   },
 
   async deleteTrip(tripId: number): Promise<void> {
@@ -106,7 +120,6 @@ export const tripService = {
     if (tripActivityId !== undefined) {
       return api.delete<void>(`/trips/${tripId}/stops/${stopIdOrActivityId}/activities/${tripActivityId}`, { requiresAuth: true });
     } else {
-      // Find stop that contains tripActivityId
       const stops = await this.getStops(tripId);
       for (const stop of stops) {
         const activities = await this.getActivitiesForStop(tripId, stop.id);
