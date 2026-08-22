@@ -3,6 +3,8 @@ import {
   LoginRequest,
   SignupRequest,
   ForgotPasswordRequest,
+  ForgotPasswordResponse,
+  ResetPasswordRequest,
   UserResponse,
   TripResponse,
   CreateTripRequest,
@@ -96,7 +98,13 @@ export const api = {
     }),
 
   forgotPassword: (data: ForgotPasswordRequest) =>
-    request<AuthResponse>('/auth/forgot-password', {
+    request<ForgotPasswordResponse>('/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  resetPassword: (data: ResetPasswordRequest) =>
+    request<ForgotPasswordResponse>('/auth/reset-password', {
       method: 'POST',
       body: JSON.stringify(data),
     }),

@@ -1,10 +1,15 @@
 package com.globetrotter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.globetrotter.dto.ForgotPasswordRequest;
 import com.globetrotter.dto.LoginRequest;
+import com.globetrotter.dto.ResetPasswordRequest;
 import com.globetrotter.dto.SignupRequest;
+import com.globetrotter.entity.PasswordResetToken;
 import com.globetrotter.entity.User;
+import com.globetrotter.repository.PasswordResetTokenRepository;
 import com.globetrotter.repository.UserRepository;
+import com.globetrotter.security.PasswordResetTokenUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -33,6 +41,9 @@ public class AuthIntegrationTest {
     private UserRepository userRepository;
 
     @Autowired
+    private PasswordResetTokenRepository passwordResetTokenRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -49,6 +60,7 @@ public class AuthIntegrationTest {
 
     @BeforeEach
     void setUp() {
+        passwordResetTokenRepository.deleteAll();
         tripActivityRepository.deleteAll();
         tripStopRepository.deleteAll();
         tripRepository.deleteAll();
@@ -205,39 +217,175 @@ public class AuthIntegrationTest {
     }
 
     @Test
-    void test9_ForgotPassword_SuccessfullyResetsPassword() throws Exception {
-        SignupRequest signup = SignupRequest.builder()
-                .name("Reset User")
-                .email("reset@example.com")
-                .password("OldPassword123!")
-                .build();
+    void test9_ForgotPassword_ExistingUser_GeneratesTokenHashAndReturnsGenericMessage() throws Exception {
+        User user = userRepository.save(User.builder()
+                .name("Forgot User")
+                .email("forgot@example.com")
+                .passwordHash(passwordEncoder.encode("OldPassword123!"))
+                .build());
 
-        mockMvc.perform(post("/api/auth/signup")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(signup)))
-                .andExpect(status().isCreated());
-
-        com.globetrotter.dto.ForgotPasswordRequest resetRequest = new com.globetrotter.dto.ForgotPasswordRequest(
-                "reset@example.com",
-                "NewPassword123!"
-        );
+        ForgotPasswordRequest forgotReq = new ForgotPasswordRequest("forgot@example.com");
 
         mockMvc.perform(post("/api/auth/forgot-password")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(resetRequest)))
+                        .content(objectMapper.writeValueAsString(forgotReq)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.token").exists())
-                .andExpect(jsonPath("$.user.email").value("reset@example.com"));
+                .andExpect(jsonPath("$.message").value("If an account exists for this email, password reset instructions have been sent."));
 
-        LoginRequest newLogin = LoginRequest.builder()
-                .email("reset@example.com")
-                .password("NewPassword123!")
+        assertEquals(1, passwordResetTokenRepository.count());
+        PasswordResetToken resetToken = passwordResetTokenRepository.findAll().get(0);
+        assertEquals(user.getId(), resetToken.getUser().getId());
+        assertNotNull(resetToken.getTokenHash());
+        assertNull(resetToken.getUsedAt());
+        assertTrue(resetToken.getExpiresAt().isAfter(Instant.now()));
+    }
+
+    @Test
+    void test10_ForgotPassword_UnknownUser_ReturnsSameGenericMessage() throws Exception {
+        ForgotPasswordRequest forgotReq = new ForgotPasswordRequest("nonexistent@example.com");
+
+        mockMvc.perform(post("/api/auth/forgot-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(forgotReq)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("If an account exists for this email, password reset instructions have been sent."));
+
+        assertEquals(0, passwordResetTokenRepository.count());
+    }
+
+    @Test
+    void test11_ResetPassword_ValidToken_SuccessfullyUpdatesPasswordAndInvalidatesOld() throws Exception {
+        User user = userRepository.save(User.builder()
+                .name("Reset Flow User")
+                .email("flow@example.com")
+                .passwordHash(passwordEncoder.encode("OldPassword123!"))
+                .build());
+
+        String rawToken = PasswordResetTokenUtil.generateRawToken();
+        String tokenHash = PasswordResetTokenUtil.hashToken(rawToken);
+
+        passwordResetTokenRepository.save(PasswordResetToken.builder()
+                .user(user)
+                .tokenHash(tokenHash)
+                .expiresAt(Instant.now().plus(30, ChronoUnit.MINUTES))
+                .build());
+
+        ResetPasswordRequest resetReq = ResetPasswordRequest.builder()
+                .token(rawToken)
+                .newPassword("BrandNewPassword123!")
                 .build();
 
+        mockMvc.perform(post("/api/auth/reset-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(resetReq)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("Your password has been reset successfully."));
+
+        // Verify old password fails
+        LoginRequest oldLogin = LoginRequest.builder().email("flow@example.com").password("OldPassword123!").build();
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(oldLogin)))
+                .andExpect(status().isUnauthorized());
+
+        // Verify new password works
+        LoginRequest newLogin = LoginRequest.builder().email("flow@example.com").password("BrandNewPassword123!").build();
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newLogin)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").exists());
+
+        // Verify token is marked used
+        PasswordResetToken updatedToken = passwordResetTokenRepository.findByTokenHash(tokenHash).orElseThrow();
+        assertNotNull(updatedToken.getUsedAt());
+    }
+
+    @Test
+    void test12_ResetPassword_ReuseToken_Fails() throws Exception {
+        User user = userRepository.save(User.builder()
+                .name("Reuse User")
+                .email("reuse@example.com")
+                .passwordHash(passwordEncoder.encode("OldPassword123!"))
+                .build());
+
+        String rawToken = PasswordResetTokenUtil.generateRawToken();
+        String tokenHash = PasswordResetTokenUtil.hashToken(rawToken);
+
+        passwordResetTokenRepository.save(PasswordResetToken.builder()
+                .user(user)
+                .tokenHash(tokenHash)
+                .expiresAt(Instant.now().plus(30, ChronoUnit.MINUTES))
+                .usedAt(Instant.now().minus(5, ChronoUnit.MINUTES)) // Already used
+                .build());
+
+        ResetPasswordRequest resetReq = ResetPasswordRequest.builder()
+                .token(rawToken)
+                .newPassword("AnotherNewPassword123!")
+                .build();
+
+        mockMvc.perform(post("/api/auth/reset-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(resetReq)))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void test13_ResetPassword_ExpiredToken_Fails() throws Exception {
+        User user = userRepository.save(User.builder()
+                .name("Expired User")
+                .email("expired@example.com")
+                .passwordHash(passwordEncoder.encode("OldPassword123!"))
+                .build());
+
+        String rawToken = PasswordResetTokenUtil.generateRawToken();
+        String tokenHash = PasswordResetTokenUtil.hashToken(rawToken);
+
+        passwordResetTokenRepository.save(PasswordResetToken.builder()
+                .user(user)
+                .tokenHash(tokenHash)
+                .expiresAt(Instant.now().minus(5, ChronoUnit.MINUTES)) // Expired
+                .build());
+
+        ResetPasswordRequest resetReq = ResetPasswordRequest.builder()
+                .token(rawToken)
+                .newPassword("AnotherNewPassword123!")
+                .build();
+
+        mockMvc.perform(post("/api/auth/reset-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(resetReq)))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void test14_ForgotPassword_NewRequestInvalidatesPreviousToken() throws Exception {
+        User user = userRepository.save(User.builder()
+                .name("Multi Request User")
+                .email("multireq@example.com")
+                .passwordHash(passwordEncoder.encode("OldPassword123!"))
+                .build());
+
+        ForgotPasswordRequest forgotReq = new ForgotPasswordRequest("multireq@example.com");
+
+        // Request 1
+        mockMvc.perform(post("/api/auth/forgot-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(forgotReq)))
+                .andExpect(status().isOk());
+
+        assertEquals(1, passwordResetTokenRepository.count());
+        PasswordResetToken token1 = passwordResetTokenRepository.findAll().get(0);
+
+        // Request 2 (should delete/invalidate token 1)
+        mockMvc.perform(post("/api/auth/forgot-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(forgotReq)))
+                .andExpect(status().isOk());
+
+        assertEquals(1, passwordResetTokenRepository.count());
+        PasswordResetToken token2 = passwordResetTokenRepository.findAll().get(0);
+
+        assertNotEquals(token1.getId(), token2.getId());
     }
 }

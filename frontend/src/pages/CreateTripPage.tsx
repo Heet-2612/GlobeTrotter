@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
+import { Compass, Calendar, DollarSign, ArrowLeft, Plus } from 'lucide-react';
+import { Button, Input, Card } from '../components/common/UIComponents';
 
 interface CreateTripPageProps {
   onNavigate: (tab: string, param?: string | number) => void;
@@ -50,119 +52,87 @@ export const CreateTripPage: React.FC<CreateTripPageProps> = ({ onNavigate }) =>
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
-      <div className="bg-slate-900 border border-slate-800 rounded-xl shadow-xl p-6 sm:p-8">
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
-          <div>
-            <h1 className="text-2xl font-bold text-white">Create New Trip</h1>
-            <p className="text-xs text-slate-400 mt-1">
-              Start planning your custom itinerary by setting trip details
-            </p>
+    <div className="max-w-2xl mx-auto px-4 py-10">
+      <Card className="p-8 sm:p-10 space-y-6 bg-white border border-slate-200 shadow-md">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-5">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-xl gradient-accent flex items-center justify-center text-white shadow-xs">
+              <Compass size={20} />
+            </div>
+            <div>
+              <h1 className="text-2xl font-extrabold text-slate-900">Create New Trip</h1>
+              <p className="text-xs text-slate-500 mt-0.5">Define trip dates and budget to start building your itinerary</p>
+            </div>
           </div>
-          <button
-            onClick={() => onNavigate('dashboard')}
-            className="text-xs text-slate-400 hover:text-white"
-          >
-            ← Cancel
-          </button>
+          <Button variant="ghost" size="sm" icon={<ArrowLeft size={14} />} onClick={() => onNavigate('dashboard')}>
+            Cancel
+          </Button>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-950/80 border border-red-800 text-red-300 text-xs rounded-lg">
+          <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-xl font-medium">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-              Trip Name *
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Summer Euro Trip 2026"
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
-              required
-            />
-          </div>
+          <Input
+            label="Trip Name *"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="e.g. Summer Euro Trip 2026"
+            required
+          />
 
-          <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-              Description
-            </label>
+          <div className="space-y-1">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Brief summary of your trip goals and places..."
+              placeholder="Brief summary of your travel goals, destinations, or theme..."
               rows={3}
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
+              className="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-sm focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all placeholder-slate-400"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                Start Date *
-              </label>
-              <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                End Date *
-              </label>
-              <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
-                required
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-              Target Budget ($ USD)
-            </label>
-            <input
-              type="number"
-              min="0"
-              step="50"
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-              placeholder="e.g. 2500"
-              className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
+            <Input
+              label="Start Date *"
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
+            />
+            <Input
+              label="End Date *"
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              required
             />
           </div>
 
-          <div className="pt-4 flex items-center justify-end space-x-3 border-t border-slate-800">
-            <button
-              type="button"
-              onClick={() => onNavigate('dashboard')}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium rounded-lg"
-            >
+          <Input
+            label="Target Budget ($ USD)"
+            type="number"
+            min="0"
+            step="50"
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
+            placeholder="e.g. 2500"
+          />
+
+          <div className="pt-4 border-t border-slate-200 flex items-center justify-end space-x-3">
+            <Button type="button" variant="secondary" size="md" onClick={() => onNavigate('dashboard')}>
               Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg shadow-md transition-colors disabled:opacity-50 flex items-center space-x-2"
-            >
-              {loading && <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>}
-              <span>{loading ? 'Creating...' : 'Create & Build Itinerary →'}</span>
-            </button>
+            </Button>
+            <Button type="submit" variant="emerald" size="md" loading={loading} icon={<Plus size={16} />}>
+              Create & Build Itinerary →
+            </Button>
           </div>
         </form>
-      </div>
+      </Card>
     </div>
   );
 };

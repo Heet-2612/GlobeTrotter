@@ -7,6 +7,23 @@ import {
   TripActivityResponse,
 } from '../types';
 import { api } from '../services/api';
+import {
+  MapPin,
+  Calendar,
+  Plus,
+  Trash2,
+  Clock,
+  DollarSign,
+  Share2,
+  Eye,
+  Edit3,
+  X,
+  Search,
+  Sparkles,
+  ArrowLeft,
+} from 'lucide-react';
+import { Button, Card, Badge, Input, LoadingState } from '../components/common/UIComponents';
+import { getCityImageUrl, getActivityImageUrl } from '../utils/imageUtils';
 
 interface ItineraryBuilderPageProps {
   tripId: number;
@@ -55,7 +72,6 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
       const stopsData = await api.getTripStops(tripId);
       setStops(stopsData);
 
-      // Load activities for each stop
       const map: Record<number, TripActivityResponse[]> = {};
       for (const stop of stopsData) {
         try {
@@ -186,186 +202,181 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
   };
 
   if (loading) {
-    return (
-      <div className="text-center py-16 text-slate-400 flex items-center justify-center space-x-2">
-        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-        <span>Loading itinerary builder...</span>
-      </div>
-    );
+    return <LoadingState message="Loading itinerary builder..." />;
   }
 
   if (error || !trip) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-4">
-        <div className="bg-red-950/80 border border-red-800 p-6 rounded-xl text-red-300 text-sm">
+        <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-sm">
           {error || 'Trip not found.'}
         </div>
-        <button
-          onClick={() => onNavigate('my-trips')}
-          className="mt-4 text-xs font-semibold text-blue-400 hover:underline"
-        >
-          ← Back to My Trips
-        </button>
+        <Button variant="ghost" size="sm" icon={<ArrowLeft size={14} />} onClick={() => onNavigate('my-trips')} className="mt-4">
+          Back to My Trips
+        </Button>
       </div>
     );
   }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      {/* Trip Header Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <div className="flex items-center space-x-2 text-xs text-blue-400 font-semibold uppercase tracking-wider mb-1">
-            <span>Itinerary Builder</span>
-            <span>•</span>
-            <span>ID #{trip.id}</span>
+      {/* Header View Switcher Card */}
+      <Card className="p-6 sm:p-8 space-y-4 bg-white border border-slate-200 shadow-sm">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div>
+            <div className="flex items-center space-x-2 text-xs font-semibold text-emerald-700 uppercase tracking-wider mb-1">
+              <Sparkles size={14} />
+              <span>Itinerary Builder • Trip #{trip.id}</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">{trip.name}</h1>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">{trip.description || 'No description provided.'}</p>
+            <div className="flex items-center space-x-4 text-xs text-slate-600 mt-2">
+              <span className="flex items-center space-x-1">
+                <Calendar size={13} className="text-emerald-600" />
+                <span>{trip.startDate} - {trip.endDate}</span>
+              </span>
+              <span className="flex items-center space-x-1">
+                <DollarSign size={13} className="text-emerald-600" />
+                <span>Budget: ${trip.budget ? trip.budget.toLocaleString() : '0'}</span>
+              </span>
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-white">{trip.name}</h1>
-          <p className="text-xs text-slate-400 mt-1">{trip.description || 'No description'}</p>
-          <div className="flex items-center space-x-4 text-xs text-slate-300 mt-2">
-            <span>📅 {trip.startDate} - {trip.endDate}</span>
-            <span>💰 Budget: ${trip.budget ? trip.budget.toLocaleString() : '0'}</span>
-          </div>
-        </div>
 
-        {/* View Switcher Tabs */}
-        <div className="flex flex-wrap gap-2 pt-2 sm:pt-0">
-          <button
-            onClick={() => onNavigate('builder', tripId)}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white shadow"
-          >
-            🛠️ Builder
-          </button>
-          <button
-            onClick={() => onNavigate('view', tripId)}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border border-slate-700"
-          >
-            👁️ Read View
-          </button>
-          <button
-            onClick={() => onNavigate('budget', tripId)}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border border-slate-700"
-          >
-            💰 Budget
-          </button>
-          <button
-            onClick={() => onNavigate('timeline', tripId)}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border border-slate-700"
-          >
-            ⏱️ Timeline
-          </button>
-          <button
-            onClick={() => onNavigate('sharing', tripId)}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border border-slate-700"
-          >
-            🌐 Share
-          </button>
+          {/* View Toolbar Switcher */}
+          <div className="flex flex-wrap gap-2 pt-2 lg:pt-0">
+            <Button variant="emerald" size="sm" icon={<Edit3 size={14} />} onClick={() => onNavigate('builder', tripId)}>
+              Builder
+            </Button>
+            <Button variant="secondary" size="sm" icon={<Eye size={14} />} onClick={() => onNavigate('view', tripId)}>
+              Read View
+            </Button>
+            <Button variant="secondary" size="sm" icon={<DollarSign size={14} />} onClick={() => onNavigate('budget', tripId)}>
+              Budget
+            </Button>
+            <Button variant="secondary" size="sm" icon={<Clock size={14} />} onClick={() => onNavigate('timeline', tripId)}>
+              Timeline
+            </Button>
+            <Button variant="secondary" size="sm" icon={<Share2 size={14} />} onClick={() => onNavigate('sharing', tripId)}>
+              Share
+            </Button>
+          </div>
         </div>
-      </div>
+      </Card>
 
       {/* Action Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-white">Trip Stops ({stops.length})</h2>
-        <button
-          onClick={() => setShowAddStopModal(true)}
-          className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow flex items-center space-x-1"
-        >
-          <span>+ Add City Stop</span>
-        </button>
+        <h2 className="text-xl font-extrabold text-slate-900">Trip Destinations ({stops.length} Stops)</h2>
+        <Button variant="emerald" size="sm" icon={<Plus size={14} />} onClick={() => setShowAddStopModal(true)}>
+          Add City Stop
+        </Button>
       </div>
 
       {/* Stops List */}
       {stops.length === 0 ? (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-10 text-center text-slate-400">
-          <p className="text-base font-semibold text-slate-300">No stops added yet</p>
-          <p className="text-xs mt-1">Add your first destination city to start scheduling activities!</p>
-          <button
-            onClick={() => setShowAddStopModal(true)}
-            className="mt-4 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-lg"
-          >
-            + Add First Stop
-          </button>
-        </div>
+        <Card className="p-10 text-center text-slate-500 space-y-3 bg-white border border-slate-200">
+          <MapPin size={32} className="mx-auto text-emerald-600 opacity-60" />
+          <h3 className="text-base font-bold text-slate-900">No stops added yet</h3>
+          <p className="text-xs text-slate-500">Add your first destination city to start scheduling activities!</p>
+          <Button variant="emerald" size="sm" icon={<Plus size={14} />} onClick={() => setShowAddStopModal(true)}>
+            Add First Stop
+          </Button>
+        </Card>
       ) : (
         <div className="space-y-6">
           {stops.map((stop, index) => {
             const stopActivities = activitiesMap[stop.id] || [];
+            const cityImage = getCityImageUrl(stop.city.name, stop.city.imageUrl);
+
             return (
-              <div
-                key={stop.id}
-                className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4 shadow-md"
-              >
-                <div className="flex items-start justify-between border-b border-slate-800 pb-4">
-                  <div className="flex items-center space-x-3">
-                    <span className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-sm flex items-center justify-center shadow">
-                      {index + 1}
-                    </span>
+              <Card key={stop.id} className="p-6 space-y-4 shadow-sm bg-white border border-slate-200">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 pb-4 gap-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 relative border border-slate-200">
+                      <img src={cityImage} alt={stop.city.name} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-slate-900/30"></div>
+                      <span className="absolute inset-0 flex items-center justify-center font-extrabold text-white text-sm drop-shadow">
+                        #{index + 1}
+                      </span>
+                    </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white">
-                        {stop.city.name}, <span className="text-slate-400 text-sm font-normal">{stop.city.country}</span>
+                      <h3 className="text-xl font-bold text-slate-900">
+                        {stop.city.name}, <span className="text-slate-500 text-sm font-normal">{stop.city.country}</span>
                       </h3>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-slate-500 mt-0.5">
                         📅 {stop.startDate} to {stop.endDate} {stop.notes && `• ${stop.notes}`}
                       </p>
                     </div>
                   </div>
+
                   <div className="flex items-center space-x-2">
-                    <button
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      icon={<Plus size={13} />}
                       onClick={() => {
                         setActiveStopForActivity(stop);
                         setScheduledDate(stop.startDate);
                       }}
-                      className="bg-slate-800 hover:bg-slate-700 text-blue-400 text-xs font-medium px-3 py-1.5 rounded border border-slate-700"
                     >
-                      + Add Activity
-                    </button>
+                      Add Activity
+                    </Button>
                     <button
                       onClick={() => handleDeleteStop(stop.id)}
-                      className="text-xs text-red-400 hover:text-red-300 p-1.5 hover:bg-red-950/40 rounded"
+                      className="p-2 text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-xl transition-colors"
+                      title="Delete Stop"
                     >
-                      🗑️
+                      <Trash2 size={16} />
                     </button>
                   </div>
                 </div>
 
                 {/* Stop Activities Section */}
-                <div className="space-y-2 pl-4 border-l-2 border-slate-800">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <div className="space-y-3 pl-2 sm:pl-4 border-l-2 border-slate-200">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                     Scheduled Activities ({stopActivities.length})
                   </h4>
+
                   {stopActivities.length === 0 ? (
-                    <p className="text-xs text-slate-400 italic">No activities added to this stop yet.</p>
+                    <p className="text-xs text-slate-500 italic">No activities added to this stop yet.</p>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                      {stopActivities.map((act) => (
-                        <div
-                          key={act.id}
-                          className="bg-slate-850 border border-slate-800 rounded-lg p-3 text-xs space-y-1 relative group"
-                        >
-                          <div className="flex items-start justify-between">
-                            <span className="font-bold text-white">{act.activity.name}</span>
-                            <button
-                              onClick={() => handleDeleteActivity(stop.id, act.id)}
-                              className="text-red-400 hover:text-red-300 font-bold ml-1 text-sm"
-                            >
-                              ×
-                            </button>
+                      {stopActivities.map((act) => {
+                        const actImg = getActivityImageUrl(act.activity.category, act.activity.imageUrl);
+                        return (
+                          <div
+                            key={act.id}
+                            className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2 text-xs relative group hover:border-emerald-500/50 transition-all"
+                          >
+                            <div className="flex items-start justify-between">
+                              <span className="font-bold text-slate-900 text-sm line-clamp-1">{act.activity.name}</span>
+                              <button
+                                onClick={() => handleDeleteActivity(stop.id, act.id)}
+                                className="text-rose-600 hover:text-rose-700 p-0.5 rounded transition-colors"
+                              >
+                                <X size={14} />
+                              </button>
+                            </div>
+
+                            <Badge variant="emerald">{act.activity.category || 'Sightseeing'}</Badge>
+
+                            <p className="text-slate-600 flex items-center space-x-1 pt-1">
+                              <Calendar size={12} className="text-emerald-600" />
+                              <span>{act.scheduledDate} {act.startTime && `at ${act.startTime}`}</span>
+                            </p>
+
+                            <div className="pt-1 flex items-center justify-between border-t border-slate-200">
+                              <span className="text-slate-500">Cost:</span>
+                              <span className="font-bold text-emerald-700">
+                                ${act.customCost ?? act.activity.estimatedCost ?? 0}
+                              </span>
+                            </div>
                           </div>
-                          <span className="inline-block bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded text-[10px]">
-                            {act.activity.category || 'General'}
-                          </span>
-                          <p className="text-slate-400">
-                            📅 {act.scheduledDate} {act.startTime && `at ${act.startTime}`}
-                          </p>
-                          <p className="font-semibold text-emerald-400">
-                            Cost: ${act.customCost ?? act.activity.estimatedCost ?? 0}
-                          </p>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
                 </div>
-              </div>
+              </Card>
             );
           })}
         </div>
@@ -373,29 +384,26 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
 
       {/* Add Stop Modal */}
       {showAddStopModal && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl max-w-md w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="text-lg font-bold text-white">Add City Stop</h3>
-              <button onClick={() => setShowAddStopModal(false)} className="text-slate-400 text-sm">
-                ✕
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <Card className="max-w-md w-full p-6 space-y-4 shadow-xl bg-white border border-slate-200">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <h3 className="text-lg font-bold text-slate-900">Add City Stop</h3>
+              <button onClick={() => setShowAddStopModal(false)} className="text-slate-500 hover:text-slate-900">
+                <X size={18} />
               </button>
             </div>
 
             <form onSubmit={handleAddStop} className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                  Search City *
-                </label>
-                <input
+              <div className="space-y-1">
+                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Search City *</label>
+                <Input
                   type="text"
                   value={citySearchQuery}
                   onChange={(e) => setCitySearchQuery(e.target.value)}
                   placeholder="e.g. Paris, Tokyo, London..."
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
                 />
                 {citySearchResults.length > 0 && (
-                  <div className="mt-1 max-h-40 overflow-y-auto bg-slate-800 border border-slate-700 rounded-lg divide-y divide-slate-700">
+                  <div className="mt-1 max-h-40 overflow-y-auto bg-white border border-slate-200 rounded-xl divide-y divide-slate-100 shadow-md">
                     {citySearchResults.map((city) => (
                       <div
                         key={city.id}
@@ -404,109 +412,83 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
                           setCitySearchQuery(`${city.name}, ${city.country}`);
                           setCitySearchResults([]);
                         }}
-                        className="p-2 hover:bg-slate-700 cursor-pointer text-xs text-white flex justify-between"
+                        className="p-2.5 hover:bg-slate-50 cursor-pointer text-xs text-slate-900 flex justify-between font-medium"
                       >
                         <span>{city.name}, {city.country}</span>
-                        <span className="text-slate-400">{city.region || ''}</span>
+                        <span className="text-slate-500">{city.region || ''}</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {selectedCity && (
-                  <p className="text-xs text-emerald-400 mt-1 font-semibold">
-                    Selected: {selectedCity.name}, {selectedCity.country}
+                  <p className="text-xs text-emerald-700 font-semibold mt-1">
+                    ✓ Selected: {selectedCity.name}, {selectedCity.country}
                   </p>
                 )}
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                    Start Date *
-                  </label>
-                  <input
-                    type="date"
-                    value={stopStartDate}
-                    onChange={(e) => setStopStartDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                    End Date *
-                  </label>
-                  <input
-                    type="date"
-                    value={stopEndDate}
-                    onChange={(e) => setStopEndDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                  Notes
-                </label>
-                <input
-                  type="text"
-                  value={stopNotes}
-                  onChange={(e) => setStopNotes(e.target.value)}
-                  placeholder="e.g. Staying near City Center"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs"
+                <Input
+                  label="Start Date *"
+                  type="date"
+                  value={stopStartDate}
+                  onChange={(e) => setStopStartDate(e.target.value)}
+                  required
+                />
+                <Input
+                  label="End Date *"
+                  type="date"
+                  value={stopEndDate}
+                  onChange={(e) => setStopEndDate(e.target.value)}
+                  required
                 />
               </div>
 
-              <div className="flex items-center justify-end space-x-2 pt-3 border-t border-slate-800">
-                <button
-                  type="button"
-                  onClick={() => setShowAddStopModal(false)}
-                  className="px-3 py-1.5 bg-slate-800 text-slate-300 text-xs rounded-lg"
-                >
+              <Input
+                label="Notes"
+                type="text"
+                value={stopNotes}
+                onChange={(e) => setStopNotes(e.target.value)}
+                placeholder="e.g. Hotel reservation near city center"
+              />
+
+              <div className="flex items-center justify-end space-x-2 pt-3 border-t border-slate-200">
+                <Button type="button" variant="secondary" size="sm" onClick={() => setShowAddStopModal(false)}>
                   Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={stopSubmitting || !selectedCity}
-                  className="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg disabled:opacity-50"
-                >
-                  {stopSubmitting ? 'Adding...' : 'Add Stop'}
-                </button>
+                </Button>
+                <Button type="submit" variant="emerald" size="sm" loading={stopSubmitting} disabled={!selectedCity}>
+                  Add Stop
+                </Button>
               </div>
             </form>
-          </div>
+          </Card>
         </div>
       )}
 
       {/* Add Activity Modal */}
       {activeStopForActivity && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl max-w-md w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="text-lg font-bold text-white">
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <Card className="max-w-md w-full p-6 space-y-4 shadow-xl bg-white border border-slate-200">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <h3 className="text-lg font-bold text-slate-900">
                 Add Activity to {activeStopForActivity.city.name}
               </h3>
-              <button onClick={() => setActiveStopForActivity(null)} className="text-slate-400 text-sm">
-                ✕
+              <button onClick={() => setActiveStopForActivity(null)} className="text-slate-500 hover:text-slate-900">
+                <X size={18} />
               </button>
             </div>
 
             <form onSubmit={handleAddActivity} className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                  Search Activity *
-                </label>
-                <input
+              <div className="space-y-1">
+                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">Search Activity *</label>
+                <Input
                   type="text"
                   value={activitySearchQuery}
                   onChange={(e) => setActivitySearchQuery(e.target.value)}
-                  placeholder="e.g. Museum, Tour, Dinner..."
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs focus:outline-none focus:border-blue-500"
+                  placeholder="e.g. Museum, Tour, Wine Tasting..."
                 />
                 {activitySearchResults.length > 0 && (
-                  <div className="mt-1 max-h-40 overflow-y-auto bg-slate-800 border border-slate-700 rounded-lg divide-y divide-slate-700">
+                  <div className="mt-1 max-h-40 overflow-y-auto bg-white border border-slate-200 rounded-xl divide-y divide-slate-100 shadow-md">
                     {activitySearchResults.map((act) => (
                       <div
                         key={act.id}
@@ -516,93 +498,65 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
                           setCustomCost(act.estimatedCost ? act.estimatedCost.toString() : '0');
                           setActivitySearchResults([]);
                         }}
-                        className="p-2 hover:bg-slate-700 cursor-pointer text-xs text-white flex justify-between"
+                        className="p-2.5 hover:bg-slate-50 cursor-pointer text-xs text-slate-900 flex justify-between font-medium"
                       >
                         <span>{act.name} ({act.category || 'General'})</span>
-                        <span className="text-emerald-400 font-semibold">${act.estimatedCost || 0}</span>
+                        <span className="text-emerald-700 font-semibold">${act.estimatedCost || 0}</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {selectedActivity && (
-                  <p className="text-xs text-emerald-400 mt-1 font-semibold">
-                    Selected: {selectedActivity.name} (${selectedActivity.estimatedCost || 0})
+                  <p className="text-xs text-emerald-700 font-semibold mt-1">
+                    ✓ Selected: {selectedActivity.name} (${selectedActivity.estimatedCost || 0})
                   </p>
                 )}
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                    Scheduled Date *
-                  </label>
-                  <input
-                    type="date"
-                    value={scheduledDate}
-                    onChange={(e) => setScheduledDate(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                    Start Time
-                  </label>
-                  <input
-                    type="time"
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                  Custom Cost ($)
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  step="5"
-                  value={customCost}
-                  onChange={(e) => setCustomCost(e.target.value)}
-                  placeholder="0"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs"
+                <Input
+                  label="Scheduled Date *"
+                  type="date"
+                  value={scheduledDate}
+                  onChange={(e) => setScheduledDate(e.target.value)}
+                  required
+                />
+                <Input
+                  label="Start Time"
+                  type="time"
+                  value={startTime}
+                  onChange={(e) => setStartTime(e.target.value)}
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-                  Notes
-                </label>
-                <input
-                  type="text"
-                  value={activityNotes}
-                  onChange={(e) => setActivityNotes(e.target.value)}
-                  placeholder="e.g. Booked tickets online"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white text-xs"
-                />
-              </div>
+              <Input
+                label="Custom Cost ($)"
+                type="number"
+                min="0"
+                step="5"
+                value={customCost}
+                onChange={(e) => setCustomCost(e.target.value)}
+                placeholder="0"
+              />
 
-              <div className="flex items-center justify-end space-x-2 pt-3 border-t border-slate-800">
-                <button
-                  type="button"
-                  onClick={() => setActiveStopForActivity(null)}
-                  className="px-3 py-1.5 bg-slate-800 text-slate-300 text-xs rounded-lg"
-                >
+              <Input
+                label="Notes"
+                type="text"
+                value={activityNotes}
+                onChange={(e) => setActivityNotes(e.target.value)}
+                placeholder="e.g. Online voucher booked"
+              />
+
+              <div className="flex items-center justify-end space-x-2 pt-3 border-t border-slate-200">
+                <Button type="button" variant="secondary" size="sm" onClick={() => setActiveStopForActivity(null)}>
                   Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={activitySubmitting || !selectedActivity}
-                  className="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg disabled:opacity-50"
-                >
-                  {activitySubmitting ? 'Assigning...' : 'Assign Activity'}
-                </button>
+                </Button>
+                <Button type="submit" variant="emerald" size="sm" loading={activitySubmitting} disabled={!selectedActivity}>
+                  Assign Activity
+                </Button>
               </div>
             </form>
-          </div>
+          </Card>
         </div>
       )}
     </div>

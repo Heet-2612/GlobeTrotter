@@ -68,11 +68,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const forgotPassword = async (data: ForgotPasswordRequest) => {
-    const response = await api.forgotPassword(data);
-    localStorage.setItem('globetrotter_token', response.token);
-    localStorage.setItem('globetrotter_user', JSON.stringify(response.user));
-    setToken(response.token);
-    setUser(response.user);
+    await api.forgotPassword(data);
   };
 
   const logout = () => {

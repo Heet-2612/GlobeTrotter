@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityResponse } from '../types';
 import { api } from '../services/api';
+import { Search, Sparkles } from 'lucide-react';
+import { Button, Input, Card, ActivityCard, LoadingState, EmptyState } from '../components/common/UIComponents';
 
 interface ActivitySearchPageProps {
   onNavigate: (tab: string, param?: string | number) => void;
@@ -39,95 +41,73 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({ onNaviga
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-800">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
-          <h1 className="text-2xl font-bold text-white">Discover Activities & Attractions</h1>
-          <p className="text-xs text-slate-400 mt-1">
-            Search curated tours, landmark visits, dining experiences, and outdoor adventures
+          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Discover Activities & Attractions</h1>
+          <p className="text-xs text-slate-500 mt-1">
+            Browse tours, landmark visits, food experiences, and outdoor adventures
           </p>
         </div>
       </div>
 
       {/* Category Pills & Search */}
       <div className="space-y-3">
-        <form onSubmit={handleSearchSubmit} className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row gap-3">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search activities (e.g. Eiffel Tower, Wine Tasting, Museum)..."
-            className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500"
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold py-2 px-5 rounded-lg shadow transition-colors"
-          >
-            🔍 Search
-          </button>
-        </form>
+        <Card className="p-4 bg-white border border-slate-200 shadow-xs">
+          <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3">
+            <div className="flex-1">
+              <Input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search activities (e.g. Eiffel Tower, Wine Tasting, Museum)..."
+              />
+            </div>
+            <Button type="submit" variant="emerald" size="md" icon={<Search size={16} />}>
+              Search
+            </Button>
+          </form>
+        </Card>
 
+        {/* Category Pills */}
         <div className="flex flex-wrap gap-2 pt-1">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => {
-                const selectedCat = cat === 'All' ? '' : cat;
-                setCategory(selectedCat);
-                fetchActivities(search, selectedCat);
-              }}
-              className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors border ${
-                (cat === 'All' && !category) || category === cat
-                  ? 'bg-blue-600 text-white border-blue-500'
-                  : 'bg-slate-900 text-slate-400 hover:text-white border-slate-800'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isSelected = (cat === 'All' && !category) || category === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => {
+                  const selectedCat = cat === 'All' ? '' : cat;
+                  setCategory(selectedCat);
+                  fetchActivities(search, selectedCat);
+                }}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                  isSelected
+                    ? 'bg-emerald-600 text-white border-emerald-500 shadow-xs'
+                    : 'bg-white text-slate-700 hover:text-slate-900 hover:bg-slate-100 border-slate-200'
+                }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       {/* Results Grid */}
       {loading ? (
-        <div className="text-center py-12 text-slate-400 flex items-center justify-center space-x-2">
-          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-          <span>Searching activities...</span>
-        </div>
+        <LoadingState message="Searching activities..." />
       ) : error ? (
-        <div className="bg-red-950/80 border border-red-800 p-4 rounded-xl text-red-300 text-sm">
+        <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-sm">
           {error}
         </div>
       ) : activities.length === 0 ? (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-12 text-center text-slate-400">
-          No activities found matching your search.
-        </div>
+        <EmptyState title="No activities found" description="Try selecting a different category or search term." />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {activities.map((act) => (
-            <div
-              key={act.id}
-              className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow hover:border-blue-500/50 transition-all space-y-3 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-blue-900/60 text-blue-300 border border-blue-700/50">
-                    {act.category || 'General'}
-                  </span>
-                  <span className="text-xs text-slate-400">
-                    📍 {act.cityName || 'City Destination'}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-white mt-2">{act.name}</h3>
-                <p className="text-xs text-slate-400 line-clamp-2 mt-1">
-                  {act.description || 'No description available.'}
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <span>⏱️ {act.estimatedDurationMinutes ? `${act.estimatedDurationMinutes} mins` : 'Flexible'}</span>
-                <span className="font-bold text-emerald-400 text-sm">${act.estimatedCost || 0}</span>
-              </div>
-            </div>
+            <ActivityCard key={act.id} activity={act} />
           ))}
         </div>
       )}

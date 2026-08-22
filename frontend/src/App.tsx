@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { AuthPage } from './pages/AuthPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { CreateTripPage } from './pages/CreateTripPage';
 import { MyTripsPage } from './pages/MyTripsPage';
@@ -14,26 +15,43 @@ import { TimelinePage } from './pages/TimelinePage';
 import { SharedItineraryPage } from './pages/SharedItineraryPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SharingSection } from './components/SharingSection';
+import { Button, LoadingState } from './components/common/UIComponents';
+import { ArrowLeft } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
   const { isAuthenticated, loading } = useAuth();
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
   const [activeParam, setActiveParam] = useState<string | number | undefined>(undefined);
 
-  // Handle hash routing for public share tokens (e.g. #public/token)
+  // Handle hash & path routing for public share tokens (#public/token) and password reset (#reset-password?token=... or /reset-password?token=...)
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleUrlChange = () => {
+      const pathname = window.location.pathname;
+      const searchParams = new URLSearchParams(window.location.search);
       const hash = window.location.hash.replace(/^#/, '');
+
+      if (pathname === '/reset-password' || hash.startsWith('reset-password')) {
+        const token = searchParams.get('token') || (hash.includes('token=') ? hash.split('token=')[1]?.split('&')[0] : '');
+        setCurrentTab('reset-password');
+        setActiveParam(token);
+        return;
+      }
+
       if (hash.startsWith('public/')) {
         const token = hash.replace('public/', '');
         setCurrentTab('public');
         setActiveParam(token);
+        return;
       }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleUrlChange();
+    window.addEventListener('hashchange', handleUrlChange);
+    window.addEventListener('popstate', handleUrlChange);
+    return () => {
+      window.removeEventListener('hashchange', handleUrlChange);
+      window.removeEventListener('popstate', handleUrlChange);
+    };
   }, []);
 
   const handleNavigate = (tab: string, param?: string | number) => {
@@ -44,9 +62,20 @@ const MainAppContent: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center space-x-2">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-        <span className="text-slate-300 font-medium">Initializing GlobeTrotter...</span>
+      <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex items-center justify-center">
+        <LoadingState message="Initializing GlobeTrotter..." />
+      </div>
+    );
+  }
+
+  // Reset Password Screen (Accessible publicly with token)
+  if (currentTab === 'reset-password') {
+    return (
+      <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans">
+        <Navbar currentTab="login" onNavigate={handleNavigate} />
+        <main className="flex-1">
+          <ResetPasswordPage token={activeParam ? String(activeParam) : undefined} onNavigate={handleNavigate} />
+        </main>
       </div>
     );
   }
@@ -54,7 +83,7 @@ const MainAppContent: React.FC = () => {
   // Public screen (accessible without login)
   if (currentTab === 'public' && activeParam) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+      <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans">
         <Navbar currentTab={currentTab} onNavigate={handleNavigate} />
         <main className="flex-1">
           <SharedItineraryPage shareToken={String(activeParam)} onNavigate={handleNavigate} />
@@ -66,7 +95,7 @@ const MainAppContent: React.FC = () => {
   // Unauthenticated users are shown AuthPage
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+      <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans">
         <Navbar currentTab="login" onNavigate={handleNavigate} />
         <main className="flex-1">
           <AuthPage onSuccess={() => handleNavigate('dashboard')} />
@@ -77,9 +106,9 @@ const MainAppContent: React.FC = () => {
 
   // Render Protected Views for Authenticated Users
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans">
       <Navbar currentTab={currentTab} onNavigate={handleNavigate} />
-      <main className="flex-1">
+      <main className="flex-1 pb-12">
         {currentTab === 'dashboard' && <DashboardPage onNavigate={handleNavigate} />}
         {currentTab === 'create-trip' && <CreateTripPage onNavigate={handleNavigate} />}
         {currentTab === 'my-trips' && <MyTripsPage onNavigate={handleNavigate} />}
@@ -98,15 +127,17 @@ const MainAppContent: React.FC = () => {
           <TimelinePage tripId={Number(activeParam)} onNavigate={handleNavigate} />
         )}
         {currentTab === 'sharing' && activeParam && (
-          <div className="max-w-4xl mx-auto px-4 py-8 space-y-4">
+          <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold text-white">Public Sharing</h2>
-              <button
+              <h2 className="text-2xl font-extrabold text-slate-900">Public Sharing Settings</h2>
+              <Button
+                variant="ghost"
+                size="sm"
+                icon={<ArrowLeft size={14} />}
                 onClick={() => handleNavigate('builder', activeParam)}
-                className="text-xs text-blue-400 font-semibold"
               >
-                ← Back to Builder
-              </button>
+                Back to Builder
+              </Button>
             </div>
             <SharingSection tripId={Number(activeParam)} />
           </div>
