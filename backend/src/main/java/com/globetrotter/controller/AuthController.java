@@ -1,8 +1,6 @@
 package com.globetrotter.controller;
 
-import com.globetrotter.dto.AuthResponse;
-import com.globetrotter.dto.LoginRequest;
-import com.globetrotter.dto.SignupRequest;
+import com.globetrotter.dto.*;
 import com.globetrotter.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,6 +29,18 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<ForgotPasswordResponse> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        ForgotPasswordResponse response = authService.forgotPassword(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<ForgotPasswordResponse> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        ForgotPasswordResponse response = authService.resetPassword(request);
         return ResponseEntity.ok(response);
     }
 }
