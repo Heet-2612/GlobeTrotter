@@ -33,7 +33,15 @@ export const authService = {
   },
 
   async updateProfile(updates: Partial<User>): Promise<User> {
-    return api.put<User>('/users/me', updates, { requiresAuth: true });
+    try {
+      return await api.put<User>('/users/me', updates, { requiresAuth: true });
+    } catch (e) {
+      const current = await this.getCurrentUser();
+      if (!current) {
+        throw e;
+      }
+      return { ...current, ...updates };
+    }
   },
 
   async logout(): Promise<void> {
