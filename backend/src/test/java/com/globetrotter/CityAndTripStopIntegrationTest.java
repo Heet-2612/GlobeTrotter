@@ -3,7 +3,9 @@ package com.globetrotter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globetrotter.dto.*;
 import com.globetrotter.entity.City;
+import com.globetrotter.repository.ActivityRepository;
 import com.globetrotter.repository.CityRepository;
+import com.globetrotter.repository.TripActivityRepository;
 import com.globetrotter.repository.TripRepository;
 import com.globetrotter.repository.TripStopRepository;
 import com.globetrotter.repository.UserRepository;
@@ -56,11 +58,19 @@ public class CityAndTripStopIntegrationTest {
     private City mumbai;
     private City bangalore;
 
+    @Autowired
+    private TripActivityRepository tripActivityRepository;
+
+    @Autowired
+    private ActivityRepository activityRepository;
+
     @BeforeEach
     void setUp() throws Exception {
+        tripActivityRepository.deleteAll();
         tripStopRepository.deleteAll();
         tripRepository.deleteAll();
         userRepository.deleteAll();
+        activityRepository.deleteAll();
         cityRepository.deleteAll();
 
         // Seed Cities

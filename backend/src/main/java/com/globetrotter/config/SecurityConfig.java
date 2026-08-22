@@ -59,7 +59,7 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/health", "/api/auth/**", "/api/public/**", "/api/cities/**").permitAll()
+                        .requestMatchers("/api/health", "/api/auth/**", "/api/public/**", "/api/cities/**", "/api/activities/**").permitAll()
                         .anyRequest().authenticated()
                 );
 

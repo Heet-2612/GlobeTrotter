@@ -5,7 +5,9 @@ import com.globetrotter.dto.AuthResponse;
 import com.globetrotter.dto.CreateTripRequest;
 import com.globetrotter.dto.SignupRequest;
 import com.globetrotter.dto.UpdateTripRequest;
+import com.globetrotter.repository.TripActivityRepository;
 import com.globetrotter.repository.TripRepository;
+import com.globetrotter.repository.TripStopRepository;
 import com.globetrotter.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,11 +44,19 @@ public class TripIntegrationTest {
     @Autowired
     private TripRepository tripRepository;
 
+    @Autowired
+    private TripStopRepository tripStopRepository;
+
+    @Autowired
+    private TripActivityRepository tripActivityRepository;
+
     private String userAToken;
     private String userBToken;
 
     @BeforeEach
     void setUp() throws Exception {
+        tripActivityRepository.deleteAll();
+        tripStopRepository.deleteAll();
         tripRepository.deleteAll();
         userRepository.deleteAll();
 

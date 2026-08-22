@@ -38,8 +38,20 @@ public class AuthIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private com.globetrotter.repository.TripActivityRepository tripActivityRepository;
+
+    @Autowired
+    private com.globetrotter.repository.TripStopRepository tripStopRepository;
+
+    @Autowired
+    private com.globetrotter.repository.TripRepository tripRepository;
+
     @BeforeEach
     void setUp() {
+        tripActivityRepository.deleteAll();
+        tripStopRepository.deleteAll();
+        tripRepository.deleteAll();
         userRepository.deleteAll();
     }
 
