@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Copy, Check, Share2, Globe, ExternalLink, QrCode, Lock, CheckCircle2 } from 'lucide-react';
-import { tripService } from '../../services/tripService';
+import { X, Copy, Check, Share2, Globe, ExternalLink, Lock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { sharingService } from '../../services/sharingService';
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -15,19 +15,23 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   isOpen, tripId, tripName = 'Travel Plan', onClose, onViewPublicPage 
 }) => {
   const [shareToken, setShareToken] = useState<string>('');
+  const [isPublic, setIsPublic] = useState<boolean>(false);
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isPublic, setIsPublic] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen && tripId) {
       setLoading(true);
-      tripService.getShareToken(tripId).then(res => {
-        setShareToken(res.shareToken);
+      setErrorMsg(null);
+      sharingService.getSharingStatus(tripId).then(res => {
         setIsPublic(res.isPublic);
-        setLoading(false);
+        setShareToken(res.shareToken || '');
       }).catch(err => {
-        console.error('Failed to get share link', err);
+        console.error('Failed to get sharing status', err);
+        setErrorMsg('Failed to load sharing settings.');
+      }).finally(() => {
         setLoading(false);
       });
     }
@@ -36,8 +40,24 @@ export const ShareModal: React.FC<ShareModalProps> = ({
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
   const fullShareUrl = shareToken ? `${origin}?share=${shareToken}` : '';
 
+  const handleToggleSharing = async (targetState: boolean) => {
+    if (!tripId) return;
+    setUpdating(true);
+    setErrorMsg(null);
+
+    try {
+      const res = await sharingService.updateSharing(tripId, targetState);
+      setIsPublic(res.isPublic);
+      setShareToken(res.shareToken || '');
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to update sharing state.');
+    } finally {
+      setUpdating(false);
+    }
+  };
+
   const handleCopy = () => {
-    if (!shareToken) return;
+    if (!fullShareUrl) return;
     navigator.clipboard.writeText(fullShareUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -59,7 +79,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
             initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
-            className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-100 p-6 z-10 overflow-hidden"
+            className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 z-10 overflow-hidden"
           >
             {/* Close Button */}
             <button
@@ -76,7 +96,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({
               </div>
               <div>
                 <h3 className="text-base font-bold text-slate-900 font-['Outfit']">
-                  Share Itinerary
+                  Public Trip Sharing
                 </h3>
                 <p className="text-xs text-slate-500 truncate max-w-[260px]">
                   {tripName}
@@ -84,88 +104,123 @@ export const ShareModal: React.FC<ShareModalProps> = ({
               </div>
             </div>
 
-            {/* Public Link Card */}
-            <div className="space-y-4">
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-700 mb-1.5">
-                  <span className="flex items-center space-x-1">
-                    <Globe className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Public Read-Only Link</span>
-                  </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">
-                    Active
-                  </span>
-                </div>
-                
-                <div className="flex items-center space-x-2 mt-2">
-                  <input
-                    type="text"
-                    readOnly
-                    value={loading ? 'Generating unique share link...' : fullShareUrl}
-                    className="w-full text-xs font-mono bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-600 focus:outline-none select-all"
-                  />
+            {errorMsg && (
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center space-x-2 mb-3">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                <span>{errorMsg}</span>
+              </div>
+            )}
+
+            {loading ? (
+              <div className="py-8 text-center text-xs text-slate-500">
+                Fetching backend sharing configuration...
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {/* Sharing Status Control */}
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-slate-800 flex items-center space-x-1.5">
+                      {isPublic ? <Globe className="w-4 h-4 text-emerald-600" /> : <Lock className="w-4 h-4 text-slate-400" />}
+                      <span>Privacy Status</span>
+                    </span>
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                      isPublic ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'
+                    }`}>
+                      {isPublic ? 'Public Share Enabled' : 'Private'}
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-slate-500">
+                    {isPublic 
+                      ? 'Anyone with the unique link can view your read-only itinerary and clone it.'
+                      : 'This itinerary is currently private. Only you can view or edit it.'}
+                  </p>
+
                   <button
-                    onClick={handleCopy}
-                    disabled={loading || !shareToken}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-1 flex-shrink-0 ${
-                      copied 
-                        ? 'bg-emerald-600 text-white shadow-sm' 
-                        : 'bg-slate-900 text-white hover:bg-slate-800 active:scale-95'
+                    onClick={() => handleToggleSharing(!isPublic)}
+                    disabled={updating}
+                    className={`w-full py-2 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 shadow-sm ${
+                      isPublic
+                        ? 'bg-slate-200 hover:bg-slate-300 text-slate-800'
+                        : 'bg-emerald-600 hover:bg-emerald-700 text-white'
                     }`}
                   >
-                    {copied ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" />
-                        <span>Copied!</span>
-                      </>
+                    {updating ? (
+                      <span>Updating Backend State...</span>
+                    ) : isPublic ? (
+                      <span>Disable Public Sharing</span>
                     ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>Copy</span>
-                      </>
+                      <span>Enable Public Sharing</span>
                     )}
                   </button>
                 </div>
-              </div>
 
-              {/* Feature Highlights for Friends */}
-              <div className="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-3">
-                <p className="font-semibold text-slate-900 flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>Anyone with this link can:</span>
-                </p>
-                <ul className="pl-6 list-disc space-y-1 text-slate-500 text-[11px]">
-                  <li>View your complete day-wise travel timeline & stops</li>
-                  <li>Inspect activities, locations, and estimated budget</li>
-                  <li>Click <span className="font-bold text-slate-700">"Copy Trip"</span> to clone it into their own account</li>
-                </ul>
-              </div>
+                {/* Public Link Copy Card (only when Public) */}
+                {isPublic && shareToken && (
+                  <div className="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-200 space-y-2">
+                    <label className="block text-[11px] font-bold text-emerald-900">
+                      Shareable Public URL
+                    </label>
 
-              {/* View Public Page directly */}
-              <div className="flex items-center justify-between pt-2">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl"
-                >
-                  Done
-                </button>
-                
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (shareToken) {
-                      onViewPublicPage(shareToken);
-                      onClose();
-                    }
-                  }}
-                  className="px-4 py-2 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl flex items-center space-x-1.5 transition"
-                >
-                  <span>Open Public Preview</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </button>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        readOnly
+                        value={fullShareUrl}
+                        className="w-full text-xs font-mono bg-white border border-emerald-200 rounded-xl px-2.5 py-2 text-slate-700 focus:outline-none select-all"
+                      />
+                      <button
+                        onClick={handleCopy}
+                        className={`px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 flex-shrink-0 ${
+                          copied 
+                            ? 'bg-emerald-700 text-white shadow-sm' 
+                            : 'bg-emerald-600 text-white hover:bg-emerald-700 active:scale-95'
+                        }`}
+                      >
+                        {copied ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5" />
+                            <span>Copy</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="pt-2 flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          onViewPublicPage(shareToken);
+                          onClose();
+                        }}
+                        className="text-xs font-bold text-emerald-800 hover:text-emerald-950 flex items-center space-x-1"
+                      >
+                        <span>Open Public Preview</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Feature Highlights */}
+                <div className="space-y-1 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                  <p className="font-semibold text-slate-900 flex items-center space-x-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span>Public sharing capabilities:</span>
+                  </p>
+                  <ul className="pl-6 list-disc space-y-0.5 text-slate-500 text-[11px]">
+                    <li>Read-only itinerary timeline for unauthenticated users</li>
+                    <li>Authenticated visitors can click <span className="font-bold text-slate-700">"Copy Trip"</span> to clone it</li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
           </motion.div>
         </div>
       )}
