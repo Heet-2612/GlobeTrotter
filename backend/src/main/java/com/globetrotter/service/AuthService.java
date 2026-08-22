@@ -1,11 +1,13 @@
 package com.globetrotter.service;
 
 import com.globetrotter.dto.AuthResponse;
+import com.globetrotter.dto.ForgotPasswordRequest;
 import com.globetrotter.dto.LoginRequest;
 import com.globetrotter.dto.SignupRequest;
 import com.globetrotter.dto.UserResponse;
 import com.globetrotter.entity.User;
 import com.globetrotter.exception.InvalidCredentialsException;
+import com.globetrotter.exception.ResourceNotFoundException;
 import com.globetrotter.exception.UserAlreadyExistsException;
 import com.globetrotter.repository.UserRepository;
 import com.globetrotter.security.JwtTokenProvider;
@@ -72,6 +74,25 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(token)
                 .user(UserResponse.fromEntity(user))
+                .build();
+    }
+
+    @Transactional
+    public AuthResponse forgotPassword(ForgotPasswordRequest request) {
+        String normalizedEmail = request.getEmail().trim().toLowerCase();
+
+        User user = userRepository.findByEmail(normalizedEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + normalizedEmail));
+
+        String hashedPassword = passwordEncoder.encode(request.getNewPassword());
+        user.setPasswordHash(hashedPassword);
+        User updatedUser = userRepository.save(user);
+
+        String token = tokenProvider.generateToken(updatedUser.getEmail());
+
+        return AuthResponse.builder()
+                .token(token)
+                .user(UserResponse.fromEntity(updatedUser))
                 .build();
     }
 }

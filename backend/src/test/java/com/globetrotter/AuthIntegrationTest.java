@@ -203,4 +203,41 @@ public class AuthIntegrationTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("Validation failed")));
     }
+
+    @Test
+    void test9_ForgotPassword_SuccessfullyResetsPassword() throws Exception {
+        SignupRequest signup = SignupRequest.builder()
+                .name("Reset User")
+                .email("reset@example.com")
+                .password("OldPassword123!")
+                .build();
+
+        mockMvc.perform(post("/api/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(signup)))
+                .andExpect(status().isCreated());
+
+        com.globetrotter.dto.ForgotPasswordRequest resetRequest = new com.globetrotter.dto.ForgotPasswordRequest(
+                "reset@example.com",
+                "NewPassword123!"
+        );
+
+        mockMvc.perform(post("/api/auth/forgot-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(resetRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").exists())
+                .andExpect(jsonPath("$.user.email").value("reset@example.com"));
+
+        LoginRequest newLogin = LoginRequest.builder()
+                .email("reset@example.com")
+                .password("NewPassword123!")
+                .build();
+
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newLogin)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").exists());
+    }
 }

@@ -1,6 +1,7 @@
 package com.globetrotter.controller;
 
 import com.globetrotter.dto.AuthResponse;
+import com.globetrotter.dto.ForgotPasswordRequest;
 import com.globetrotter.dto.LoginRequest;
 import com.globetrotter.dto.SignupRequest;
 import com.globetrotter.service.AuthService;
@@ -31,6 +32,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<AuthResponse> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
+        AuthResponse response = authService.forgotPassword(request);
         return ResponseEntity.ok(response);
     }
 }
