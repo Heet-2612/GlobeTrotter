@@ -38,6 +38,12 @@ public class Trip {
     @Column(precision = 12, scale = 2)
     private BigDecimal budget;
 
+    @Column(name = "is_public", nullable = false)
+    private Boolean isPublic = false;
+
+    @Column(name = "share_token", unique = true, length = 100)
+    private String shareToken;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -49,7 +55,7 @@ public class Trip {
     public Trip() {
     }
 
-    public Trip(Long id, User user, String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto, BigDecimal budget, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Trip(Long id, User user, String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto, BigDecimal budget, Boolean isPublic, String shareToken, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -58,6 +64,8 @@ public class Trip {
         this.endDate = endDate;
         this.coverPhoto = coverPhoto;
         this.budget = budget;
+        this.isPublic = isPublic != null ? isPublic : false;
+        this.shareToken = shareToken;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -90,6 +98,12 @@ public class Trip {
     public BigDecimal getBudget() { return budget; }
     public void setBudget(BigDecimal budget) { this.budget = budget; }
 
+    public Boolean getIsPublic() { return isPublic; }
+    public void setIsPublic(Boolean isPublic) { this.isPublic = isPublic != null ? isPublic : false; }
+
+    public String getShareToken() { return shareToken; }
+    public void setShareToken(String shareToken) { this.shareToken = shareToken; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
@@ -105,6 +119,8 @@ public class Trip {
         private LocalDate endDate;
         private String coverPhoto;
         private BigDecimal budget;
+        private Boolean isPublic = false;
+        private String shareToken;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
@@ -116,11 +132,13 @@ public class Trip {
         public TripBuilder endDate(LocalDate endDate) { this.endDate = endDate; return this; }
         public TripBuilder coverPhoto(String coverPhoto) { this.coverPhoto = coverPhoto; return this; }
         public TripBuilder budget(BigDecimal budget) { this.budget = budget; return this; }
+        public TripBuilder isPublic(Boolean isPublic) { this.isPublic = isPublic; return this; }
+        public TripBuilder shareToken(String shareToken) { this.shareToken = shareToken; return this; }
         public TripBuilder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
         public TripBuilder updatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public Trip build() {
-            return new Trip(id, user, name, description, startDate, endDate, coverPhoto, budget, createdAt, updatedAt);
+            return new Trip(id, user, name, description, startDate, endDate, coverPhoto, budget, isPublic, shareToken, createdAt, updatedAt);
         }
     }
 }

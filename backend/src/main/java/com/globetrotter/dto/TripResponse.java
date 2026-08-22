@@ -15,13 +15,15 @@ public class TripResponse {
     private LocalDate endDate;
     private String coverPhoto;
     private BigDecimal budget;
+    private Boolean isPublic;
+    private String shareToken;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public TripResponse() {
     }
 
-    public TripResponse(Long id, String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto, BigDecimal budget, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public TripResponse(Long id, String name, String description, LocalDate startDate, LocalDate endDate, String coverPhoto, BigDecimal budget, Boolean isPublic, String shareToken, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -29,6 +31,8 @@ public class TripResponse {
         this.endDate = endDate;
         this.coverPhoto = coverPhoto;
         this.budget = budget;
+        this.isPublic = isPublic;
+        this.shareToken = shareToken;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -45,6 +49,8 @@ public class TripResponse {
                 trip.getEndDate(),
                 trip.getCoverPhoto(),
                 trip.getBudget(),
+                trip.getIsPublic(),
+                trip.getShareToken(),
                 trip.getCreatedAt(),
                 trip.getUpdatedAt()
         );
@@ -70,6 +76,12 @@ public class TripResponse {
 
     public BigDecimal getBudget() { return budget; }
     public void setBudget(BigDecimal budget) { this.budget = budget; }
+
+    public Boolean getIsPublic() { return isPublic; }
+    public void setIsPublic(Boolean isPublic) { this.isPublic = isPublic; }
+
+    public String getShareToken() { return shareToken; }
+    public void setShareToken(String shareToken) { this.shareToken = shareToken; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

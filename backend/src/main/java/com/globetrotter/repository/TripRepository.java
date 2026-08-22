@@ -13,4 +13,8 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     List<Trip> findByUserIdOrderByStartDateAsc(Long userId);
 
     Optional<Trip> findByIdAndUserId(Long id, Long userId);
+
+    Optional<Trip> findByShareToken(String shareToken);
+
+    Optional<Trip> findByShareTokenAndIsPublicTrue(String shareToken);
 }
