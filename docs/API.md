@@ -1,22 +1,22 @@
 # GlobeTrotter — REST API Specifications
 
-> **Document Status**: API Contract Specification  
-> **Source of Truth**: GlobeTrotter PRD & Problem Statement  
+> **Document Status**: Complete API Contract Specification (Phase 8 Audited)  
+> **Source of Truth**: GlobeTrotter Backend Implementation & PRD  
 > **Base URL**: `/api`  
 
 ---
 
-## 1. Authentication Endpoints
+## 1. Authentication Endpoints (`/api/auth`)
 
-### 1.1 `POST /auth/signup`
-- **Purpose**: Register a new traveler account. `[Explicitly Required by PDF]`
+### 1.1 `POST /api/auth/signup`
+- **Purpose**: Register a new traveler account.
 - **Auth**: Public
 - **Request Body**:
   ```json
   {
     "name": "Jane Doe",
     "email": "jane@example.com",
-    "password": "securepassword123"
+    "password": "Password123!"
   }
   ```
 - **Response**: `201 Created`
@@ -33,14 +33,14 @@
   }
   ```
 
-### 1.2 `POST /auth/login`
-- **Purpose**: Authenticate existing user and issue stateless JWT token. `[Explicitly Required by PDF]`
+### 1.2 `POST /api/auth/login`
+- **Purpose**: Authenticate existing user and issue stateless JWT token.
 - **Auth**: Public
 - **Request Body**:
   ```json
   {
     "email": "jane@example.com",
-    "password": "securepassword123"
+    "password": "Password123!"
   }
   ```
 - **Response**: `200 OK`
@@ -59,10 +59,10 @@
 
 ---
 
-## 2. User Profile & Settings Endpoints
+## 2. User Profile & Settings Endpoints (`/api/users`)
 
-### 2.1 `GET /users/me`
-- **Purpose**: Retrieve current logged-in user profile and settings. `[Explicitly Required by PDF]`
+### 2.1 `GET /api/users/me`
+- **Purpose**: Retrieve current logged-in user profile.
 - **Auth**: Bearer JWT Token
 - **Response**: `200 OK`
   ```json
@@ -71,60 +71,21 @@
     "name": "Jane Doe",
     "email": "jane@example.com",
     "profilePhoto": "https://example.com/photo.jpg",
-    "languagePreference": "en",
-    "savedDestinationsCount": 3
+    "languagePreference": "en"
   }
   ```
-
-### 2.2 `PUT /users/me`
-- **Purpose**: Update editable profile information (name, photo, email, language). `[Explicitly Required by PDF]`
-- **Auth**: Bearer JWT Token
-- **Request Body**:
-  ```json
-  {
-    "name": "Jane Smith",
-    "email": "janesmith@example.com",
-    "profilePhoto": "https://example.com/newphoto.jpg",
-    "languagePreference": "fr"
-  }
-  ```
-- **Response**: `200 OK`
-
-### 2.3 `DELETE /users/me`
-- **Purpose**: Delete current user account and associated personal data. `[Explicitly Required by PDF]`
-- **Auth**: Bearer JWT Token
-- **Response**: `204 No Content`
-
-### 2.4 `GET /users/saved-destinations`
-- **Purpose**: Fetch user's saved/bookmarked destinations list. `[Explicitly Required by PDF]`
-- **Auth**: Bearer JWT Token
-- **Response**: `200 OK` (Array of city objects)
 
 ---
 
-## 3. Trip Management Endpoints
+## 3. Trip Management Endpoints (`/api/trips`)
 
-### 3.1 `GET /trips`
-- **Purpose**: Retrieve list of all trips created by the logged-in user for Dashboard & My Trips. `[Explicitly Required by PDF]`
+### 3.1 `GET /api/trips`
+- **Purpose**: Retrieve list of all trips created by the logged-in user.
 - **Auth**: Bearer JWT Token
-- **Response**: `200 OK`
-  ```json
-  [
-    {
-      "id": 101,
-      "name": "European Tour 2026",
-      "description": "Multi-city tour across France and Italy.",
-      "startDate": "2026-10-10",
-      "endDate": "2026-10-20",
-      "coverPhoto": "https://example.com/paris.jpg",
-      "destinationCount": 2,
-      "estimatedTotalCost": 2450.00
-    }
-  ]
-  ```
+- **Response**: `200 OK` (Array of Trip objects)
 
-### 3.2 `POST /trips`
-- **Purpose**: Initiate creation of a new travel plan. `[Explicitly Required by PDF]`
+### 3.2 `POST /api/trips`
+- **Purpose**: Create a new trip.
 - **Auth**: Bearer JWT Token
 - **Request Body**:
   ```json
@@ -133,63 +94,68 @@
     "description": "Multi-city tour across France and Italy.",
     "startDate": "2026-10-10",
     "endDate": "2026-10-20",
-    "coverPhoto": "https://example.com/paris.jpg"
+    "coverPhoto": "https://example.com/paris.jpg",
+    "budget": 1500.00
   }
   ```
-- **Response**: `201 Created` with created Trip object.
+- **Response**: `201 Created`
+  ```json
+  {
+    "id": 101,
+    "name": "European Tour 2026",
+    "description": "Multi-city tour across France and Italy.",
+    "startDate": "2026-10-10",
+    "endDate": "2026-10-20",
+    "coverPhoto": "https://example.com/paris.jpg",
+    "budget": 1500.00,
+    "isPublic": false,
+    "shareToken": null,
+    "createdAt": "2026-08-22T10:00:00",
+    "updatedAt": "2026-08-22T10:00:00"
+  }
+  ```
 
-### 3.3 `GET /trips/{tripId}`
-- **Purpose**: Get metadata details of a specific trip. `[Explicitly Required by PDF]`
+### 3.3 `GET /api/trips/{id}`
+- **Purpose**: Get metadata details of a specific trip.
 - **Auth**: Bearer JWT Token
 - **Response**: `200 OK`
 
-### 3.4 `PUT /trips/{tripId}`
-- **Purpose**: Edit trip name, dates, description, or cover photo. `[Explicitly Required by PDF]`
+### 3.4 `PUT /api/trips/{id}`
+- **Purpose**: Edit trip details.
 - **Auth**: Bearer JWT Token
 - **Response**: `200 OK`
 
-### 3.5 `DELETE /trips/{tripId}`
-- **Purpose**: Delete a trip and its associated stops/activities. `[Explicitly Required by PDF]`
+### 3.5 `DELETE /api/trips/{id}`
+- **Purpose**: Delete a trip and its associated stops/activities.
 - **Auth**: Bearer JWT Token
 - **Response**: `204 No Content`
 
 ---
 
-## 4. City Search & Discovery Endpoints
+## 4. City Search & Discovery Endpoints (`/api/cities`)
 
-### 4.1 `GET /cities`
-- **Purpose**: Search cities by name with meta info (country, cost index, popularity) and filters. `[Explicitly Required by PDF]`
+### 4.1 `GET /api/cities`
+- **Purpose**: Search cities by name/country/region.
 - **Auth**: Public / Authenticated
-- **Query Parameters**:
-  - `search`: String (e.g. `Paris`)
-  - `country`: String (e.g. `France`)
-  - `region`: String (e.g. `Europe`)
-- **Response**: `200 OK`
-  ```json
-  [
-    {
-      "id": 12,
-      "name": "Paris",
-      "country": "France",
-      "region": "Europe",
-      "costIndex": 4.2,
-      "popularity": 95,
-      "imageUrl": "https://images.example.com/paris.jpg"
-    }
-  ]
-  ```
+- **Query Parameters**: `search`, `country`, `region`
+- **Response**: `200 OK` (Array of City objects)
 
-### 4.2 `GET /cities/{cityId}`
-- **Purpose**: Fetch single city details and metadata. `[Explicitly Required by PDF]`
+### 4.2 `GET /api/cities/{id}`
+- **Purpose**: Fetch single city details.
 - **Auth**: Public / Authenticated
 - **Response**: `200 OK`
 
 ---
 
-## 5. Itinerary Builder & Stop Endpoints
+## 5. Trip Stops Endpoints (`/api/trips/{tripId}/stops`)
 
-### 5.1 `POST /trips/{tripId}/stops`
-- **Purpose**: Add a city stop to an itinerary with travel dates. `[Explicitly Required by PDF]`
+### 5.1 `GET /api/trips/{tripId}/stops`
+- **Purpose**: List stops for a trip ordered by `stopOrder`.
+- **Auth**: Bearer JWT Token
+- **Response**: `200 OK`
+
+### 5.2 `POST /api/trips/{tripId}/stops`
+- **Purpose**: Add a city stop to an itinerary with travel dates.
 - **Auth**: Bearer JWT Token
 - **Request Body**:
   ```json
@@ -197,170 +163,173 @@
     "cityId": 12,
     "startDate": "2026-10-10",
     "endDate": "2026-10-15",
-    "stopOrder": 1
+    "notes": "Exploring Paris"
   }
   ```
 - **Response**: `201 Created`
 
-### 5.2 `PUT /trips/{tripId}/stops/{stopId}`
-- **Purpose**: Update dates or notes for a city stop. `[Explicitly Required by PDF]`
+### 5.3 `PUT /api/trips/{tripId}/stops/{stopId}`
+- **Purpose**: Update dates or notes for a stop.
 - **Auth**: Bearer JWT Token
 - **Response**: `200 OK`
 
-### 5.3 `DELETE /trips/{tripId}/stops/{stopId}`
-- **Purpose**: Remove a city stop from the trip. `[Explicitly Required by PDF]`
-- **Auth**: Bearer JWT Token
-- **Response**: `204 No Content`
-
-### 5.4 `PUT /trips/{tripId}/stops/reorder`
-- **Purpose**: Reorder sequence of cities in a multi-city itinerary. `[Explicitly Required by PDF]`
+### 5.4 `PUT /api/trips/{tripId}/stops/reorder`
+- **Purpose**: Reorder sequence of stops in an itinerary.
 - **Auth**: Bearer JWT Token
 - **Request Body**:
   ```json
   {
-    "orderedStopIds": [202, 201, 203]
+    "orderedStopIds": [2, 1, 3]
   }
   ```
 - **Response**: `200 OK`
 
+### 5.5 `DELETE /api/trips/{tripId}/stops/{stopId}`
+- **Purpose**: Remove a city stop from the trip.
+- **Auth**: Bearer JWT Token
+- **Response**: `204 No Content`
+
 ---
 
-## 6. Activity Search & Assignment Endpoints
+## 6. Activity Search & Trip Activity Endpoints
 
-### 6.1 `GET /cities/{cityId}/activities`
-- **Purpose**: Browse available activities in a city filtered by type, cost, duration. `[Explicitly Required by PDF]`
+### 6.1 `GET /api/activities`
+- **Purpose**: Search catalog activities filtered by `cityId`, `search`, `category`.
 - **Auth**: Public / Authenticated
-- **Query Parameters**: `type`, `maxCost`, `maxDuration`
-- **Response**: `200 OK`
-  ```json
-  [
-    {
-      "id": 501,
-      "cityId": 12,
-      "name": "Eiffel Tower Guided Tour",
-      "type": "SIGHTSEEING",
-      "estimatedCost": 45.00,
-      "durationMin": 120,
-      "imageUrl": "https://images.example.com/eiffel.jpg"
-    }
-  ]
-  ```
+- **Response**: `200 OK` (Array of Activity objects)
 
-### 6.2 `POST /trips/{tripId}/stops/{stopId}/activities`
-- **Purpose**: Assign an activity to a trip stop on a specific date/time. `[Explicitly Required by PDF]`
+### 6.2 `GET /api/trips/{tripId}/stops/{stopId}/activities`
+- **Purpose**: List activities assigned to a specific stop ordered by `activityOrder`.
+- **Auth**: Bearer JWT Token
+- **Response**: `200 OK`
+
+### 6.3 `POST /api/trips/{tripId}/stops/{stopId}/activities`
+- **Purpose**: Assign an activity to a trip stop.
 - **Auth**: Bearer JWT Token
 - **Request Body**:
   ```json
   {
     "activityId": 501,
-    "activityDate": "2026-10-11",
+    "scheduledDate": "2026-10-11",
     "startTime": "10:00:00",
-    "estimatedCost": 45.00,
-    "notes": "Booked tickets online"
+    "notes": "Booked online",
+    "customCost": 45.00
   }
   ```
 - **Response**: `201 Created`
 
-### 6.3 `PUT /trips/{tripId}/activities/{tripActivityId}`
-- **Purpose**: Edit scheduled activity time, date, or cost. `[Explicitly Required by PDF]`
+### 6.4 `PUT /api/trips/{tripId}/stops/{stopId}/activities/{tripActivityId}`
+- **Purpose**: Edit scheduled activity time, date, notes, or custom cost.
 - **Auth**: Bearer JWT Token
 - **Response**: `200 OK`
 
-### 6.4 `DELETE /trips/{tripId}/activities/{tripActivityId}`
-- **Purpose**: Remove assigned activity from a trip stop. `[Explicitly Required by PDF]`
+### 6.5 `PUT /api/trips/{tripId}/stops/{stopId}/activities/reorder`
+- **Purpose**: Reorder assigned activities within a stop.
+- **Auth**: Bearer JWT Token
+- **Request Body**:
+  ```json
+  {
+    "orderedTripActivityIds": [3, 1, 2]
+  }
+  ```
+- **Response**: `200 OK`
+
+### 6.6 `DELETE /api/trips/{tripId}/stops/{stopId}/activities/{tripActivityId}`
+- **Purpose**: Remove assigned activity from a trip stop.
 - **Auth**: Bearer JWT Token
 - **Response**: `204 No Content`
 
 ---
 
-## 7. Itinerary View & Calendar Endpoints
+## 7. Budget Endpoints (`/api/trips/{tripId}/budget`)
 
-### 7.1 `GET /trips/{tripId}/itinerary`
-- **Purpose**: Get structured day-wise itinerary, timeline, and schedule blocks. `[Explicitly Required by PDF]`
+### 7.1 `GET /api/trips/{tripId}/budget`
+- **Purpose**: Retrieve financial breakdown (budget, total activity cost, remaining, %, category breakdown, overbudget flag).
 - **Auth**: Bearer JWT Token
 - **Response**: `200 OK`
   ```json
   {
     "tripId": 101,
-    "tripName": "European Tour 2026",
-    "days": [
+    "budget": 1500.00,
+    "totalActivityCost": 450.00,
+    "remainingBudget": 1050.00,
+    "budgetUsedPercentage": 30.0,
+    "budgetExceeded": false,
+    "currency": "USD",
+    "categoryBreakdown": [
       {
-        "date": "2026-10-10",
-        "city": "Paris",
-        "activities": [
-          {
-            "tripActivityId": 901,
-            "name": "Eiffel Tower Tour",
-            "time": "10:00:00",
-            "durationMin": 120,
-            "cost": 45.00
-          }
-        ]
+        "category": "ADVENTURE",
+        "cost": 250.00,
+        "activityCount": 2
+      },
+      {
+        "category": "CULTURE",
+        "cost": 200.00,
+        "activityCount": 3
       }
     ]
   }
   ```
 
----
-
-## 8. Trip Budget & Financial Endpoints
-
-### 8.1 `GET /trips/{tripId}/budget`
-- **Purpose**: Get total financial breakdown (Transport, Stay, Activities, Meals), daily averages, and overbudget flags. `[Explicitly Required by PDF]`
+### 7.2 `PUT /api/trips/{tripId}/budget`
+- **Purpose**: Set or update trip budget.
 - **Auth**: Bearer JWT Token
-- **Response**: `200 OK`
+- **Request Body**:
   ```json
   {
-    "tripId": 101,
-    "totalEstimatedCost": 2450.00,
-    "averageCostPerDay": 245.00,
-    "categoryBreakdown": {
-      "TRANSPORT": 600.00,
-      "STAY": 1000.00,
-      "ACTIVITIES": 450.00,
-      "MEALS": 400.00
-    },
-    "overbudgetDays": [
-      {
-        "date": "2026-10-12",
-        "dayCost": 420.00,
-        "alertMessage": "Exceeds average daily budget threshold"
-      }
-    ]
+    "budget": 2000.00
   }
   ```
+- **Response**: `200 OK` (returns updated `BudgetSummaryResponse`)
 
 ---
 
-## 9. Sharing & Public Itinerary Endpoints
+## 8. Sharing & Public Itinerary Endpoints
 
-### 9.1 `POST /trips/{tripId}/share`
-- **Purpose**: Generate or fetch unique public share URL token for an itinerary. `[Explicitly Required by PDF]`
+### 8.1 `PUT /api/trips/{tripId}/sharing`
+- **Purpose**: Enable or disable public sharing for a trip.
 - **Auth**: Bearer JWT Token
-- **Response**: `200 OK`
+- **Request Body**:
   ```json
   {
-    "shareToken": "a1b2c3d4-trip-public-token",
-    "publicUrl": "/shared/a1b2c3d4-trip-public-token",
     "isPublic": true
   }
   ```
-
-### 9.2 `GET /public/trips/{shareToken}`
-- **Purpose**: Retrieve read-only trip itinerary payload for public view page. `[Explicitly Required by PDF]`
-- **Auth**: Public
-- **Response**: `200 OK` (Full read-only trip, stops, and activities data)
-
-### 9.3 `POST /public/trips/{shareToken}/copy`
-- **Purpose**: Clone a public shared itinerary into the logged-in user's account ("Copy Trip"). `[Explicitly Required by PDF]`
-- **Auth**: Bearer JWT Token
-- **Response**: `201 Created` returning cloned Trip ID.
-
----
-
-## 10. Admin & Analytics Endpoints `[Optional in PDF]`
-
-### 10.1 `GET /admin/analytics`
-- **Purpose**: Admin dashboard tracking platform usage, top cities, top activities, user counts. `[Optional in PDF]`
-- **Auth**: Admin Bearer JWT Token
 - **Response**: `200 OK`
+  ```json
+  {
+    "tripId": 101,
+    "isPublic": true,
+    "shareToken": "4dc3785e-9c8d-4e02-a9f5-ec2fa049302a",
+    "publicUrl": "/shared/4dc3785e-9c8d-4e02-a9f5-ec2fa049302a"
+  }
+  ```
+
+### 8.2 `GET /api/trips/{tripId}/sharing`
+- **Purpose**: Retrieve sharing status & public link for trip owner.
+- **Auth**: Bearer JWT Token
+- **Response**: `200 OK`
+
+### 8.3 `GET /api/public/trips/{shareToken}`
+- **Purpose**: Retrieve read-only trip itinerary payload for public view page.
+- **Auth**: Public
+- **Response**: `200 OK`
+  ```json
+  {
+    "tripId": 101,
+    "shareToken": "4dc3785e-9c8d-4e02-a9f5-ec2fa049302a",
+    "name": "European Tour 2026",
+    "description": "Multi-city tour across France and Italy.",
+    "startDate": "2026-10-10",
+    "endDate": "2026-10-20",
+    "coverPhoto": "https://example.com/paris.jpg",
+    "creatorName": "Jane Doe",
+    "budget": 1500.00,
+    "stops": [...]
+  }
+  ```
+
+### 8.4 `POST /api/public/trips/{shareToken}/copy`
+- **Purpose**: Clone a public shared itinerary into the logged-in user's account.
+- **Auth**: Bearer JWT Token
+- **Response**: `201 Created` returning cloned `TripResponse`.

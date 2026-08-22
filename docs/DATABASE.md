@@ -1,7 +1,7 @@
 # GlobeTrotter — Database Design & Schema
 
-> **Document Status**: Relational Schema Specification  
-> **Source of Truth**: GlobeTrotter PRD & Problem Statement  
+> **Document Status**: Relational Schema Specification (Phase 8 Audited)  
+> **Source of Truth**: Flyway Migrations (V1 to V6) & Entity Model  
 
 ---
 
@@ -10,13 +10,9 @@
 ```mermaid
 erDiagram
     users ||--o{ trips : "creates/owns"
-    users ||--o{ user_saved_destinations : "saves"
     trips ||--o{ trip_stops : "contains ordered"
-    trips ||--o{ trip_budget_expenses : "has breakdown"
-    trips ||--o? trip_shares : "has share link"
     cities ||--o{ trip_stops : "located at"
     cities ||--o{ activities : "offers"
-    cities ||--o{ user_saved_destinations : "saved in profile"
     trip_stops ||--o{ trip_activities : "includes scheduled"
     activities ||--o{ trip_activities : "instantiated as"
 
@@ -28,6 +24,7 @@ erDiagram
         varchar profile_photo
         varchar language_preference
         timestamp created_at
+        timestamp updated_at
     }
 
     trips {
@@ -38,7 +35,11 @@ erDiagram
         date start_date
         date end_date
         varchar cover_photo
+        decimal budget
+        boolean is_public
+        varchar share_token UK
         timestamp created_at
+        timestamp updated_at
     }
 
     cities {
@@ -46,7 +47,7 @@ erDiagram
         varchar name
         varchar country
         varchar region
-        decimal cost_index
+        double_precision cost_index
         integer popularity
         varchar image_url
     }
@@ -58,6 +59,7 @@ erDiagram
         integer stop_order
         date start_date
         date end_date
+        text notes
     }
 
     activities {
@@ -65,9 +67,10 @@ erDiagram
         bigint city_id FK
         varchar name
         text description
-        varchar type
+        varchar category
+        integer estimated_duration_minutes
         decimal estimated_cost
-        integer duration_min
+        varchar currency
         varchar image_url
     }
 
@@ -75,31 +78,11 @@ erDiagram
         bigint id PK
         bigint trip_stop_id FK
         bigint activity_id FK
-        date activity_date
+        date scheduled_date
         time start_time
-        decimal estimated_cost
+        text notes
+        decimal custom_cost
         integer activity_order
-    }
-
-    trip_budget_expenses {
-        bigint id PK
-        bigint trip_id FK
-        varchar category
-        decimal estimated_amount
-    }
-
-    trip_shares {
-        bigint id PK
-        bigint trip_id FK
-        varchar share_token UK
-        boolean is_public
-        integer views_count
-    }
-
-    user_saved_destinations {
-        bigint id PK
-        bigint user_id FK
-        bigint city_id FK
     }
 ```
 
@@ -107,49 +90,48 @@ erDiagram
 
 ## 2. Entity Specifications & Field Dictionary
 
-### 2.1 `users` Table
-- **Purpose**: Stores user account identity, credentials, and settings.
-- **Primary Key**: `id` (`BIGINT AUTO_INCREMENT` / `BIGSERIAL`)
+### 2.1 `users` Table (`V1__create_users_table.sql`)
+- **Primary Key**: `id` (`BIGSERIAL` / `BIGINT`)
 - **Fields**:
-  - `id`: Unique identifier
+  - `id`: Unique user identifier
   - `email`: User email address (`VARCHAR(255)`, `UNIQUE`, `NOT NULL`)
   - `password_hash`: BCrypt encrypted password hash (`VARCHAR(255)`, `NOT NULL`)
-  - `name`: Full display name (`VARCHAR(100)`, `NOT NULL`)
+  - `name`: Display name (`VARCHAR(100)`, `NOT NULL`)
   - `profile_photo`: Profile photo URL (`VARCHAR(500)`, `NULL`)
-  - `language_preference`: Preferred language code e.g., 'en', 'fr' (`VARCHAR(10)`, `DEFAULT 'en'`)
-  - `created_at`: Account creation timestamp (`TIMESTAMP`, `DEFAULT CURRENT_TIMESTAMP`)
-  - `updated_at`: Modification timestamp (`TIMESTAMP`, `DEFAULT CURRENT_TIMESTAMP`)
+  - `language_preference`: Preferred language code e.g., 'en' (`VARCHAR(10)`, `DEFAULT 'en'`)
+  - `created_at`: Account creation timestamp (`TIMESTAMP`)
+  - `updated_at`: Modification timestamp (`TIMESTAMP`)
 
-### 2.2 `trips` Table
-- **Purpose**: Master table for travel itineraries created by users.
-- **Primary Key**: `id` (`BIGINT`)
+### 2.2 `trips` Table (`V2__create_trips_table.sql`, `V5__add_budget_to_trips.sql`, `V6__add_trip_sharing.sql`)
+- **Primary Key**: `id` (`BIGSERIAL` / `BIGINT`)
 - **Foreign Keys**: `user_id` -> `users(id)` (`ON DELETE CASCADE`)
 - **Fields**:
   - `id`: Unique trip identifier
   - `user_id`: Owner user ID (`BIGINT`, `NOT NULL`)
-  - `name`: Title of the trip e.g., "Euro Summer 2026" (`VARCHAR(150)`, `NOT NULL`)
-  - `description`: Overview text of the travel plan (`TEXT`, `NULL`)
+  - `name`: Title of the trip e.g., "Goa Vacation 2026" (`VARCHAR(150)`, `NOT NULL`)
+  - `description`: Overview text of travel plan (`TEXT`, `NULL`)
   - `start_date`: Overall trip start date (`DATE`, `NOT NULL`)
   - `end_date`: Overall trip end date (`DATE`, `NOT NULL`)
   - `cover_photo`: Optional cover photo URL (`VARCHAR(500)`, `NULL`)
+  - `budget`: Configured trip budget (`DECIMAL(12,2)`, `NULL`)
+  - `is_public`: Public itinerary toggle status (`BOOLEAN`, `NOT NULL`, `DEFAULT FALSE`)
+  - `share_token`: Unpredictable UUID share token (`VARCHAR(100)`, `UNIQUE`, `NULL`)
   - `created_at`: Record creation timestamp (`TIMESTAMP`)
   - `updated_at`: Record modification timestamp (`TIMESTAMP`)
 
-### 2.3 `cities` Table
-- **Purpose**: Catalog of global destinations searchable by travelers.
-- **Primary Key**: `id` (`BIGINT`)
+### 2.3 `cities` Table (`V3__create_cities_and_trip_stops.sql`)
+- **Primary Key**: `id` (`BIGSERIAL` / `BIGINT`)
 - **Fields**:
   - `id`: Unique city identifier
-  - `name`: City name e.g., "Paris", "Tokyo" (`VARCHAR(100)`, `NOT NULL`)
-  - `country`: Country name e.g., "France", "Japan" (`VARCHAR(100)`, `NOT NULL`)
-  - `region`: Region / Continent e.g., "Europe", "Asia" (`VARCHAR(100)`, `NOT NULL`)
-  - `cost_index`: Relative cost rating scale (e.g., 1.0 to 5.0) (`DECIMAL(3,2)`, `NOT NULL`)
-  - `popularity`: Popularity score index (e.g., 1 to 100) (`INTEGER`, `NOT NULL`)
-  - `image_url`: Representative thumbnail image URL (`VARCHAR(500)`, `NULL`)
+  - `name`: City name (`VARCHAR(100)`, `NOT NULL`)
+  - `country`: Country name (`VARCHAR(100)`, `NOT NULL`)
+  - `region`: Region / Continent (`VARCHAR(100)`, `NOT NULL`)
+  - `cost_index`: Relative cost rating scale (`DOUBLE PRECISION`, `NOT NULL`, `DEFAULT 1.0`)
+  - `popularity`: Popularity score index (`INTEGER`, `NOT NULL`, `DEFAULT 50`)
+  - `image_url`: City photo URL (`VARCHAR(500)`, `NULL`)
 
-### 2.4 `trip_stops` Table
-- **Purpose**: Represents a multi-city leg/stop within a specific trip itinerary.
-- **Primary Key**: `id` (`BIGINT`)
+### 2.4 `trip_stops` Table (`V3__create_cities_and_trip_stops.sql`)
+- **Primary Key**: `id` (`BIGSERIAL` / `BIGINT`)
 - **Foreign Keys**:
   - `trip_id` -> `trips(id)` (`ON DELETE CASCADE`)
   - `city_id` -> `cities(id)` (`ON DELETE RESTRICT`)
@@ -157,90 +139,45 @@ erDiagram
   - `id`: Unique stop identifier
   - `trip_id`: Associated trip (`BIGINT`, `NOT NULL`)
   - `city_id`: Selected city (`BIGINT`, `NOT NULL`)
-  - `stop_order`: Sequential position order of the stop (1, 2, 3...) (`INTEGER`, `NOT NULL`)
-  - `start_date`: Arrival date at city stop (`DATE`, `NOT NULL`)
-  - `end_date`: Departure date from city stop (`DATE`, `NOT NULL`)
-  - `notes`: Travel notes / stay details (`TEXT`, `NULL`)
+  - `stop_order`: Sequential position order (`INTEGER`, `NOT NULL`)
+  - `start_date`: Stop start date (`DATE`, `NOT NULL`)
+  - `end_date`: Stop end date (`DATE`, `NOT NULL`)
+  - `notes`: Custom notes (`TEXT`, `NULL`)
 
-### 2.5 `activities` Table
-- **Purpose**: Master reference library of activities and attractions per city.
-- **Primary Key**: `id` (`BIGINT`)
+### 2.5 `activities` Table (`V4__create_activities_and_trip_activities.sql`)
+- **Primary Key**: `id` (`BIGSERIAL` / `BIGINT`)
 - **Foreign Keys**: `city_id` -> `cities(id)` (`ON DELETE CASCADE`)
 - **Fields**:
   - `id`: Unique activity identifier
   - `city_id`: Associated city ID (`BIGINT`, `NOT NULL`)
-  - `name`: Title of activity e.g., "Eiffel Tower Sunset Tour" (`VARCHAR(150)`, `NOT NULL`)
-  - `description`: Detailed description (`TEXT`, `NULL`)
-  - `type`: Category e.g., 'SIGHTSEEING', 'FOOD_TOUR', 'ADVENTURE', 'CULTURE' (`VARCHAR(50)`, `NOT NULL`)
+  - `name`: Title of activity (`VARCHAR(150)`, `NOT NULL`)
+  - `description`: Activity description (`TEXT`, `NULL`)
+  - `category`: Category e.g., 'ADVENTURE', 'CULTURE', 'SIGHTSEEING' (`VARCHAR(50)`, `NOT NULL`)
+  - `estimated_duration_minutes`: Estimated duration in minutes (`INTEGER`, `NOT NULL`, `DEFAULT 60`)
   - `estimated_cost`: Baseline cost estimate (`DECIMAL(10,2)`, `NOT NULL`, `DEFAULT 0.00`)
-  - `duration_min`: Expected duration in minutes (`INTEGER`, `NOT NULL`)
+  - `currency`: Currency code (`VARCHAR(10)`, `DEFAULT 'USD'`)
   - `image_url`: Activity image URL (`VARCHAR(500)`, `NULL`)
 
-### 2.6 `trip_activities` Table
-- **Purpose**: Specific activity scheduled within a trip stop on a given date/time.
-- **Primary Key**: `id` (`BIGINT`)
+### 2.6 `trip_activities` Table (`V4__create_activities_and_trip_activities.sql`)
+- **Primary Key**: `id` (`BIGSERIAL` / `BIGINT`)
 - **Foreign Keys**:
   - `trip_stop_id` -> `trip_stops(id)` (`ON DELETE CASCADE`)
   - `activity_id` -> `activities(id)` (`ON DELETE RESTRICT`)
 - **Fields**:
-  - `id`: Unique scheduled activity instance ID
+  - `id`: Unique scheduled trip activity instance ID
   - `trip_stop_id`: Parent trip stop (`BIGINT`, `NOT NULL`)
   - `activity_id`: Referenced activity (`BIGINT`, `NOT NULL`)
-  - `activity_date`: Date scheduled (`DATE`, `NOT NULL`)
-  - `start_time`: Scheduled time e.g., "14:30:00" (`TIME`, `NULL`)
-  - `estimated_cost`: Cost override or confirmed cost (`DECIMAL(10,2)`, `NOT NULL`)
-  - `notes`: User custom notes for activity (`TEXT`, `NULL`)
-  - `activity_order`: Display sequence order for the day (`INTEGER`, `NOT NULL`)
-
-### 2.7 `trip_budget_expenses` Table
-- **Purpose**: Stores trip cost breakdown per category (Transport, Stay, Meals, Activities, Other).
-- **Primary Key**: `id` (`BIGINT`)
-- **Foreign Keys**: `trip_id` -> `trips(id)` (`ON DELETE CASCADE`)
-- **Fields**:
-  - `id`: Unique record ID
-  - `trip_id`: Associated trip (`BIGINT`, `NOT NULL`)
-  - `category`: Expense category (`VARCHAR(50)`, `NOT NULL`) — 'TRANSPORT', 'STAY', 'MEALS', 'ACTIVITIES', 'OTHER'
-  - `estimated_amount`: Allocated or estimated amount (`DECIMAL(10,2)`, `NOT NULL`, `DEFAULT 0.00`)
-  - `notes`: Notes regarding budget allocation (`TEXT`, `NULL`)
-
-### 2.8 `trip_shares` Table
-- **Purpose**: Manages public share tokens and read-only access URLs.
-- **Primary Key**: `id` (`BIGINT`)
-- **Foreign Keys**: `trip_id` -> `trips(id)` (`ON DELETE CASCADE`)
-- **Fields**:
-  - `id`: Unique share record ID
-  - `trip_id`: Associated trip (`BIGINT`, `NOT NULL`)
-  - `share_token`: Secure random unique token string (`VARCHAR(64)`, `UNIQUE`, `NOT NULL`)
-  - `is_public`: Sharing toggle status (`BOOLEAN`, `NOT NULL`, `DEFAULT TRUE`)
-  - `views_count`: Public view counter (`INTEGER`, `DEFAULT 0`)
-  - `created_at`: Share link creation date (`TIMESTAMP`)
-
-### 2.9 `user_saved_destinations` Table
-- **Purpose**: Stores bookmarked/saved destinations displayed in user profile settings.
-- **Primary Key**: `id` (`BIGINT`)
-- **Foreign Keys**:
-  - `user_id` -> `users(id)` (`ON DELETE CASCADE`)
-  - `city_id` -> `cities(id)` (`ON DELETE CASCADE`)
+  - `scheduled_date`: Date scheduled (`DATE`, `NOT NULL`)
+  - `start_time`: Scheduled time (`TIME`, `NULL`)
+  - `notes`: User custom notes (`TEXT`, `NULL`)
+  - `custom_cost`: Custom cost override (`DECIMAL(10,2)`, `NULL`)
+  - `activity_order`: Display sequence order (`INTEGER`, `NOT NULL`)
 
 ---
 
-## 3. Database Indexing & Performance Strategy `[Technical Recommendation]`
+## 3. Database Indexes & Constraints
 
-To optimize queries for the hackathon application:
-- `idx_trips_user_id`: Index on `trips(user_id)` for quick retrieval of "My Trips".
-- `idx_trip_stops_trip_id_order`: Composite index on `trip_stops(trip_id, stop_order)` for rapid itinerary rendering.
-- `idx_cities_search`: Full-text or lowercase index on `cities(name, country, region)` for live search filtering.
-- `idx_activities_city_type`: Index on `activities(city_id, type)` for activity browsing by city and filter.
-- `idx_trip_shares_token`: Unique index on `trip_shares(share_token)` for fast resolution of public share URLs.
-
----
-
-## 4. Calculated Financial Aggregations
-
-Total Trip Cost is computed using SQL / Service logic:
-
-$$\text{Total Cost} = \sum (\text{Category Expenses}) + \sum (\text{Trip Activity Costs})$$
-
-$$\text{Average Daily Cost} = \frac{\text{Total Cost}}{\text{End Date} - \text{Start Date} + 1}$$
-
-If $\text{Daily Expense} > \text{Daily Budget Threshold}$, an over-budget visual alert flag is raised.
+- `idx_trips_share_token`: Unique index on `trips(share_token)` for fast public itinerary resolution.
+- `fk_trips_user`: Foreign key linking `trips.user_id` to `users.id` with `ON DELETE CASCADE`.
+- `fk_trip_stops_trip`: Foreign key linking `trip_stops.trip_id` to `trips.id` with `ON DELETE CASCADE`.
+- `fk_trip_activities_stop`: Foreign key linking `trip_activities.trip_stop_id` to `trip_stops.id` with `ON DELETE CASCADE`.
