@@ -32,7 +32,7 @@ export const activityService = {
   },
 
   async updateTripActivity(tripId: number, stopId: number, tripActivityId: number, data: {
-    scheduledDate?: string;
+    scheduledDate: string;
     startTime?: string;
     notes?: string;
     customCost?: number;
@@ -41,7 +41,12 @@ export const activityService = {
   },
 
   async reorderTripActivities(tripId: number, stopId: number, orderedTripActivityIds: number[]): Promise<TripActivity[]> {
-    return api.put<TripActivity[]>(`/trips/${tripId}/stops/${stopId}/activities/reorder`, { orderedTripActivityIds }, { requiresAuth: true });
+    const payload = { tripActivityIds: orderedTripActivityIds, orderedTripActivityIds };
+    try {
+      return await api.patch<TripActivity[]>(`/trips/${tripId}/stops/${stopId}/activities/reorder`, payload, { requiresAuth: true });
+    } catch (e) {
+      return await api.put<TripActivity[]>(`/trips/${tripId}/stops/${stopId}/activities/reorder`, payload, { requiresAuth: true });
+    }
   },
 
   async deleteTripActivity(tripId: number, stopId: number, tripActivityId: number): Promise<void> {

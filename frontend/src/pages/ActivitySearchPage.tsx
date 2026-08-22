@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Search, Sparkles, Clock, DollarSign, MapPin, 
-  Plus, Filter, CheckCircle2, AlertCircle
+  Search, Sparkles, Clock, MapPin, 
+  Plus, CheckCircle2, AlertCircle
 } from 'lucide-react';
 import { cityService } from '../services/cityService';
+import { activityService } from '../services/activityService';
 import { useTrip } from '../context/TripContext';
 import { Activity, City } from '../types';
 
@@ -34,7 +35,9 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
   const [activityDate, setActivityDate] = useState('');
   const [activityTime, setActivityTime] = useState('10:00');
   const [activityNotes, setActivityNotes] = useState('');
+  const [customCost, setCustomCost] = useState<number>(0);
   const [assignSuccess, setAssignSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     cityService.getCities().then(res => setCities(res));
@@ -48,20 +51,31 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
 
   useEffect(() => {
     setLoading(true);
-    cityService.getActivities({
-      query: searchQuery,
+    activityService.searchActivities({
       cityId: selectedCityId !== 'ALL' ? Number(selectedCityId) : undefined,
+      search: searchQuery.trim() || undefined,
       category: selectedCategory !== 'ALL' ? selectedCategory : undefined,
-      maxCost: Number(maxCost),
-    }).then(res => setActivities(res))
-      .finally(() => setLoading(false));
+    }).then(res => {
+      let list = Array.isArray(res) ? res : [];
+      if (maxCost !== undefined) {
+        list = list.filter(a => a.estimatedCost <= maxCost);
+      }
+      setActivities(list);
+    }).catch(err => {
+      console.error('Failed to search activities', err);
+      setActivities([]);
+    }).finally(() => setLoading(false));
   }, [searchQuery, selectedCityId, selectedCategory, maxCost]);
 
   const handleOpenAssign = (act: Activity) => {
     setAssigningActivity(act);
+    setCustomCost(act.estimatedCost);
+    setErrorMsg(null);
+
     if (activeTrip?.stops && activeTrip.stops.length > 0) {
-      // Look for stop with same cityId, else fallback to first stop
-      const matchStop = activeTrip.stops.find(s => s.cityId === act.cityId) || activeTrip.stops[0];
+      // Prefer stop matching activity cityId
+      const matchingStops = activeTrip.stops.filter(s => s.cityId === act.cityId || s.city?.id === act.cityId);
+      const matchStop = matchingStops.length > 0 ? matchingStops[0] : activeTrip.stops[0];
       setTargetStopId(matchStop.id);
       setActivityDate(matchStop.startDate);
     }
@@ -70,21 +84,34 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
   const handleConfirmAssign = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!activeTrip || !assigningActivity || !targetStopId) return;
+    setErrorMsg(null);
 
-    await assignActivity(activeTrip.id, targetStopId, {
-      activityId: assigningActivity.id,
-      activityDate: activityDate || activeTrip.startDate,
-      startTime: activityTime ? `${activityTime}:00` : '10:00:00',
-      estimatedCost: assigningActivity.estimatedCost,
-      notes: activityNotes.trim(),
-    });
+    const selectedStop = activeTrip.stops?.find(s => s.id === targetStopId);
+    if (selectedStop) {
+      if (new Date(activityDate) < new Date(selectedStop.startDate) || new Date(activityDate) > new Date(selectedStop.endDate)) {
+        setErrorMsg(`Scheduled date must be within stop dates (${selectedStop.startDate} to ${selectedStop.endDate}).`);
+        return;
+      }
+    }
 
-    setAssignSuccess(true);
-    setTimeout(() => {
-      setAssignSuccess(false);
-      setAssigningActivity(null);
-      setActivityNotes('');
-    }, 1200);
+    try {
+      await assignActivity(activeTrip.id, targetStopId, {
+        activityId: assigningActivity.id,
+        scheduledDate: activityDate || (selectedStop?.startDate ?? activeTrip.startDate),
+        startTime: activityTime ? `${activityTime}:00` : '10:00:00',
+        customCost: Number(customCost),
+        notes: activityNotes.trim(),
+      });
+
+      setAssignSuccess(true);
+      setTimeout(() => {
+        setAssignSuccess(false);
+        setAssigningActivity(null);
+        setActivityNotes('');
+      }, 1200);
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Failed to schedule activity.');
+    }
   };
 
   return (
@@ -183,7 +210,11 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
       </div>
 
       {/* Activity Results Grid */}
-      {activities.length === 0 ? (
+      {loading ? (
+        <div className="p-12 text-center text-xs text-slate-500">
+          Loading catalog experiences from backend...
+        </div>
+      ) : activities.length === 0 ? (
         <div className="p-12 text-center rounded-3xl bg-white border border-dashed border-slate-300 space-y-3">
           <Sparkles className="w-10 h-10 text-slate-300 mx-auto" />
           <h3 className="text-base font-bold text-slate-700 font-['Outfit']">No Activities Found</h3>
@@ -192,7 +223,8 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {activities.map((act) => {
-            const city = cities.find(c => c.id === act.cityId);
+            const city = cities.find(c => c.id === act.cityId || c.id === act.city?.id);
+            const cityName = city?.name || act.city?.name;
             return (
               <motion.div
                 key={act.id}
@@ -212,14 +244,14 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
 
                   {/* Category Pill */}
                   <span className="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-md text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
-                    {act.type}
+                    {act.category || act.type}
                   </span>
 
                   {/* City Pill */}
-                  {city && (
+                  {cityName && (
                     <span className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-md text-white text-[10px] font-medium flex items-center space-x-1">
                       <MapPin className="w-3 h-3 text-emerald-400" />
-                      <span>{city.name}</span>
+                      <span>{cityName}</span>
                     </span>
                   )}
 
@@ -238,11 +270,11 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
                   <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
                     <span className="text-slate-500 flex items-center space-x-1">
                       <Clock className="w-3.5 h-3.5 text-slate-400" />
-                      <span>{act.durationMin} mins</span>
+                      <span>{act.estimatedDurationMinutes || act.durationMin || 60} mins</span>
                     </span>
 
                     <span className="text-sm font-black text-emerald-700">
-                      ${act.estimatedCost.toFixed(2)}
+                      ${(act.estimatedCost || 0).toFixed(2)}
                     </span>
                   </div>
 
@@ -289,7 +321,7 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <h3 className="text-base font-bold text-slate-900 font-['Outfit']">Experience Scheduled!</h3>
-                  <p className="text-xs text-slate-500">Added to your itinerary timeline and budget ledger.</p>
+                  <p className="text-xs text-slate-500">Added to your itinerary timeline.</p>
                 </div>
               ) : (
                 <>
@@ -298,10 +330,17 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
                       <h3 className="text-base font-bold text-slate-900 font-['Outfit']">
                         Schedule: {assigningActivity.name}
                       </h3>
-                      <p className="text-xs text-slate-500">${assigningActivity.estimatedCost} • {assigningActivity.durationMin} mins</p>
+                      <p className="text-xs text-slate-500">${assigningActivity.estimatedCost} • {assigningActivity.estimatedDurationMinutes || assigningActivity.durationMin || 60} mins</p>
                     </div>
                     <button onClick={() => setAssigningActivity(null)} className="text-slate-400 hover:text-slate-600">✕</button>
                   </div>
+
+                  {errorMsg && (
+                    <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center space-x-2">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                      <span>{errorMsg}</span>
+                    </div>
+                  )}
 
                   {(!activeTrip?.stops || activeTrip.stops.length === 0) ? (
                     <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs space-y-2">
@@ -323,7 +362,12 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
                         <label className="block font-bold text-slate-700 mb-1">Target City Stop</label>
                         <select
                           value={targetStopId || ''}
-                          onChange={(e) => setTargetStopId(Number(e.target.value))}
+                          onChange={(e) => {
+                            const sId = Number(e.target.value);
+                            setTargetStopId(sId);
+                            const stop = activeTrip.stops?.find(s => s.id === sId);
+                            if (stop) setActivityDate(stop.startDate);
+                          }}
                           className="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-slate-50"
                           required
                         >
@@ -337,7 +381,7 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
 
                       <div className="grid grid-cols-2 gap-2">
                         <div>
-                          <label className="block font-bold text-slate-700 mb-1">Date</label>
+                          <label className="block font-bold text-slate-700 mb-1">Scheduled Date</label>
                           <input
                             type="date"
                             value={activityDate}
@@ -359,7 +403,18 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({
                       </div>
 
                       <div>
-                        <label className="block font-bold text-slate-700 mb-1">Custom Notes</label>
+                        <label className="block font-bold text-slate-700 mb-1">Custom Cost Override ($ USD)</label>
+                        <input
+                          type="number"
+                          step="0.5"
+                          value={customCost}
+                          onChange={(e) => setCustomCost(Number(e.target.value))}
+                          className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">Custom Notes / Booking Details</label>
                         <input
                           type="text"
                           placeholder="e.g. Priority entrance pass booked"

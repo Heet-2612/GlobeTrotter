@@ -17,7 +17,9 @@ interface TripContextType {
   updateStop: (tripId: number, stopId: number, updates: { startDate?: string; endDate?: string; notes?: string }) => Promise<TripStop>;
   deleteStop: (tripId: number, stopId: number) => Promise<void>;
   reorderStops: (tripId: number, stopIds: number[]) => Promise<TripStop[]>;
-  assignActivity: (tripId: number, stopId: number, data: { activityId: number; activityDate: string; startTime?: string; estimatedCost?: number; notes?: string }) => Promise<TripActivity>;
+  assignActivity: (tripId: number, stopId: number, data: { activityId: number; activityDate?: string; scheduledDate?: string; startTime?: string; estimatedCost?: number; customCost?: number; notes?: string }) => Promise<TripActivity>;
+  updateTripActivity: (tripId: number, stopId: number, tripActivityId: number, updates: { scheduledDate?: string; startTime?: string; notes?: string; customCost?: number }) => Promise<TripActivity>;
+  reorderTripActivities: (tripId: number, stopId: number, orderedTripActivityIds: number[]) => Promise<TripActivity[]>;
   deleteTripActivity: (tripId: number, tripActivityId: number) => Promise<void>;
   getItinerary: (tripId: number) => Promise<ItineraryViewResponse>;
   getBudget: (tripId: number) => Promise<TripBudgetSummary>;
@@ -120,10 +122,22 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return stops;
   };
 
-  const assignActivity = async (tripId: number, stopId: number, data: { activityId: number; activityDate: string; startTime?: string; estimatedCost?: number; notes?: string }) => {
+  const assignActivity = async (tripId: number, stopId: number, data: { activityId: number; activityDate?: string; scheduledDate?: string; startTime?: string; estimatedCost?: number; customCost?: number; notes?: string }) => {
     const act = await tripService.assignActivity(tripId, stopId, data);
     await refreshActiveTrip();
     return act;
+  };
+
+  const updateTripActivity = async (tripId: number, stopId: number, tripActivityId: number, updates: { scheduledDate?: string; startTime?: string; notes?: string; customCost?: number }) => {
+    const act = await tripService.updateTripActivity(tripId, stopId, tripActivityId, updates);
+    await refreshActiveTrip();
+    return act;
+  };
+
+  const reorderTripActivities = async (tripId: number, stopId: number, orderedTripActivityIds: number[]) => {
+    const acts = await tripService.reorderTripActivities(tripId, stopId, orderedTripActivityIds);
+    await refreshActiveTrip();
+    return acts;
   };
 
   const deleteTripActivity = async (tripId: number, tripActivityId: number) => {
@@ -163,6 +177,8 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         deleteStop,
         reorderStops,
         assignActivity,
+        updateTripActivity,
+        reorderTripActivities,
         deleteTripActivity,
         getItinerary,
         getBudget,

@@ -7,7 +7,8 @@ import {
 } from 'lucide-react';
 import { useTrip } from '../context/TripContext';
 import { cityService } from '../services/cityService';
-import { City, Activity, TripStop } from '../types';
+import { activityService } from '../services/activityService';
+import { City, Activity, TripStop, TripActivity } from '../types';
 
 interface ItineraryBuilderPageProps {
   onSelectTab: (tab: string) => void;
@@ -19,7 +20,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
 }) => {
   const { 
     activeTrip, addStop, updateStop, deleteStop, reorderStops, 
-    assignActivity, deleteTripActivity 
+    assignActivity, updateTripActivity, reorderTripActivities, deleteTripActivity 
   } = useTrip();
 
   const [cities, setCities] = useState<City[]>([]);
@@ -42,9 +43,18 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
   const [availableActivities, setAvailableActivities] = useState<Activity[]>([]);
   const [selectedActivityId, setSelectedActivityId] = useState<number | null>(null);
   const [activityDate, setActivityDate] = useState('');
-  const [activityTime, setActivityTime] = useState('10:00:00');
+  const [activityTime, setActivityTime] = useState('10:00');
   const [activityCost, setActivityCost] = useState<number>(0);
   const [activityNotes, setActivityNotes] = useState('');
+  const [actAssignError, setActAssignError] = useState<string | null>(null);
+
+  // Edit Scheduled Activity State
+  const [editingTripActivity, setEditingTripActivity] = useState<{ stop: TripStop; act: TripActivity } | null>(null);
+  const [editActDate, setEditActDate] = useState('');
+  const [editActTime, setEditActTime] = useState('10:00');
+  const [editActCost, setEditActCost] = useState<number>(0);
+  const [editActNotes, setEditActNotes] = useState('');
+  const [editActError, setEditActError] = useState<string | null>(null);
 
   useEffect(() => {
     cityService.getCities().then(res => {
@@ -62,6 +72,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
 
   useEffect(() => {
     if (assigningStop) {
+      setActAssignError(null);
       const cityId = assigningStop.cityId || (assigningStop.city ? assigningStop.city.id : 0);
       if (cityId) {
         cityService.getActivitiesForCity(cityId).then(acts => {
@@ -161,17 +172,65 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
   const handleAssignActivitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!assigningStop || !selectedActivityId) return;
+    setActAssignError(null);
 
-    await assignActivity(activeTrip.id, assigningStop.id, {
-      activityId: selectedActivityId,
-      activityDate: activityDate || assigningStop.startDate,
-      startTime: activityTime,
-      estimatedCost: Number(activityCost),
-      notes: activityNotes.trim(),
-    });
+    if (new Date(activityDate) < new Date(assigningStop.startDate) || new Date(activityDate) > new Date(assigningStop.endDate)) {
+      setActAssignError(`Scheduled date must fall within stop dates (${assigningStop.startDate} to ${assigningStop.endDate}).`);
+      return;
+    }
 
-    setAssigningStop(null);
-    setActivityNotes('');
+    try {
+      await assignActivity(activeTrip.id, assigningStop.id, {
+        activityId: selectedActivityId,
+        scheduledDate: activityDate || assigningStop.startDate,
+        startTime: activityTime ? `${activityTime}:00` : '10:00:00',
+        customCost: Number(activityCost),
+        notes: activityNotes.trim(),
+      });
+
+      setAssigningStop(null);
+      setActivityNotes('');
+    } catch (err: any) {
+      setActAssignError(err?.message || 'Failed to schedule activity.');
+    }
+  };
+
+  const handleEditActivitySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingTripActivity) return;
+    setEditActError(null);
+
+    const { stop, act } = editingTripActivity;
+    if (new Date(editActDate) < new Date(stop.startDate) || new Date(editActDate) > new Date(stop.endDate)) {
+      setEditActError(`Scheduled date must fall within stop dates (${stop.startDate} to ${stop.endDate}).`);
+      return;
+    }
+
+    try {
+      await updateTripActivity(activeTrip.id, stop.id, act.id, {
+        scheduledDate: editActDate,
+        startTime: editActTime ? (editActTime.length === 5 ? `${editActTime}:00` : editActTime) : '10:00:00',
+        customCost: Number(editActCost),
+        notes: editActNotes.trim(),
+      });
+
+      setEditingTripActivity(null);
+    } catch (err: any) {
+      setEditActError(err?.message || 'Failed to update activity.');
+    }
+  };
+
+  const handleMoveActivity = async (stop: TripStop, actIndex: number, direction: 'UP' | 'DOWN') => {
+    const acts = [...(stop.activities || [])];
+    const targetIdx = direction === 'UP' ? actIndex - 1 : actIndex + 1;
+    if (targetIdx < 0 || targetIdx >= acts.length) return;
+
+    const temp = acts[actIndex];
+    acts[actIndex] = acts[targetIdx];
+    acts[targetIdx] = temp;
+
+    const orderedIds = acts.map(a => a.id);
+    await reorderTripActivities(activeTrip.id, stop.id, orderedIds);
   };
 
   const stops = activeTrip.stops || [];
@@ -351,19 +410,19 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
 
                   {activities.length === 0 ? (
                     <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-center text-xs text-slate-500">
-                      No activities scheduled for {city?.name} yet. Click <span className="font-semibold text-emerald-700">"Assign Activity"</span> to add sightseeing, food tours, or cultural visits.
+                      No activities planned yet. Click <span className="font-semibold text-emerald-700">"Assign Activity"</span> to schedule experiences.
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {activities.map((act) => (
+                      {activities.map((act, actIdx) => (
                         <div
                           key={act.id}
                           className="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between space-x-3 hover:border-slate-300 transition"
                         >
-                          <div className="space-y-1">
+                          <div className="space-y-1 flex-1">
                             <div className="flex items-center space-x-2">
-                              <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">
-                                {act.activity?.type || 'SIGHTSEEING'}
+                              <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold uppercase">
+                                {act.activity?.category || act.activity?.type || 'SIGHTSEEING'}
                               </span>
                               <span className="text-xs font-bold text-slate-800">
                                 {act.activity?.name || 'Experience'}
@@ -377,7 +436,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                               </span>
                               <span className="flex items-center space-x-1">
                                 <Clock className="w-3 h-3 text-slate-400" />
-                                <span>{act.startTime || '10:00:00'} ({act.activity?.durationMin || 90}m)</span>
+                                <span>{act.startTime || '10:00:00'} ({act.activity?.estimatedDurationMinutes || act.activity?.durationMin || 60}m)</span>
                               </span>
                             </p>
 
@@ -390,15 +449,47 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
 
                           <div className="flex flex-col items-end justify-between self-stretch">
                             <span className="text-xs font-black text-emerald-700">
-                              ${Number(act.customCost ?? act.estimatedCost ?? 0).toFixed(2)}
+                              ${Number(act.customCost ?? act.activity?.estimatedCost ?? 0).toFixed(2)}
                             </span>
-                            <button
-                              onClick={() => deleteTripActivity(activeTrip.id, act.id)}
-                              className="text-slate-400 hover:text-rose-600 transition p-1"
-                              title="Delete scheduled activity"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
+                            <div className="flex items-center space-x-1 mt-2">
+                              <button
+                                onClick={() => handleMoveActivity(stop, actIdx, 'UP')}
+                                disabled={actIdx === 0}
+                                className={`p-1 rounded text-slate-400 hover:text-slate-700 ${actIdx === 0 ? 'opacity-30' : ''}`}
+                                title="Move Activity Up"
+                              >
+                                <ArrowUp className="w-3 h-3" />
+                              </button>
+                              <button
+                                onClick={() => handleMoveActivity(stop, actIdx, 'DOWN')}
+                                disabled={actIdx === activities.length - 1}
+                                className={`p-1 rounded text-slate-400 hover:text-slate-700 ${actIdx === activities.length - 1 ? 'opacity-30' : ''}`}
+                                title="Move Activity Down"
+                              >
+                                <ArrowDown className="w-3 h-3" />
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setEditingTripActivity({ stop, act });
+                                  setEditActDate(act.scheduledDate || act.activityDate || stop.startDate);
+                                  setEditActTime(act.startTime ? act.startTime.slice(0, 5) : '10:00');
+                                  setEditActCost(act.customCost ?? act.activity?.estimatedCost ?? 0);
+                                  setEditActNotes(act.notes || '');
+                                  setEditActError(null);
+                                }}
+                                className="p-1 text-slate-400 hover:text-slate-700 transition"
+                                title="Edit Scheduled Activity"
+                              >
+                                <Edit3 className="w-3 h-3" />
+                              </button>
+                              <button
+                                onClick={() => deleteTripActivity(activeTrip.id, act.id)}
+                                className="text-slate-400 hover:text-rose-600 transition p-1 ml-0.5"
+                                title="Delete scheduled activity"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </button>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -623,6 +714,13 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                 <button onClick={() => setAssigningStop(null)} className="text-slate-400 hover:text-slate-600">✕</button>
               </div>
 
+              {actAssignError && (
+                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center space-x-2">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <span>{actAssignError}</span>
+                </div>
+              )}
+
               <form onSubmit={handleAssignActivitySubmit} className="space-y-3.5 text-xs">
                 <div>
                   <label className="block font-bold text-slate-700 mb-1">Select Activity</label>
@@ -668,7 +766,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                 </div>
 
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Estimated Cost ($ USD)</label>
+                  <label className="block font-bold text-slate-700 mb-1">Custom Cost Override ($ USD)</label>
                   <input
                     type="number"
                     step="0.5"
@@ -703,6 +801,110 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({
                     className="flex-1 py-2 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700"
                   >
                     Assign to Stop
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Modal: Edit Scheduled Activity */}
+      <AnimatePresence>
+        {editingTripActivity && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setEditingTripActivity(null)}
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-slate-100 z-10 space-y-4"
+            >
+              <div className="flex justify-between items-center pb-2 border-b border-slate-100">
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 font-['Outfit']">
+                    Edit Experience ({editingTripActivity.act.activity?.name || 'Activity'})
+                  </h3>
+                  <p className="text-[11px] text-slate-500">
+                    Stop: {editingTripActivity.stop.city?.name} ({editingTripActivity.stop.startDate} to {editingTripActivity.stop.endDate})
+                  </p>
+                </div>
+                <button onClick={() => setEditingTripActivity(null)} className="text-slate-400 hover:text-slate-600">✕</button>
+              </div>
+
+              {editActError && (
+                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center space-x-2">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <span>{editActError}</span>
+                </div>
+              )}
+
+              <form onSubmit={handleEditActivitySubmit} className="space-y-3.5 text-xs">
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Scheduled Date</label>
+                    <input
+                      type="date"
+                      value={editActDate}
+                      onChange={(e) => setEditActDate(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Start Time</label>
+                    <input
+                      type="time"
+                      value={editActTime}
+                      onChange={(e) => setEditActTime(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Custom Cost Override ($ USD)</label>
+                  <input
+                    type="number"
+                    step="0.5"
+                    value={editActCost}
+                    onChange={(e) => setEditActCost(Number(e.target.value))}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-bold text-slate-700 mb-1">Custom Notes / Booking Details</label>
+                  <input
+                    type="text"
+                    value={editActNotes}
+                    onChange={(e) => setEditActNotes(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200"
+                    placeholder="Notes..."
+                  />
+                </div>
+
+                <div className="flex space-x-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setEditingTripActivity(null)}
+                    className="flex-1 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 py-2 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700"
+                  >
+                    Save Changes
                   </button>
                 </div>
               </form>
