@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import { Trip, TripStop, TripActivity, TripBudgetSummary, ItineraryViewResponse } from '../types';
+import { Trip, TripStop, TripActivity, BudgetSummaryResponse, ItineraryViewResponse } from '../types';
 import { tripService } from '../services/tripService';
+import { budgetService } from '../services/budgetService';
 import { useAuth } from './AuthContext';
 
 interface TripContextType {
@@ -10,7 +11,7 @@ interface TripContextType {
   loadTrips: () => Promise<void>;
   setActiveTripId: (tripId: number | null) => Promise<void>;
   refreshActiveTrip: () => Promise<void>;
-  createTrip: (data: { name: string; description?: string; startDate: string; endDate: string; coverPhoto?: string; budgetThreshold?: number }) => Promise<Trip>;
+  createTrip: (data: { name: string; description?: string; startDate: string; endDate: string; coverPhoto?: string; budgetThreshold?: number; budget?: number }) => Promise<Trip>;
   updateTrip: (tripId: number, updates: Partial<Trip>) => Promise<Trip>;
   deleteTrip: (tripId: number) => Promise<void>;
   addStop: (tripId: number, stopData: { cityId: number; startDate: string; endDate: string; notes?: string }) => Promise<TripStop>;
@@ -22,7 +23,8 @@ interface TripContextType {
   reorderTripActivities: (tripId: number, stopId: number, orderedTripActivityIds: number[]) => Promise<TripActivity[]>;
   deleteTripActivity: (tripId: number, tripActivityId: number) => Promise<void>;
   getItinerary: (tripId: number) => Promise<ItineraryViewResponse>;
-  getBudget: (tripId: number) => Promise<TripBudgetSummary>;
+  getBudget: (tripId: number) => Promise<BudgetSummaryResponse>;
+  updateBudget: (tripId: number, budget: number) => Promise<BudgetSummaryResponse>;
   copyTrip: (shareToken: string) => Promise<Trip>;
 }
 
@@ -78,7 +80,7 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const createTrip = async (data: { name: string; description?: string; startDate: string; endDate: string; coverPhoto?: string; budgetThreshold?: number }) => {
+  const createTrip = async (data: { name: string; description?: string; startDate: string; endDate: string; coverPhoto?: string; budgetThreshold?: number; budget?: number }) => {
     const created = await tripService.createTrip(data);
     await loadTrips();
     setActiveTrip(created);
@@ -149,8 +151,14 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return tripService.getItinerary(tripId);
   };
 
-  const getBudget = async (tripId: number) => {
-    return tripService.getBudget(tripId);
+  const getBudget = async (tripId: number): Promise<BudgetSummaryResponse> => {
+    return budgetService.getBudgetSummary(tripId);
+  };
+
+  const updateBudget = async (tripId: number, budget: number): Promise<BudgetSummaryResponse> => {
+    const res = await budgetService.setTripBudget(tripId, budget);
+    await refreshActiveTrip();
+    return res;
   };
 
   const copyTrip = async (shareToken: string) => {
@@ -182,6 +190,7 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         deleteTripActivity,
         getItinerary,
         getBudget,
+        updateBudget,
         copyTrip,
       }}
     >
