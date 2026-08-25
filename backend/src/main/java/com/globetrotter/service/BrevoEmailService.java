@@ -7,6 +7,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -45,6 +46,7 @@ public class BrevoEmailService {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("accept", "application/json");
             headers.set("api-key", apiKey.trim());
 
             Map<String, Object> senderMap = new HashMap<>();
@@ -99,6 +101,10 @@ public class BrevoEmailService {
 
             log.info("Successfully sent Brevo password reset email to {}", recipientEmail);
             return true;
+        } catch (HttpStatusCodeException e) {
+            log.error("Failed to send password reset email via Brevo for email {}. Status: {}, Response: {}",
+                    recipientEmail, e.getStatusCode(), e.getResponseBodyAsString());
+            return false;
         } catch (Exception e) {
             log.error("Failed to send password reset email via Brevo for email {}: {}", recipientEmail, e.getMessage());
             return false;

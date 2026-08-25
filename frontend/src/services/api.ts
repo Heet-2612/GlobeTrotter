@@ -54,10 +54,12 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   });
 
   if (response.status === 401) {
-    localStorage.removeItem('globetrotter_token');
-    localStorage.removeItem('globetrotter_user');
-    window.dispatchEvent(new Event('globetrotter_unauthorized'));
-    throw new ApiError(401, 'Session expired. Please log in again.');
+    if (!endpoint.startsWith('/auth/')) {
+      localStorage.removeItem('globetrotter_token');
+      localStorage.removeItem('globetrotter_user');
+      window.dispatchEvent(new Event('globetrotter_unauthorized'));
+      throw new ApiError(401, 'Session expired. Please log in again.');
+    }
   }
 
   if (!response.ok) {

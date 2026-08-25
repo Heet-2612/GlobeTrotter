@@ -26,7 +26,7 @@ public class Activity {
     @Column(name = "estimated_duration_minutes", nullable = false)
     private Integer estimatedDurationMinutes;
 
-    @Column(name = "estimated_cost", nullable = false)
+    @Column(name = "estimated_cost", nullable = false, columnDefinition = "numeric(10,2)")
     private Double estimatedCost;
 
     @Column(length = 10)

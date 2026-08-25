@@ -28,8 +28,10 @@ public class DotenvLoadingTest {
     @Test
     void testRootDotenvFileLoaded() {
         // Verify properties are present without printing secret values
-        assertThat(environment.containsProperty("BREVO_API_KEY")).isTrue();
-        assertThat(apiKey).isNotEmpty();
+        boolean hasKey = environment.containsProperty("BREVO_API_KEY") && apiKey != null && !apiKey.trim().isEmpty();
+        System.out.println("VERIFICATION: BREVO_API_KEY = " + (hasKey ? "PRESENT" : "ABSENT"));
+        System.out.println("VERIFICATION: BREVO_SENDER_EMAIL = " + senderEmail);
+        assertThat(hasKey).isTrue();
         assertThat(senderEmail).isNotEmpty();
         assertThat(senderName).isEqualTo("GlobeTrotter");
     }

@@ -19,19 +19,15 @@ public class DotenvEnvironmentPostProcessor implements EnvironmentPostProcessor 
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         Path userDir = Paths.get(System.getProperty("user.dir", ".")).toAbsolutePath().normalize();
 
-        Path[] candidatePaths = new Path[]{
-                userDir.resolve(".env"),
-                userDir.getParent() != null ? userDir.getParent().resolve(".env") : null,
-                Paths.get(".env").toAbsolutePath().normalize(),
-                Paths.get("../.env").toAbsolutePath().normalize()
-        };
-
         File envFile = null;
-        for (Path candidate : candidatePaths) {
-            if (candidate != null && Files.exists(candidate) && Files.isRegularFile(candidate)) {
+        Path current = userDir;
+        while (current != null) {
+            Path candidate = current.resolve(".env");
+            if (Files.exists(candidate) && Files.isRegularFile(candidate)) {
                 envFile = candidate.toFile();
                 break;
             }
+            current = current.getParent();
         }
 
         if (envFile != null && envFile.canRead()) {
@@ -43,6 +39,9 @@ public class DotenvEnvironmentPostProcessor implements EnvironmentPostProcessor 
                     String trimmed = line.trim();
                     if (trimmed.isEmpty() || trimmed.startsWith("#")) {
                         continue;
+                    }
+                    if (trimmed.startsWith("export ")) {
+                        trimmed = trimmed.substring(7).trim();
                     }
                     int eqIndex = trimmed.indexOf('=');
                     if (eqIndex > 0) {
