@@ -11,11 +11,13 @@ public class CityResponse {
     private Double costIndex;
     private Integer popularity;
     private String imageUrl;
+    private String currencyCode;
+    private String currencySymbol;
 
     public CityResponse() {
     }
 
-    public CityResponse(Long id, String name, String country, String region, Double costIndex, Integer popularity, String imageUrl) {
+    public CityResponse(Long id, String name, String country, String region, Double costIndex, Integer popularity, String imageUrl, String currencyCode, String currencySymbol) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -23,6 +25,12 @@ public class CityResponse {
         this.costIndex = costIndex;
         this.popularity = popularity;
         this.imageUrl = imageUrl;
+        this.currencyCode = currencyCode;
+        this.currencySymbol = currencySymbol;
+    }
+
+    public CityResponse(Long id, String name, String country, String region, Double costIndex, Integer popularity, String imageUrl) {
+        this(id, name, country, region, costIndex, popularity, imageUrl, "INR", "₹");
     }
 
     public static CityResponse fromEntity(City city) {
@@ -34,7 +42,9 @@ public class CityResponse {
                 city.getRegion(),
                 city.getCostIndex(),
                 city.getPopularity(),
-                city.getImageUrl()
+                city.getImageUrl(),
+                city.getCurrencyCode(),
+                city.getCurrencySymbol()
         );
     }
 
@@ -58,4 +68,10 @@ public class CityResponse {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getCurrencyCode() { return currencyCode; }
+    public void setCurrencyCode(String currencyCode) { this.currencyCode = currencyCode; }
+
+    public String getCurrencySymbol() { return currencySymbol; }
+    public void setCurrencySymbol(String currencySymbol) { this.currencySymbol = currencySymbol; }
 }

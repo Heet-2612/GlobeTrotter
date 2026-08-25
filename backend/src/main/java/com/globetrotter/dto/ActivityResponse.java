@@ -33,6 +33,10 @@ public class ActivityResponse {
 
     public static ActivityResponse fromEntity(Activity activity) {
         if (activity == null) return null;
+        String currency = activity.getCurrency();
+        if ((currency == null || currency.isBlank()) && activity.getCity() != null) {
+            currency = activity.getCity().getCurrencyCode();
+        }
         return new ActivityResponse(
                 activity.getId(),
                 activity.getCity() != null ? activity.getCity().getId() : null,
@@ -42,7 +46,7 @@ public class ActivityResponse {
                 activity.getCategory(),
                 activity.getEstimatedDurationMinutes(),
                 activity.getEstimatedCost(),
-                activity.getCurrency(),
+                currency != null ? currency : "INR",
                 activity.getImageUrl()
         );
     }

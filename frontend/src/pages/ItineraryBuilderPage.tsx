@@ -23,6 +23,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { Button, Card, Badge, Input, LoadingState } from '../components/common/UIComponents';
+import { formatCurrency } from '../utils/currency';
 import { getCityImageUrl, getActivityImageUrl } from '../utils/imageUtils';
 
 interface ItineraryBuilderPageProps {
@@ -237,7 +238,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
               </span>
               <span className="flex items-center space-x-1">
                 <DollarSign size={13} className="text-emerald-600" />
-                <span>Budget: ${trip.budget ? trip.budget.toLocaleString() : '0'}</span>
+                <span>Budget: {formatCurrency(trip.budget)}</span>
               </span>
             </div>
           </div>
@@ -367,7 +368,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
                             <div className="pt-1 flex items-center justify-between border-t border-slate-200">
                               <span className="text-slate-500">Cost:</span>
                               <span className="font-bold text-emerald-700">
-                                ${act.customCost ?? act.activity.estimatedCost ?? 0}
+                                {formatCurrency(act.customCost ?? act.activity?.estimatedCost, act.activity?.currency)}
                               </span>
                             </div>
                           </div>

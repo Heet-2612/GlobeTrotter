@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { getCityImageUrl, getActivityImageUrl, getTripCoverUrl } from '../../utils/imageUtils';
 import { TripResponse, CityResponse, ActivityResponse } from '../../types';
+import { formatCurrency } from '../../utils/currency';
 
 // Button Component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -193,7 +194,7 @@ export const TripCard: React.FC<TripCardProps> = ({ trip, onNavigate, onDelete }
             <span>{trip.startDate} - {trip.endDate}</span>
           </div>
           <div className="font-extrabold text-emerald-700 text-sm">
-            ${trip.budget ? trip.budget.toLocaleString() : '0'}
+            {formatCurrency(trip.budget)}
           </div>
         </div>
 
@@ -319,7 +320,9 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
             <Clock size={12} />
             <span>{activity.estimatedDurationMinutes ? `${activity.estimatedDurationMinutes}m` : 'Flexible'}</span>
           </span>
-          <span className="font-extrabold text-emerald-700 text-sm">${activity.estimatedCost || 0}</span>
+          <span className="font-extrabold text-emerald-700 text-sm">
+            {formatCurrency(activity.estimatedCost, activity.currency)}
+          </span>
         </div>
       </div>
     </Card>

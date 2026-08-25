@@ -4,6 +4,7 @@ import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { Globe, Calendar, DollarSign, Copy, Check, Sparkles, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
+import { formatCurrency } from '../utils/currency';
 import { getTripCoverUrl, getCityImageUrl } from '../utils/imageUtils';
 
 interface SharedItineraryPageProps {
@@ -124,8 +125,7 @@ export const SharedItineraryPage: React.FC<SharedItineraryPageProps> = ({ shareT
           <div>
             <span className="text-slate-500 text-xs block font-semibold uppercase">ESTIMATED BUDGET</span>
             <span className="font-extrabold text-emerald-700 flex items-center space-x-1 mt-0.5">
-              <DollarSign size={14} />
-              <span>${itinerary.budget ? itinerary.budget.toLocaleString() : '0'}</span>
+              <span>{formatCurrency(itinerary.budget)}</span>
             </span>
           </div>
         </div>
@@ -172,7 +172,7 @@ export const SharedItineraryPage: React.FC<SharedItineraryPageProps> = ({ shareT
                         <div key={act.id || actIdx} className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
                           <div className="flex justify-between items-start">
                             <span className="font-bold text-slate-900 text-sm">{act.name}</span>
-                            <span className="text-xs font-extrabold text-emerald-700">${act.cost}</span>
+                            <span className="text-xs font-extrabold text-emerald-700">{formatCurrency(act.cost, act.currency)}</span>
                           </div>
                           <Badge variant="emerald">{act.category}</Badge>
                           <p className="text-xs text-slate-600 pt-1">

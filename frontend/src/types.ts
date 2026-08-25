@@ -76,6 +76,8 @@ export interface CityResponse {
   costIndex?: number;
   popularity?: number;
   imageUrl?: string;
+  currencyCode?: string;
+  currencySymbol?: string;
 }
 
 export interface TripStopResponse {

@@ -3,6 +3,7 @@ import { BudgetSummaryResponse, TripResponse } from '../types';
 import { api } from '../services/api';
 import { DollarSign, AlertTriangle, TrendingUp, Edit3, Eye, Clock, Calendar } from 'lucide-react';
 import { Button, Card, Input, LoadingState } from '../components/common/UIComponents';
+import { formatCurrency } from '../utils/currency';
 
 interface BudgetPageProps {
   tripId: number;
@@ -112,7 +113,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
           <div>
             <p className="font-bold text-rose-950">Budget Exceeded Alert!</p>
             <p className="text-xs text-rose-700">
-              Total activity costs (${budgetSummary.totalActivityCost}) exceed your target budget (${budgetSummary.budget}).
+              Total activity costs ({formatCurrency(budgetSummary.totalActivityCost, budgetSummary.currency)}) exceed your target budget ({formatCurrency(budgetSummary.budget, budgetSummary.currency)}).
             </p>
           </div>
         </div>
@@ -122,16 +123,16 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
           <p className="text-xs font-semibold text-slate-500 uppercase">Target Budget</p>
-          <p className="text-2xl font-extrabold text-slate-900 mt-1">${budgetSummary.budget}</p>
+          <p className="text-2xl font-extrabold text-slate-900 mt-1">{formatCurrency(budgetSummary.budget, budgetSummary.currency)}</p>
         </Card>
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
           <p className="text-xs font-semibold text-slate-500 uppercase">Total Spent</p>
-          <p className="text-2xl font-extrabold text-amber-700 mt-1">${budgetSummary.totalActivityCost}</p>
+          <p className="text-2xl font-extrabold text-amber-700 mt-1">{formatCurrency(budgetSummary.totalActivityCost, budgetSummary.currency)}</p>
         </Card>
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
           <p className="text-xs font-semibold text-slate-500 uppercase">Remaining</p>
           <p className={`text-2xl font-extrabold mt-1 ${budgetSummary.remainingBudget < 0 ? 'text-rose-600' : 'text-emerald-700'}`}>
-            ${budgetSummary.remainingBudget}
+            {formatCurrency(budgetSummary.remainingBudget, budgetSummary.currency)}
           </p>
         </Card>
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
@@ -164,7 +165,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
           {successMsg && <p className="text-xs text-emerald-700 font-semibold">{successMsg}</p>}
           <form onSubmit={handleUpdateBudget} className="space-y-4">
             <Input
-              label="New Target Budget ($)"
+              label={`New Target Budget (${budgetSummary.currency || 'INR'})`}
               type="number"
               min="0"
               step="50"
@@ -190,7 +191,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
                   <tr>
                     <th className="p-3">Category</th>
                     <th className="p-3 text-center">Activities Count</th>
-                    <th className="p-3 text-right">Total Cost ($)</th>
+                    <th className="p-3 text-right">Total Cost</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -198,7 +199,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
                     <tr key={i} className="hover:bg-slate-50">
                       <td className="p-3 font-bold text-slate-900">{cat.category}</td>
                       <td className="p-3 text-center">{cat.count}</td>
-                      <td className="p-3 text-right font-bold text-emerald-700">${cat.totalCost}</td>
+                      <td className="p-3 text-right font-bold text-emerald-700">{formatCurrency(cat.totalCost, budgetSummary.currency)}</td>
                     </tr>
                   ))}
                 </tbody>

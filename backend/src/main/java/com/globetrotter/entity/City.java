@@ -28,10 +28,16 @@ public class City {
     @Column(name = "image_url", length = 500)
     private String imageUrl;
 
+    @Column(name = "currency_code", nullable = false, length = 10)
+    private String currencyCode = "INR";
+
+    @Column(name = "currency_symbol", nullable = false, length = 10)
+    private String currencySymbol = "₹";
+
     public City() {
     }
 
-    public City(Long id, String name, String country, String region, Double costIndex, Integer popularity, String imageUrl) {
+    public City(Long id, String name, String country, String region, Double costIndex, Integer popularity, String imageUrl, String currencyCode, String currencySymbol) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -39,6 +45,12 @@ public class City {
         this.costIndex = costIndex;
         this.popularity = popularity;
         this.imageUrl = imageUrl;
+        this.currencyCode = currencyCode != null ? currencyCode : "INR";
+        this.currencySymbol = currencySymbol != null ? currencySymbol : "₹";
+    }
+
+    public City(Long id, String name, String country, String region, Double costIndex, Integer popularity, String imageUrl) {
+        this(id, name, country, region, costIndex, popularity, imageUrl, "INR", "₹");
     }
 
     public static CityBuilder builder() {
@@ -66,6 +78,12 @@ public class City {
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
+    public String getCurrencyCode() { return currencyCode; }
+    public void setCurrencyCode(String currencyCode) { this.currencyCode = currencyCode; }
+
+    public String getCurrencySymbol() { return currencySymbol; }
+    public void setCurrencySymbol(String currencySymbol) { this.currencySymbol = currencySymbol; }
+
     public static class CityBuilder {
         private Long id;
         private String name;
@@ -74,6 +92,8 @@ public class City {
         private Double costIndex;
         private Integer popularity;
         private String imageUrl;
+        private String currencyCode = "INR";
+        private String currencySymbol = "₹";
 
         public CityBuilder id(Long id) { this.id = id; return this; }
         public CityBuilder name(String name) { this.name = name; return this; }
@@ -82,9 +102,11 @@ public class City {
         public CityBuilder costIndex(Double costIndex) { this.costIndex = costIndex; return this; }
         public CityBuilder popularity(Integer popularity) { this.popularity = popularity; return this; }
         public CityBuilder imageUrl(String imageUrl) { this.imageUrl = imageUrl; return this; }
+        public CityBuilder currencyCode(String currencyCode) { this.currencyCode = currencyCode; return this; }
+        public CityBuilder currencySymbol(String currencySymbol) { this.currencySymbol = currencySymbol; return this; }
 
         public City build() {
-            return new City(id, name, country, region, costIndex, popularity, imageUrl);
+            return new City(id, name, country, region, costIndex, popularity, imageUrl, currencyCode, currencySymbol);
         }
     }
 }

@@ -3,6 +3,7 @@ import { TripResponse, TripStopResponse, TripActivityResponse } from '../types';
 import { api } from '../services/api';
 import { Calendar, DollarSign, Globe, Lock, Edit3, Eye, Clock, Share2, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
+import { formatCurrency } from '../utils/currency';
 import { getTripCoverUrl, getCityImageUrl, getActivityImageUrl } from '../utils/imageUtils';
 
 interface ItineraryViewPageProps {
@@ -105,8 +106,7 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({ tripId, on
           <div>
             <span className="text-slate-500 text-xs block font-semibold uppercase">TARGET BUDGET</span>
             <span className="font-extrabold text-emerald-700 flex items-center space-x-1 mt-0.5">
-              <DollarSign size={14} />
-              <span>${trip.budget ? trip.budget.toLocaleString() : '0'}</span>
+              <span>{formatCurrency(trip.budget)}</span>
             </span>
           </div>
           <div>
@@ -166,7 +166,7 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({ tripId, on
                               <div className="flex justify-between items-start">
                                 <span className="font-bold text-slate-900 text-sm">{act.activity.name}</span>
                                 <span className="text-xs font-extrabold text-emerald-700">
-                                  ${act.customCost ?? act.activity.estimatedCost ?? 0}
+                                  {formatCurrency(act.customCost ?? act.activity?.estimatedCost, act.activity?.currency)}
                                 </span>
                               </div>
                               <Badge variant="emerald">{act.activity.category || 'Attraction'}</Badge>

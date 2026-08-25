@@ -4,6 +4,8 @@ import { api } from '../services/api';
 import { Calendar, Clock, Edit3, Eye, DollarSign, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
 
+import { formatCurrency } from '../utils/currency';
+
 interface TimelinePageProps {
   tripId: number;
   onNavigate: (tab: string, param?: string | number) => void;
@@ -140,7 +142,7 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({ tripId, onNavigate }
                                 </span>
                               </div>
                               <span className="font-bold text-emerald-700 text-sm">
-                                ${act.customCost ?? act.activity.estimatedCost ?? 0}
+                                {formatCurrency(act.customCost ?? act.activity?.estimatedCost, act.activity?.currency)}
                               </span>
                             </div>
                           ))}
