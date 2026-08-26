@@ -5,6 +5,8 @@ import com.globetrotter.entity.Activity;
 public class ActivityResponse {
 
     private Long id;
+    private Long destinationId;
+    private String destinationName;
     private Long cityId;
     private String cityName;
     private String name;
@@ -19,10 +21,12 @@ public class ActivityResponse {
     public ActivityResponse() {
     }
 
-    public ActivityResponse(Long id, Long cityId, String cityName, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl, String googlePlaceId) {
+    public ActivityResponse(Long id, Long destinationId, String destinationName, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl, String googlePlaceId) {
         this.id = id;
-        this.cityId = cityId;
-        this.cityName = cityName;
+        this.destinationId = destinationId;
+        this.destinationName = destinationName;
+        this.cityId = destinationId;
+        this.cityName = destinationName;
         this.name = name;
         this.description = description;
         this.category = category;
@@ -36,13 +40,16 @@ public class ActivityResponse {
     public static ActivityResponse fromEntity(Activity activity) {
         if (activity == null) return null;
         String currency = activity.getCurrency();
-        if ((currency == null || currency.isBlank()) && activity.getCity() != null) {
-            currency = activity.getCity().getCurrencyCode();
+        if ((currency == null || currency.isBlank()) && activity.getDestination() != null) {
+            currency = activity.getDestination().getCurrencyCode();
         }
+        Long destId = activity.getDestination() != null ? activity.getDestination().getId() : null;
+        String destName = activity.getDestination() != null ? activity.getDestination().getName() : null;
+
         return new ActivityResponse(
                 activity.getId(),
-                activity.getCity() != null ? activity.getCity().getId() : null,
-                activity.getCity() != null ? activity.getCity().getName() : null,
+                destId,
+                destName,
                 activity.getName(),
                 activity.getDescription(),
                 activity.getCategory(),
@@ -57,11 +64,29 @@ public class ActivityResponse {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getCityId() { return cityId; }
-    public void setCityId(Long cityId) { this.cityId = cityId; }
+    public Long getDestinationId() { return destinationId; }
+    public void setDestinationId(Long destinationId) {
+        this.destinationId = destinationId;
+        this.cityId = destinationId;
+    }
 
-    public String getCityName() { return cityName; }
-    public void setCityName(String cityName) { this.cityName = cityName; }
+    public String getDestinationName() { return destinationName; }
+    public void setDestinationName(String destinationName) {
+        this.destinationName = destinationName;
+        this.cityName = destinationName;
+    }
+
+    public Long getCityId() { return cityId != null ? cityId : destinationId; }
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+        if (this.destinationId == null) this.destinationId = cityId;
+    }
+
+    public String getCityName() { return cityName != null ? cityName : destinationName; }
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+        if (this.destinationName == null) this.destinationName = cityName;
+    }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

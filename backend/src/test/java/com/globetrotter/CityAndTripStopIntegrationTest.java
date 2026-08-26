@@ -3,6 +3,7 @@ package com.globetrotter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globetrotter.dto.*;
 import com.globetrotter.entity.City;
+import com.globetrotter.entity.Destination;
 import com.globetrotter.repository.ActivityRepository;
 import com.globetrotter.repository.CityRepository;
 import com.globetrotter.repository.TripActivityRepository;
@@ -54,9 +55,9 @@ public class CityAndTripStopIntegrationTest {
     private String userAToken;
     private String userBToken;
     private Long userATripId;
-    private City goa;
-    private City mumbai;
-    private City bangalore;
+    private Destination goa;
+    private Destination mumbai;
+    private Destination bangalore;
 
     @Autowired
     private TripActivityRepository tripActivityRepository;
@@ -73,10 +74,10 @@ public class CityAndTripStopIntegrationTest {
         activityRepository.deleteAll();
         cityRepository.deleteAll();
 
-        // Seed Cities
-        goa = cityRepository.save(new City(null, "Goa", "India", "Asia", 2.00, 90, "https://example.com/goa.jpg"));
-        mumbai = cityRepository.save(new City(null, "Mumbai", "India", "Asia", 2.50, 85, "https://example.com/mumbai.jpg"));
-        bangalore = cityRepository.save(new City(null, "Bangalore", "India", "Asia", 2.20, 80, "https://example.com/bangalore.jpg"));
+        // Seed Cities/Destinations
+        goa = cityRepository.save(Destination.builder().name("Goa").country("India").region("Asia").costIndex(2.00).popularity(90).imageUrl("https://example.com/goa.jpg").build());
+        mumbai = cityRepository.save(Destination.builder().name("Mumbai").country("India").region("Asia").costIndex(2.50).popularity(85).imageUrl("https://example.com/mumbai.jpg").build());
+        bangalore = cityRepository.save(Destination.builder().name("Bangalore").country("India").region("Asia").costIndex(2.20).popularity(80).imageUrl("https://example.com/bangalore.jpg").build());
 
         // Register User A
         SignupRequest signupA = new SignupRequest("User A", "usera.stop@example.com", "Password123!");

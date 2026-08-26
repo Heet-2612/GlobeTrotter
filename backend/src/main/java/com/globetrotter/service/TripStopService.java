@@ -4,12 +4,12 @@ import com.globetrotter.dto.CreateTripStopRequest;
 import com.globetrotter.dto.ReorderStopsRequest;
 import com.globetrotter.dto.TripStopResponse;
 import com.globetrotter.dto.UpdateTripStopRequest;
-import com.globetrotter.entity.City;
+import com.globetrotter.entity.Destination;
 import com.globetrotter.entity.Trip;
 import com.globetrotter.entity.TripStop;
 import com.globetrotter.entity.User;
 import com.globetrotter.exception.ResourceNotFoundException;
-import com.globetrotter.repository.CityRepository;
+import com.globetrotter.repository.DestinationRepository;
 import com.globetrotter.repository.TripRepository;
 import com.globetrotter.repository.TripStopRepository;
 import org.springframework.stereotype.Service;
@@ -25,12 +25,12 @@ public class TripStopService {
 
     private final TripStopRepository tripStopRepository;
     private final TripRepository tripRepository;
-    private final CityRepository cityRepository;
+    private final DestinationRepository destinationRepository;
 
-    public TripStopService(TripStopRepository tripStopRepository, TripRepository tripRepository, CityRepository cityRepository) {
+    public TripStopService(TripStopRepository tripStopRepository, TripRepository tripRepository, DestinationRepository destinationRepository) {
         this.tripStopRepository = tripStopRepository;
         this.tripRepository = tripRepository;
-        this.cityRepository = cityRepository;
+        this.destinationRepository = destinationRepository;
     }
 
     private Trip getOwnedTrip(Long tripId, User currentUser) {
@@ -50,14 +50,15 @@ public class TripStopService {
             throw new IllegalArgumentException("Stop dates must fall within the trip's date range (" + trip.getStartDate() + " to " + trip.getEndDate() + ")");
         }
 
-        City city = cityRepository.findById(request.getCityId())
-                .orElseThrow(() -> new ResourceNotFoundException("City not found with id: " + request.getCityId()));
+        Long targetDestId = request.getDestinationId();
+        Destination destination = destinationRepository.findById(targetDestId)
+                .orElseThrow(() -> new ResourceNotFoundException("Destination not found with id: " + targetDestId));
 
         int nextOrder = (int) tripStopRepository.countByTripId(tripId) + 1;
 
         TripStop stop = TripStop.builder()
                 .trip(trip)
-                .city(city)
+                .destination(destination)
                 .stopOrder(nextOrder)
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())

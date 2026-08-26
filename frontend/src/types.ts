@@ -68,21 +68,49 @@ export interface UpdateTripRequest {
   budget?: number;
 }
 
-export interface CityResponse {
+export type DestinationType =
+  | 'CITY' | 'TOWN' | 'REGION_CLUSTER' | 'ISLAND_ARCHIPELAGO'
+  | 'NATIONAL_PARK' | 'HERITAGE_SITE' | 'PILGRIMAGE' | 'HILL_STATION'
+  | 'BEACH' | 'CIRCUIT' | 'OTHER';
+
+export type DestinationSource = 'CURATED' | 'GEOAPIFY' | 'USER_CREATED';
+
+export interface RegionResponse {
   id: number;
   name: string;
+  canonicalName: string;
   country: string;
+  description?: string;
+  imageUrl?: string;
+}
+
+export interface DestinationResponse {
+  id: number;
+  name: string;
+  canonicalName?: string;
+  country: string;
+  regionId?: number;
+  regionName?: string;
   region?: string;
+  destinationType?: DestinationType;
+  source?: DestinationSource;
+  isCurated?: boolean;
   costIndex?: number;
   popularity?: number;
   imageUrl?: string;
   currencyCode?: string;
   currencySymbol?: string;
+  latitude?: number;
+  longitude?: number;
+  aliases?: string[];
 }
+
+export type CityResponse = DestinationResponse;
 
 export interface TripStopResponse {
   id: number;
   tripId: number;
+  destination?: DestinationResponse;
   city: CityResponse;
   stopOrder: number;
   startDate: string;
@@ -91,6 +119,7 @@ export interface TripStopResponse {
 }
 
 export interface CreateTripStopRequest {
+  destinationId?: number;
   cityId: number;
   startDate: string;
   endDate: string;
@@ -99,6 +128,8 @@ export interface CreateTripStopRequest {
 
 export interface ActivityResponse {
   id: number;
+  destinationId?: number;
+  destinationName?: string;
   cityId?: number;
   cityName?: string;
   name: string;

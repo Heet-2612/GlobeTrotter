@@ -10,6 +10,8 @@ import {
   CreateTripRequest,
   UpdateTripRequest,
   CityResponse,
+  DestinationResponse,
+  RegionResponse,
   TripStopResponse,
   CreateTripStopRequest,
   ActivityResponse,
@@ -59,9 +61,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   if (response.status === 401) {
     if (!endpoint.startsWith('/auth/')) {
       localStorage.removeItem('globetrotter_token');
-      localStorage.removeItem('globetrotter_user');
-      window.dispatchEvent(new Event('globetrotter_unauthorized'));
-      throw new ApiError(401, 'Session expired. Please log in again.');
+      window.dispatchEvent(new Event('auth:unauthorized'));
     }
   }
 
@@ -137,7 +137,23 @@ export const api = {
       method: 'DELETE',
     }),
 
-  // Cities
+  // Regions (NEW V2)
+  getRegions: () => request<RegionResponse[]>('/regions'),
+  getRegionById: (id: number) => request<RegionResponse>(`/regions/${id}`),
+
+  // Destinations (NEW V2)
+  searchDestinations: (query?: string, country?: string, region?: string, regionId?: number) => {
+    const params = new URLSearchParams();
+    if (query) params.append('search', query);
+    if (country) params.append('country', country);
+    if (region) params.append('region', region);
+    if (regionId) params.append('regionId', String(regionId));
+    const queryString = params.toString();
+    return request<DestinationResponse[]>(`/destinations${queryString ? `?${queryString}` : ''}`);
+  },
+  getDestinationById: (id: number) => request<DestinationResponse>(`/destinations/${id}`),
+
+  // Cities (Deprecated V1 Alias for Destinations)
   searchCities: (query?: string, country?: string, region?: string) => {
     const params = new URLSearchParams();
     if (query) params.append('search', query);
@@ -155,9 +171,24 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+  addTripStop: (tripId: number, data: CreateTripStopRequest) =>
+    request<TripStopResponse>(`/trips/${tripId}/stops`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  updateTripStop: (tripId: number, stopId: number, data: Partial<CreateTripStopRequest>) =>
+    request<TripStopResponse>(`/trips/${tripId}/stops/${stopId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
   deleteTripStop: (tripId: number, stopId: number) =>
     request<void>(`/trips/${tripId}/stops/${stopId}`, {
       method: 'DELETE',
+    }),
+  reorderTripStops: (tripId: number, stopIds: number[]) =>
+    request<TripStopResponse[]>(`/trips/${tripId}/stops/reorder`, {
+      method: 'PUT',
+      body: JSON.stringify({ stopIds }),
     }),
 
   // Activities
@@ -172,21 +203,47 @@ export const api = {
   getActivityById: (activityId: number) => request<ActivityResponse>(`/activities/${activityId}`),
 
   // Trip Activities
-  getTripActivities: (tripId: number, stopId: number) =>
-    request<TripActivityResponse[]>(`/trips/${tripId}/stops/${stopId}/activities`),
+  getTripActivities: (tripId: number, stopId?: number) => {
+    if (stopId) {
+      return request<TripActivityResponse[]>(`/trips/${tripId}/stops/${stopId}/activities`);
+    }
+    return request<TripActivityResponse[]>(`/trips/${tripId}/activities`);
+  },
   createTripActivity: (tripId: number, stopId: number, data: CreateTripActivityRequest) =>
     request<TripActivityResponse>(`/trips/${tripId}/stops/${stopId}/activities`, {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-  deleteTripActivity: (tripId: number, stopId: number, tripActivityId: number) =>
-    request<void>(`/trips/${tripId}/stops/${stopId}/activities/${tripActivityId}`, {
+  addTripActivity: (tripId: number, stopId: number, data: CreateTripActivityRequest) =>
+    request<TripActivityResponse>(`/trips/${tripId}/stops/${stopId}/activities`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  deleteTripActivity: (tripId: number, stopIdOrActivityId: number, tripActivityId?: number) => {
+    if (tripActivityId !== undefined) {
+      return request<void>(`/trips/${tripId}/stops/${stopIdOrActivityId}/activities/${tripActivityId}`, {
+        method: 'DELETE',
+      });
+    }
+    return request<void>(`/trips/${tripId}/activities/${stopIdOrActivityId}`, {
       method: 'DELETE',
+    });
+  },
+  reorderTripActivities: (tripId: number, stopId: number, tripActivityIds: number[]) =>
+    request<TripActivityResponse[]>(`/trips/${tripId}/stops/${stopId}/activities/reorder`, {
+      method: 'PUT',
+      body: JSON.stringify({ tripActivityIds }),
     }),
 
   // Budget
   getBudgetSummary: (tripId: number) => request<BudgetSummaryResponse>(`/trips/${tripId}/budget`),
+  getTripBudget: (tripId: number) => request<BudgetSummaryResponse>(`/trips/${tripId}/budget`),
   updateBudget: (tripId: number, data: SetBudgetRequest) =>
+    request<BudgetSummaryResponse>(`/trips/${tripId}/budget`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+  setTripBudget: (tripId: number, data: SetBudgetRequest) =>
     request<BudgetSummaryResponse>(`/trips/${tripId}/budget`, {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -194,8 +251,14 @@ export const api = {
 
   // Sharing
   getSharingStatus: (tripId: number) => request<TripSharingResponse>(`/trips/${tripId}/sharing`),
+  getTripSharing: (tripId: number) => request<TripSharingResponse>(`/trips/${tripId}/share`),
   updateSharing: (tripId: number, data: UpdateSharingRequest) =>
     request<TripSharingResponse>(`/trips/${tripId}/sharing`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+  updateTripSharing: (tripId: number, data: UpdateSharingRequest) =>
+    request<TripSharingResponse>(`/trips/${tripId}/share`, {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
@@ -206,7 +269,7 @@ export const api = {
       method: 'POST',
     }),
 
-  // Google Places API (New)
+  // Google Places API
   searchPlaces: (city: string, query?: string, category?: string) => {
     const params = new URLSearchParams();
     params.append('city', city);
@@ -220,6 +283,10 @@ export const api = {
     if (city) params.append('city', city);
     return request<PlaceAutocompleteResponse[]>(`/places/autocomplete?${params.toString()}`);
   },
+  autocompletePlaces: (input: string) => {
+    const params = new URLSearchParams({ input });
+    return request<PlaceAutocompleteResponse[]>(`/places/autocomplete?${params.toString()}`);
+  },
   getPlaceDetails: (placeId: string) => request<PlaceResponse>(`/places/${placeId}`),
   convertPlaceToActivity: (cityId: number, place: PlaceResponse) =>
     request<ActivityResponse>(`/places/convert-to-activity?cityId=${cityId}`, {
@@ -228,5 +295,5 @@ export const api = {
     }),
 
   // Exchange Rates
-  getExchangeRates: () => request<ExchangeRateResponse>('/currencies/rates'),
+  getExchangeRates: (baseCurrency: string = 'INR') => request<ExchangeRateResponse>(`/currency/rates?base=${baseCurrency}`),
 };

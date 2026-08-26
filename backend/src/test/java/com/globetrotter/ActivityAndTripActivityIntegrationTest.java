@@ -57,8 +57,8 @@ public class ActivityAndTripActivityIntegrationTest {
     private String userBToken;
     private Long userATripId;
     private Long userAGoaStopId;
-    private City goa;
-    private City paris;
+    private Destination goa;
+    private Destination paris;
     private Activity scubaGoa;
     private Activity fortGoa;
     private Activity eiffelParis;
@@ -72,9 +72,9 @@ public class ActivityAndTripActivityIntegrationTest {
         activityRepository.deleteAll();
         cityRepository.deleteAll();
 
-        // Seed Cities
-        goa = cityRepository.save(new City(null, "Goa", "India", "Asia", 2.00, 90, "https://example.com/goa.jpg"));
-        paris = cityRepository.save(new City(null, "Paris", "France", "Europe", 4.20, 98, "https://example.com/paris.jpg"));
+        // Seed Destinations
+        goa = cityRepository.save(Destination.builder().name("Goa").country("India").region("Asia").costIndex(2.00).popularity(90).imageUrl("https://example.com/goa.jpg").build());
+        paris = cityRepository.save(Destination.builder().name("Paris").country("France").region("Europe").costIndex(4.20).popularity(98).imageUrl("https://example.com/paris.jpg").build());
 
         // Seed Activities
         scubaGoa = activityRepository.save(new Activity(null, goa, "Scuba Diving", "Underwater reef dive", "ADVENTURE", 240, 60.00, "USD", null));

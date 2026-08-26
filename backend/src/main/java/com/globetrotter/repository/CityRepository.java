@@ -1,6 +1,6 @@
 package com.globetrotter.repository;
 
-import com.globetrotter.entity.City;
+import com.globetrotter.entity.Destination;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,15 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Deprecated
 @Repository
-public interface CityRepository extends JpaRepository<City, Long> {
+public interface CityRepository extends JpaRepository<Destination, Long> {
 
-    @Query("SELECT c FROM City c WHERE " +
-           "(:search IS NULL OR :search = '' OR LOWER(c.name) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(c.country) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(c.region) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
-           "(:country IS NULL OR :country = '' OR LOWER(c.country) = LOWER(:country)) AND " +
-           "(:region IS NULL OR :region = '' OR LOWER(c.region) = LOWER(:region)) " +
-           "ORDER BY c.popularity DESC, c.name ASC")
-    List<City> searchCities(@Param("search") String search,
-                             @Param("country") String country,
-                             @Param("region") String region);
+    @Query("SELECT d FROM Destination d LEFT JOIN d.regionEntity r WHERE " +
+           "(:search IS NULL OR :search = '' OR LOWER(d.name) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(d.canonicalName) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
+           "(:country IS NULL OR :country = '' OR LOWER(d.country) = LOWER(:country)) AND " +
+           "(:region IS NULL OR :region = '' OR LOWER(d.legacyRegion) = LOWER(:region) OR LOWER(r.name) = LOWER(:region)) " +
+           "ORDER BY d.name ASC")
+    List<Destination> searchCities(@Param("search") String search,
+                                   @Param("country") String country,
+                                   @Param("region") String region);
 }

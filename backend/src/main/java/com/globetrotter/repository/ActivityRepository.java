@@ -13,15 +13,25 @@ import java.util.Optional;
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query("SELECT a FROM Activity a WHERE " +
-           "(:cityId IS NULL OR a.city.id = :cityId) AND " +
+           "(:destinationId IS NULL OR a.destination.id = :destinationId) AND " +
            "(:search IS NULL OR :search = '' OR LOWER(a.name) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(a.description) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
            "(:category IS NULL OR :category = '' OR LOWER(a.category) = LOWER(:category)) " +
            "ORDER BY a.name ASC")
-    List<Activity> searchActivities(@Param("cityId") Long cityId,
+    List<Activity> searchActivities(@Param("destinationId") Long destinationId,
                                     @Param("search") String search,
                                     @Param("category") String category);
 
-    List<Activity> findByCityId(Long cityId);
+    List<Activity> findByDestinationId(Long destinationId);
 
-    Optional<Activity> findByCityIdAndGooglePlaceId(Long cityId, String googlePlaceId);
+    Optional<Activity> findByDestinationIdAndGooglePlaceId(Long destinationId, String googlePlaceId);
+
+    @Deprecated
+    default List<Activity> findByCityId(Long cityId) {
+        return findByDestinationId(cityId);
+    }
+
+    @Deprecated
+    default Optional<Activity> findByCityIdAndGooglePlaceId(Long cityId, String googlePlaceId) {
+        return findByDestinationIdAndGooglePlaceId(cityId, googlePlaceId);
+    }
 }

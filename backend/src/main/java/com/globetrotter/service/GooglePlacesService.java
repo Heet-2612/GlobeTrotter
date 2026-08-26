@@ -5,9 +5,9 @@ import com.globetrotter.dto.ActivityResponse;
 import com.globetrotter.dto.PlaceAutocompleteResponse;
 import com.globetrotter.dto.PlaceResponse;
 import com.globetrotter.entity.Activity;
-import com.globetrotter.entity.City;
+import com.globetrotter.entity.Destination;
 import com.globetrotter.repository.ActivityRepository;
-import com.globetrotter.repository.CityRepository;
+import com.globetrotter.repository.DestinationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,63 +23,87 @@ public class GooglePlacesService {
     private static final Logger logger = LoggerFactory.getLogger(GooglePlacesService.class);
 
     private final GooglePlacesClient googlePlacesClient;
-    private final CityRepository cityRepository;
+    private final DestinationRepository destinationRepository;
     private final ActivityRepository activityRepository;
 
     public GooglePlacesService(
             GooglePlacesClient googlePlacesClient,
-            CityRepository cityRepository,
+            DestinationRepository destinationRepository,
             ActivityRepository activityRepository
     ) {
         this.googlePlacesClient = googlePlacesClient;
-        this.cityRepository = cityRepository;
+        this.destinationRepository = destinationRepository;
         this.activityRepository = activityRepository;
     }
 
     public List<PlaceResponse> searchPlaces(String cityName, String query, String category) {
         if (cityName == null || cityName.isBlank()) {
+            throw new IllegalArgumentException("City/Destination name is required for searching places.");
+        }
+
+        StringBuilder searchQuery = new StringBuilder();
+        if (query != null && !query.isBlank()) {
+            searchQuery.append(query.trim());
+        }
+        if (category != null && !category.isBlank()) {
+            if (searchQuery.length() > 0) searchQuery.append(" ");
+            searchQuery.append(category.trim());
+        }
+
+        if (searchQuery.length() == 0) {
+            searchQuery.append("tourist attractions");
+        }
+
+        String fullQuery = searchQuery.toString() + " in " + cityName.trim();
+
+        if (!googlePlacesClient.isConfigured()) {
+            logger.warn("Google Places API key is not configured. Returning empty list.");
             return new ArrayList<>();
         }
 
-        String searchContext = constructContextQuery(cityName, query, category);
-        logger.info("Executing Google Places search with context query: '{}'", searchContext);
-        return googlePlacesClient.searchText(searchContext);
+        return googlePlacesClient.searchText(fullQuery);
     }
 
-    public List<PlaceAutocompleteResponse> autocomplete(String cityName, String input) {
-        if (input == null || input.trim().length() < 2) {
+    public List<PlaceAutocompleteResponse> autocomplete(String input, String cityContext) {
+        if (input == null || input.isBlank()) {
             return new ArrayList<>();
         }
-        return googlePlacesClient.autocomplete(input.trim(), cityName);
+
+        if (!googlePlacesClient.isConfigured()) {
+            logger.warn("Google Places API key is not configured. Returning empty autocomplete list.");
+            return new ArrayList<>();
+        }
+
+        return googlePlacesClient.autocomplete(input, cityContext);
     }
 
     public PlaceResponse getPlaceDetails(String placeId) {
         if (placeId == null || placeId.isBlank()) {
-            return null;
+            throw new IllegalArgumentException("Place ID is required.");
         }
         return googlePlacesClient.getPlaceDetails(placeId);
     }
 
     @Transactional
-    public ActivityResponse convertPlaceToActivity(Long cityId, PlaceResponse place) {
-        if (cityId == null || place == null || place.getPlaceId() == null) {
-            throw new IllegalArgumentException("City ID and Place details with valid placeId are required.");
+    public ActivityResponse convertPlaceToActivity(Long destinationId, PlaceResponse place) {
+        if (destinationId == null || place == null || place.getPlaceId() == null) {
+            throw new IllegalArgumentException("Destination ID and Place details with valid placeId are required.");
         }
 
-        City city = cityRepository.findById(cityId)
-                .orElseThrow(() -> new IllegalArgumentException("City with ID " + cityId + " not found."));
+        Destination destination = destinationRepository.findById(destinationId)
+                .orElseThrow(() -> new IllegalArgumentException("Destination with ID " + destinationId + " not found."));
 
-        // Check if an activity for this google_place_id already exists in this city
-        Optional<Activity> existingActivity = activityRepository.findByCityIdAndGooglePlaceId(cityId, place.getPlaceId());
+        // Check if an activity for this google_place_id already exists in this destination
+        Optional<Activity> existingActivity = activityRepository.findByDestinationIdAndGooglePlaceId(destinationId, place.getPlaceId());
         if (existingActivity.isPresent()) {
             return ActivityResponse.fromEntity(existingActivity.get());
         }
 
         String category = mapPrimaryTypeToCategory(place.getPrimaryType());
-        String currency = city.getCurrencyCode() != null ? city.getCurrencyCode() : "INR";
+        String currency = destination.getCurrencyCode() != null ? destination.getCurrencyCode() : "INR";
 
         Activity activity = Activity.builder()
-                .city(city)
+                .destination(destination)
                 .name(place.getName() != null ? place.getName() : "Discovered Attraction")
                 .description(place.getFormattedAddress() != null ? place.getFormattedAddress() : "Discovered via Google Places")
                 .category(category)
@@ -90,57 +114,26 @@ public class GooglePlacesService {
                 .build();
 
         Activity savedActivity = activityRepository.save(activity);
-        logger.info("Created new Activity entity (ID {}) from Google Place ID '{}'", savedActivity.getId(), place.getPlaceId());
-
         return ActivityResponse.fromEntity(savedActivity);
     }
 
-    public String constructContextQuery(String cityName, String rawQuery, String category) {
-        StringBuilder sb = new StringBuilder();
-
-        if (rawQuery != null && !rawQuery.isBlank()) {
-            sb.append(rawQuery.trim());
-        } else if (category != null && !category.isBlank()) {
-            sb.append(mapCategoryToQueryTerms(category));
-        } else {
-            sb.append("top attractions");
-        }
-
-        sb.append(" in ").append(cityName.trim());
-        sb.append(", India");
-
-        return sb.toString();
-    }
-
-    private String mapCategoryToQueryTerms(String category) {
-        if (category == null) return "attractions";
-        switch (category.trim().toLowerCase()) {
-            case "culture": return "museums, temples, and historical landmarks";
-            case "nature": return "parks, lakes, gardens, and viewpoints";
-            case "food": return "restaurants, cafes, and local food";
-            case "shopping": return "markets and shopping centers";
-            case "adventure": return "adventure activities";
-            case "nightlife": return "bars and nightlife venues";
-            case "relaxation": return "spa, wellness, and quiet gardens";
-            case "sightseeing": return "famous landmarks and sightseeing";
-            default: return "tourist attractions";
-        }
-    }
-
     private String mapPrimaryTypeToCategory(String primaryType) {
-        if (primaryType == null) return "Sightseeing";
-        String lower = primaryType.toLowerCase();
-        if (lower.contains("museum") || lower.contains("temple") || lower.contains("church") || lower.contains("monument") || lower.contains("historical")) {
-            return "Culture";
-        } else if (lower.contains("park") || lower.contains("lake") || lower.contains("garden") || lower.contains("mountain") || lower.contains("nature")) {
-            return "Nature";
-        } else if (lower.contains("restaurant") || lower.contains("cafe") || lower.contains("food") || lower.contains("bakery")) {
-            return "Food";
-        } else if (lower.contains("store") || lower.contains("shopping") || lower.contains("market") || lower.contains("mall")) {
-            return "Shopping";
-        } else if (lower.contains("bar") || lower.contains("night_club")) {
-            return "Nightlife";
+        if (primaryType == null) return "SIGHTSEEING";
+        String type = primaryType.toLowerCase();
+
+        if (type.contains("restaurant") || type.contains("food") || type.contains("cafe") || type.contains("bakery")) {
+            return "FOOD";
+        } else if (type.contains("museum") || type.contains("art_gallery") || type.contains("church") || type.contains("place_of_worship") || type.contains("hindu_temple") || type.contains("mosque")) {
+            return "CULTURE";
+        } else if (type.contains("park") || type.contains("natural_feature") || type.contains("beach") || type.contains("hiking")) {
+            return "RELAXATION";
+        } else if (type.contains("amusement_park") || type.contains("zoo") || type.contains("aquarium")) {
+            return "ENTERTAINMENT";
+        } else if (type.contains("night_club") || type.contains("bar")) {
+            return "NIGHTLIFE";
+        } else if (type.contains("shopping_mall") || type.contains("store")) {
+            return "SHOPPING";
         }
-        return "Sightseeing";
+        return "SIGHTSEEING";
     }
 }

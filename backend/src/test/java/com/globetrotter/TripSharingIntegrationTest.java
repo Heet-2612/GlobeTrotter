@@ -57,7 +57,7 @@ public class TripSharingIntegrationTest {
     private String userBToken;
     private Long userATripId;
     private Long userAGoaStopId;
-    private City goa;
+    private Destination goa;
     private Activity scubaGoa;
 
     @BeforeEach
@@ -69,8 +69,8 @@ public class TripSharingIntegrationTest {
         activityRepository.deleteAll();
         cityRepository.deleteAll();
 
-        // Seed City & Activity
-        goa = cityRepository.save(new City(null, "Goa", "India", "Asia", 2.00, 90, "https://example.com/goa.jpg"));
+        // Seed Destination & Activity
+        goa = cityRepository.save(Destination.builder().name("Goa").country("India").region("Asia").costIndex(2.00).popularity(90).imageUrl("https://example.com/goa.jpg").build());
         scubaGoa = activityRepository.save(new Activity(null, goa, "Scuba Diving", "Deep sea dive", "ADVENTURE", 240, 60.00, "USD", null));
 
         // Register Users

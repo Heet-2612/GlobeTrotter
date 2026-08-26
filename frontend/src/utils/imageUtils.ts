@@ -12,12 +12,10 @@ import { cityImages } from '../data/cityImages';
 
 // Curated travel imagery for destinations & activity categories
 
-// Normalize a city name for lookup (lowercase, trimmed)
+// Normalize a destination name for lookup (lowercase, trimmed)
 function normalizeCityKey(name: string): string {
   return name.trim().toLowerCase();
 }
-
-
 
 const CATEGORY_IMAGES: Record<string, string> = {
   adventure: adventureImg,
@@ -38,50 +36,50 @@ const DEFAULT_TRIP_IMAGES = [
   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
 ];
 
-export function getCityImageUrl(cityName?: string, fallbackUrl?: string): string {
-  // Priority 1: A valid API/backend-provided image URL
+export function getDestinationImageUrl(destinationName?: string, fallbackUrl?: string): string {
   if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
     return fallbackUrl;
   }
-  // Priority 2: Curated Wikimedia Commons image for the city
-  if (cityName) {
-    const key = normalizeCityKey(cityName);
+  if (destinationName) {
+    const key = normalizeCityKey(destinationName);
     if (cityImages[key]) {
       return cityImages[key];
     }
   }
-  // Priority 3: Generic travel fallback (never a broken image)
-  if (!cityName) return DEFAULT_TRIP_IMAGES[0];
-  return DEFAULT_TRIP_IMAGES[Math.abs(hashString(cityName)) % DEFAULT_TRIP_IMAGES.length];
+  if (!destinationName) return DEFAULT_TRIP_IMAGES[0];
+  return DEFAULT_TRIP_IMAGES[Math.abs(hashString(destinationName)) % DEFAULT_TRIP_IMAGES.length];
+}
+
+export function getCityImageUrl(cityName?: string, fallbackUrl?: string): string {
+  return getDestinationImageUrl(cityName, fallbackUrl);
 }
 
 /**
- * Use as `onError` on any <img> displaying a city image.
+ * Use as `onError` on any <img> displaying a destination image.
  * Prevents broken-image icons by falling back to the generic travel image.
  */
 export function onCityImageError(e: Event): void {
   const img = e.currentTarget as HTMLImageElement;
-  // Avoid infinite loop if fallback also fails
   if (!img.dataset.fallbackApplied) {
     img.dataset.fallbackApplied = 'true';
     img.src = DEFAULT_TRIP_IMAGES[0];
   }
 }
 
+export function onDestinationImageError(e: Event): void {
+  onCityImageError(e);
+}
 
 export function getActivityImageUrl(category?: string, fallbackUrl?: string): string {
-  // Priority 1: A real image URL provided by the activity/API
   if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
     return fallbackUrl;
   }
-  // Priority 2: Corresponding local category image
   if (category) {
     const key = category.trim().toLowerCase().replace(/[-_\s]/g, '');
     if (CATEGORY_IMAGES[key]) {
       return CATEGORY_IMAGES[key];
     }
   }
-  // Priority 3: Generic fallback image
   return CATEGORY_IMAGES['sightseeing'];
 }
 

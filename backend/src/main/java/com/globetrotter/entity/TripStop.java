@@ -1,7 +1,6 @@
 package com.globetrotter.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -17,8 +16,8 @@ public class TripStop {
     private Trip trip;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+    @JoinColumn(name = "destination_id", nullable = false)
+    private Destination destination;
 
     @Column(name = "stop_order", nullable = false)
     private Integer stopOrder;
@@ -35,10 +34,10 @@ public class TripStop {
     public TripStop() {
     }
 
-    public TripStop(Long id, Trip trip, City city, Integer stopOrder, LocalDate startDate, LocalDate endDate, String notes) {
+    public TripStop(Long id, Trip trip, Destination destination, Integer stopOrder, LocalDate startDate, LocalDate endDate, String notes) {
         this.id = id;
         this.trip = trip;
-        this.city = city;
+        this.destination = destination;
         this.stopOrder = stopOrder;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -55,8 +54,13 @@ public class TripStop {
     public Trip getTrip() { return trip; }
     public void setTrip(Trip trip) { this.trip = trip; }
 
-    public City getCity() { return city; }
-    public void setCity(City city) { this.city = city; }
+    public Destination getDestination() { return destination; }
+    public void setDestination(Destination destination) { this.destination = destination; }
+
+    @Deprecated
+    public Destination getCity() { return destination; }
+    @Deprecated
+    public void setCity(Destination destination) { this.destination = destination; }
 
     public Integer getStopOrder() { return stopOrder; }
     public void setStopOrder(Integer stopOrder) { this.stopOrder = stopOrder; }
@@ -73,7 +77,7 @@ public class TripStop {
     public static class TripStopBuilder {
         private Long id;
         private Trip trip;
-        private City city;
+        private Destination destination;
         private Integer stopOrder;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -81,14 +85,15 @@ public class TripStop {
 
         public TripStopBuilder id(Long id) { this.id = id; return this; }
         public TripStopBuilder trip(Trip trip) { this.trip = trip; return this; }
-        public TripStopBuilder city(City city) { this.city = city; return this; }
+        public TripStopBuilder destination(Destination destination) { this.destination = destination; return this; }
+        public TripStopBuilder city(Destination destination) { this.destination = destination; return this; }
         public TripStopBuilder stopOrder(Integer stopOrder) { this.stopOrder = stopOrder; return this; }
         public TripStopBuilder startDate(LocalDate startDate) { this.startDate = startDate; return this; }
         public TripStopBuilder endDate(LocalDate endDate) { this.endDate = endDate; return this; }
         public TripStopBuilder notes(String notes) { this.notes = notes; return this; }
 
         public TripStop build() {
-            return new TripStop(id, trip, city, stopOrder, startDate, endDate, notes);
+            return new TripStop(id, trip, destination, stopOrder, startDate, endDate, notes);
         }
     }
 }

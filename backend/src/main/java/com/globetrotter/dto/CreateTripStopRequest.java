@@ -1,34 +1,41 @@
 package com.globetrotter.dto;
 
-import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDate;
 
 public class CreateTripStopRequest {
 
-    @NotNull(message = "City ID is required")
+    private Long destinationId;
     private Long cityId;
-
-    @NotNull(message = "Start date is required")
     private LocalDate startDate;
-
-    @NotNull(message = "End date is required")
     private LocalDate endDate;
-
     private String notes;
 
     public CreateTripStopRequest() {
     }
 
-    public CreateTripStopRequest(Long cityId, LocalDate startDate, LocalDate endDate, String notes) {
-        this.cityId = cityId;
+    public CreateTripStopRequest(Long destinationId, LocalDate startDate, LocalDate endDate, String notes) {
+        this.destinationId = destinationId;
+        this.cityId = destinationId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.notes = notes;
     }
 
-    public Long getCityId() { return cityId; }
-    public void setCityId(Long cityId) { this.cityId = cityId; }
+    public Long getDestinationId() {
+        return destinationId != null ? destinationId : cityId;
+    }
+    public void setDestinationId(Long destinationId) {
+        this.destinationId = destinationId;
+        if (this.cityId == null) this.cityId = destinationId;
+    }
+
+    public Long getCityId() {
+        return cityId != null ? cityId : destinationId;
+    }
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+        if (this.destinationId == null) this.destinationId = cityId;
+    }
 
     public LocalDate getStartDate() { return startDate; }
     public void setStartDate(LocalDate startDate) { this.startDate = startDate; }

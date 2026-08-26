@@ -1,13 +1,13 @@
 package com.globetrotter.dto;
 
 import com.globetrotter.entity.TripStop;
-
 import java.time.LocalDate;
 
 public class TripStopResponse {
 
     private Long id;
     private Long tripId;
+    private DestinationResponse destination;
     private CityResponse city;
     private Integer stopOrder;
     private LocalDate startDate;
@@ -17,9 +17,10 @@ public class TripStopResponse {
     public TripStopResponse() {
     }
 
-    public TripStopResponse(Long id, Long tripId, CityResponse city, Integer stopOrder, LocalDate startDate, LocalDate endDate, String notes) {
+    public TripStopResponse(Long id, Long tripId, DestinationResponse destination, CityResponse city, Integer stopOrder, LocalDate startDate, LocalDate endDate, String notes) {
         this.id = id;
         this.tripId = tripId;
+        this.destination = destination;
         this.city = city;
         this.stopOrder = stopOrder;
         this.startDate = startDate;
@@ -29,10 +30,14 @@ public class TripStopResponse {
 
     public static TripStopResponse fromEntity(TripStop stop) {
         if (stop == null) return null;
+        DestinationResponse destResponse = DestinationResponse.fromEntity(stop.getDestination());
+        CityResponse cityResp = (stop.getDestination() != null) ? CityResponse.fromDestination(stop.getDestination()) : null;
+
         return new TripStopResponse(
                 stop.getId(),
                 stop.getTrip() != null ? stop.getTrip().getId() : null,
-                CityResponse.fromEntity(stop.getCity()),
+                destResponse,
+                cityResp,
                 stop.getStopOrder(),
                 stop.getStartDate(),
                 stop.getEndDate(),
@@ -45,6 +50,9 @@ public class TripStopResponse {
 
     public Long getTripId() { return tripId; }
     public void setTripId(Long tripId) { this.tripId = tripId; }
+
+    public DestinationResponse getDestination() { return destination; }
+    public void setDestination(DestinationResponse destination) { this.destination = destination; }
 
     public CityResponse getCity() { return city; }
     public void setCity(CityResponse city) { this.city = city; }

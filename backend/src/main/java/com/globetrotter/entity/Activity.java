@@ -11,8 +11,8 @@ public class Activity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+    @JoinColumn(name = "destination_id", nullable = false)
+    private Destination destination;
 
     @Column(nullable = false, length = 150)
     private String name;
@@ -41,13 +41,9 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(Long id, City city, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl) {
-        this(id, city, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, null);
-    }
-
-    public Activity(Long id, City city, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl, String googlePlaceId) {
+    public Activity(Long id, Destination destination, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl, String googlePlaceId) {
         this.id = id;
-        this.city = city;
+        this.destination = destination;
         this.name = name;
         this.description = description;
         this.category = category;
@@ -58,6 +54,10 @@ public class Activity {
         this.googlePlaceId = googlePlaceId;
     }
 
+    public Activity(Long id, Destination destination, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl) {
+        this(id, destination, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, null);
+    }
+
     public static ActivityBuilder builder() {
         return new ActivityBuilder();
     }
@@ -65,8 +65,13 @@ public class Activity {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public City getCity() { return city; }
-    public void setCity(City city) { this.city = city; }
+    public Destination getDestination() { return destination; }
+    public void setDestination(Destination destination) { this.destination = destination; }
+
+    @Deprecated
+    public Destination getCity() { return destination; }
+    @Deprecated
+    public void setCity(Destination destination) { this.destination = destination; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -94,7 +99,7 @@ public class Activity {
 
     public static class ActivityBuilder {
         private Long id;
-        private City city;
+        private Destination destination;
         private String name;
         private String description;
         private String category;
@@ -105,7 +110,8 @@ public class Activity {
         private String googlePlaceId;
 
         public ActivityBuilder id(Long id) { this.id = id; return this; }
-        public ActivityBuilder city(City city) { this.city = city; return this; }
+        public ActivityBuilder destination(Destination destination) { this.destination = destination; return this; }
+        public ActivityBuilder city(Destination destination) { this.destination = destination; return this; }
         public ActivityBuilder name(String name) { this.name = name; return this; }
         public ActivityBuilder description(String description) { this.description = description; return this; }
         public ActivityBuilder category(String category) { this.category = category; return this; }
@@ -116,7 +122,7 @@ public class Activity {
         public ActivityBuilder googlePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; return this; }
 
         public Activity build() {
-            return new Activity(id, city, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, googlePlaceId);
+            return new Activity(id, destination, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, googlePlaceId);
         }
     }
 }

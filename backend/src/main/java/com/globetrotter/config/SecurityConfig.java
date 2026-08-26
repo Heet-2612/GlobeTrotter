@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/health", "/api/auth/**", "/api/public/**", "/api/cities/**", "/api/activities/**", "/api/places/**", "/api/currencies/**").permitAll()
+                        .requestMatchers("/api/health", "/api/auth/**", "/api/public/**", "/api/regions/**", "/api/destinations/**", "/api/cities/**", "/api/activities/**", "/api/places/**", "/api/currencies/**").permitAll()
                         .anyRequest().authenticated()
                 );
 

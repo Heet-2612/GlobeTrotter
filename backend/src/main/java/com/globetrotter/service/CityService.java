@@ -1,40 +1,34 @@
 package com.globetrotter.service;
 
 import com.globetrotter.dto.CityResponse;
-import com.globetrotter.entity.City;
-import com.globetrotter.exception.ResourceNotFoundException;
-import com.globetrotter.repository.CityRepository;
+import com.globetrotter.dto.DestinationResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Deprecated
 @Service
 public class CityService {
 
-    private final CityRepository cityRepository;
+    private final DestinationService destinationService;
 
-    public CityService(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
+    public CityService(DestinationService destinationService) {
+        this.destinationService = destinationService;
     }
 
     @Transactional(readOnly = true)
     public List<CityResponse> searchCities(String search, String country, String region) {
-        String cleanSearch = (search != null && !search.trim().isEmpty()) ? search.trim() : null;
-        String cleanCountry = (country != null && !country.trim().isEmpty()) ? country.trim() : null;
-        String cleanRegion = (region != null && !region.trim().isEmpty()) ? region.trim() : null;
-
-        return cityRepository.searchCities(cleanSearch, cleanCountry, cleanRegion)
-                .stream()
-                .map(CityResponse::fromEntity)
+        List<DestinationResponse> destinations = destinationService.searchDestinations(search, country, region, null);
+        return destinations.stream()
+                .map(d -> new CityResponse(d.getId(), d.getName(), d.getCountry(), d.getRegion(), d.getCostIndex(), d.getPopularity(), d.getImageUrl(), d.getCurrencyCode(), d.getCurrencySymbol()))
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public CityResponse getCityById(Long cityId) {
-        City city = cityRepository.findById(cityId)
-                .orElseThrow(() -> new ResourceNotFoundException("City not found with id: " + cityId));
-        return CityResponse.fromEntity(city);
+        DestinationResponse d = destinationService.getDestinationById(cityId);
+        return new CityResponse(d.getId(), d.getName(), d.getCountry(), d.getRegion(), d.getCostIndex(), d.getPopularity(), d.getImageUrl(), d.getCurrencyCode(), d.getCurrencySymbol());
     }
 }
