@@ -1,30 +1,34 @@
-// Curated high-resolution Unsplash travel imagery for destinations & activities
+import adventureImg from '../assets/activities/activity-adventure.jpg';
+import cultureImg from '../assets/activities/activity-culture.jpg';
+import entertainmentImg from '../assets/activities/activity-entertainment.jpg';
+import foodImg from '../assets/activities/activity-food.jpg';
+import nightlifeImg from '../assets/activities/activity-nightlife.jpg';
+import relaxationImg from '../assets/activities/activity-relaxation.jpg';
+import sightseeingImg from '../assets/activities/activity-sightseeing.jpg';
+import shoppingImg from '../assets/activities/activity-shopping.jpg';
+import spiritualImg from '../assets/activities/activity-spiritual.jpg';
 
-const CITY_IMAGES: Record<string, string> = {
-  paris: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
-  tokyo: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80',
-  london: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80',
-  rome: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80',
-  'new york': 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80',
-  sydney: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80',
-  bali: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
-  dubai: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
-  amsterdam: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=800&q=80',
-  barcelona: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80',
-  kyoto: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
-  venice: 'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=800&q=80',
-  singapore: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',
-  prague: 'https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=800&q=80',
-  cairo: 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80',
-};
+import { cityImages } from '../data/cityImages';
+
+// Curated travel imagery for destinations & activity categories
+
+// Normalize a city name for lookup (lowercase, trimmed)
+function normalizeCityKey(name: string): string {
+  return name.trim().toLowerCase();
+}
+
+
 
 const CATEGORY_IMAGES: Record<string, string> = {
-  sightseeing: 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=600&q=80',
-  food: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80',
-  adventure: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80',
-  culture: 'https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80',
-  nightlife: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-  shopping: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80',
+  adventure: adventureImg,
+  culture: cultureImg,
+  entertainment: entertainmentImg,
+  food: foodImg,
+  nightlife: nightlifeImg,
+  relaxation: relaxationImg,
+  sightseeing: sightseeingImg,
+  shopping: shoppingImg,
+  spiritual: spiritualImg,
 };
 
 const DEFAULT_TRIP_IMAGES = [
@@ -35,17 +39,50 @@ const DEFAULT_TRIP_IMAGES = [
 ];
 
 export function getCityImageUrl(cityName?: string, fallbackUrl?: string): string {
-  if (fallbackUrl && fallbackUrl.startsWith('http')) return fallbackUrl;
+  // Priority 1: A valid API/backend-provided image URL
+  if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
+    return fallbackUrl;
+  }
+  // Priority 2: Curated Wikimedia Commons image for the city
+  if (cityName) {
+    const key = normalizeCityKey(cityName);
+    if (cityImages[key]) {
+      return cityImages[key];
+    }
+  }
+  // Priority 3: Generic travel fallback (never a broken image)
   if (!cityName) return DEFAULT_TRIP_IMAGES[0];
-  const key = cityName.trim().toLowerCase();
-  return CITY_IMAGES[key] || DEFAULT_TRIP_IMAGES[Math.abs(hashString(cityName)) % DEFAULT_TRIP_IMAGES.length];
+  return DEFAULT_TRIP_IMAGES[Math.abs(hashString(cityName)) % DEFAULT_TRIP_IMAGES.length];
 }
 
+/**
+ * Use as `onError` on any <img> displaying a city image.
+ * Prevents broken-image icons by falling back to the generic travel image.
+ */
+export function onCityImageError(e: Event): void {
+  const img = e.currentTarget as HTMLImageElement;
+  // Avoid infinite loop if fallback also fails
+  if (!img.dataset.fallbackApplied) {
+    img.dataset.fallbackApplied = 'true';
+    img.src = DEFAULT_TRIP_IMAGES[0];
+  }
+}
+
+
 export function getActivityImageUrl(category?: string, fallbackUrl?: string): string {
-  if (fallbackUrl && fallbackUrl.startsWith('http')) return fallbackUrl;
-  if (!category) return CATEGORY_IMAGES['sightseeing'];
-  const key = category.trim().toLowerCase();
-  return CATEGORY_IMAGES[key] || CATEGORY_IMAGES['sightseeing'];
+  // Priority 1: A real image URL provided by the activity/API
+  if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
+    return fallbackUrl;
+  }
+  // Priority 2: Corresponding local category image
+  if (category) {
+    const key = category.trim().toLowerCase().replace(/[-_\s]/g, '');
+    if (CATEGORY_IMAGES[key]) {
+      return CATEGORY_IMAGES[key];
+    }
+  }
+  // Priority 3: Generic fallback image
+  return CATEGORY_IMAGES['sightseeing'];
 }
 
 export function getTripCoverUrl(tripId?: number, coverPhoto?: string): string {

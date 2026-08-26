@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { User, LogOut, Settings, Globe, Bell, Check, Shield } from 'lucide-react';
-import { Button, Card, Badge, Input } from '../components/common/UIComponents';
+import { useCurrency } from '../context/CurrencyContext';
+import { LogOut, Settings, Check, Shield } from 'lucide-react';
+import { Button, Card, Badge } from '../components/common/UIComponents';
 
 interface ProfilePageProps {
   onNavigate: (tab: string, param?: string | number) => void;
@@ -9,6 +10,7 @@ interface ProfilePageProps {
 
 export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
   const { user, logout } = useAuth();
+  const { displayCurrency, setDisplayCurrency, supportedCurrencies } = useCurrency();
   const [language, setLanguage] = useState(user?.languagePreference || 'en');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [savedMsg, setSavedMsg] = useState(false);
@@ -48,7 +50,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
           <p className="text-sm text-slate-600 font-medium">✉️ {user?.email}</p>
           <div className="pt-2 flex flex-wrap gap-2 justify-center sm:justify-start text-xs">
             <Badge variant="slate">User ID: #{user?.id}</Badge>
-            <Badge variant="blue">Language: {user?.languagePreference?.toUpperCase() || 'EN'}</Badge>
+            <Badge variant="blue">Preferred Currency: {displayCurrency}</Badge>
             {user?.createdAt && (
               <Badge variant="slate">Joined: {new Date(user.createdAt).toLocaleDateString()}</Badge>
             )}
@@ -74,6 +76,23 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                Display Currency
+              </label>
+              <select
+                value={displayCurrency}
+                onChange={(e) => setDisplayCurrency(e.target.value)}
+                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-emerald-600 transition-all font-medium"
+              >
+                {supportedCurrencies.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name} ({c.symbol}) - {c.code}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
                 Language Preference
               </label>
               <select
@@ -87,23 +106,23 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onNavigate }) => {
                 <option value="de">German (Deutsch)</option>
               </select>
             </div>
+          </div>
 
-            <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                Notifications
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+              Notifications
+            </label>
+            <div className="flex items-center space-x-3 pt-1">
+              <input
+                type="checkbox"
+                id="notifications"
+                checked={notificationsEnabled}
+                onChange={(e) => setNotificationsEnabled(e.target.checked)}
+                className="w-4 h-4 rounded border-slate-300 bg-white text-emerald-600 focus:ring-emerald-600"
+              />
+              <label htmlFor="notifications" className="text-sm text-slate-700 cursor-pointer font-medium">
+                Receive itinerary updates & budget notifications
               </label>
-              <div className="flex items-center space-x-3 pt-2">
-                <input
-                  type="checkbox"
-                  id="notifications"
-                  checked={notificationsEnabled}
-                  onChange={(e) => setNotificationsEnabled(e.target.checked)}
-                  className="w-4 h-4 rounded border-slate-300 bg-white text-emerald-600 focus:ring-emerald-600"
-                />
-                <label htmlFor="notifications" className="text-sm text-slate-700 cursor-pointer font-medium">
-                  Receive itinerary updates & budget notifications
-                </label>
-              </div>
             </div>
           </div>
 

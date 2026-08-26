@@ -4,8 +4,9 @@ import { api } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { Globe, Calendar, DollarSign, Copy, Check, Sparkles, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
-import { formatCurrency } from '../utils/currency';
-import { getTripCoverUrl, getCityImageUrl } from '../utils/imageUtils';
+import { useCurrency } from '../context/CurrencyContext';
+import { getTripCoverUrl, getCityImageUrl, getActivityImageUrl, onCityImageError } from '../utils/imageUtils';
+
 
 interface SharedItineraryPageProps {
   shareToken: string;
@@ -13,6 +14,7 @@ interface SharedItineraryPageProps {
 }
 
 export const SharedItineraryPage: React.FC<SharedItineraryPageProps> = ({ shareToken, onNavigate }) => {
+  const { formatDual } = useCurrency();
   const { isAuthenticated } = useAuth();
   const [itinerary, setItinerary] = useState<PublicTripItineraryResponse | null>(null);
   const [loading, setLoading] = useState(true);
@@ -125,7 +127,7 @@ export const SharedItineraryPage: React.FC<SharedItineraryPageProps> = ({ shareT
           <div>
             <span className="text-slate-500 text-xs block font-semibold uppercase">ESTIMATED BUDGET</span>
             <span className="font-extrabold text-emerald-700 flex items-center space-x-1 mt-0.5">
-              <span>{formatCurrency(itinerary.budget)}</span>
+              <span>{formatDual(itinerary.budget)}</span>
             </span>
           </div>
         </div>
@@ -146,7 +148,8 @@ export const SharedItineraryPage: React.FC<SharedItineraryPageProps> = ({ shareT
               <Card key={stop.id || idx} className="p-6 space-y-4 shadow-xs bg-white border border-slate-200">
                 <div className="flex items-center space-x-4 border-b border-slate-200 pb-4">
                   <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 relative border border-slate-200">
-                    <img src={cityImg} alt={stop.cityName} className="w-full h-full object-cover" />
+                    <img src={cityImg} alt={stop.cityName} loading="lazy" onError={onCityImageError} className="w-full h-full object-cover" />
+
                     <div className="absolute inset-0 bg-slate-900/30"></div>
                     <span className="absolute inset-0 flex items-center justify-center font-extrabold text-white text-base">
                       #{idx + 1}
@@ -168,18 +171,26 @@ export const SharedItineraryPage: React.FC<SharedItineraryPageProps> = ({ shareT
                     <p className="text-xs text-slate-500 italic">No scheduled activities for this city stop.</p>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {stop.activities.map((act, actIdx) => (
-                        <div key={act.id || actIdx} className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
-                          <div className="flex justify-between items-start">
-                            <span className="font-bold text-slate-900 text-sm">{act.name}</span>
-                            <span className="text-xs font-extrabold text-emerald-700">{formatCurrency(act.cost, act.currency)}</span>
+                      {stop.activities.map((act, actIdx) => {
+                        const actImg = getActivityImageUrl(act.category);
+                        return (
+                          <div key={act.id || actIdx} className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex space-x-3 items-center">
+                            <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-slate-200">
+                              <img src={actImg} alt={act.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 space-y-1 text-xs min-w-0">
+                              <div className="flex justify-between items-start">
+                                <span className="font-bold text-slate-900 text-sm truncate">{act.name}</span>
+                                <span className="text-xs font-extrabold text-emerald-700 ml-2 shrink-0">{formatDual(act.cost, act.currency)}</span>
+                              </div>
+                              <Badge variant="emerald">{act.category || 'Sightseeing'}</Badge>
+                              <p className="text-xs text-slate-600">
+                                📅 {act.scheduledDate} {act.startTime && `• ⏰ ${act.startTime}`}
+                              </p>
+                            </div>
                           </div>
-                          <Badge variant="emerald">{act.category}</Badge>
-                          <p className="text-xs text-slate-600 pt-1">
-                            📅 {act.scheduledDate} {act.startTime && `• ⏰ ${act.startTime}`}
-                          </p>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
                 </div>

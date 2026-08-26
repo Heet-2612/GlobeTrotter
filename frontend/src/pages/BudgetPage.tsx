@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BudgetSummaryResponse, TripResponse } from '../types';
 import { api } from '../services/api';
-import { DollarSign, AlertTriangle, TrendingUp, Edit3, Eye, Clock, Calendar } from 'lucide-react';
+import { DollarSign, AlertTriangle, Edit3, Eye, Clock } from 'lucide-react';
 import { Button, Card, Input, LoadingState } from '../components/common/UIComponents';
-import { formatCurrency } from '../utils/currency';
+import { useCurrency } from '../context/CurrencyContext';
 
 interface BudgetPageProps {
   tripId: number;
@@ -11,6 +11,7 @@ interface BudgetPageProps {
 }
 
 export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) => {
+  const { formatDual } = useCurrency();
   const [trip, setTrip] = useState<TripResponse | null>(null);
   const [budgetSummary, setBudgetSummary] = useState<BudgetSummaryResponse | null>(null);
   const [newBudget, setNewBudget] = useState<string>('');
@@ -75,6 +76,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
 
   const isExceeded = budgetSummary.budgetExceeded;
   const percentage = Math.min(Math.max(budgetSummary.budgetUsedPercentage || 0, 0), 100);
+  const tripCurrency = budgetSummary.currency || 'INR';
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -113,7 +115,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
           <div>
             <p className="font-bold text-rose-950">Budget Exceeded Alert!</p>
             <p className="text-xs text-rose-700">
-              Total activity costs ({formatCurrency(budgetSummary.totalActivityCost, budgetSummary.currency)}) exceed your target budget ({formatCurrency(budgetSummary.budget, budgetSummary.currency)}).
+              Total activity costs ({formatDual(budgetSummary.totalActivityCost, tripCurrency)}) exceed your target budget ({formatDual(budgetSummary.budget, tripCurrency)}).
             </p>
           </div>
         </div>
@@ -123,16 +125,16 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
           <p className="text-xs font-semibold text-slate-500 uppercase">Target Budget</p>
-          <p className="text-2xl font-extrabold text-slate-900 mt-1">{formatCurrency(budgetSummary.budget, budgetSummary.currency)}</p>
+          <p className="text-lg font-extrabold text-slate-900 mt-1">{formatDual(budgetSummary.budget, tripCurrency)}</p>
         </Card>
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
           <p className="text-xs font-semibold text-slate-500 uppercase">Total Spent</p>
-          <p className="text-2xl font-extrabold text-amber-700 mt-1">{formatCurrency(budgetSummary.totalActivityCost, budgetSummary.currency)}</p>
+          <p className="text-lg font-extrabold text-amber-700 mt-1">{formatDual(budgetSummary.totalActivityCost, tripCurrency)}</p>
         </Card>
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
           <p className="text-xs font-semibold text-slate-500 uppercase">Remaining</p>
-          <p className={`text-2xl font-extrabold mt-1 ${budgetSummary.remainingBudget < 0 ? 'text-rose-600' : 'text-emerald-700'}`}>
-            {formatCurrency(budgetSummary.remainingBudget, budgetSummary.currency)}
+          <p className={`text-lg font-extrabold mt-1 ${budgetSummary.remainingBudget < 0 ? 'text-rose-600' : 'text-emerald-700'}`}>
+            {formatDual(budgetSummary.remainingBudget, tripCurrency)}
           </p>
         </Card>
         <Card className="p-5 bg-white border border-slate-200 shadow-xs">
@@ -165,7 +167,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
           {successMsg && <p className="text-xs text-emerald-700 font-semibold">{successMsg}</p>}
           <form onSubmit={handleUpdateBudget} className="space-y-4">
             <Input
-              label={`New Target Budget (${budgetSummary.currency || 'INR'})`}
+              label={`New Target Budget (${tripCurrency})`}
               type="number"
               min="0"
               step="50"
@@ -199,7 +201,7 @@ export const BudgetPage: React.FC<BudgetPageProps> = ({ tripId, onNavigate }) =>
                     <tr key={i} className="hover:bg-slate-50">
                       <td className="p-3 font-bold text-slate-900">{cat.category}</td>
                       <td className="p-3 text-center">{cat.count}</td>
-                      <td className="p-3 text-right font-bold text-emerald-700">{formatCurrency(cat.totalCost, budgetSummary.currency)}</td>
+                      <td className="p-3 text-right font-bold text-emerald-700">{formatDual(cat.totalCost, tripCurrency)}</td>
                     </tr>
                   ))}
                 </tbody>

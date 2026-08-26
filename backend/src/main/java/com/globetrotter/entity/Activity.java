@@ -35,10 +35,17 @@ public class Activity {
     @Column(name = "image_url", length = 500)
     private String imageUrl;
 
+    @Column(name = "google_place_id", length = 255)
+    private String googlePlaceId;
+
     public Activity() {
     }
 
     public Activity(Long id, City city, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl) {
+        this(id, city, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, null);
+    }
+
+    public Activity(Long id, City city, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl, String googlePlaceId) {
         this.id = id;
         this.city = city;
         this.name = name;
@@ -48,6 +55,7 @@ public class Activity {
         this.estimatedCost = estimatedCost;
         this.currency = currency;
         this.imageUrl = imageUrl;
+        this.googlePlaceId = googlePlaceId;
     }
 
     public static ActivityBuilder builder() {
@@ -81,6 +89,9 @@ public class Activity {
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
+    public String getGooglePlaceId() { return googlePlaceId; }
+    public void setGooglePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; }
+
     public static class ActivityBuilder {
         private Long id;
         private City city;
@@ -91,6 +102,7 @@ public class Activity {
         private Double estimatedCost;
         private String currency;
         private String imageUrl;
+        private String googlePlaceId;
 
         public ActivityBuilder id(Long id) { this.id = id; return this; }
         public ActivityBuilder city(City city) { this.city = city; return this; }
@@ -101,9 +113,10 @@ public class Activity {
         public ActivityBuilder estimatedCost(Double estimatedCost) { this.estimatedCost = estimatedCost; return this; }
         public ActivityBuilder currency(String currency) { this.currency = currency; return this; }
         public ActivityBuilder imageUrl(String imageUrl) { this.imageUrl = imageUrl; return this; }
+        public ActivityBuilder googlePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; return this; }
 
         public Activity build() {
-            return new Activity(id, city, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl);
+            return new Activity(id, city, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, googlePlaceId);
         }
     }
 }

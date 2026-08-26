@@ -29,6 +29,9 @@ public class User {
     @Column(name = "language_preference", length = 10)
     private String languagePreference;
 
+    @Column(name = "preferred_currency", length = 10)
+    private String preferredCurrency;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -41,12 +44,17 @@ public class User {
     }
 
     public User(Long id, String name, String email, String passwordHash, String profilePhoto, String languagePreference, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this(id, name, email, passwordHash, profilePhoto, languagePreference, "INR", createdAt, updatedAt);
+    }
+
+    public User(Long id, String name, String email, String passwordHash, String profilePhoto, String languagePreference, String preferredCurrency, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.passwordHash = passwordHash;
         this.profilePhoto = profilePhoto;
         this.languagePreference = languagePreference;
+        this.preferredCurrency = preferredCurrency;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -73,6 +81,9 @@ public class User {
     public String getLanguagePreference() { return languagePreference; }
     public void setLanguagePreference(String languagePreference) { this.languagePreference = languagePreference; }
 
+    public String getPreferredCurrency() { return preferredCurrency; }
+    public void setPreferredCurrency(String preferredCurrency) { this.preferredCurrency = preferredCurrency; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
@@ -86,6 +97,7 @@ public class User {
         private String passwordHash;
         private String profilePhoto;
         private String languagePreference;
+        private String preferredCurrency;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
@@ -95,11 +107,12 @@ public class User {
         public UserBuilder passwordHash(String passwordHash) { this.passwordHash = passwordHash; return this; }
         public UserBuilder profilePhoto(String profilePhoto) { this.profilePhoto = profilePhoto; return this; }
         public UserBuilder languagePreference(String languagePreference) { this.languagePreference = languagePreference; return this; }
+        public UserBuilder preferredCurrency(String preferredCurrency) { this.preferredCurrency = preferredCurrency; return this; }
         public UserBuilder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
         public UserBuilder updatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public User build() {
-            return new User(id, name, email, passwordHash, profilePhoto, languagePreference, createdAt, updatedAt);
+            return new User(id, name, email, passwordHash, profilePhoto, languagePreference, preferredCurrency, createdAt, updatedAt);
         }
     }
 }

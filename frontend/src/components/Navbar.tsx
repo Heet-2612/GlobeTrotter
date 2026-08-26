@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Compass, LayoutDashboard, MapPin, Sparkles, User, LogOut, Menu, X, Globe, Calendar } from 'lucide-react';
+import { useCurrency } from '../context/CurrencyContext';
+import { Compass, LayoutDashboard, MapPin, Sparkles, User, LogOut, Menu, X, DollarSign, Calendar } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;
@@ -9,6 +10,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentTab, onNavigate }) => {
   const { user, logout, isAuthenticated } = useAuth();
+  const { displayCurrency, setDisplayCurrency, supportedCurrencies } = useCurrency();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleNavClick = (tab: string, param?: string | number) => {
@@ -64,47 +66,66 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onNavigate }) => {
             </div>
           ) : null}
 
-          {/* User Profile & Actions */}
-          {isAuthenticated ? (
-            <div className="hidden md:flex items-center space-x-4 border-l border-slate-200 pl-5">
-              <div className="flex items-center space-x-2.5 cursor-pointer" onClick={() => handleNavClick('profile')}>
-                <div className="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold text-xs flex items-center justify-center">
-                  {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
-                </div>
-                <span className="text-sm font-semibold text-slate-800">
-                  {user?.name}
-                </span>
-              </div>
-              <button
-                onClick={logout}
-                className="text-slate-500 hover:text-rose-600 p-2 hover:bg-slate-100 rounded-xl transition-colors"
-                title="Logout"
+          {/* User Profile & Global Currency Selector */}
+          <div className="flex items-center space-x-3">
+            {/* Global Display Currency Selector */}
+            <div className="flex items-center space-x-1.5 bg-slate-100/90 border border-slate-200 rounded-xl px-2.5 py-1 text-xs font-bold text-slate-700">
+              <DollarSign size={13} className="text-emerald-600" />
+              <select
+                value={displayCurrency}
+                onChange={(e) => setDisplayCurrency(e.target.value)}
+                className="bg-transparent font-bold text-slate-800 text-xs focus:outline-none cursor-pointer"
+                title="Global Display Currency"
               >
-                <LogOut size={18} />
-              </button>
+                {supportedCurrencies.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.code} ({c.symbol})
+                  </option>
+                ))}
+              </select>
             </div>
-          ) : (
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={() => handleNavClick('login')}
-                className="text-slate-700 hover:text-slate-900 px-4 py-2 text-sm font-semibold"
-              >
-                Login
-              </button>
-            </div>
-          )}
 
-          {/* Mobile Menu Toggle Button */}
-          {isAuthenticated && (
-            <div className="md:hidden flex items-center">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-slate-600 hover:text-slate-900 rounded-xl focus:outline-none"
-              >
-                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          )}
+            {isAuthenticated ? (
+              <div className="hidden md:flex items-center space-x-4 border-l border-slate-200 pl-4">
+                <div className="flex items-center space-x-2.5 cursor-pointer" onClick={() => handleNavClick('profile')}>
+                  <div className="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 font-bold text-xs flex items-center justify-center">
+                    {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                  </div>
+                  <span className="text-sm font-semibold text-slate-800">
+                    {user?.name}
+                  </span>
+                </div>
+                <button
+                  onClick={logout}
+                  className="text-slate-500 hover:text-rose-600 p-2 hover:bg-slate-100 rounded-xl transition-colors"
+                  title="Logout"
+                >
+                  <LogOut size={18} />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-3">
+                <button
+                  onClick={() => handleNavClick('login')}
+                  className="text-slate-700 hover:text-slate-900 px-4 py-2 text-sm font-semibold"
+                >
+                  Login
+                </button>
+              </div>
+            )}
+
+            {/* Mobile Menu Toggle Button */}
+            {isAuthenticated && (
+              <div className="md:hidden flex items-center">
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2 text-slate-600 hover:text-slate-900 rounded-xl focus:outline-none"
+                >
+                  {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

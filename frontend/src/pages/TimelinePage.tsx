@@ -4,7 +4,8 @@ import { api } from '../services/api';
 import { Calendar, Clock, Edit3, Eye, DollarSign, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
 
-import { formatCurrency } from '../utils/currency';
+import { useCurrency } from '../context/CurrencyContext';
+import { getActivityImageUrl } from '../utils/imageUtils';
 
 interface TimelinePageProps {
   tripId: number;
@@ -12,6 +13,7 @@ interface TimelinePageProps {
 }
 
 export const TimelinePage: React.FC<TimelinePageProps> = ({ tripId, onNavigate }) => {
+  const { formatDual } = useCurrency();
   const [trip, setTrip] = useState<TripResponse | null>(null);
   const [stops, setStops] = useState<TripStopResponse[]>([]);
   const [activitiesMap, setActivitiesMap] = useState<Record<number, TripActivityResponse[]>>({});
@@ -129,23 +131,31 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({ tripId, onNavigate }
                         <p className="text-xs text-slate-500 italic">No scheduled activities for this stop.</p>
                       ) : (
                         <div className="space-y-2">
-                          {stopActivities.map((act) => (
-                            <div
-                              key={act.id}
-                              className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs flex items-center justify-between"
-                            >
-                              <div className="space-y-0.5">
-                                <span className="font-bold text-slate-900 block text-sm">{act.activity.name}</span>
-                                <span className="text-slate-600 flex items-center space-x-1">
-                                  <Calendar size={12} className="text-emerald-600" />
-                                  <span>{act.scheduledDate} {act.startTime && `• ⏰ ${act.startTime}`}</span>
+                          {stopActivities.map((act) => {
+                            const actImg = getActivityImageUrl(act.activity?.category, act.activity?.imageUrl);
+                            return (
+                              <div
+                                key={act.id}
+                                className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs flex items-center justify-between gap-3"
+                              >
+                                <div className="flex items-center space-x-3 min-w-0">
+                                  <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-slate-200">
+                                    <img src={actImg} alt={act.activity.name} className="w-full h-full object-cover" />
+                                  </div>
+                                  <div className="space-y-0.5 min-w-0">
+                                    <span className="font-bold text-slate-900 block text-sm truncate">{act.activity.name}</span>
+                                    <span className="text-slate-600 flex items-center space-x-1">
+                                      <Calendar size={12} className="text-emerald-600 shrink-0" />
+                                      <span className="truncate">{act.scheduledDate} {act.startTime && `• ⏰ ${act.startTime}`}</span>
+                                    </span>
+                                  </div>
+                                </div>
+                                <span className="font-bold text-emerald-700 text-sm shrink-0">
+                                  {formatDual(act.customCost ?? act.activity?.estimatedCost, act.activity?.currency)}
                                 </span>
                               </div>
-                              <span className="font-bold text-emerald-700 text-sm">
-                                {formatCurrency(act.customCost ?? act.activity?.estimatedCost, act.activity?.currency)}
-                              </span>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       )}
                     </div>

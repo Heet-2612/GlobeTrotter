@@ -13,9 +13,10 @@ import {
   Eye,
   Settings,
 } from 'lucide-react';
-import { getCityImageUrl, getActivityImageUrl, getTripCoverUrl } from '../../utils/imageUtils';
+import { getCityImageUrl, getActivityImageUrl, getTripCoverUrl, onCityImageError } from '../../utils/imageUtils';
+
 import { TripResponse, CityResponse, ActivityResponse } from '../../types';
-import { formatCurrency } from '../../utils/currency';
+import { useCurrency } from '../../context/CurrencyContext';
 
 // Button Component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -162,24 +163,46 @@ interface TripCardProps {
 }
 
 export const TripCard: React.FC<TripCardProps> = ({ trip, onNavigate, onDelete }) => {
-  const imageUrl = getTripCoverUrl(trip.id, trip.coverPhoto);
+  const { formatDual } = useCurrency();
+  const coverUrl = getTripCoverUrl(trip.id, trip.coverPhoto);
 
   return (
-    <Card hoverable className="p-0 overflow-hidden flex flex-col justify-between group bg-white border border-slate-200 shadow-sm">
+    <Card className="flex flex-col h-full hover:shadow-lg transition-all duration-300 group overflow-hidden bg-white border border-slate-200">
       <div className="relative h-44 overflow-hidden">
         <img
-          src={imageUrl}
+          src={coverUrl}
           alt={trip.name}
+          loading="lazy"
+          onError={onCityImageError}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
-        <div className="absolute top-3 right-3 flex space-x-2">
-          <Badge variant={trip.isPublic ? 'emerald' : 'slate'} icon={trip.isPublic ? <Globe size={12} /> : <Lock size={12} />}>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+
+        <div className="absolute top-3 left-3 right-3 flex justify-between items-center">
+          <Badge variant={trip.isPublic ? 'emerald' : 'slate'} className="backdrop-blur-md bg-white/90">
+            {trip.isPublic ? <Globe size={11} className="mr-1 inline text-emerald-700" /> : <Lock size={11} className="mr-1 inline text-slate-500" />}
             {trip.isPublic ? 'Public' : 'Private'}
           </Badge>
+
+          {onDelete && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(trip.id, trip.name);
+              }}
+              className="p-1.5 bg-white/80 hover:bg-rose-500 text-slate-700 hover:text-white rounded-xl backdrop-blur-md transition-colors"
+              title="Delete Trip"
+            >
+              <Trash2 size={13} />
+            </button>
+          )}
         </div>
-        <div className="absolute bottom-3 left-4 right-4">
-          <h3 className="text-xl font-extrabold text-white truncate drop-shadow">{trip.name}</h3>
+
+        <div className="absolute bottom-3 left-3 right-3 text-white">
+          <h3 className="font-extrabold text-lg leading-snug line-clamp-1 group-hover:text-emerald-300 transition-colors">
+            {trip.name}
+          </h3>
         </div>
       </div>
 
@@ -194,7 +217,7 @@ export const TripCard: React.FC<TripCardProps> = ({ trip, onNavigate, onDelete }
             <span>{trip.startDate} - {trip.endDate}</span>
           </div>
           <div className="font-extrabold text-emerald-700 text-sm">
-            {formatCurrency(trip.budget)}
+            {formatDual(trip.budget)}
           </div>
         </div>
 
@@ -248,22 +271,26 @@ export const CityCard: React.FC<CityCardProps> = ({ city, onNavigate }) => {
   const imageUrl = getCityImageUrl(city.name, city.imageUrl);
 
   return (
-    <Card hoverable className="p-0 overflow-hidden group flex flex-col justify-between bg-white border border-slate-200 shadow-sm">
-      <div className="relative h-40 overflow-hidden">
+    <Card hoverable className="p-0 overflow-hidden group flex flex-col justify-between bg-white border border-slate-200 shadow-sm cursor-pointer" onClick={() => onNavigate('destination', city.id)}>
+      <div className="relative h-44 overflow-hidden">
         <img
           src={imageUrl}
           alt={city.name}
+          loading="lazy"
+          onError={onCityImageError}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
+
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 flex items-center space-x-1.5">
           <Badge variant="amber" icon={<Star size={11} className="fill-amber-500 text-amber-500" />}>
             Rank #{city.popularity ?? 'N/A'}
           </Badge>
+          <Badge variant="emerald">{city.currencyCode || 'INR'}</Badge>
         </div>
         <div className="absolute bottom-3 left-4">
           <h3 className="text-xl font-bold text-white drop-shadow">{city.name}</h3>
-          <p className="text-xs text-slate-200 font-medium">{city.country}</p>
+          <p className="text-xs text-slate-200 font-medium">{city.region ? `${city.region}, ${city.country}` : city.country}</p>
         </div>
       </div>
 
@@ -271,8 +298,16 @@ export const CityCard: React.FC<CityCardProps> = ({ city, onNavigate }) => {
         <span className="text-slate-600 font-medium">
           Cost Index: <strong className="text-emerald-700">{city.costIndex ?? 1.0}x</strong>
         </span>
-        <Button variant="primary" size="sm" icon={<ArrowRight size={12} />} onClick={() => onNavigate('create-trip')}>
-          Plan Trip
+        <Button
+          variant="emerald"
+          size="sm"
+          icon={<ArrowRight size={12} />}
+          onClick={(e) => {
+            e.stopPropagation();
+            onNavigate('destination', city.id);
+          }}
+        >
+          Explore destination →
         </Button>
       </div>
     </Card>
@@ -285,10 +320,11 @@ interface ActivityCardProps {
 }
 
 export const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
+  const { formatDual } = useCurrency();
   const imageUrl = getActivityImageUrl(activity.category, activity.imageUrl);
 
   return (
-    <Card hoverable className="p-0 overflow-hidden flex flex-col justify-between group bg-white border border-slate-200 shadow-sm">
+    <Card hoverable className="p-0 overflow-hidden flex flex-col justify-between group bg-white border border-slate-200 shadow-xs">
       <div className="relative h-36 overflow-hidden">
         <img
           src={imageUrl}
@@ -321,7 +357,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
             <span>{activity.estimatedDurationMinutes ? `${activity.estimatedDurationMinutes}m` : 'Flexible'}</span>
           </span>
           <span className="font-extrabold text-emerald-700 text-sm">
-            {formatCurrency(activity.estimatedCost, activity.currency)}
+            {formatDual(activity.estimatedCost, activity.currency)}
           </span>
         </div>
       </div>

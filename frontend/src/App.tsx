@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { CurrencyProvider } from './context/CurrencyContext';
 import { Navbar } from './components/Navbar';
 import { AuthPage } from './pages/AuthPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
@@ -9,6 +10,7 @@ import { MyTripsPage } from './pages/MyTripsPage';
 import { ItineraryBuilderPage } from './pages/ItineraryBuilderPage';
 import { ItineraryViewPage } from './pages/ItineraryViewPage';
 import { CitySearchPage } from './pages/CitySearchPage';
+import { DestinationDetailsPage } from './pages/DestinationDetailsPage';
 import { ActivitySearchPage } from './pages/ActivitySearchPage';
 import { BudgetPage } from './pages/BudgetPage';
 import { TimelinePage } from './pages/TimelinePage';
@@ -42,6 +44,16 @@ const MainAppContent: React.FC = () => {
         setCurrentTab('public');
         setActiveParam(token);
         return;
+      }
+
+      if (pathname.startsWith('/cities/') || hash.startsWith('cities/') || hash.startsWith('city/')) {
+        const parts = (pathname.startsWith('/cities/') ? pathname : hash).split('/');
+        const cId = parts[parts.length - 1];
+        if (cId && !isNaN(Number(cId))) {
+          setCurrentTab('destination');
+          setActiveParam(Number(cId));
+          return;
+        }
       }
     };
 
@@ -119,6 +131,9 @@ const MainAppContent: React.FC = () => {
           <ItineraryViewPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
         )}
         {currentTab === 'city-search' && <CitySearchPage onNavigate={handleNavigate} />}
+        {currentTab === 'destination' && activeParam && (
+          <DestinationDetailsPage cityId={Number(activeParam)} onNavigate={handleNavigate} />
+        )}
         {currentTab === 'activity-search' && <ActivitySearchPage onNavigate={handleNavigate} />}
         {currentTab === 'budget' && activeParam && (
           <BudgetPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
@@ -151,7 +166,9 @@ const MainAppContent: React.FC = () => {
 export function App() {
   return (
     <AuthProvider>
-      <MainAppContent />
+      <CurrencyProvider>
+        <MainAppContent />
+      </CurrencyProvider>
     </AuthProvider>
   );
 }

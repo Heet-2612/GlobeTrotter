@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
@@ -21,4 +22,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
                                     @Param("category") String category);
 
     List<Activity> findByCityId(Long cityId);
+
+    Optional<Activity> findByCityIdAndGooglePlaceId(Long cityId, String googlePlaceId);
 }

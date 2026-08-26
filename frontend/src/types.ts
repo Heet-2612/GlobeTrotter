@@ -108,6 +108,7 @@ export interface ActivityResponse {
   estimatedCost?: number;
   currency?: string;
   imageUrl?: string;
+  googlePlaceId?: string;
 }
 
 export interface TripActivityResponse {
@@ -192,4 +193,30 @@ export interface PublicTripItineraryResponse {
   creatorName: string;
   budget?: number;
   stops: PublicTripStopResponse[];
+}
+
+export interface PlaceResponse {
+  placeId: string;
+  name: string;
+  formattedAddress: string;
+  latitude?: number;
+  longitude?: number;
+  rating?: number;
+  googleMapsUri?: string;
+  primaryType?: string;
+  photoUrl?: string;
+}
+
+export interface PlaceAutocompleteResponse {
+  placeId: string;
+  text: string;
+  secondaryText?: string;
+}
+
+export interface ExchangeRateResponse {
+  baseCode: string;
+  rates: Record<string, number>;
+  lastUpdated: string;
+  live?: boolean;
+  source?: string;
 }

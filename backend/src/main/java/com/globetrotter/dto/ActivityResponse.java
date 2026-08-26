@@ -14,11 +14,12 @@ public class ActivityResponse {
     private Double estimatedCost;
     private String currency;
     private String imageUrl;
+    private String googlePlaceId;
 
     public ActivityResponse() {
     }
 
-    public ActivityResponse(Long id, Long cityId, String cityName, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl) {
+    public ActivityResponse(Long id, Long cityId, String cityName, String name, String description, String category, Integer estimatedDurationMinutes, Double estimatedCost, String currency, String imageUrl, String googlePlaceId) {
         this.id = id;
         this.cityId = cityId;
         this.cityName = cityName;
@@ -29,6 +30,7 @@ public class ActivityResponse {
         this.estimatedCost = estimatedCost;
         this.currency = currency;
         this.imageUrl = imageUrl;
+        this.googlePlaceId = googlePlaceId;
     }
 
     public static ActivityResponse fromEntity(Activity activity) {
@@ -47,7 +49,8 @@ public class ActivityResponse {
                 activity.getEstimatedDurationMinutes(),
                 activity.getEstimatedCost(),
                 currency != null ? currency : "INR",
-                activity.getImageUrl()
+                activity.getImageUrl(),
+                activity.getGooglePlaceId()
         );
     }
 
@@ -80,4 +83,7 @@ public class ActivityResponse {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getGooglePlaceId() { return googlePlaceId; }
+    public void setGooglePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; }
 }

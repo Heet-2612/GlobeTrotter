@@ -20,6 +20,9 @@ import {
   TripSharingResponse,
   UpdateSharingRequest,
   PublicTripItineraryResponse,
+  PlaceResponse,
+  PlaceAutocompleteResponse,
+  ExchangeRateResponse,
 } from '../types';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -73,7 +76,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     throw new ApiError(response.status, message, errorData);
   }
 
-  if (response.status === 2400 || response.status === 204) {
+  if (response.status === 204) {
     return {} as T;
   }
 
@@ -202,4 +205,28 @@ export const api = {
     request<TripResponse>(`/public/trips/${shareToken}/copy`, {
       method: 'POST',
     }),
+
+  // Google Places API (New)
+  searchPlaces: (city: string, query?: string, category?: string) => {
+    const params = new URLSearchParams();
+    params.append('city', city);
+    if (query) params.append('query', query);
+    if (category) params.append('category', category);
+    return request<PlaceResponse[]>(`/places/search?${params.toString()}`);
+  },
+  getPlaceAutocomplete: (input: string, city?: string) => {
+    const params = new URLSearchParams();
+    params.append('input', input);
+    if (city) params.append('city', city);
+    return request<PlaceAutocompleteResponse[]>(`/places/autocomplete?${params.toString()}`);
+  },
+  getPlaceDetails: (placeId: string) => request<PlaceResponse>(`/places/${placeId}`),
+  convertPlaceToActivity: (cityId: number, place: PlaceResponse) =>
+    request<ActivityResponse>(`/places/convert-to-activity?cityId=${cityId}`, {
+      method: 'POST',
+      body: JSON.stringify(place),
+    }),
+
+  // Exchange Rates
+  getExchangeRates: () => request<ExchangeRateResponse>('/currencies/rates'),
 };

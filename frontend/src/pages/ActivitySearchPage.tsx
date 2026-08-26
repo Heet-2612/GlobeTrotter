@@ -37,7 +37,7 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({ onNaviga
     fetchActivities(search, category);
   };
 
-  const categories = ['All', 'SIGHTSEEING', 'FOOD', 'ADVENTURE', 'CULTURE', 'NIGHTLIFE', 'SHOPPING'];
+  const categories = ['All', 'SIGHTSEEING', 'FOOD', 'ADVENTURE', 'CULTURE', 'NIGHTLIFE', 'SHOPPING', 'ENTERTAINMENT', 'RELAXATION', 'SPIRITUAL'];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">

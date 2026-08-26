@@ -3,8 +3,9 @@ import { TripResponse, TripStopResponse, TripActivityResponse } from '../types';
 import { api } from '../services/api';
 import { Calendar, DollarSign, Globe, Lock, Edit3, Eye, Clock, Share2, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
-import { formatCurrency } from '../utils/currency';
-import { getTripCoverUrl, getCityImageUrl, getActivityImageUrl } from '../utils/imageUtils';
+import { useCurrency } from '../context/CurrencyContext';
+import { getTripCoverUrl, getCityImageUrl, getActivityImageUrl, onCityImageError } from '../utils/imageUtils';
+
 
 interface ItineraryViewPageProps {
   tripId: number;
@@ -12,6 +13,7 @@ interface ItineraryViewPageProps {
 }
 
 export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({ tripId, onNavigate }) => {
+  const { formatDual } = useCurrency();
   const [trip, setTrip] = useState<TripResponse | null>(null);
   const [stops, setStops] = useState<TripStopResponse[]>([]);
   const [activitiesMap, setActivitiesMap] = useState<Record<number, TripActivityResponse[]>>({});
@@ -106,36 +108,47 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({ tripId, on
           <div>
             <span className="text-slate-500 text-xs block font-semibold uppercase">TARGET BUDGET</span>
             <span className="font-extrabold text-emerald-700 flex items-center space-x-1 mt-0.5">
-              <span>{formatCurrency(trip.budget)}</span>
+              <span>{formatDual(trip.budget)}</span>
             </span>
           </div>
           <div>
-            <span className="text-slate-500 text-xs block font-semibold uppercase">SHARING STATUS</span>
-            <Badge variant={trip.isPublic ? 'emerald' : 'slate'} className="mt-1">
-              {trip.isPublic ? 'Public' : 'Private'}
-            </Badge>
+            <span className="text-slate-500 text-xs block font-semibold uppercase">VISIBILITY</span>
+            <span className="font-bold text-slate-800 flex items-center space-x-1 mt-0.5 text-xs">
+              {trip.isPublic ? (
+                <>
+                  <Globe size={13} className="text-emerald-700" />
+                  <span className="text-emerald-700">Public Shared</span>
+                </>
+              ) : (
+                <>
+                  <Lock size={13} className="text-slate-400" />
+                  <span>Private</span>
+                </>
+              )}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Itinerary Stops Breakdown */}
+      {/* Stops Timeline View */}
       <div className="space-y-6">
-        <h2 className="text-xl font-extrabold text-slate-900">Itinerary Overview ({stops.length} Destination Stops)</h2>
+        <h2 className="text-xl font-extrabold text-slate-900">Trip Destinations ({stops.length})</h2>
 
         {stops.length === 0 ? (
           <Card className="p-8 text-center text-slate-500 bg-white border border-slate-200">
-            No stops have been added to this trip yet.
+            No city stops added to this trip yet.
           </Card>
         ) : (
           stops.map((stop, idx) => {
+            const cityImg = getCityImageUrl(stop.city.name, stop.city.imageUrl);
             const stopActivities = activitiesMap[stop.id] || [];
-            const cityImage = getCityImageUrl(stop.city.name, stop.city.imageUrl);
 
             return (
-              <Card key={stop.id} className="p-6 space-y-4 shadow-sm bg-white border border-slate-200">
+              <Card key={stop.id} className="p-6 space-y-4 shadow-xs bg-white border border-slate-200">
                 <div className="flex items-center space-x-4 border-b border-slate-200 pb-4">
                   <div className="w-14 h-14 rounded-2xl overflow-hidden shrink-0 relative border border-slate-200">
-                    <img src={cityImage} alt={stop.city.name} className="w-full h-full object-cover" />
+                    <img src={cityImg} alt={stop.city.name} loading="lazy" onError={onCityImageError} className="w-full h-full object-cover" />
+
                     <div className="absolute inset-0 bg-slate-900/30"></div>
                     <span className="absolute inset-0 flex items-center justify-center font-extrabold text-white text-base">
                       #{idx + 1}
@@ -151,29 +164,26 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({ tripId, on
                   </div>
                 </div>
 
+                {/* Scheduled Activities */}
                 <div className="space-y-3 pl-2 sm:pl-4">
                   <h4 className="text-xs font-semibold uppercase text-slate-500 tracking-wider">Scheduled Activities</h4>
-
                   {stopActivities.length === 0 ? (
-                    <p className="text-xs text-slate-500 italic">No activities scheduled for this city stop.</p>
+                    <p className="text-xs text-slate-500 italic">No activities added for this stop yet.</p>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {stopActivities.map((act) => {
-                        const actImg = getActivityImageUrl(act.activity.category, act.activity.imageUrl);
+                        const actImg = getActivityImageUrl(act.activity?.category, act.activity?.imageUrl);
                         return (
-                          <div key={act.id} className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 flex flex-col justify-between">
-                            <div className="space-y-1">
-                              <div className="flex justify-between items-start">
-                                <span className="font-bold text-slate-900 text-sm">{act.activity.name}</span>
-                                <span className="text-xs font-extrabold text-emerald-700">
-                                  {formatCurrency(act.customCost ?? act.activity?.estimatedCost, act.activity?.currency)}
-                                </span>
-                              </div>
-                              <Badge variant="emerald">{act.activity.category || 'Attraction'}</Badge>
-                              <p className="text-xs text-slate-600 pt-1">
-                                📅 {act.scheduledDate} {act.startTime && `• ⏰ ${act.startTime}`}
+                          <div key={act.id} className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex space-x-3 items-center">
+                            <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-slate-200">
+                              <img src={actImg} alt={act.activity.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 space-y-0.5 text-xs">
+                              <h5 className="font-bold text-slate-900 line-clamp-1">{act.activity.name}</h5>
+                              <p className="text-slate-500">📅 {act.scheduledDate} {act.startTime && `• ⏰ ${act.startTime}`}</p>
+                              <p className="font-extrabold text-emerald-700">
+                                {formatDual(act.customCost ?? act.activity?.estimatedCost, act.activity?.currency)}
                               </p>
-                              {act.notes && <p className="text-xs text-slate-500 italic">"{act.notes}"</p>}
                             </div>
                           </div>
                         );
