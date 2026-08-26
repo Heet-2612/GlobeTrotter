@@ -25,6 +25,8 @@ import {
   PlaceResponse,
   PlaceAutocompleteResponse,
   ExchangeRateResponse,
+  DiscoveredPlaceResponse,
+  AddDiscoveredActivityRequest,
 } from '../types';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -142,16 +144,25 @@ export const api = {
   getRegionById: (id: number) => request<RegionResponse>(`/regions/${id}`),
 
   // Destinations (NEW V2)
-  searchDestinations: (query?: string, country?: string, region?: string, regionId?: number) => {
+  searchDestinations: (query?: string, country?: string, region?: string, regionId?: number, curated?: boolean) => {
     const params = new URLSearchParams();
     if (query) params.append('search', query);
     if (country) params.append('country', country);
     if (region) params.append('region', region);
     if (regionId) params.append('regionId', String(regionId));
+    if (curated !== undefined) params.append('curated', String(curated));
     const queryString = params.toString();
     return request<DestinationResponse[]>(`/destinations${queryString ? `?${queryString}` : ''}`);
   },
   getDestinationById: (id: number) => request<DestinationResponse>(`/destinations/${id}`),
+  discoverPlacesByDestination: (destinationId: number, query?: string, category?: string, radius?: number) => {
+    const params = new URLSearchParams();
+    if (query) params.append('query', query);
+    if (category) params.append('category', category);
+    if (radius) params.append('radius', radius.toString());
+    const queryString = params.toString();
+    return request<DiscoveredPlaceResponse[]>(`/destinations/${destinationId}/discover${queryString ? `?${queryString}` : ''}`);
+  },
 
   // Cities (Deprecated V1 Alias for Destinations)
   searchCities: (query?: string, country?: string, region?: string) => {
@@ -192,14 +203,20 @@ export const api = {
     }),
 
   // Activities
-  searchActivities: (cityId?: number, search?: string, category?: string) => {
+  searchActivities: (cityId?: number, search?: string, category?: string, destinationId?: number, source?: string) => {
     const params = new URLSearchParams();
-    if (cityId) params.append('cityId', cityId.toString());
+    const targetDestId = destinationId || cityId;
+    if (targetDestId) params.append('destinationId', targetDestId.toString());
     if (search) params.append('search', search);
     if (category) params.append('category', category);
+    if (source) params.append('source', source);
     const queryString = params.toString();
     return request<ActivityResponse[]>(`/activities${queryString ? `?${queryString}` : ''}`);
   },
+  getCuratedActivitiesByDestination: (destinationId: number) =>
+    request<ActivityResponse[]>(`/destinations/${destinationId}/activities/curated`),
+  getActivitiesByDestination: (destinationId: number) =>
+    request<ActivityResponse[]>(`/destinations/${destinationId}/activities`),
   getActivityById: (activityId: number) => request<ActivityResponse>(`/activities/${activityId}`),
 
   // Trip Activities
@@ -217,6 +234,16 @@ export const api = {
   addTripActivity: (tripId: number, stopId: number, data: CreateTripActivityRequest) =>
     request<TripActivityResponse>(`/trips/${tripId}/stops/${stopId}/activities`, {
       method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  addDiscoveredActivityToStop: (tripId: number, stopId: number, data: AddDiscoveredActivityRequest) =>
+    request<TripActivityResponse>(`/trips/${tripId}/stops/${stopId}/activities/discovered`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  updateTripActivity: (tripId: number, stopId: number, tripActivityId: number, data: Partial<CreateTripActivityRequest>) =>
+    request<TripActivityResponse>(`/trips/${tripId}/stops/${stopId}/activities/${tripActivityId}`, {
+      method: 'PUT',
       body: JSON.stringify(data),
     }),
   deleteTripActivity: (tripId: number, stopIdOrActivityId: number, tripActivityId?: number) => {

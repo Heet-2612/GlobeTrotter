@@ -15,13 +15,19 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     @Query("SELECT a FROM Activity a WHERE " +
            "(:destinationId IS NULL OR a.destination.id = :destinationId) AND " +
            "(:search IS NULL OR :search = '' OR LOWER(a.name) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(a.description) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
-           "(:category IS NULL OR :category = '' OR LOWER(a.category) = LOWER(:category)) " +
+           "(:category IS NULL OR :category = '' OR LOWER(a.category) = LOWER(:category)) AND " +
+           "(:source IS NULL OR :source = '' OR LOWER(a.source) = LOWER(:source)) " +
            "ORDER BY a.name ASC")
     List<Activity> searchActivities(@Param("destinationId") Long destinationId,
                                     @Param("search") String search,
-                                    @Param("category") String category);
+                                    @Param("category") String category,
+                                    @Param("source") String source);
 
     List<Activity> findByDestinationId(Long destinationId);
+
+    List<Activity> findByDestinationIdAndSourceIgnoreCaseOrderByNameAsc(Long destinationId, String source);
+
+    Optional<Activity> findByDestinationIdAndSourceIgnoreCaseAndExternalId(Long destinationId, String source, String externalId);
 
     Optional<Activity> findByDestinationIdAndGooglePlaceId(Long destinationId, String googlePlaceId);
 

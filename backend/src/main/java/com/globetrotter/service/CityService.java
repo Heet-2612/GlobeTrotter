@@ -20,7 +20,7 @@ public class CityService {
 
     @Transactional(readOnly = true)
     public List<CityResponse> searchCities(String search, String country, String region) {
-        List<DestinationResponse> destinations = destinationService.searchDestinations(search, country, region, null);
+        List<DestinationResponse> destinations = destinationService.searchDestinations(search, country, region, null, null);
         return destinations.stream()
                 .map(d -> new CityResponse(d.getId(), d.getName(), d.getCountry(), d.getRegion(), d.getCostIndex(), d.getPopularity(), d.getImageUrl(), d.getCurrencyCode(), d.getCurrencySymbol()))
                 .collect(Collectors.toList());

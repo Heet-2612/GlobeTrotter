@@ -17,6 +17,10 @@ public class ActivityResponse {
     private String currency;
     private String imageUrl;
     private String googlePlaceId;
+    private String source;
+    private String externalId;
+    private Double latitude;
+    private Double longitude;
 
     public ActivityResponse() {
     }
@@ -46,7 +50,7 @@ public class ActivityResponse {
         Long destId = activity.getDestination() != null ? activity.getDestination().getId() : null;
         String destName = activity.getDestination() != null ? activity.getDestination().getName() : null;
 
-        return new ActivityResponse(
+        ActivityResponse response = new ActivityResponse(
                 activity.getId(),
                 destId,
                 destName,
@@ -59,6 +63,11 @@ public class ActivityResponse {
                 activity.getImageUrl(),
                 activity.getGooglePlaceId()
         );
+        response.setSource(activity.getSource());
+        response.setExternalId(activity.getExternalId());
+        response.setLatitude(activity.getLatitude());
+        response.setLongitude(activity.getLongitude());
+        return response;
     }
 
     public Long getId() { return id; }
@@ -111,4 +120,16 @@ public class ActivityResponse {
 
     public String getGooglePlaceId() { return googlePlaceId; }
     public void setGooglePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; }
+
+    public String getSource() { return source; }
+    public void setSource(String source) { this.source = source; }
+
+    public String getExternalId() { return externalId; }
+    public void setExternalId(String externalId) { this.externalId = externalId; }
+
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
+
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
 }

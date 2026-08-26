@@ -4,6 +4,8 @@ public enum DestinationType {
     CITY,
     TOWN,
     REGION_CLUSTER,
+    ISLAND,
+    ARCHIPELAGO,
     ISLAND_ARCHIPELAGO,
     NATIONAL_PARK,
     HERITAGE_SITE,

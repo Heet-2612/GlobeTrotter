@@ -120,7 +120,7 @@ export interface TripStopResponse {
 
 export interface CreateTripStopRequest {
   destinationId?: number;
-  cityId: number;
+  cityId?: number;
   startDate: string;
   endDate: string;
   notes?: string;
@@ -140,6 +140,39 @@ export interface ActivityResponse {
   currency?: string;
   imageUrl?: string;
   googlePlaceId?: string;
+  source?: 'CURATED' | 'LEGACY' | 'GEOAPIFY';
+  externalId?: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+export interface DiscoveredPlaceResponse {
+  id: string;
+  externalId?: string;
+  name: string;
+  description?: string;
+  category?: string;
+  latitude?: number;
+  longitude?: number;
+  address?: string;
+  imageUrl?: string;
+  source: 'GEOAPIFY';
+  attribution?: string;
+}
+
+export interface AddDiscoveredActivityRequest {
+  externalId: string;
+  name: string;
+  description?: string;
+  category?: string;
+  latitude?: number;
+  longitude?: number;
+  address?: string;
+  imageUrl?: string;
+  scheduledDate: string;
+  startTime?: string;
+  notes?: string;
+  customCost?: number;
 }
 
 export interface TripActivityResponse {

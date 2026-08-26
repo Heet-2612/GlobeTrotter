@@ -38,6 +38,18 @@ public class Activity {
     @Column(name = "google_place_id", length = 255)
     private String googlePlaceId;
 
+    @Column(length = 30)
+    private String source;
+
+    @Column(name = "external_id", length = 255)
+    private String externalId;
+
+    @Column(columnDefinition = "numeric(10,7)")
+    private Double latitude;
+
+    @Column(columnDefinition = "numeric(10,7)")
+    private Double longitude;
+
     public Activity() {
     }
 
@@ -97,6 +109,18 @@ public class Activity {
     public String getGooglePlaceId() { return googlePlaceId; }
     public void setGooglePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; }
 
+    public String getSource() { return source; }
+    public void setSource(String source) { this.source = source; }
+
+    public String getExternalId() { return externalId; }
+    public void setExternalId(String externalId) { this.externalId = externalId; }
+
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
+
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
+
     public static class ActivityBuilder {
         private Long id;
         private Destination destination;
@@ -108,6 +132,10 @@ public class Activity {
         private String currency;
         private String imageUrl;
         private String googlePlaceId;
+        private String source;
+        private String externalId;
+        private Double latitude;
+        private Double longitude;
 
         public ActivityBuilder id(Long id) { this.id = id; return this; }
         public ActivityBuilder destination(Destination destination) { this.destination = destination; return this; }
@@ -120,9 +148,18 @@ public class Activity {
         public ActivityBuilder currency(String currency) { this.currency = currency; return this; }
         public ActivityBuilder imageUrl(String imageUrl) { this.imageUrl = imageUrl; return this; }
         public ActivityBuilder googlePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; return this; }
+        public ActivityBuilder source(String source) { this.source = source; return this; }
+        public ActivityBuilder externalId(String externalId) { this.externalId = externalId; return this; }
+        public ActivityBuilder latitude(Double latitude) { this.latitude = latitude; return this; }
+        public ActivityBuilder longitude(Double longitude) { this.longitude = longitude; return this; }
 
         public Activity build() {
-            return new Activity(id, destination, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, googlePlaceId);
+            Activity act = new Activity(id, destination, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, googlePlaceId);
+            act.setSource(source);
+            act.setExternalId(externalId);
+            act.setLatitude(latitude);
+            act.setLongitude(longitude);
+            return act;
         }
     }
 }

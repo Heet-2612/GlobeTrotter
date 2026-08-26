@@ -20,12 +20,12 @@ public class DestinationService {
     }
 
     @Transactional(readOnly = true)
-    public List<DestinationResponse> searchDestinations(String search, String country, String region, Long regionId) {
+    public List<DestinationResponse> searchDestinations(String search, String country, String region, Long regionId, Boolean curated) {
         String cleanSearch = (search != null && !search.trim().isEmpty()) ? search.trim() : null;
         String cleanCountry = (country != null && !country.trim().isEmpty()) ? country.trim() : null;
         String cleanRegion = (region != null && !region.trim().isEmpty()) ? region.trim() : null;
 
-        return destinationRepository.searchDestinations(cleanSearch, cleanCountry, cleanRegion, regionId)
+        return destinationRepository.searchDestinations(cleanSearch, cleanCountry, cleanRegion, regionId, curated)
                 .stream()
                 .map(DestinationResponse::fromEntity)
                 .collect(Collectors.toList());

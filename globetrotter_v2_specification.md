@@ -1,4 +1,4 @@
-﻿# GlobeTrotter V2 â€” Product Vision, User Experience & Architecture Specification
+# GlobeTrotter V2 â€” Product Vision, User Experience & Architecture Specification
 
 > **Document Status:** Authoritative Master Specification (GlobeTrotter V2 Portfolio Edition)  
 > **Supersedes:** Prototype-focused schema design documents.  
@@ -55,14 +55,15 @@ The trip creation flow focuses entirely on the traveler's intent:
 
 ## 5. Region Concept
 
-A **Region** is an internal discovery and grouping concept that organizes travel destinations logically.
+A **Region** in the GlobeTrotter database schema primarily represents an **Indian State or Union Territory** (e.g. *Karnataka*, *Rajasthan*, *Kerala*, *Tamil Nadu*, *Maharashtra*, *Dadra and Nagar Haveli and Daman and Diu*).
 
-- **Nature of a Region**: A Region is NOT strictly an administrative state. It can represent a state (*Kerala*), a geographical area (*Himalayas*), a travel circuit (*Golden Triangle*), an island group (*Andaman Islands*), or a cultural belt (*Shekhawati*).
+- **Nature of a Region**: A Region entity represents an official administrative State or Union Territory. Broad travel regions (*South India*, *Himalayas*), geographical belts (*Western Ghats*), or tourist circuits (*Golden Triangle*) are NOT primary database Region entities, but exist as UX Discovery Collections.
+- **Authoritative Catalog**: GlobeTrotter V2 defines **29 State / Union Territory Regions** containing **137 curated destinations** (refer to `state_region_destination_catalog.md`).
 - **Examples**:
-  - **Rajasthan** $\rightarrow$ Jaipur, Udaipur, Jodhpur, Jaisalmer, Pushkar
-  - **Kerala** $\rightarrow$ Kochi, Munnar, Alappuzha, Wayanad, Varkala
-  - **Ladakh** $\rightarrow$ Leh, Nubra Valley, Pangong Tso
-- **UX Role**: Users browse regions to discover where to go; regions group destinations visually without cluttering the main trip entity.
+  - **Karnataka** $\rightarrow$ Bengaluru, Mysuru, Hampi, Gokarna, Chikkamagaluru, Badami-Pattadakal, Dandeli, Nagarhole, Bandipur, Murudeshwar, Shettihalli/Sakleshpur
+  - **Rajasthan** $\rightarrow$ Jaipur, Udaipur, Jodhpur, Jaisalmer, Pushkar, Ajmer, Chittorgarh, Bikaner, Mount Abu, Bundi, Shekhawati, Ranakpur, Ranthambore
+  - **Kerala** $\rightarrow$ Kochi, Alappuzha, Munnar, Wayanad, Varkala, Thekkady-Periyar, Kumarakom, Bekal, Vagamon, Kozhikode, Kerala (state container)
+- **UX Role**: Users explore destinations by selecting one or more States/UTs during trip creation; selecting destinations across multiple states seamlessly builds a multi-state itinerary.
 
 ---
 

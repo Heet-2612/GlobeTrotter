@@ -19,10 +19,13 @@ public class ActivityController {
 
     @GetMapping
     public ResponseEntity<List<ActivityResponse>> searchActivities(
+            @RequestParam(required = false) Long destinationId,
             @RequestParam(required = false) Long cityId,
             @RequestParam(required = false) String search,
-            @RequestParam(required = false) String category) {
-        List<ActivityResponse> response = activityService.searchActivities(cityId, search, category);
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String source) {
+        Long targetId = destinationId != null ? destinationId : cityId;
+        List<ActivityResponse> response = activityService.searchActivities(targetId, search, category, source);
         return ResponseEntity.ok(response);
     }
 

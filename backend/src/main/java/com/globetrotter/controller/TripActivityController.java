@@ -36,6 +36,17 @@ public class TripActivityController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @PostMapping("/discovered")
+    public ResponseEntity<TripActivityResponse> addDiscoveredActivityToStop(
+            @PathVariable Long tripId,
+            @PathVariable Long stopId,
+            @Valid @RequestBody AddDiscoveredActivityRequest request,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        User currentUser = userService.getUserByEmail(userDetails.getUsername());
+        TripActivityResponse response = tripActivityService.addDiscoveredActivityToStop(tripId, stopId, request, currentUser);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
     @GetMapping
     public ResponseEntity<List<TripActivityResponse>> getTripActivities(
             @PathVariable Long tripId,

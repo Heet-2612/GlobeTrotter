@@ -1,4 +1,4 @@
-﻿# Phase 1: Region + Destination Domain Foundation â€” Technical Implementation Plan
+# Phase 1: Region + Destination Domain Foundation â€” Technical Implementation Plan
 
 > **Document Status:** Authoritative Implementation Plan (Planning Phase Only)  
 > **Repository Scope:** Aditya240606/GlobeTrotter (Personal Portfolio Repository)  
@@ -31,17 +31,17 @@ otes).
 
 The Phase 1 foundation evolves the core domain model into a structured 3-tier hierarchy:
 
-`
-[Region Entity] (e.g. Kerala, Rajasthan, Ladakh, Himalayas)
-    â”‚
-    â””â”€â”€ 1:N â”€â”€> [Destination Entity] (e.g. Jaipur, Munnar, Andaman Islands)
-                    â”œâ”€â”€ 1:N â”€â”€> [DestinationAlias Entity] (e.g. Bangalore -> Bengaluru)
-                    â”‚
-                    â””â”€â”€ 1:N â”€â”€> [Activity Entity] (Curated POIs + Geoapify Discovery)
-`
+```
+[Region Entity] (e.g. Karnataka, Rajasthan, Kerala, Maharashtra - 29 State/UT Regions)
+    │
+    └── 1:N ──> [Destination Entity] (137 Curated Destinations: Jaipur, Munnar, Andaman Islands)
+                    ├── 1:N ──> [DestinationAlias Entity] (e.g. Bangalore -> Bengaluru)
+                    │
+                    └── 1:N ──> [Activity Entity] (Curated POIs + Geoapify Discovery)
+```
 
 - TripStop connects directly to Destination (destination_id FK).
-- Region acts as an organizational and discovery container.
+- Region acts as an administrative State / Union Territory organizational container (29 State/UT Regions).
 - DestinationAlias enables canonical name resolution without duplicating destination records.
 
 ---

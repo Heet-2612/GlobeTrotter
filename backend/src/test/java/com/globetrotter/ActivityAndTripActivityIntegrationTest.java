@@ -331,4 +331,58 @@ public class ActivityAndTripActivityIntegrationTest {
                         .header("Authorization", "Bearer " + userBToken))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    @DisplayName("18. Get curated activities for destination returns only CURATED source")
+    void test18_GetCuratedActivitiesForDestinationReturnsOnlyCurated() throws Exception {
+        Activity curatedGoa = new Activity(null, goa, "Dudhsagar Waterfalls Trek", "Jeep safari & jungle trek", "NATURE", 300, 20.00, "USD", null);
+        curatedGoa.setSource("CURATED");
+        activityRepository.save(curatedGoa);
+
+        scubaGoa.setSource("LEGACY");
+        activityRepository.save(scubaGoa);
+
+        mockMvc.perform(get("/api/destinations/" + goa.getId() + "/activities/curated"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Dudhsagar Waterfalls Trek")))
+                .andExpect(jsonPath("$[0].source", is("CURATED")));
+
+        // Verify backward-compatible /activities returns all (curated + legacy)
+        mockMvc.perform(get("/api/destinations/" + goa.getId() + "/activities"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(3)));
+    }
+
+    @Test
+    @DisplayName("19. Get curated activities for destination with no curated activities returns empty list")
+    void test19_GetCuratedActivitiesForDestinationWithNoCuratedReturnsEmptyList() throws Exception {
+        mockMvc.perform(get("/api/destinations/" + paris.getId() + "/activities/curated"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(0)));
+    }
+
+    @Test
+    @DisplayName("20. Get curated activities for invalid destination returns 404")
+    void test20_GetCuratedActivitiesForInvalidDestinationReturns404() throws Exception {
+        mockMvc.perform(get("/api/destinations/999999/activities/curated"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("21. Search activities by source parameter")
+    void test21_SearchActivitiesBySourceParameter() throws Exception {
+        Activity curatedGoa = new Activity(null, goa, "Basilica of Bom Jesus", "Unesco World Heritage Church", "PILGRIMAGE", 90, 0.00, "USD", null);
+        curatedGoa.setSource("CURATED");
+        activityRepository.save(curatedGoa);
+
+        scubaGoa.setSource("LEGACY");
+        activityRepository.save(scubaGoa);
+
+        mockMvc.perform(get("/api/activities").param("destinationId", goa.getId().toString()).param("source", "CURATED"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Basilica of Bom Jesus")))
+                .andExpect(jsonPath("$[0].source", is("CURATED")));
+    }
 }

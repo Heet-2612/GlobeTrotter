@@ -77,6 +77,60 @@ public class TripActivityService {
         return TripActivityResponse.fromEntity(saved);
     }
 
+    @Transactional
+    public TripActivityResponse addDiscoveredActivityToStop(Long tripId, Long stopId, AddDiscoveredActivityRequest request, User currentUser) {
+        TripStop stop = getOwnedTripStop(tripId, stopId, currentUser);
+        Destination destination = stop.getDestination();
+
+        if (request.getScheduledDate().isBefore(stop.getStartDate()) || request.getScheduledDate().isAfter(stop.getEndDate())) {
+            throw new IllegalArgumentException("Scheduled date must fall within the trip stop's date range (" + stop.getStartDate() + " to " + stop.getEndDate() + ")");
+        }
+
+        if (request.getCustomCost() != null && request.getCustomCost() < 0) {
+            throw new IllegalArgumentException("Custom cost must not be negative");
+        }
+
+        Activity activity = activityRepository.findByDestinationIdAndSourceIgnoreCaseAndExternalId(
+                destination.getId(), "GEOAPIFY", request.getExternalId()
+        ).orElseGet(() -> {
+            String category = (request.getCategory() != null && !request.getCategory().isBlank()) ? request.getCategory() : "SIGHTSEEING";
+            String desc = (request.getDescription() != null && !request.getDescription().isBlank()) ? request.getDescription() : request.getAddress();
+
+            Activity newAct = Activity.builder()
+                    .destination(destination)
+                    .name(request.getName())
+                    .description(desc)
+                    .category(category)
+                    .estimatedDurationMinutes(60)
+                    .estimatedCost(request.getCustomCost() != null ? request.getCustomCost() : 0.0)
+                    .currency("INR")
+                    .imageUrl(request.getImageUrl())
+                    .source(DestinationSource.GEOAPIFY.name())
+                    .externalId(request.getExternalId())
+                    .latitude(request.getLatitude())
+                    .longitude(request.getLongitude())
+                    .build();
+
+            return activityRepository.save(newAct);
+        });
+
+        int nextOrder = (int) tripActivityRepository.countByTripStopId(stopId) + 1;
+        Double cost = request.getCustomCost() != null ? request.getCustomCost() : (activity.getEstimatedCost() != null ? activity.getEstimatedCost() : 0.0);
+
+        TripActivity tripActivity = TripActivity.builder()
+                .tripStop(stop)
+                .activity(activity)
+                .scheduledDate(request.getScheduledDate())
+                .startTime(request.getStartTime())
+                .notes(request.getNotes())
+                .customCost(cost)
+                .activityOrder(nextOrder)
+                .build();
+
+        TripActivity saved = tripActivityRepository.save(tripActivity);
+        return TripActivityResponse.fromEntity(saved);
+    }
+
     @Transactional(readOnly = true)
     public List<TripActivityResponse> getTripActivities(Long tripId, Long stopId, User currentUser) {
         getOwnedTripStop(tripId, stopId, currentUser);

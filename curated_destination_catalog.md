@@ -1,7 +1,7 @@
-﻿# GlobeTrotter Curated Destination Catalog & Activity Master Freeze
+# GlobeTrotter Curated Destination Catalog & Activity Master Freeze
 
-> **Document Status:** Authoritative Master Data Catalog Freeze  
-> **Scope:** Final curated 137 destinations, organized by **12 Travel Regions**, with Destination Types, Priorities (MAJOR, SECONDARY, NICHE), Aliases, and 4â€“5 REAL authentic activities per destination.  
+> **Document Status:** Authoritative Master Data Catalog Freeze (Updated to State & Union Territory Regions)
+> **Scope:** Final curated 137 destinations, organized by **29 State / Union Territory Regions** (refer to `state_region_destination_catalog.md`), with Destination Types, Priorities (MAJOR, SECONDARY, NICHE), Aliases, and 548 REAL authentic activities.
 > **Safety Guarantee:** Zero database changes executed, zero code modifications made, zero migrations applied.
 
 ---
@@ -10,7 +10,7 @@
 
 | Metric | Master Count | Breakdown / Details |
 | :--- | :---: | :--- |
-| **Total Travel Regions** | **12** | Rajasthan, Kerala, Goa & West Coast, Himalayas & North, etc. |
+| **Total State / UT Regions** | **29** | Indian States & Union Territories (e.g. Karnataka, Rajasthan, Kerala, Tamil Nadu, etc.) |
 | **MAJOR Priority Destinations** | **46** | High-demand Tier 1 travel hubs |
 | **SECONDARY Priority Destinations** | **61** | Tier 2 heritage, hill station & wildlife hubs |
 | **NICHE Priority Destinations** | **30** | Specialized culture, eco & adventure spots |
