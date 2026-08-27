@@ -35,11 +35,11 @@ interface DestinationExplorationModalProps {
 
 const CATEGORY_FILTERS = [
   { label: 'All', value: '' },
-  { label: 'Attractions', value: 'tourism', icon: Landmark },
-  { label: 'Nature', value: 'natural', icon: Trees },
-  { label: 'Food', value: 'catering', icon: Utensils },
+  { label: 'Attractions', value: 'attractions', icon: Landmark },
+  { label: 'Nature', value: 'nature', icon: Trees },
+  { label: 'Food', value: 'food', icon: Utensils },
   { label: 'Shopping', value: 'shopping', icon: ShoppingBag },
-  { label: 'Culture', value: 'heritage', icon: Compass },
+  { label: 'Culture', value: 'culture', icon: Compass },
   { label: 'Entertainment', value: 'entertainment', icon: Film },
 ];
 
@@ -111,17 +111,23 @@ export const DestinationExplorationModal: React.FC<DestinationExplorationModalPr
     }
   };
 
+  // Active search query snapshot (for no-results label)
+  const [activeQuery, setActiveQuery] = useState('');
+
   // Discover More Search Handler
   const handleSearchDiscover = async (categoryFilter?: string) => {
     const cat = categoryFilter !== undefined ? categoryFilter : selectedCategory;
+    const q = discoverQuery.trim();
     try {
       setLoadingDiscover(true);
       setDiscoverError(null);
       setHasDiscovered(true);
+      setDiscoveredPlaces([]); // Clear stale results immediately
+      setActiveQuery(q);
 
       const places = await api.discoverPlacesByDestination(
         destinationId,
-        discoverQuery.trim() || undefined,
+        q || undefined,
         cat || undefined
       );
 
@@ -374,7 +380,11 @@ export const DestinationExplorationModal: React.FC<DestinationExplorationModalPr
               </div>
             ) : hasDiscovered && discoveredPlaces.length === 0 ? (
               <div className="py-6 text-center text-slate-400 text-xs italic bg-slate-50 rounded-xl border border-slate-200">
-                No places found. Try a different search term or category.
+                {activeQuery
+                  ? `No places found for "${activeQuery}".`
+                  : selectedCategory
+                  ? `No ${CATEGORY_FILTERS.find((c) => c.value === selectedCategory)?.label.toLowerCase() || ''} places found around ${destination.name}.`
+                  : `No places found around ${destination.name}.`}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">

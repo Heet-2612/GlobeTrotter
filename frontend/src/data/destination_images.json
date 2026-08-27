@@ -1,0 +1,178 @@
+[
+  {
+    "destination": "Udaipur",
+    "state": "Rajasthan",
+    "title": "City Palace & Lake Pichola",
+    "altText": "City Palace overlooking Lake Pichola in Udaipur",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Udaipur_City_Palace_and_Pichola_Lake.jpg/1280px-Udaipur_City_Palace_and_Pichola_Lake.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Udaipur_City_Palace_and_Pichola_Lake.jpg"
+  },
+  {
+    "destination": "Jaipur",
+    "state": "Rajasthan",
+    "title": "Hawa Mahal",
+    "altText": "Palace of Winds Hawa Mahal in Jaipur",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Hawa_Mahal_Jaipur_Rajasthan_India.jpg/1280px-Hawa_Mahal_Jaipur_Rajasthan_India.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hawa_Mahal_Jaipur_Rajasthan_India.jpg"
+  },
+  {
+    "destination": "Jaisalmer",
+    "state": "Rajasthan",
+    "title": "Jaisalmer Golden Fort",
+    "altText": "Historic golden sandstone fort in Jaisalmer Thar desert",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jaisalmer_Fort_12.jpg/1280px-Jaisalmer_Fort_12.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jaisalmer_Fort_12.jpg"
+  },
+  {
+    "destination": "Jodhpur",
+    "state": "Rajasthan",
+    "title": "Mehrangarh Fort & Blue City",
+    "altText": "Blue-painted houses below Mehrangarh Fort in Jodhpur",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/The_Blue_City%2C_Jodhpur.jpg/1280px-The_Blue_City%2C_Jodhpur.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Blue_City,_Jodhpur.jpg"
+  },
+  {
+    "destination": "Ahmedabad",
+    "state": "Gujarat",
+    "title": "Adalaj Stepwell",
+    "altText": "Intricately carved subterranean Adalaj Stepwell in Ahmedabad",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Adalaj_stepwell_Ahmedabad.jpg/1280px-Adalaj_stepwell_Ahmedabad.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adalaj_stepwell_Ahmedabad.jpg"
+  },
+  {
+    "destination": "Rann of Kutch",
+    "state": "Gujarat",
+    "title": "White Desert of Kutch",
+    "altText": "Vast salt marsh of Rann of Kutch white desert",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Rann_Utsav_White_Desert_Kutch.jpg/1280px-Rann_Utsav_White_Desert_Kutch.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rann_Utsav_White_Desert_Kutch.jpg"
+  },
+  {
+    "destination": "Statue of Unity",
+    "state": "Gujarat",
+    "title": "Statue of Unity, Kevadia",
+    "altText": "Colossal monument Statue of Unity in Gujarat",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Statue_of_Unity%2C_Kevadiya_colony.jpg/1280px-Statue_of_Unity%2C_Kevadiya_colony.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Statue_of_Unity,_Kevadiya_colony.jpg"
+  },
+  {
+    "destination": "Hyderabad",
+    "state": "Telangana",
+    "title": "Charminar",
+    "altText": "Charminar monument four minarets in Hyderabad",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Charminar_at_hyderabad_city.jpg/1280px-Charminar_at_hyderabad_city.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Charminar_at_hyderabad_city.jpg"
+  },
+  {
+    "destination": "Agra",
+    "state": "Uttar Pradesh",
+    "title": "Taj Mahal",
+    "altText": "White marble mausoleum Taj Mahal in Agra",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/1280px-Taj_Mahal_%28Edited%29.jpeg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Taj_Mahal_(Edited).jpeg"
+  },
+  {
+    "destination": "Varanasi",
+    "state": "Uttar Pradesh",
+    "title": "Dashashwamedh Ghat",
+    "altText": "Sacred Ganges riverfront Dashashwamedh Ghat in Varanasi",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Varanasi-Dasaswamedh-Ghat.jpg/1280px-Varanasi-Dasaswamedh-Ghat.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Varanasi-Dasaswamedh-Ghat.jpg"
+  },
+  {
+    "destination": "Alleppey",
+    "state": "Kerala",
+    "title": "Alappuzha Houseboat Backwaters",
+    "altText": "Traditional Kettuvallam houseboat on Alleppey backwaters",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Alleppey_Houseboat_Kerala.jpg/1280px-Alleppey_Houseboat_Kerala.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alleppey_Houseboat_Kerala.jpg"
+  },
+  {
+    "destination": "Munnar",
+    "state": "Kerala",
+    "title": "Munnar Tea Plantations",
+    "altText": "Lush green rolling tea gardens in Munnar hills",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Tea_garden_in_Munnar.jpg/1280px-Tea_garden_in_Munnar.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tea_garden_in_Munnar.jpg"
+  },
+  {
+    "destination": "Goa",
+    "state": "Goa",
+    "title": "Baga Beach",
+    "altText": "Golden sandy beach shore of Baga Beach in Goa",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Baga_Beach_Goa.jpg/1280px-Baga_Beach_Goa.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baga_Beach_Goa.jpg"
+  },
+  {
+    "destination": "Mumbai",
+    "state": "Maharashtra",
+    "title": "Gateway of India",
+    "altText": "Historic Gateway of India arch on Mumbai harbor",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Mumbai_03-2016_30_Gateway_of_India.jpg/1280px-Mumbai_03-2016_30_Gateway_of_India.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mumbai_03-2016_30_Gateway_of_India.jpg"
+  },
+  {
+    "destination": "Amritsar",
+    "state": "Punjab",
+    "title": "Sri Harmandir Sahib (Golden Temple)",
+    "altText": "Gilded Sri Harmandir Sahib Golden Temple in Amritsar",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Golden_Temple_of_Amritsar.jpg/1280px-Golden_Temple_of_Amritsar.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Temple_of_Amritsar.jpg"
+  },
+  {
+    "destination": "Shimla",
+    "state": "Himachal Pradesh",
+    "title": "Shimla Ridge & Mall Road",
+    "altText": "Snowy ridge landscape of Shimla hill station",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Shimla_in_winters.jpg/1280px-Shimla_in_winters.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shimla_in_winters.jpg"
+  },
+  {
+    "destination": "Manali",
+    "state": "Himachal Pradesh",
+    "title": "Manali Valley",
+    "altText": "Pine-covered mountain valley in Manali",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Manali_valley.jpg/1280px-Manali_valley.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Manali_valley.jpg"
+  },
+  {
+    "destination": "Rishikesh",
+    "state": "Uttarakhand",
+    "title": "Laxman Jhula over Ganges",
+    "altText": "Laxman Jhula suspension bridge across Ganges in Rishikesh",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Laxman_Jhula_bridge_over_Ganges.jpg/1280px-Laxman_Jhula_bridge_over_Ganges.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Laxman_Jhula_bridge_over_Ganges.jpg"
+  },
+  {
+    "destination": "Mysore",
+    "state": "Karnataka",
+    "title": "Mysore Palace",
+    "altText": "Illuminated Mysore Palace royal residence",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Mysore_Palace_Morning.jpg/1280px-Mysore_Palace_Morning.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mysore_Palace_Morning.jpg"
+  },
+  {
+    "destination": "Hampi",
+    "state": "Karnataka",
+    "title": "Virupaksha Temple & Hampi Ruins",
+    "altText": "Ancient Vijayanagara empire temple tower in Hampi",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Hampi_Virupaksha_Temple_Oct_2013.jpg/1280px-Hampi_Virupaksha_Temple_Oct_2013.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hampi_Virupaksha_Temple_Oct_2013.jpg"
+  },
+  {
+    "destination": "Kolkata",
+    "state": "West Bengal",
+    "title": "Howrah Bridge",
+    "altText": "Iconic cantilever Howrah Bridge over Hooghly river",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Howrah_Bridge_Kolkata.jpg/1280px-Howrah_Bridge_Kolkata.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Howrah_Bridge_Kolkata.jpg"
+  },
+  {
+    "destination": "Delhi",
+    "state": "Delhi",
+    "title": "India Gate",
+    "altText": "Sandstone war memorial India Gate in New Delhi",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/India_Gate_in_New_Delhi_03-2016.jpg/1280px-India_Gate_in_New_Delhi_03-2016.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:India_Gate_in_New_Delhi_03-2016.jpg"
+  }
+]

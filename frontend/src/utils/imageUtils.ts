@@ -9,23 +9,26 @@ import shoppingImg from '../assets/activities/activity-shopping.jpg';
 import spiritualImg from '../assets/activities/activity-spiritual.jpg';
 
 import { cityImages } from '../data/cityImages';
+import { stateImages } from '../data/stateImages';
 
 // Curated travel imagery for destinations & activity categories
 
-// Normalize a destination name for lookup (lowercase, trimmed)
-function normalizeCityKey(name: string): string {
+function normalizeKey(name: string): string {
   return name.trim().toLowerCase();
 }
 
 const CATEGORY_IMAGES: Record<string, string> = {
-  adventure: adventureImg,
+  attraction: sightseeingImg,
+  sightseeing: sightseeingImg,
+  nature: relaxationImg,
+  food: foodImg,
+  shopping: shoppingImg,
   culture: cultureImg,
   entertainment: entertainmentImg,
-  food: foodImg,
-  nightlife: nightlifeImg,
+  pilgrimage: spiritualImg,
   relaxation: relaxationImg,
-  sightseeing: sightseeingImg,
-  shopping: shoppingImg,
+  adventure: adventureImg,
+  nightlife: nightlifeImg,
   spiritual: spiritualImg,
 };
 
@@ -36,40 +39,63 @@ const DEFAULT_TRIP_IMAGES = [
   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
 ];
 
-export function getDestinationImageUrl(destinationName?: string, fallbackUrl?: string): string {
+/**
+ * Reliable fallback hierarchy:
+ * 1. Provided explicit fallbackUrl (if valid)
+ * 2. Destination-specific landmark image (cityImages)
+ * 3. State/Region-specific landscape image (stateImages)
+ * 4. General travel fallback
+ */
+export function getDestinationImageUrl(destinationName?: string, stateName?: string, fallbackUrl?: string): string {
   if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
     return fallbackUrl;
   }
+
+  // 1. Destination-specific image check
   if (destinationName) {
-    const key = normalizeCityKey(destinationName);
-    if (cityImages[key]) {
-      return cityImages[key];
+    const cityKey = normalizeKey(destinationName);
+    if (cityImages[cityKey]) {
+      return cityImages[cityKey];
     }
   }
+
+  // 2. State-specific image check
+  if (stateName) {
+    const stateKey = normalizeKey(stateName);
+    if (stateImages[stateKey]) {
+      return stateImages[stateKey].imageUrl;
+    }
+  }
+
+  // 3. General fallback
   if (!destinationName) return DEFAULT_TRIP_IMAGES[0];
   return DEFAULT_TRIP_IMAGES[Math.abs(hashString(destinationName)) % DEFAULT_TRIP_IMAGES.length];
 }
 
-export function getCityImageUrl(cityName?: string, fallbackUrl?: string): string {
-  return getDestinationImageUrl(cityName, fallbackUrl);
+export function getCityImageUrl(cityName?: string, stateName?: string, fallbackUrl?: string): string {
+  return getDestinationImageUrl(cityName, stateName, fallbackUrl);
 }
 
 /**
  * Use as `onError` on any <img> displaying a destination image.
  * Prevents broken-image icons by falling back to the generic travel image.
  */
-export function onCityImageError(e: Event): void {
-  const img = e.currentTarget as HTMLImageElement;
-  if (!img.dataset.fallbackApplied) {
+export function onCityImageError(e: any): void {
+  const img = e.currentTarget || e.target;
+  if (img && !img.dataset.fallbackApplied) {
     img.dataset.fallbackApplied = 'true';
     img.src = DEFAULT_TRIP_IMAGES[0];
   }
 }
 
-export function onDestinationImageError(e: Event): void {
+export function onDestinationImageError(e: any): void {
   onCityImageError(e);
 }
 
+/**
+ * Category-based fallback system for activities.
+ * Categories: ATTRACTION, NATURE, FOOD, SHOPPING, CULTURE, ENTERTAINMENT, PILGRIMAGE, RELAXATION
+ */
 export function getActivityImageUrl(category?: string, fallbackUrl?: string): string {
   if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
     return fallbackUrl;
@@ -80,7 +106,7 @@ export function getActivityImageUrl(category?: string, fallbackUrl?: string): st
       return CATEGORY_IMAGES[key];
     }
   }
-  return CATEGORY_IMAGES['sightseeing'];
+  return CATEGORY_IMAGES['attraction'];
 }
 
 export function getTripCoverUrl(tripId?: number, coverPhoto?: string): string {
