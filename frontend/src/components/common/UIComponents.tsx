@@ -268,7 +268,7 @@ interface CityCardProps {
 }
 
 export const CityCard: React.FC<CityCardProps> = ({ city, onNavigate }) => {
-  const imageUrl = getCityImageUrl(city.name, city.imageUrl);
+  const imageUrl = getCityImageUrl(city.name, city.region, city.imageUrl);
 
   return (
     <Card hoverable className="p-0 overflow-hidden group flex flex-col justify-between bg-white border border-slate-200 shadow-sm cursor-pointer" onClick={() => onNavigate('destination', city.id)}>

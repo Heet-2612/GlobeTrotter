@@ -18,7 +18,7 @@ public interface DestinationRepository extends JpaRepository<Destination, Long> 
            "(:region IS NULL OR :region = '' OR LOWER(d.legacyRegion) = LOWER(:region) OR LOWER(r.name) = LOWER(:region)) AND " +
            "(:regionId IS NULL OR r.id = :regionId) AND " +
            "(:curated IS NULL OR d.isCurated = :curated) " +
-           "ORDER BY d.name ASC")
+           "ORDER BY d.isCurated DESC, d.name ASC")
     List<Destination> searchDestinations(@Param("search") String search,
                                         @Param("country") String country,
                                         @Param("region") String region,

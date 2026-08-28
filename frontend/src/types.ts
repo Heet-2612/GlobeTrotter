@@ -135,6 +135,9 @@ export interface ActivityResponse {
   name: string;
   description?: string;
   category?: string;
+  subcategoryId?: string;
+  imageStrategy?: string;
+  type?: string;
   estimatedDurationMinutes?: number;
   estimatedCost?: number;
   currency?: string;

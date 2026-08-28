@@ -35,7 +35,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
       setLoading(true);
       const [userTrips, cities] = await Promise.all([
         api.getTrips(),
-        api.searchCities().catch(() => []),
+        api.searchCities(undefined, undefined, undefined, true).catch(() => []),
       ]);
       setTrips(userTrips);
       setPopularCities(cities.slice(0, 3));

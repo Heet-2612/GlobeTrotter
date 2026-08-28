@@ -21,7 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onNavigate }) => {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={16} /> },
     { id: 'my-trips', label: 'My Trips', icon: <Calendar size={16} /> },
-    { id: 'city-search', label: 'Cities', icon: <MapPin size={16} /> },
+    { id: 'city-search', label: 'Destinations', icon: <MapPin size={16} /> },
     { id: 'activity-search', label: 'Activities', icon: <Sparkles size={16} /> },
     { id: 'profile', label: 'Profile', icon: <User size={16} /> },
   ];

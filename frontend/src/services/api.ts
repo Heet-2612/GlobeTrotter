@@ -165,11 +165,12 @@ export const api = {
   },
 
   // Cities (Deprecated V1 Alias for Destinations)
-  searchCities: (query?: string, country?: string, region?: string) => {
+  searchCities: (query?: string, country?: string, region?: string, curated?: boolean) => {
     const params = new URLSearchParams();
     if (query) params.append('search', query);
     if (country) params.append('country', country);
     if (region) params.append('region', region);
+    if (curated !== undefined) params.append('curated', String(curated));
     const queryString = params.toString();
     return request<CityResponse[]>(`/cities${queryString ? `?${queryString}` : ''}`);
   },

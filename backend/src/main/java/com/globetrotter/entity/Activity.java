@@ -35,6 +35,12 @@ public class Activity {
     @Column(name = "image_url", length = 500)
     private String imageUrl;
 
+    @Column(name = "subcategory_id", length = 64)
+    private String subcategoryId;
+
+    @Column(name = "image_strategy", length = 32)
+    private String imageStrategy;
+
     @Column(name = "google_place_id", length = 255)
     private String googlePlaceId;
 
@@ -106,6 +112,12 @@ public class Activity {
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
+    public String getSubcategoryId() { return subcategoryId; }
+    public void setSubcategoryId(String subcategoryId) { this.subcategoryId = subcategoryId; }
+
+    public String getImageStrategy() { return imageStrategy; }
+    public void setImageStrategy(String imageStrategy) { this.imageStrategy = imageStrategy; }
+
     public String getGooglePlaceId() { return googlePlaceId; }
     public void setGooglePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; }
 
@@ -131,6 +143,8 @@ public class Activity {
         private Double estimatedCost;
         private String currency;
         private String imageUrl;
+        private String subcategoryId;
+        private String imageStrategy;
         private String googlePlaceId;
         private String source;
         private String externalId;
@@ -147,6 +161,8 @@ public class Activity {
         public ActivityBuilder estimatedCost(Double estimatedCost) { this.estimatedCost = estimatedCost; return this; }
         public ActivityBuilder currency(String currency) { this.currency = currency; return this; }
         public ActivityBuilder imageUrl(String imageUrl) { this.imageUrl = imageUrl; return this; }
+        public ActivityBuilder subcategoryId(String subcategoryId) { this.subcategoryId = subcategoryId; return this; }
+        public ActivityBuilder imageStrategy(String imageStrategy) { this.imageStrategy = imageStrategy; return this; }
         public ActivityBuilder googlePlaceId(String googlePlaceId) { this.googlePlaceId = googlePlaceId; return this; }
         public ActivityBuilder source(String source) { this.source = source; return this; }
         public ActivityBuilder externalId(String externalId) { this.externalId = externalId; return this; }
@@ -155,6 +171,8 @@ public class Activity {
 
         public Activity build() {
             Activity act = new Activity(id, destination, name, description, category, estimatedDurationMinutes, estimatedCost, currency, imageUrl, googlePlaceId);
+            act.setSubcategoryId(subcategoryId);
+            act.setImageStrategy(imageStrategy);
             act.setSource(source);
             act.setExternalId(externalId);
             act.setLatitude(latitude);

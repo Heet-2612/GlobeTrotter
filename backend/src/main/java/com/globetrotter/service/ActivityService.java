@@ -16,10 +16,12 @@ public class ActivityService {
 
     private final ActivityRepository activityRepository;
     private final DestinationRepository destinationRepository;
+    private final ActivityImageRegistry activityImageRegistry;
 
-    public ActivityService(ActivityRepository activityRepository, DestinationRepository destinationRepository) {
+    public ActivityService(ActivityRepository activityRepository, DestinationRepository destinationRepository, ActivityImageRegistry activityImageRegistry) {
         this.activityRepository = activityRepository;
         this.destinationRepository = destinationRepository;
+        this.activityImageRegistry = activityImageRegistry;
     }
 
     @Transactional(readOnly = true)
@@ -30,7 +32,7 @@ public class ActivityService {
 
         return activityRepository.searchActivities(destinationId, cleanSearch, cleanCategory, cleanSource)
                 .stream()
-                .map(ActivityResponse::fromEntity)
+                .map(a -> ActivityResponse.fromEntity(a, activityImageRegistry))
                 .collect(Collectors.toList());
     }
 
@@ -46,7 +48,7 @@ public class ActivityService {
 
         return activityRepository.findByDestinationIdAndSourceIgnoreCaseOrderByNameAsc(destinationId, "CURATED")
                 .stream()
-                .map(ActivityResponse::fromEntity)
+                .map(a -> ActivityResponse.fromEntity(a, activityImageRegistry))
                 .collect(Collectors.toList());
     }
 
@@ -54,6 +56,6 @@ public class ActivityService {
     public ActivityResponse getActivityById(Long activityId) {
         Activity activity = activityRepository.findById(activityId)
                 .orElseThrow(() -> new ResourceNotFoundException("Activity not found with id: " + activityId));
-        return ActivityResponse.fromEntity(activity);
+        return ActivityResponse.fromEntity(activity, activityImageRegistry);
     }
 }

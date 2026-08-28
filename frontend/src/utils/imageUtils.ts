@@ -47,11 +47,18 @@ const DEFAULT_TRIP_IMAGES = [
  * 4. General travel fallback
  */
 export function getDestinationImageUrl(destinationName?: string, stateName?: string, fallbackUrl?: string): string {
-  if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
-    return fallbackUrl;
+  // If the 2nd argument is an HTTP/HTTPS image URL string, treat it as fallbackUrl if fallbackUrl is omitted
+  let resolvedUrl = fallbackUrl;
+  if (!resolvedUrl && stateName && (stateName.startsWith('http://') || stateName.startsWith('https://'))) {
+    resolvedUrl = stateName;
   }
 
-  // 1. Destination-specific image check
+  // Priority 1: Valid dynamic API/database image URL
+  if (resolvedUrl && typeof resolvedUrl === 'string' && resolvedUrl.trim().length > 0 && resolvedUrl !== 'null' && resolvedUrl !== 'undefined') {
+    return resolvedUrl.trim();
+  }
+
+  // Priority 2: Destination-specific static fallback (cityImages.ts)
   if (destinationName) {
     const cityKey = normalizeKey(destinationName);
     if (cityImages[cityKey]) {
@@ -59,15 +66,15 @@ export function getDestinationImageUrl(destinationName?: string, stateName?: str
     }
   }
 
-  // 2. State-specific image check
-  if (stateName) {
+  // Priority 3: State-specific static fallback (stateImages.ts)
+  if (stateName && !stateName.startsWith('http')) {
     const stateKey = normalizeKey(stateName);
     if (stateImages[stateKey]) {
       return stateImages[stateKey].imageUrl;
     }
   }
 
-  // 3. General fallback
+  // Priority 4: Generic trip fallback
   if (!destinationName) return DEFAULT_TRIP_IMAGES[0];
   return DEFAULT_TRIP_IMAGES[Math.abs(hashString(destinationName)) % DEFAULT_TRIP_IMAGES.length];
 }
@@ -96,9 +103,9 @@ export function onDestinationImageError(e: any): void {
  * Category-based fallback system for activities.
  * Categories: ATTRACTION, NATURE, FOOD, SHOPPING, CULTURE, ENTERTAINMENT, PILGRIMAGE, RELAXATION
  */
-export function getActivityImageUrl(category?: string, fallbackUrl?: string): string {
+export function getActivityImageUrl(category?: string, fallbackUrl?: string | null): string {
   if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
-    return fallbackUrl;
+    return fallbackUrl.trim();
   }
   if (category) {
     const key = category.trim().toLowerCase().replace(/[-_\s]/g, '');

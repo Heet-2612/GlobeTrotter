@@ -463,7 +463,7 @@ export const CreateTripPage: React.FC<CreateTripPageProps> = ({ onNavigate }) =>
                   >
                     <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-slate-100 border border-slate-200 relative">
                       <img
-                        src={getDestinationImageUrl(dest.name, dest.imageUrl)}
+                        src={getDestinationImageUrl(dest.name, dest.regionName || dest.region, dest.imageUrl)}
                         alt={dest.name}
                         onError={onCityImageError}
                         className="w-full h-full object-cover"

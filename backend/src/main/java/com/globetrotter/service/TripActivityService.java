@@ -19,17 +19,20 @@ public class TripActivityService {
     private final TripStopRepository tripStopRepository;
     private final TripRepository tripRepository;
     private final ActivityRepository activityRepository;
+    private final ActivityImageRegistry activityImageRegistry;
 
     public TripActivityService(
             TripActivityRepository tripActivityRepository,
             TripStopRepository tripStopRepository,
             TripRepository tripRepository,
-            ActivityRepository activityRepository
+            ActivityRepository activityRepository,
+            ActivityImageRegistry activityImageRegistry
     ) {
         this.tripActivityRepository = tripActivityRepository;
         this.tripStopRepository = tripStopRepository;
         this.tripRepository = tripRepository;
         this.activityRepository = activityRepository;
+        this.activityImageRegistry = activityImageRegistry;
     }
 
     private TripStop getOwnedTripStop(Long tripId, Long stopId, User currentUser) {
@@ -74,7 +77,7 @@ public class TripActivityService {
                 .build();
 
         TripActivity saved = tripActivityRepository.save(tripActivity);
-        return TripActivityResponse.fromEntity(saved);
+        return TripActivityResponse.fromEntity(saved, activityImageRegistry);
     }
 
     @Transactional
@@ -128,7 +131,7 @@ public class TripActivityService {
                 .build();
 
         TripActivity saved = tripActivityRepository.save(tripActivity);
-        return TripActivityResponse.fromEntity(saved);
+        return TripActivityResponse.fromEntity(saved, activityImageRegistry);
     }
 
     @Transactional(readOnly = true)
@@ -136,7 +139,7 @@ public class TripActivityService {
         getOwnedTripStop(tripId, stopId, currentUser);
         return tripActivityRepository.findByTripStopIdOrderByActivityOrderAsc(stopId)
                 .stream()
-                .map(TripActivityResponse::fromEntity)
+                .map(ta -> TripActivityResponse.fromEntity(ta, activityImageRegistry))
                 .collect(Collectors.toList());
     }
 
@@ -163,7 +166,7 @@ public class TripActivityService {
         }
 
         TripActivity updated = tripActivityRepository.save(tripActivity);
-        return TripActivityResponse.fromEntity(updated);
+        return TripActivityResponse.fromEntity(updated, activityImageRegistry);
     }
 
     @Transactional
@@ -209,7 +212,7 @@ public class TripActivityService {
         List<TripActivity> saved = tripActivityRepository.saveAll(existing);
         return saved.stream()
                 .sorted((a, b) -> Integer.compare(a.getActivityOrder(), b.getActivityOrder()))
-                .map(TripActivityResponse::fromEntity)
+                .map(ta -> TripActivityResponse.fromEntity(ta, activityImageRegistry))
                 .collect(Collectors.toList());
     }
 }

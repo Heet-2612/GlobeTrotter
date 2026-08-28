@@ -39,14 +39,12 @@ interface DestinationDetailsPageProps {
 
 const CATEGORIES = [
   'All',
-  'Sightseeing',
+  'Attractions',
   'Culture',
   'Nature',
-  'Adventure',
-  'Relaxation',
-  'Food',
-  'Nightlife',
   'Shopping',
+  'Food',
+  'Entertainment',
 ];
 
 export const DestinationDetailsPage: React.FC<DestinationDetailsPageProps> = ({ cityId, onNavigate }) => {
@@ -284,7 +282,7 @@ export const DestinationDetailsPage: React.FC<DestinationDetailsPageProps> = ({ 
     );
   }
 
-  const cityImg = getCityImageUrl(city.name, city.imageUrl);
+  const cityImg = getCityImageUrl(city.name, city.region, city.imageUrl);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">

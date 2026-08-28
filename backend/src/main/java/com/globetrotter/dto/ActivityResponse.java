@@ -1,6 +1,7 @@
 package com.globetrotter.dto;
 
 import com.globetrotter.entity.Activity;
+import com.globetrotter.service.ActivityImageRegistry;
 
 public class ActivityResponse {
 
@@ -12,6 +13,8 @@ public class ActivityResponse {
     private String name;
     private String description;
     private String category;
+    private String subcategoryId;
+    private String imageStrategy;
     private Integer estimatedDurationMinutes;
     private Double estimatedCost;
     private String currency;
@@ -41,7 +44,7 @@ public class ActivityResponse {
         this.googlePlaceId = googlePlaceId;
     }
 
-    public static ActivityResponse fromEntity(Activity activity) {
+    public static ActivityResponse fromEntity(Activity activity, ActivityImageRegistry registry) {
         if (activity == null) return null;
         String currency = activity.getCurrency();
         if ((currency == null || currency.isBlank()) && activity.getDestination() != null) {
@@ -49,6 +52,8 @@ public class ActivityResponse {
         }
         Long destId = activity.getDestination() != null ? activity.getDestination().getId() : null;
         String destName = activity.getDestination() != null ? activity.getDestination().getName() : null;
+
+        String resolvedUrl = registry != null ? registry.resolveImageUrl(activity) : activity.getImageUrl();
 
         ActivityResponse response = new ActivityResponse(
                 activity.getId(),
@@ -60,14 +65,20 @@ public class ActivityResponse {
                 activity.getEstimatedDurationMinutes(),
                 activity.getEstimatedCost(),
                 currency != null ? currency : "INR",
-                activity.getImageUrl(),
+                resolvedUrl,
                 activity.getGooglePlaceId()
         );
+        response.setSubcategoryId(activity.getSubcategoryId());
+        response.setImageStrategy(activity.getImageStrategy());
         response.setSource(activity.getSource());
         response.setExternalId(activity.getExternalId());
         response.setLatitude(activity.getLatitude());
         response.setLongitude(activity.getLongitude());
         return response;
+    }
+
+    public static ActivityResponse fromEntity(Activity activity) {
+        return fromEntity(activity, null);
     }
 
     public Long getId() { return id; }
@@ -105,6 +116,12 @@ public class ActivityResponse {
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
+
+    public String getSubcategoryId() { return subcategoryId; }
+    public void setSubcategoryId(String subcategoryId) { this.subcategoryId = subcategoryId; }
+
+    public String getImageStrategy() { return imageStrategy; }
+    public void setImageStrategy(String imageStrategy) { this.imageStrategy = imageStrategy; }
 
     public Integer getEstimatedDurationMinutes() { return estimatedDurationMinutes; }
     public void setEstimatedDurationMinutes(Integer estimatedDurationMinutes) { this.estimatedDurationMinutes = estimatedDurationMinutes; }

@@ -1,0 +1,94 @@
+# GlobeTrotter Authoritative Activity Category Image Worklist
+# Format: CATEGORY_ID | DISPLAY NAME | IMAGE URL | SOURCE PAGE URL
+# Exactly 18 Visual Image Categories
+
+# Search: Indian temple architecture landscape exterior
+# Search: Traditional Indian Hindu temple gopuram landscape
+# Search: Ancient Indian sacred temple shrine view
+TEMPLES_RELIGIOUS | Temples & Religious Sites |  | 
+
+# Search: Indian royal fort palace landscape facade
+# Search: Rajasthani historic citadel ramparts view
+# Search: Majestic Indian heritage fort exterior landscape
+FORTS_PALACES | Forts & Palaces |  | 
+
+# Search: Indian heritage stone monument architecture facade
+# Search: Historic Indian stepwell ruin landmark view
+# Search: Ancient Indian stone arch gateway heritage
+HERITAGE_ARCHITECTURE | Heritage & Architecture |  | 
+
+# Search: Indian jungle safari national park landscape
+# Search: Royal Bengal tiger wildlife safari reserve India
+# Search: Indian wilderness wildlife open jeep safari
+WILDLIFE_SAFARI | Wildlife & Safaris |  | 
+
+# Search: Tropical Indian beach palm trees landscape
+# Search: Scenic coastal sea shoreline sand India
+# Search: Goa Kerala beach coastal sunset view
+BEACHES_COASTAL | Beaches & Coastal |  | 
+
+# Search: Tranquil Indian lake mountain reflection landscape
+# Search: Scenic riverfront ghats landscape India
+# Search: Serene Indian river lake waters sunset view
+LAKES_RIVERS | Lakes, Rivers & Ghats |  | 
+
+# Search: Himalayan mountain trekking trail landscape
+# Search: Hikers mountain ridge trail pass India
+# Search: Nature hiking path scenic Indian mountains
+TREKKING_HIKING | Trekking & Hiking |  | 
+
+# Search: Indian museum gallery hall interior exhibit
+# Search: Historic museum artifacts display hall India
+# Search: Heritage art gallery hall exhibit display
+MUSEUMS_GALLERIES | Museums & Galleries |  | 
+
+# Search: Lush green tea plantations estate landscape India
+# Search: Scenic botanical garden park lawn flowers India
+# Search: Emerald green tea garden hills landscape
+GARDENS_PARKS | Gardens, Parks & Plantations |  | 
+
+# Search: Kerala backwaters traditional houseboat canal cruise
+# Search: Tranquil backwater boat ride coconut palm trees
+# Search: Scenic lake boating shikara ride view
+BACKWATERS_BOATING | Backwaters & Boating |  | 
+
+# Search: Majestic Indian waterfall cascade plunge landscape
+# Search: Lush forest mountain waterfall stream India
+# Search: Scenic tropical waterfall spray landscape
+WATERFALLS | Waterfalls |  | 
+
+# Search: Ancient rock cut cave temple pillars facade India
+# Search: Dramatic river canyon gorge rock formation landscape
+# Search: Historic cavern rock cut facade landmark
+CAVES_ROCK_FORMATIONS | Caves & Rock Formations |  | 
+
+# Search: Scenic hill station mountain viewpoint panorama India
+# Search: Panoramic mountain valley sunset lookout landscape
+# Search: Gondola cable car mountain view panorama
+SCENIC_VIEWPOINTS | Scenic Viewpoints |  | 
+
+# Search: Authentic Indian thali food spread platter
+# Search: Traditional Indian culinary dish street food
+# Search: Vibrant Indian food tour culinary experience
+FOOD_CULINARY | Food & Culinary |  | 
+
+# Search: Vibrant Indian bazaar street market spices textiles
+# Search: Traditional Indian handicraft market stalls colorful
+# Search: Indian bazaar shopping street heritage
+MARKETS_SHOPPING | Markets & Shopping |  | 
+
+# Search: Traditional Indian dance performance Kathakali costume
+# Search: Ganga Aarti oil lamps ceremony riverfront night
+# Search: Indian cultural heritage light sound show performance
+CULTURAL_EXPERIENCES | Cultural & Performing Arts |  | 
+
+# Search: White water river rafting adventure rapids India
+# Search: Paragliding mountain valley adventure flight India
+# Search: Snow skiing mountain slopes adventure India
+ADVENTURE_SPORTS | Adventure & Watersports |  | 
+
+# Search: Thar desert sand dunes sunset landscape India
+# Search: Camel caravan desert sand dunes sunset
+# Search: White Rann of Kutch salt desert landscape
+DESERT_DUNES | Desert & Sand Dunes |  | 
+

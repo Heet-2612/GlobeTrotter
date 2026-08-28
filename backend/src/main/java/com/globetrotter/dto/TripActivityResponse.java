@@ -1,6 +1,7 @@
 package com.globetrotter.dto;
 
 import com.globetrotter.entity.TripActivity;
+import com.globetrotter.service.ActivityImageRegistry;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,18 +31,22 @@ public class TripActivityResponse {
         this.activityOrder = activityOrder;
     }
 
-    public static TripActivityResponse fromEntity(TripActivity ta) {
+    public static TripActivityResponse fromEntity(TripActivity ta, ActivityImageRegistry registry) {
         if (ta == null) return null;
         return new TripActivityResponse(
                 ta.getId(),
                 ta.getTripStop() != null ? ta.getTripStop().getId() : null,
-                ActivityResponse.fromEntity(ta.getActivity()),
+                ActivityResponse.fromEntity(ta.getActivity(), registry),
                 ta.getScheduledDate(),
                 ta.getStartTime(),
                 ta.getNotes(),
                 ta.getCustomCost() != null ? ta.getCustomCost() : (ta.getActivity() != null ? ta.getActivity().getEstimatedCost() : 0.0),
                 ta.getActivityOrder()
         );
+    }
+
+    public static TripActivityResponse fromEntity(TripActivity ta) {
+        return fromEntity(ta, null);
     }
 
     public Long getId() { return id; }

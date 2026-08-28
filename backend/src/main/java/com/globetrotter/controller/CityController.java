@@ -21,8 +21,9 @@ public class CityController {
     public ResponseEntity<List<CityResponse>> searchCities(
             @RequestParam(required = false) String search,
             @RequestParam(required = false) String country,
-            @RequestParam(required = false) String region) {
-        List<CityResponse> response = cityService.searchCities(search, country, region);
+            @RequestParam(required = false) String region,
+            @RequestParam(required = false) Boolean curated) {
+        List<CityResponse> response = cityService.searchCities(search, country, region, curated);
         return ResponseEntity.ok(response);
     }
 

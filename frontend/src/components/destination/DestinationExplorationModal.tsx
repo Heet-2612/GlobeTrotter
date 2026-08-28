@@ -192,7 +192,7 @@ export const DestinationExplorationModal: React.FC<DestinationExplorationModalPr
         {/* Destination Header Banner */}
         <div className="relative h-44 shrink-0 bg-slate-900 overflow-hidden">
           <img
-            src={getDestinationImageUrl(destination.name, destination.imageUrl)}
+            src={getDestinationImageUrl(destination.name, destination.regionName || destination.region, destination.imageUrl)}
             alt={destination.name}
             onError={onCityImageError}
             className="w-full h-full object-cover opacity-60"

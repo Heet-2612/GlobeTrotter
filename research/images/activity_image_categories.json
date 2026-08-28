@@ -1,0 +1,5652 @@
+{
+  "categories": [
+    {
+      "categoryId": "TEMPLES_RELIGIOUS",
+      "displayName": "Temples & Religious Sites",
+      "description": "Sacred temples, shrines, gurdwaras, churches, basilicas, mosques, monasteries, and stupas."
+    },
+    {
+      "categoryId": "FORTS_PALACES",
+      "displayName": "Forts & Palaces",
+      "description": "Historic royal forts, palaces, citadels, castles, mahals, and fortified structures."
+    },
+    {
+      "categoryId": "HERITAGE_ARCHITECTURE",
+      "displayName": "Heritage & Architecture",
+      "description": "Historic monuments, ancient stepwells, arches, clock towers, ruins, tombs, and architectural landmarks."
+    },
+    {
+      "categoryId": "WILDLIFE_SAFARI",
+      "displayName": "Wildlife & Safaris",
+      "description": "National parks, tiger reserves, jungle safaris, animal sanctuaries, and birding habitats."
+    },
+    {
+      "categoryId": "BEACHES_COASTAL",
+      "displayName": "Beaches & Coastal",
+      "description": "Sandy beaches, sea cliffs, coastal promenades, coves, and ocean shorelines."
+    },
+    {
+      "categoryId": "LAKES_RIVERS",
+      "displayName": "Lakes, Rivers & Ghats",
+      "description": "Lakes, riverfronts, holy ghats, dams, water reservoirs, and tranquil waters."
+    },
+    {
+      "categoryId": "TREKKING_HIKING",
+      "displayName": "Trekking & Hiking",
+      "description": "Mountain trails, high-altitude passes, peak climbs, nature walks, and trekking routes."
+    },
+    {
+      "categoryId": "MUSEUMS_GALLERIES",
+      "displayName": "Museums & Galleries",
+      "description": "Museums, art galleries, science centers, wax exhibits, and cultural displays."
+    },
+    {
+      "categoryId": "GARDENS_PARKS",
+      "displayName": "Gardens, Parks & Plantations",
+      "description": "Botanical gardens, city parks, tea gardens, coffee estates, and alpine meadows."
+    },
+    {
+      "categoryId": "BACKWATERS_BOATING",
+      "displayName": "Backwaters & Boating",
+      "description": "Houseboat cruises, backwater canals, lake boat rides, shikara rides, and ferry trips."
+    },
+    {
+      "categoryId": "WATERFALLS",
+      "displayName": "Waterfalls",
+      "description": "Natural waterfalls, mountain cascades, and forest plunge pools."
+    },
+    {
+      "categoryId": "CAVES_ROCK_FORMATIONS",
+      "displayName": "Caves & Rock Formations",
+      "description": "Rock-cut cave temples, ancient caverns, river gorges, canyons, and unique rock structures."
+    },
+    {
+      "categoryId": "SCENIC_VIEWPOINTS",
+      "displayName": "Scenic Viewpoints",
+      "description": "Hill station lookouts, mountain panoramas, sunset/sunrise points, and cable car/gondola rides."
+    },
+    {
+      "categoryId": "FOOD_CULINARY",
+      "displayName": "Food & Culinary",
+      "description": "Food tours, street food walks, iconic local eateries, dining experiences, and tea/coffee tasting."
+    },
+    {
+      "categoryId": "MARKETS_SHOPPING",
+      "displayName": "Markets & Shopping",
+      "description": "Bazaars, traditional handicraft markets, shopping streets, and vibrant night markets."
+    },
+    {
+      "categoryId": "CULTURAL_EXPERIENCES",
+      "displayName": "Cultural & Performing Arts",
+      "description": "Traditional dance and music performances, light & sound shows, Aarti ceremonies, and craft villages."
+    },
+    {
+      "categoryId": "ADVENTURE_SPORTS",
+      "displayName": "Adventure & Watersports",
+      "description": "White-water rafting, paragliding, skiing, scuba diving, ziplining, and high-adrenaline sports."
+    },
+    {
+      "categoryId": "DESERT_DUNES",
+      "displayName": "Desert & Sand Dunes",
+      "description": "Sand dunes, desert safaris, salt flats, and desert camping experiences."
+    }
+  ],
+  "activities": [
+    {
+      "activityId": "act_1",
+      "activityName": "Hawa Mahal Palace of Winds Photography",
+      "destination": "Jaipur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_2",
+      "activityName": "Amber Fort",
+      "destination": "Jaipur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_3",
+      "activityName": "Jantar Mantar",
+      "destination": "Jaipur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_4",
+      "activityName": "City Palace",
+      "destination": "Jaipur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_5",
+      "activityName": "Albert Hall Museum",
+      "destination": "Jaipur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_6",
+      "activityName": "Jhalana Leopard Safari",
+      "destination": "Jaipur",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_7",
+      "activityName": "Johari Bazaar",
+      "destination": "Jaipur",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_8",
+      "activityName": "Laxmi Mishtan Bhandar (LMB)",
+      "destination": "Jaipur",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_9",
+      "activityName": "Chokhi Dhani",
+      "destination": "Jaipur",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_10",
+      "activityName": "Taj Mahal Sunrise Viewing",
+      "destination": "Agra",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_11",
+      "activityName": "Agra Fort Mughal Heritage Walk",
+      "destination": "Agra",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_12",
+      "activityName": "Fatehpur Sikri Abandoned City Day Trip",
+      "destination": "Agra",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_13",
+      "activityName": "Mehtab Bagh Sunset Taj View",
+      "destination": "Agra",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_14",
+      "activityName": "Taj Mahal",
+      "destination": "Agra",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_15",
+      "activityName": "Agra Fort",
+      "destination": "Agra",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_16",
+      "activityName": "Fatehpur Sikri",
+      "destination": "Agra",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_17",
+      "activityName": "Tomb of I'timad-ud-Daulah",
+      "destination": "Agra",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_18",
+      "activityName": "Mehtab Bagh",
+      "destination": "Agra",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_19",
+      "activityName": "Kinari Bazaar",
+      "destination": "Agra",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_20",
+      "activityName": "Dashashwamedh Ghat Evening Ganga Aarti",
+      "destination": "Varanasi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_21",
+      "activityName": "Subah-e-Banaras Ganges Sunrise Boat Ride",
+      "destination": "Varanasi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_22",
+      "activityName": "Kashi Vishwanath Temple Pilgrimage",
+      "destination": "Varanasi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_23",
+      "activityName": "Sarnath Buddhist Site Excursion",
+      "destination": "Varanasi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_24",
+      "activityName": "Dashashwamedh Ghat",
+      "destination": "Varanasi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_25",
+      "activityName": "Assi Ghat",
+      "destination": "Varanasi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_26",
+      "activityName": "Kashi Vishwanath Temple",
+      "destination": "Varanasi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_27",
+      "activityName": "Sarnath Archaeological Site",
+      "destination": "Varanasi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_28",
+      "activityName": "Ganga Aarti Ceremony",
+      "destination": "Varanasi",
+      "categoryId": "CULTURAL_EXPERIENCES"
+    },
+    {
+      "activityId": "act_29",
+      "activityName": "Kashi Chat Bhandar",
+      "destination": "Varanasi",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_30",
+      "activityName": "Vishwanath Gali",
+      "destination": "Varanasi",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_31",
+      "activityName": "Lake Pichola Sunset Boat Cruise",
+      "destination": "Udaipur",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_32",
+      "activityName": "Jagdish Temple Indo-Aryan Carvings",
+      "destination": "Udaipur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_33",
+      "activityName": "Saheliyon Ki Bari Royal Garden Stroll",
+      "destination": "Udaipur",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_34",
+      "activityName": "City Palace",
+      "destination": "Udaipur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_35",
+      "activityName": "Jagmandir Island Palace",
+      "destination": "Udaipur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_36",
+      "activityName": "Bagore Ki Haveli",
+      "destination": "Udaipur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_37",
+      "activityName": "Dharohar Dance Show",
+      "destination": "Udaipur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_38",
+      "activityName": "Lake Pichola Boat Ride",
+      "destination": "Udaipur",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_39",
+      "activityName": "Hathi Pol Bazaar",
+      "destination": "Udaipur",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_40",
+      "activityName": "Ambrai Restaurant",
+      "destination": "Udaipur",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_41",
+      "activityName": "Mehrangarh Fort Cliffside Tour",
+      "destination": "Jodhpur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_42",
+      "activityName": "Jaswant Thada Marble Cenotaph",
+      "destination": "Jodhpur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_43",
+      "activityName": "Blue City Old Town Heritage Walk",
+      "destination": "Jodhpur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_44",
+      "activityName": "Umaid Bhawan Palace Museum",
+      "destination": "Jodhpur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_45",
+      "activityName": "Mehrangarh Fort",
+      "destination": "Jodhpur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_46",
+      "activityName": "Jaswant Thada",
+      "destination": "Jodhpur",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_47",
+      "activityName": "Umaid Bhawan Palace",
+      "destination": "Jodhpur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_48",
+      "activityName": "Toorji Ka Jhalra",
+      "destination": "Jodhpur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_49",
+      "activityName": "Rao Jodha Desert Rock Park",
+      "destination": "Jodhpur",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_50",
+      "activityName": "Sardar Market (Clock Tower)",
+      "destination": "Jodhpur",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_51",
+      "activityName": "Jaisalmer Living Fort Walk",
+      "destination": "Jaisalmer",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_52",
+      "activityName": "Sam Sand Dunes Camel Safari & Desert Camping",
+      "destination": "Jaisalmer",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_53",
+      "activityName": "Patwon Ki Haveli Carved Stone Mansions",
+      "destination": "Jaisalmer",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_54",
+      "activityName": "Gadisar Lake Sunset Boat Ride",
+      "destination": "Jaisalmer",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_55",
+      "activityName": "Jaisalmer Fort",
+      "destination": "Jaisalmer",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_56",
+      "activityName": "Patwon Ki Haveli",
+      "destination": "Jaisalmer",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_57",
+      "activityName": "Bada Bagh",
+      "destination": "Jaisalmer",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_58",
+      "activityName": "Sam Sand Dunes",
+      "destination": "Jaisalmer",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_59",
+      "activityName": "Thar Desert Camel Safari",
+      "destination": "Jaisalmer",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_60",
+      "activityName": "Sadar Bazaar",
+      "destination": "Jaisalmer",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_61",
+      "activityName": "Pushkar Holy Lake 52 Bathing Ghats Dip",
+      "destination": "Pushkar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_62",
+      "activityName": "Sacred Brahma Temple Visit",
+      "destination": "Pushkar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_63",
+      "activityName": "Savitri Temple Hilltop Ropeway Hike",
+      "destination": "Pushkar",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_64",
+      "activityName": "Pushkar Bazaar Handicraft & Rose Market Stroll",
+      "destination": "Pushkar",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_65",
+      "activityName": "Pushkar Lake",
+      "destination": "Pushkar",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_66",
+      "activityName": "Brahma Temple",
+      "destination": "Pushkar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_67",
+      "activityName": "Pushkar Main Market",
+      "destination": "Pushkar",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_68",
+      "activityName": "Pushkar Camel Fair",
+      "destination": "Pushkar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_69",
+      "activityName": "Solang Valley Paragliding & Zorbing Adventure",
+      "destination": "Manali",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_70",
+      "activityName": "Hadimba Devi Ancient Wooden Temple",
+      "destination": "Manali",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_71",
+      "activityName": "Atal Tunnel & Sissu Valley Day Trip",
+      "destination": "Manali",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_72",
+      "activityName": "Old Manali Cafe & Handicrafts Walk",
+      "destination": "Manali",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_73",
+      "activityName": "Rohtang Pass",
+      "destination": "Manali",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_74",
+      "activityName": "Solang Valley",
+      "destination": "Manali",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_75",
+      "activityName": "Hadimba Devi Temple",
+      "destination": "Manali",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_76",
+      "activityName": "Jogini Waterfall Trek",
+      "destination": "Manali",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_77",
+      "activityName": "Johnson's Cafe",
+      "destination": "Manali",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_78",
+      "activityName": "Great Himalayan National Park",
+      "destination": "Manali",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_79",
+      "activityName": "Beas River White Water Rafting",
+      "destination": "Manali",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_80",
+      "activityName": "The Ridge & Mall Road Colonial Stroll",
+      "destination": "Shimla",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_81",
+      "activityName": "Jakhoo Temple Lord Hanuman Hilltop Hike",
+      "destination": "Shimla",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_82",
+      "activityName": "Kalka-Shimla UNESCO Toy Train Ride",
+      "destination": "Shimla",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_83",
+      "activityName": "Kufri Snow Adventure Park Excursion",
+      "destination": "Shimla",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_84",
+      "activityName": "The Ridge",
+      "destination": "Shimla",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_85",
+      "activityName": "Viceregal Lodge (Rashtrapati Niwas)",
+      "destination": "Shimla",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_86",
+      "activityName": "Jakhoo Temple",
+      "destination": "Shimla",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_87",
+      "activityName": "Kalka-Shimla Toy Train",
+      "destination": "Shimla",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_88",
+      "activityName": "Indian Coffee House",
+      "destination": "Shimla",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_89",
+      "activityName": "Triveni Ghat Evening Aarti",
+      "destination": "Rishikesh",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_90",
+      "activityName": "Ganges White Water Rafting Expedition",
+      "destination": "Rishikesh",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_91",
+      "activityName": "Beatles Ashram (Chaurasi Kutia) Meditation Trail",
+      "destination": "Rishikesh",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_92",
+      "activityName": "Laxman Jhula & Ram Jhula Suspension Bridges",
+      "destination": "Rishikesh",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_93",
+      "activityName": "Lakshman Jhula",
+      "destination": "Rishikesh",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_94",
+      "activityName": "The Beatles Ashram (Chaurasi Kutia)",
+      "destination": "Rishikesh",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_95",
+      "activityName": "White Water Rafting on the Ganges",
+      "destination": "Rishikesh",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_96",
+      "activityName": "Neer Garh Waterfall",
+      "destination": "Rishikesh",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_97",
+      "activityName": "Triveni Ghat Ganga Aarti",
+      "destination": "Rishikesh",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_98",
+      "activityName": "Ram Jhula",
+      "destination": "Rishikesh",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_99",
+      "activityName": "Golden Temple (Harmandir Sahib) & Langar Experience",
+      "destination": "Amritsar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_100",
+      "activityName": "Wagah Border Beating Retreat Ceremony",
+      "destination": "Amritsar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_101",
+      "activityName": "Jallianwala Bagh Memorial Park",
+      "destination": "Amritsar",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_102",
+      "activityName": "Partition Museum Heritage Walk",
+      "destination": "Amritsar",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_103",
+      "activityName": "Golden Temple (Sri Harmandir Sahib)",
+      "destination": "Amritsar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_104",
+      "activityName": "Jallianwala Bagh",
+      "destination": "Amritsar",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_105",
+      "activityName": "Partition Museum",
+      "destination": "Amritsar",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_106",
+      "activityName": "Kesar Da Dhaba",
+      "destination": "Amritsar",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_107",
+      "activityName": "Hall Bazaar",
+      "destination": "Amritsar",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_108",
+      "activityName": "Pangong Tso High-Altitude Blue Lake Tour",
+      "destination": "Ladakh",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_109",
+      "activityName": "Nubra Valley Hunder Double-Humped Camel Safari",
+      "destination": "Ladakh",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_110",
+      "activityName": "Khardung La World's Highest Motorable Pass",
+      "destination": "Ladakh",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_111",
+      "activityName": "Thiksey & Hemis Monasteries Tour",
+      "destination": "Ladakh",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_112",
+      "activityName": "Dal Lake Sunset Shikara Ride & Houseboat Stay",
+      "destination": "Srinagar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_113",
+      "activityName": "Shalimar & Nishat Bagh Mughal Gardens",
+      "destination": "Srinagar",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_114",
+      "activityName": "Shankaracharya Temple Hilltop Shrine",
+      "destination": "Srinagar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_115",
+      "activityName": "Pari Mahal Palace Ruins & Nigeen Lake Walk",
+      "destination": "Srinagar",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_116",
+      "activityName": "Dal Lake Shikara Ride",
+      "destination": "Srinagar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_117",
+      "activityName": "Shalimar Bagh",
+      "destination": "Srinagar",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_118",
+      "activityName": "Nishat Bagh",
+      "destination": "Srinagar",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_119",
+      "activityName": "Hazratbal Shrine",
+      "destination": "Srinagar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_120",
+      "activityName": "Shankaracharya Temple",
+      "destination": "Srinagar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_121",
+      "activityName": "Dalai Lama Temple Complex (Tsuglagkhang)",
+      "destination": "Dharamshala",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_122",
+      "activityName": "Bhagsu Waterfall & Temple Trail",
+      "destination": "Dharamshala",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_123",
+      "activityName": "Triund Hill Day Trek",
+      "destination": "Dharamshala",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_124",
+      "activityName": "HPCA Cricket Stadium Dhauladhar View",
+      "destination": "Dharamshala",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_125",
+      "activityName": "Tsuglagkhang Complex",
+      "destination": "Dharamshala",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_126",
+      "activityName": "Bhagsunag Waterfall Trek",
+      "destination": "Dharamshala",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_127",
+      "activityName": "Norbulingka Institute",
+      "destination": "Dharamshala",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_128",
+      "activityName": "HPCA Stadium",
+      "destination": "Dharamshala",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_129",
+      "activityName": "Tsuglagkhang Complex (McLeod Ganj)",
+      "destination": "Dharamshala",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_130",
+      "activityName": "Tibet Museum",
+      "destination": "Dharamshala",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_131",
+      "activityName": "Kempty Falls Cascade Dip",
+      "destination": "Mussoorie",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_132",
+      "activityName": "Gun Hill Ropeway Cable Car Viewpoint",
+      "destination": "Mussoorie",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_133",
+      "activityName": "Mussoorie Mall Road & Camel's Back Road Stroll",
+      "destination": "Mussoorie",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_134",
+      "activityName": "Lal Tibba Scenic Highest Point Observatory",
+      "destination": "Mussoorie",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_135",
+      "activityName": "Kempty Falls",
+      "destination": "Mussoorie",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_136",
+      "activityName": "Lal Tibba Scenic Point",
+      "destination": "Mussoorie",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_137",
+      "activityName": "Camel's Back Road",
+      "destination": "Mussoorie",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_138",
+      "activityName": "Mussoorie Mall Road",
+      "destination": "Mussoorie",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_139",
+      "activityName": "Naini Lake Yacht Boating & Promenade",
+      "destination": "Nainital",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_140",
+      "activityName": "Naina Devi Temple Lakeside Shrine",
+      "destination": "Nainital",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_141",
+      "activityName": "Snow View Point Aerial Cable Car",
+      "destination": "Nainital",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_142",
+      "activityName": "Eco Cave Gardens Rock Crawl",
+      "destination": "Nainital",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_143",
+      "activityName": "Naini Lake Boating",
+      "destination": "Nainital",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_144",
+      "activityName": "Naina Devi Temple",
+      "destination": "Nainital",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_145",
+      "activityName": "Snow View Point Cable Car",
+      "destination": "Nainital",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_146",
+      "activityName": "Eco Cave Gardens",
+      "destination": "Nainital",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_147",
+      "activityName": "Har Ki Pauri Evening Ganga Aarti",
+      "destination": "Haridwar",
+      "categoryId": "CULTURAL_EXPERIENCES"
+    },
+    {
+      "activityId": "act_148",
+      "activityName": "Mansa Devi Temple Cable Car Ride",
+      "destination": "Haridwar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_149",
+      "activityName": "Chandi Devi Temple Hilltop Hike",
+      "destination": "Haridwar",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_150",
+      "activityName": "Maya Devi Temple Pilgrimage",
+      "destination": "Haridwar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_151",
+      "activityName": "Har Ki Pauri",
+      "destination": "Haridwar",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_152",
+      "activityName": "Ganga Aarti at Har Ki Pauri",
+      "destination": "Haridwar",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_153",
+      "activityName": "Mansa Devi Temple Ropeway",
+      "destination": "Haridwar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_154",
+      "activityName": "Rajaji National Park Jeep Safari",
+      "destination": "Haridwar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_155",
+      "activityName": "Shree Krishna Janmabhoomi Temple",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_156",
+      "activityName": "Dwarkadhish Temple Vishram Ghat Aarti",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_157",
+      "activityName": "Prem Mandir Illuminated Evening Walk",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_158",
+      "activityName": "Banke Bihari Temple Vrindavan Darshan",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_159",
+      "activityName": "Shri Krishna Janmabhoomi",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_160",
+      "activityName": "Vishram Ghat",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_161",
+      "activityName": "Dwarkadhish Temple",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_162",
+      "activityName": "Banke Bihari Temple",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_163",
+      "activityName": "Prem Mandir",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_164",
+      "activityName": "ISKCON Vrindavan (Sri Krishna Balaram Mandir)",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_165",
+      "activityName": "Nidhivan",
+      "destination": "Mathura-Vrindavan",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_166",
+      "activityName": "Western Group Kandariya Mahadeva UNESCO Temples",
+      "destination": "Khajuraho",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_167",
+      "activityName": "Eastern & Southern Group Jain Shrines",
+      "destination": "Khajuraho",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_168",
+      "activityName": "Khajuraho Sound & Light Show Evening Performance",
+      "destination": "Khajuraho",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_169",
+      "activityName": "Raneh Falls & Canyons Crystalline Granite Gorge",
+      "destination": "Khajuraho",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_170",
+      "activityName": "Western Group of Temples",
+      "destination": "Khajuraho",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_171",
+      "activityName": "Eastern Group of Temples",
+      "destination": "Khajuraho",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_172",
+      "activityName": "Khajuraho Dance Festival",
+      "destination": "Khajuraho",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_173",
+      "activityName": "Adivart Tribal and Folk Art Museum",
+      "destination": "Khajuraho",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_174",
+      "activityName": "Raneh Falls",
+      "destination": "Khajuraho",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_175",
+      "activityName": "Punnamada Lake Overnight Houseboat Cruise",
+      "destination": "Alappuzha",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_176",
+      "activityName": "Vembanad Lake Shikara Boat Backwater Ride",
+      "destination": "Alappuzha",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_177",
+      "activityName": "Marari Quiet Beach Sunset Walk",
+      "destination": "Alappuzha",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_178",
+      "activityName": "Alappuzha Coastal Lighthouse View",
+      "destination": "Alappuzha",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_179",
+      "activityName": "Alappuzha Backwaters Houseboat Cruise",
+      "destination": "Alappuzha",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_180",
+      "activityName": "Marari Beach",
+      "destination": "Alappuzha",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_181",
+      "activityName": "Alappuzha Beach and Lighthouse",
+      "destination": "Alappuzha",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_182",
+      "activityName": "Revi Karunakaran Memorial Museum",
+      "destination": "Alappuzha",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_183",
+      "activityName": "Alleppey Beach and Lighthouse",
+      "destination": "Alappuzha",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_184",
+      "activityName": "Tata Tea Museum & Plantation Tour",
+      "destination": "Munnar",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_185",
+      "activityName": "Eravikulam National Park Nilgiri Tahr Safari",
+      "destination": "Munnar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_186",
+      "activityName": "Mattupetty Dam & Echo Point Boating",
+      "destination": "Munnar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_187",
+      "activityName": "Anamudi Peak Trekking Viewpoint",
+      "destination": "Munnar",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_188",
+      "activityName": "Eravikulam National Park",
+      "destination": "Munnar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_189",
+      "activityName": "Kannan Devan Tea Museum",
+      "destination": "Munnar",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_190",
+      "activityName": "Mattupetty Dam and Lake",
+      "destination": "Munnar",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_191",
+      "activityName": "Kolukkumalai Tea Estate Safari",
+      "destination": "Munnar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_192",
+      "activityName": "Fort Kochi Chinese Fishing Nets Sunset",
+      "destination": "Kochi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_193",
+      "activityName": "Mattancherry Dutch Palace & Murals",
+      "destination": "Kochi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_194",
+      "activityName": "Paradesi Synagogue & Jew Town Antique Trail",
+      "destination": "Kochi",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_195",
+      "activityName": "Kathakali Cultural Dance Center Performance",
+      "destination": "Kochi",
+      "categoryId": "CULTURAL_EXPERIENCES"
+    },
+    {
+      "activityId": "act_196",
+      "activityName": "Chinese Fishing Nets (Cheenavala)",
+      "destination": "Kochi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_197",
+      "activityName": "Mattancherry Palace (Dutch Palace)",
+      "destination": "Kochi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_198",
+      "activityName": "Paradesi Synagogue and Jew Town",
+      "destination": "Kochi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_199",
+      "activityName": "Kerala Kathakali Centre",
+      "destination": "Kochi",
+      "categoryId": "CULTURAL_EXPERIENCES"
+    },
+    {
+      "activityId": "act_200",
+      "activityName": "Princess Street",
+      "destination": "Kochi",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_201",
+      "activityName": "Grand Mysore Palace Royal Museum Tour",
+      "destination": "Mysuru",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_202",
+      "activityName": "Chamundi Hill Temple & Nandi Monolith Statue",
+      "destination": "Mysuru",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_203",
+      "activityName": "Brindavan Gardens Musical Fountain Show",
+      "destination": "Mysuru",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_204",
+      "activityName": "Devaraja Heritage Spice & Flower Market Walk",
+      "destination": "Mysuru",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_205",
+      "activityName": "Mysore Palace (Amba Vilas Palace)",
+      "destination": "Mysuru",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_206",
+      "activityName": "Chamundeshwari Temple",
+      "destination": "Mysuru",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_207",
+      "activityName": "Devaraja Market",
+      "destination": "Mysuru",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_208",
+      "activityName": "Hotel Original Vinayaka Mylari",
+      "destination": "Mysuru",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_209",
+      "activityName": "Brindavan Gardens",
+      "destination": "Mysuru",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_210",
+      "activityName": "Mysore Palace (Amba Vilas)",
+      "destination": "Mysuru",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_211",
+      "activityName": "Virupaksha Temple Sacred Complex",
+      "destination": "Hampi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_212",
+      "activityName": "Vittala Temple Stone Chariot & Musical Pillars",
+      "destination": "Hampi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_213",
+      "activityName": "Hemakuta Hill Sunset Rock Boulders Hike",
+      "destination": "Hampi",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_214",
+      "activityName": "Lotus Mahal & Elephant Stables Enclosure",
+      "destination": "Hampi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_215",
+      "activityName": "Vittala Temple Complex",
+      "destination": "Hampi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_216",
+      "activityName": "Virupaksha Temple",
+      "destination": "Hampi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_217",
+      "activityName": "Matanga Hill",
+      "destination": "Hampi",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_218",
+      "activityName": "Royal Enclosure",
+      "destination": "Hampi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_219",
+      "activityName": "Tungabhadra River Coracle Ride",
+      "destination": "Hampi",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_220",
+      "activityName": "Nilgiri Mountain Railway UNESCO Heritage Toy Train",
+      "destination": "Ooty",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_221",
+      "activityName": "Ooty Botanical Gardens Exotic Flora Walk",
+      "destination": "Ooty",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_222",
+      "activityName": "Doddabetta Peak Highest Viewpoint Observatory",
+      "destination": "Ooty",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_223",
+      "activityName": "Ooty Lake Boat Cruise & Tea Factory",
+      "destination": "Ooty",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_224",
+      "activityName": "Nilgiri Mountain Railway",
+      "destination": "Ooty",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_225",
+      "activityName": "Government Botanical Garden",
+      "destination": "Ooty",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_226",
+      "activityName": "Doddabetta Peak",
+      "destination": "Ooty",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_227",
+      "activityName": "Ooty Lake Boating",
+      "destination": "Ooty",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_228",
+      "activityName": "Ooty Rose Garden",
+      "destination": "Ooty",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_229",
+      "activityName": "French Quarter White Town Heritage Stroll",
+      "destination": "Puducherry",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_230",
+      "activityName": "Sri Aurobindo Ashram Meditation Hall",
+      "destination": "Puducherry",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_231",
+      "activityName": "Auroville Matrimandir Golden Dome View",
+      "destination": "Puducherry",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_232",
+      "activityName": "Promenade Beach Rock Walk & Sunset",
+      "destination": "Puducherry",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_233",
+      "activityName": "White Town (French Quarter)",
+      "destination": "Puducherry",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_234",
+      "activityName": "Sri Aurobindo Ashram",
+      "destination": "Puducherry",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_235",
+      "activityName": "Auroville Matrimandir",
+      "destination": "Puducherry",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_236",
+      "activityName": "Promenade Beach (Rock Beach)",
+      "destination": "Puducherry",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_237",
+      "activityName": "Cafe des Arts",
+      "destination": "Puducherry",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_238",
+      "activityName": "Meenakshi Amman Temple 14 Gopuram Complex",
+      "destination": "Madurai",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_239",
+      "activityName": "Thirumalai Nayakkar Palace Stucco Pillars",
+      "destination": "Madurai",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_240",
+      "activityName": "Gandhi Memorial Museum Historic Artifacts",
+      "destination": "Madurai",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_241",
+      "activityName": "Vandiyur Mariamman Teppakulam Temple Tank",
+      "destination": "Madurai",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_242",
+      "activityName": "Meenakshi Sundareswarar Temple",
+      "destination": "Madurai",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_243",
+      "activityName": "Thirumalai Nayakkar Mahal",
+      "destination": "Madurai",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_244",
+      "activityName": "Puthu Mandapam",
+      "destination": "Madurai",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_245",
+      "activityName": "Murugan Idli Shop",
+      "destination": "Madurai",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_246",
+      "activityName": "Edakkal Caves Prehistoric Petroglyphs Hike",
+      "destination": "Wayanad",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_247",
+      "activityName": "Chembra Peak Heart-Shaped Lake Trek",
+      "destination": "Wayanad",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_248",
+      "activityName": "Banasura Sagar Earth Dam Boating",
+      "destination": "Wayanad",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_249",
+      "activityName": "Kuruva Island Bamboo Rafting",
+      "destination": "Wayanad",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_250",
+      "activityName": "Edakkal Caves",
+      "destination": "Wayanad",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_251",
+      "activityName": "Wayanad Wildlife Sanctuary (Muthanga)",
+      "destination": "Wayanad",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_252",
+      "activityName": "Chembra Peak Trek",
+      "destination": "Wayanad",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_253",
+      "activityName": "Banasura Sagar Dam",
+      "destination": "Wayanad",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_254",
+      "activityName": "Vivekananda Rock Memorial Offshore Ferry Trip",
+      "destination": "Kanyakumari",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_255",
+      "activityName": "Thiruvalluvar 133ft Statue Island View",
+      "destination": "Kanyakumari",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_256",
+      "activityName": "Triveni Sangam Three Oceans Confluence Sunset",
+      "destination": "Kanyakumari",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_257",
+      "activityName": "Kumari Amman Temple Coastal Shrine",
+      "destination": "Kanyakumari",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_258",
+      "activityName": "Thiruvalluvar Statue",
+      "destination": "Kanyakumari",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_259",
+      "activityName": "Kanyakumari Sunrise and Sunset Point",
+      "destination": "Kanyakumari",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_260",
+      "activityName": "Varkala Cliff Beach Sunset & Cafe Walk",
+      "destination": "Varkala",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_261",
+      "activityName": "Janardanaswamy 2000-Year Temple Visit",
+      "destination": "Varkala",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_262",
+      "activityName": "Papanasam Sacred Beach Bathing",
+      "destination": "Varkala",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_263",
+      "activityName": "Kapil Lake & Backwater Kayaking",
+      "destination": "Varkala",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_264",
+      "activityName": "Varkala North Cliff",
+      "destination": "Varkala",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_265",
+      "activityName": "Papanasam Beach",
+      "destination": "Varkala",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_266",
+      "activityName": "Janardanaswamy Temple",
+      "destination": "Varkala",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_267",
+      "activityName": "Kodaikanal Star Lake Boating & Cycling Trail",
+      "destination": "Kodaikanal",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_268",
+      "activityName": "Coaker's Walk Valley View Cliffside Stroll",
+      "destination": "Kodaikanal",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_269",
+      "activityName": "Pillar Rocks 400ft Cliff Viewpoint",
+      "destination": "Kodaikanal",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_270",
+      "activityName": "Bryant Park Botanical Flower Displays",
+      "destination": "Kodaikanal",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_271",
+      "activityName": "Kodaikanal Lake Boating",
+      "destination": "Kodaikanal",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_272",
+      "activityName": "Coaker's Walk",
+      "destination": "Kodaikanal",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_273",
+      "activityName": "Pillar Rocks",
+      "destination": "Kodaikanal",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_274",
+      "activityName": "Bryant Park",
+      "destination": "Kodaikanal",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_275",
+      "activityName": "Shore Temple UNESCO Coastal Granite Complex",
+      "destination": "Mahabalipuram",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_276",
+      "activityName": "Pancha Rathas Monolithic Rock-Cut Chariots",
+      "destination": "Mahabalipuram",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_277",
+      "activityName": "Descent of the Ganges (Arjuna's Penance) Bas-Relief",
+      "destination": "Mahabalipuram",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_278",
+      "activityName": "Krishna's Butterball Natural Balancing Boulder",
+      "destination": "Mahabalipuram",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_279",
+      "activityName": "Shore Temple",
+      "destination": "Mahabalipuram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_280",
+      "activityName": "Pancha Rathas",
+      "destination": "Mahabalipuram",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_281",
+      "activityName": "Arjuna's Penance (Descent of the Ganges)",
+      "destination": "Mahabalipuram",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_282",
+      "activityName": "Krishna's Butterball",
+      "destination": "Mahabalipuram",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_283",
+      "activityName": "Marina Beach Promenade Longest Urban Beach Stroll",
+      "destination": "Chennai",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_284",
+      "activityName": "Kapaleeshwarar Temple Dravidian Gopuram Tour",
+      "destination": "Chennai",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_285",
+      "activityName": "San Thome Cathedral Basilica Historic Shrine",
+      "destination": "Chennai",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_286",
+      "activityName": "Fort St. George & Museum Heritage Walk",
+      "destination": "Chennai",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_287",
+      "activityName": "Charminar Four Minarets & Laad Bazaar Pearl Shopping",
+      "destination": "Hyderabad",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_288",
+      "activityName": "Golconda Fort Acoustics & Hilltop Citadel",
+      "destination": "Hyderabad",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_289",
+      "activityName": "Hussain Sagar Lake Buddha Statue Boat Cruise",
+      "destination": "Hyderabad",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_290",
+      "activityName": "Salarchung Museum Rare Artifacts & Veiled Rebecca",
+      "destination": "Hyderabad",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_291",
+      "activityName": "Bangalore Palace Tudor-Style Architecture Tour",
+      "destination": "Bengaluru",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_292",
+      "activityName": "Lalbagh Botanical Garden Glass House Stroll",
+      "destination": "Bengaluru",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_293",
+      "activityName": "Cubbon Park & Vidhana Soudha Walk",
+      "destination": "Bengaluru",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_294",
+      "activityName": "ISKCON Temple Rajajinagar Visit",
+      "destination": "Bengaluru",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_295",
+      "activityName": "Om Beach & Kudle Beach Coastal Cliff Trek",
+      "destination": "Gokarna",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_296",
+      "activityName": "Mahabaleshwar Temple Sacred Lingam Visit",
+      "destination": "Gokarna",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_297",
+      "activityName": "Half Moon & Paradise Beach Boat Ride",
+      "destination": "Gokarna",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_298",
+      "activityName": "Gokarna Town Beach Sunset Chill",
+      "destination": "Gokarna",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_299",
+      "activityName": "Om Beach",
+      "destination": "Gokarna",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_300",
+      "activityName": "Kudle Beach",
+      "destination": "Gokarna",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_301",
+      "activityName": "Mahabaleshwar Temple",
+      "destination": "Gokarna",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_302",
+      "activityName": "Victoria Memorial Hall Marble Museum Gardens",
+      "destination": "Kolkata",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_303",
+      "activityName": "Howrah Bridge & Hooghly River Ferry Ride",
+      "destination": "Kolkata",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_304",
+      "activityName": "Dakshineswar Kali Temple & Belur Math Complex",
+      "destination": "Kolkata",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_305",
+      "activityName": "Park Street Cultural & Culinary Kathi Roll Walk",
+      "destination": "Kolkata",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_306",
+      "activityName": "Tiger Hill Kangchenjunga Sunrise Viewpoint",
+      "destination": "Darjeeling",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_307",
+      "activityName": "Darjeeling Himalayan Railway UNESCO Toy Train",
+      "destination": "Darjeeling",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_308",
+      "activityName": "Happy Valley Tea Estate Guided Plantation Walk",
+      "destination": "Darjeeling",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_309",
+      "activityName": "Batasia Loop War Memorial Garden",
+      "destination": "Darjeeling",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_310",
+      "activityName": "Rumtek Monastery Golden Stupa",
+      "destination": "Gangtok",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_311",
+      "activityName": "Tsomgo (Changu) High-Altitude Lake Excursion",
+      "destination": "Gangtok",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_312",
+      "activityName": "Nathula Pass Indo-China Border Viewpoint",
+      "destination": "Gangtok",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_313",
+      "activityName": "MG Marg Pedestrian Street Food & Shopping Stroll",
+      "destination": "Gangtok",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_314",
+      "activityName": "Umiam Lake (Barapani) Boating & Water Sports",
+      "destination": "Shillong",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_315",
+      "activityName": "Shillong Peak & Elephant Falls Waterfall Trail",
+      "destination": "Shillong",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_316",
+      "activityName": "Don Bosco Museum Indigenous Northeast Culture",
+      "destination": "Shillong",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_317",
+      "activityName": "Police Bazar Local Street Market Walk",
+      "destination": "Shillong",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_318",
+      "activityName": "Nohkalikai Falls India's Tallest Plunge Waterfall",
+      "destination": "Cherrapunji (Sohra)",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_319",
+      "activityName": "Double Decker Living Root Bridge Nongriat Trek",
+      "destination": "Cherrapunji (Sohra)",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_320",
+      "activityName": "Mawsmai & Arwah Prehistoric Limestone Caves",
+      "destination": "Cherrapunji (Sohra)",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_321",
+      "activityName": "Seven Sisters (Nohsngithiang) Waterfalls Viewpoint",
+      "destination": "Cherrapunji (Sohra)",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_322",
+      "activityName": "Kaziranga Central Range One-Horned Rhino Elephant Safari",
+      "destination": "Kaziranga",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_323",
+      "activityName": "Western Range Open Jeep Wildlife Safari",
+      "destination": "Kaziranga",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_324",
+      "activityName": "Kaziranga National Orchid & Biodiversity Park",
+      "destination": "Kaziranga",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_325",
+      "activityName": "Kaziranga Burapahar Range Wildlife Trek",
+      "destination": "Kaziranga",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_326",
+      "activityName": "Jagannath Temple Sacred Chariot Pilgrimage",
+      "destination": "Puri",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_327",
+      "activityName": "Puri Golden Beach Sunset & Sea Bathing",
+      "destination": "Puri",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_328",
+      "activityName": "Swargadwar Beach Market Stroll",
+      "destination": "Puri",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_329",
+      "activityName": "Raghurajpur Heritage Crafts Village Excursion",
+      "destination": "Puri",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_330",
+      "activityName": "Konark Sun Temple UNESCO 13th-Century Chariot",
+      "destination": "Konark",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_331",
+      "activityName": "Konark Archaeological Museum Stone Relics",
+      "destination": "Konark",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_332",
+      "activityName": "Chandrabhaga Beach Golden Sand Stroll",
+      "destination": "Konark",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_333",
+      "activityName": "Surya Dance Festival Amphitheater",
+      "destination": "Konark",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_334",
+      "activityName": "Gateway of India & Taj Mahal Palace Hotel Stroll",
+      "destination": "Mumbai",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_335",
+      "activityName": "Elephanta Caves Island Boat Trip",
+      "destination": "Mumbai",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_336",
+      "activityName": "Marine Drive Queens Necklace Sunset Walk",
+      "destination": "Mumbai",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_337",
+      "activityName": "Chhatrapati Shivaji Maharaj Terminus (CSMT) UNESCO Tour",
+      "destination": "Mumbai",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_338",
+      "activityName": "Shaniwar Wada Fort Palace Ruins",
+      "destination": "Pune",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_339",
+      "activityName": "Aga Khan Palace Mahatma Gandhi Memorial",
+      "destination": "Pune",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_340",
+      "activityName": "Dagadusheth Halwai Ganapati Temple",
+      "destination": "Pune",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_341",
+      "activityName": "Sinhagad Fort Hilltop Trek",
+      "destination": "Pune",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_342",
+      "activityName": "Tiger's Leap & Rajmachi Viewpoint Panorama",
+      "destination": "Lonavala-Khandala",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_343",
+      "activityName": "Bhaja & Karla Ancient Buddhist Caves",
+      "destination": "Lonavala-Khandala",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_344",
+      "activityName": "Bhushi Dam Monsoon Waterfall Steps",
+      "destination": "Lonavala-Khandala",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_345",
+      "activityName": "Lonavala Chikki Street Tasting Tour",
+      "destination": "Lonavala-Khandala",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_346",
+      "activityName": "Arthur's Seat & Wilson Point Sunrise View",
+      "destination": "Mahabaleshwar",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_347",
+      "activityName": "Venna Lake Boating & Horse Riding",
+      "destination": "Mahabaleshwar",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_348",
+      "activityName": "Mapro Garden Strawberry Farm Tasting",
+      "destination": "Mahabaleshwar",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_349",
+      "activityName": "Pratapgad Fort Chhatrapati Shivaji Memorial",
+      "destination": "Mahabaleshwar",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_350",
+      "activityName": "Sabarmati Ashram Gandhi Memorial Walk",
+      "destination": "Ahmedabad",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_351",
+      "activityName": "Adalaj Stepwell (Vav) 5-Story Carved Structure",
+      "destination": "Ahmedabad",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_352",
+      "activityName": "Old City Heritage Walk & Jama Masjid",
+      "destination": "Ahmedabad",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_353",
+      "activityName": "Sabarmati Riverfront Park Stroll",
+      "destination": "Ahmedabad",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_354",
+      "activityName": "White Desert Great Rann Sunset & Full Moon Walk",
+      "destination": "Rann of Kutch",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_355",
+      "activityName": "Rann Utsav Tent City Cultural Folk Evening",
+      "destination": "Rann of Kutch",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_356",
+      "activityName": "Kala Dungar (Black Hill) Highest Kutch Viewpoint",
+      "destination": "Rann of Kutch",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_357",
+      "activityName": "Nirona Village Rogan Art & Bell Handicraft Workshop",
+      "destination": "Rann of Kutch",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_358",
+      "activityName": "Upper Lake (Bada Talaab) Sunset Boat Cruise",
+      "destination": "Bhopal",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_359",
+      "activityName": "Taj-ul-Masajid Largest Mosque Complex",
+      "destination": "Bhopal",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_360",
+      "activityName": "Bhimbetka Prehistoric UNESCO Rock Shelters Day Trip",
+      "destination": "Bhopal",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_361",
+      "activityName": "Tribal Museum Folk Living Art Galleries",
+      "destination": "Bhopal",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_362",
+      "activityName": "Mahakaleshwar Jyotirlinga Temple Bhasma Aarti",
+      "destination": "Ujjain",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_363",
+      "activityName": "Ram Ghat Shipra River Evening Aarti Dip",
+      "destination": "Ujjain",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_364",
+      "activityName": "Kal Bhairav Temple Shrine",
+      "destination": "Ujjain",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_365",
+      "activityName": "Harsiddhi Mata Shaktipeeth Temple",
+      "destination": "Ujjain",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_366",
+      "activityName": "Gwalior Fort Hilltop Citadel & Man Singh Palace",
+      "destination": "Gwalior",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_367",
+      "activityName": "Jai Vilas Palace Durbar Hall Crystal Chandeliers",
+      "destination": "Gwalior",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_368",
+      "activityName": "Tansen & Mohammad Ghaus Tombs Heritage Site",
+      "destination": "Gwalior",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_369",
+      "activityName": "Sas Bahu Temple Intricate Carvings",
+      "destination": "Gwalior",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_370",
+      "activityName": "Orchha Fort Complex (Raja Mahal & Jahangir Mahal)",
+      "destination": "Orchha",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_371",
+      "activityName": "Ram Raja Temple Unique Fort-Shrine",
+      "destination": "Orchha",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_372",
+      "activityName": "Betwa River Chhatris Cenotaph Sunset Point",
+      "destination": "Orchha",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_373",
+      "activityName": "Chaturbhuj Temple Towering Spiers",
+      "destination": "Orchha",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_374",
+      "activityName": "Dhupgarh Highest Satpura Peak Sunset Point",
+      "destination": "Pachmarhi",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_375",
+      "activityName": "Bee Falls Natural Cascade Dip",
+      "destination": "Pachmarhi",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_376",
+      "activityName": "Jata Shankar & Pandav Ancient Caves",
+      "destination": "Pachmarhi",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_377",
+      "activityName": "Apsara Vihar Natural Pool Hike",
+      "destination": "Pachmarhi",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_378",
+      "activityName": "Bada Imambara & Bhool Bhulaiya Maze",
+      "destination": "Lucknow",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_379",
+      "activityName": "Chota Imambara & Rumi Darwaza",
+      "destination": "Lucknow",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_380",
+      "activityName": "Hazratganj Heritage & Awadhi Tunday Kabab Trail",
+      "destination": "Lucknow",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_381",
+      "activityName": "British Residency Ruins Tour",
+      "destination": "Lucknow",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_382",
+      "activityName": "Bara Imambara",
+      "destination": "Lucknow",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_383",
+      "activityName": "Chhota Imambara",
+      "destination": "Lucknow",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_384",
+      "activityName": "The Residency",
+      "destination": "Lucknow",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_385",
+      "activityName": "Hazratganj",
+      "destination": "Lucknow",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_386",
+      "activityName": "Tunday Kababi",
+      "destination": "Lucknow",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_387",
+      "activityName": "Shree Ram Janmabhoomi Mandir Visit",
+      "destination": "Ayodhya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_388",
+      "activityName": "Hanuman Garhi Hilltop Temple",
+      "destination": "Ayodhya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_389",
+      "activityName": "Saryu River Ghats & Evening Aarti",
+      "destination": "Ayodhya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_390",
+      "activityName": "Kanak Bhawan Royal Shrine",
+      "destination": "Ayodhya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_391",
+      "activityName": "Ram Janmabhoomi Temple",
+      "destination": "Ayodhya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_392",
+      "activityName": "Hanuman Garhi",
+      "destination": "Ayodhya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_393",
+      "activityName": "Saryu River Aarti",
+      "destination": "Ayodhya",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_394",
+      "activityName": "Triveni Sangam Holy Dip & Boat Ride",
+      "destination": "Prayagraj",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_395",
+      "activityName": "Allahabad Fort & Ashoka Pillar",
+      "destination": "Prayagraj",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_396",
+      "activityName": "Anand Bhavan Nehru Ancestral Home",
+      "destination": "Prayagraj",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_397",
+      "activityName": "Khusro Bagh Mughal Garden Cenotaphs",
+      "destination": "Prayagraj",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_398",
+      "activityName": "Triveni Sangam",
+      "destination": "Prayagraj",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_399",
+      "activityName": "Allahabad Fort",
+      "destination": "Prayagraj",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_400",
+      "activityName": "Anand Bhavan",
+      "destination": "Prayagraj",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_401",
+      "activityName": "Chittorgarh Fort UNESCO Complex Tour",
+      "destination": "Chittorgarh",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_402",
+      "activityName": "Vijay Stambha (Tower of Victory)",
+      "destination": "Chittorgarh",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_403",
+      "activityName": "Padmini Palace Waterfront Ruins",
+      "destination": "Chittorgarh",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_404",
+      "activityName": "Kirti Stambha Tower of Fame",
+      "destination": "Chittorgarh",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_405",
+      "activityName": "Chittorgarh Fort",
+      "destination": "Chittorgarh",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_406",
+      "activityName": "Chittorgarh Fort Light & Sound Show",
+      "destination": "Chittorgarh",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_407",
+      "activityName": "Junagarh Fort Imposing Palaces",
+      "destination": "Bikaner",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_408",
+      "activityName": "Karni Mata Temple (Rat Temple) Deshnoke",
+      "destination": "Bikaner",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_409",
+      "activityName": "Rampuria Havelies Street Architecture Stroll",
+      "destination": "Bikaner",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_410",
+      "activityName": "National Research Centre on Camel Safari",
+      "destination": "Bikaner",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_411",
+      "activityName": "Junagarh Fort",
+      "destination": "Bikaner",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_412",
+      "activityName": "Karni Mata Temple",
+      "destination": "Bikaner",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_413",
+      "activityName": "National Research Centre on Camel",
+      "destination": "Bikaner",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_414",
+      "activityName": "Dilwara Marble Jain Temples",
+      "destination": "Mount Abu",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_415",
+      "activityName": "Nakki Lake Boating & Toad Rock Hike",
+      "destination": "Mount Abu",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_416",
+      "activityName": "Guru Shikhar Peak Highest Viewpoint",
+      "destination": "Mount Abu",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_417",
+      "activityName": "Sunset Point Aravalli Valley Panorama",
+      "destination": "Mount Abu",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_418",
+      "activityName": "Dilwara Temples",
+      "destination": "Mount Abu",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_419",
+      "activityName": "Nakki Lake",
+      "destination": "Mount Abu",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_420",
+      "activityName": "Guru Shikhar",
+      "destination": "Mount Abu",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_421",
+      "activityName": "Ranthambore National Park Open Jeep Tiger Safari",
+      "destination": "Ranthambore",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_422",
+      "activityName": "10th-Century Ranthambore Fort Clifftop Citadel",
+      "destination": "Ranthambore",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_423",
+      "activityName": "Kachida Valley & Lakarda Leopard Spotting Zone",
+      "destination": "Ranthambore",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_424",
+      "activityName": "Trinetra Ganesh Temple Fort Pilgrimage",
+      "destination": "Ranthambore",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_425",
+      "activityName": "Ranthambore National Park",
+      "destination": "Ranthambore",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_426",
+      "activityName": "Ranthambore Jeep Safari",
+      "destination": "Ranthambore",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_427",
+      "activityName": "Ranthambore Fort",
+      "destination": "Ranthambore",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_428",
+      "activityName": "Taragarh Fort & Garh Palace Murals",
+      "destination": "Bundi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_429",
+      "activityName": "Raniji ki Baori Ornate Stepwell",
+      "destination": "Bundi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_430",
+      "activityName": "Nawal Sagar Lake Reflection Walk",
+      "destination": "Bundi",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_431",
+      "activityName": "84-Pillared Cenotaph Monument",
+      "destination": "Bundi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_432",
+      "activityName": "Taragarh Fort",
+      "destination": "Bundi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_433",
+      "activityName": "Garh Palace",
+      "destination": "Bundi",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_434",
+      "activityName": "Raniji Ki Baori",
+      "destination": "Bundi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_435",
+      "activityName": "Khajjiar (Mini Switzerland of India) Meadow Stroll",
+      "destination": "Dalhousie",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_436",
+      "activityName": "Dainkund Peak Sing Hill Trek",
+      "destination": "Dalhousie",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_437",
+      "activityName": "Subhash Baoli & Panjpulla Waterfalls",
+      "destination": "Dalhousie",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_438",
+      "activityName": "St. John's Church Colonial Walk",
+      "destination": "Dalhousie",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_439",
+      "activityName": "Khajjiar Meadow",
+      "destination": "Dalhousie",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_440",
+      "activityName": "St. John's Church",
+      "destination": "Dalhousie",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_441",
+      "activityName": "Dainkund Peak",
+      "destination": "Dalhousie",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_442",
+      "activityName": "Kalatop Wildlife Sanctuary Trek",
+      "destination": "Dalhousie",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_443",
+      "activityName": "Gilbert Nature Trail & Sunset Point Walk",
+      "destination": "Kasauli",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_444",
+      "activityName": "Christ Church Victorian Heritage",
+      "destination": "Kasauli",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_445",
+      "activityName": "Monkey Point Hanuman Temple Hilltop View",
+      "destination": "Kasauli",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_446",
+      "activityName": "Kasauli Mall Road Local Heritage Stroll",
+      "destination": "Kasauli",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_447",
+      "activityName": "Gilbert Trail",
+      "destination": "Kasauli",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_448",
+      "activityName": "Monkey Point (Manki Point)",
+      "destination": "Kasauli",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_449",
+      "activityName": "Christ Church",
+      "destination": "Kasauli",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_450",
+      "activityName": "Key Monastery Cliffside Buddhist Shrine",
+      "destination": "Spiti Valley",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_451",
+      "activityName": "Chandratal (Moon Lake) High-Altitude Camp",
+      "destination": "Spiti Valley",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_452",
+      "activityName": "Kaza High-Altitude Market Stroll",
+      "destination": "Spiti Valley",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_453",
+      "activityName": "Hikkim World's Highest Post Office Visit",
+      "destination": "Spiti Valley",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_454",
+      "activityName": "Key Monastery (Kye Gompa)",
+      "destination": "Spiti Valley",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_455",
+      "activityName": "Chandratal Lake (Lake of the Moon)",
+      "destination": "Spiti Valley",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_456",
+      "activityName": "Dhankar Gompa and Fort",
+      "destination": "Spiti Valley",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_457",
+      "activityName": "Tabo Monastery",
+      "destination": "Spiti Valley",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_458",
+      "activityName": "Pin Valley National Park",
+      "destination": "Spiti Valley",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_459",
+      "activityName": "Auli Ropeway Cable Car Ride from Joshimath",
+      "destination": "Auli",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_460",
+      "activityName": "Auli Ski Slopes & Winter Sports",
+      "destination": "Auli",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_461",
+      "activityName": "Gorson Bugyal Alpine Meadow Trek",
+      "destination": "Auli",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_462",
+      "activityName": "Auli Artificial Lake Nanda Devi Reflection",
+      "destination": "Auli",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_463",
+      "activityName": "Auli Ropeway (Cable Car)",
+      "destination": "Auli",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_464",
+      "activityName": "Auli Ski Slopes",
+      "destination": "Auli",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_465",
+      "activityName": "Gorson Bugyal Trek",
+      "destination": "Auli",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_466",
+      "activityName": "Auli Ropeway",
+      "destination": "Auli",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_467",
+      "activityName": "Gulmarg Gondola World's Highest Cable Car",
+      "destination": "Gulmarg",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_468",
+      "activityName": "Apharwat Peak Snow Skiing & Trekking",
+      "destination": "Gulmarg",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_469",
+      "activityName": "Gulmarg Golf Course Meadow Walk",
+      "destination": "Gulmarg",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_470",
+      "activityName": "St. Mary's Church Victorian Heritage",
+      "destination": "Gulmarg",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_471",
+      "activityName": "Gulmarg Gondola",
+      "destination": "Gulmarg",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_472",
+      "activityName": "Gulmarg Ski Slopes",
+      "destination": "Gulmarg",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_473",
+      "activityName": "Apharwat Peak",
+      "destination": "Gulmarg",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_474",
+      "activityName": "Betaab Valley River Scenic Meadow Stroll",
+      "destination": "Pahalgam",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_475",
+      "activityName": "Aru Valley Eco-Village & Horse Riding",
+      "destination": "Pahalgam",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_476",
+      "activityName": "Lidder River Trout Fishing & White Water Rafting",
+      "destination": "Pahalgam",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_477",
+      "activityName": "Baisaran Valley (Mini Switzerland) Pony Trail",
+      "destination": "Pahalgam",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_478",
+      "activityName": "Betaab Valley",
+      "destination": "Pahalgam",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_479",
+      "activityName": "Aru Valley",
+      "destination": "Pahalgam",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_480",
+      "activityName": "Lidder River White Water Rafting",
+      "destination": "Pahalgam",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_481",
+      "activityName": "Tawang Monastery India's Largest Buddhist Shrine",
+      "destination": "Tawang",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_482",
+      "activityName": "Sela Pass High-Altitude Lake (13,700ft)",
+      "destination": "Tawang",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_483",
+      "activityName": "Madhuri (Sangetsar) Lake Scenic Walk",
+      "destination": "Tawang",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_484",
+      "activityName": "Tawang War Memorial & Light Show",
+      "destination": "Tawang",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_485",
+      "activityName": "Reiek Tlang Hilltop Peak & Mizo Heritage Village",
+      "destination": "Champhai / Aizawl Circuit",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_486",
+      "activityName": "Solomon's Temple Aizawl Architectural Shrine",
+      "destination": "Champhai / Aizawl Circuit",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_487",
+      "activityName": "Durtlang Hills City Panorama Viewpoint",
+      "destination": "Champhai / Aizawl Circuit",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_488",
+      "activityName": "Bara Bazar Local Mizo Handloom Market",
+      "destination": "Champhai / Aizawl Circuit",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_489",
+      "activityName": "Deolo Hill Panoramic Valley View Park",
+      "destination": "Kalimpong",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_490",
+      "activityName": "Durpin Monastery (Zang Dhok Palri Phodang)",
+      "destination": "Kalimpong",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_491",
+      "activityName": "Pine View Cactus Nursery Collection",
+      "destination": "Kalimpong",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_492",
+      "activityName": "Morgan House British Colonial Heritage",
+      "destination": "Kalimpong",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_493",
+      "activityName": "Majuli World's Largest River Island Brahmaputra Ferry",
+      "destination": "Majuli",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_494",
+      "activityName": "Kamalabari & Auniati Satra Neo-Vaishnavite Monasteries",
+      "destination": "Majuli",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_495",
+      "activityName": "Traditional Mishing Tribal Village Bamboo Stilt Tour",
+      "destination": "Majuli",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_496",
+      "activityName": "Samaguri Satra Traditional Mask Making Workshop",
+      "destination": "Majuli",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_497",
+      "activityName": "Apatani Tribal Village Cultural Stroll",
+      "destination": "Ziro Valley",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_498",
+      "activityName": "Ziro Paddy-cum-Fish Cultivation Terraces Walk",
+      "destination": "Ziro Valley",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_499",
+      "activityName": "Talley Valley Wildlife Sanctuary Bamboo Trek",
+      "destination": "Ziro Valley",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_500",
+      "activityName": "Meghna Cave Temple Ancient Shrine",
+      "destination": "Ziro Valley",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_501",
+      "activityName": "Cellular Jail National Memorial Light & Sound Show (Port Blair)",
+      "destination": "Andaman Islands",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_502",
+      "activityName": "Radhanagar Beach Sunset Stroll (Swaraj Dweep / Havelock)",
+      "destination": "Andaman Islands",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_503",
+      "activityName": "Elephant Beach Scuba Diving & Snorkeling Reefs",
+      "destination": "Andaman Islands",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_504",
+      "activityName": "Natural Rock Bridge & Lakshmanpur Beach (Shaheed Dweep / Neil)",
+      "destination": "Andaman Islands",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_505",
+      "activityName": "Bangaram Island Coral Atoll Scuba Diving & Snorkeling",
+      "destination": "Lakshadweep",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_506",
+      "activityName": "Kavaratti Lagoon Glass-Bottom Boat Ride & Kayaking",
+      "destination": "Lakshadweep",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_507",
+      "activityName": "Agatti Island White Sand Beach Walk",
+      "destination": "Lakshadweep",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_508",
+      "activityName": "Marine Aquarium & Oceanic Research Station Tour",
+      "destination": "Lakshadweep",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_509",
+      "activityName": "Mullayanagiri Peak Highest Karnataka Trek",
+      "destination": "Chikkamagaluru",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_510",
+      "activityName": "Baba Budangiri Dargah & Caves Trail",
+      "destination": "Chikkamagaluru",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_511",
+      "activityName": "Hebbe Waterfalls Forest Jeep Safari",
+      "destination": "Chikkamagaluru",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_512",
+      "activityName": "Coffee Plantation Estate Guided Tour",
+      "destination": "Chikkamagaluru",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_513",
+      "activityName": "Bandipur Tiger Reserve Jungle Bus Safari",
+      "destination": "Bandipur",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_514",
+      "activityName": "Mudumalai Border Wildlife Observation",
+      "destination": "Bandipur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_515",
+      "activityName": "Himavad Gopalaswamy Betta Hilltop Shrine & Foggy Trail",
+      "destination": "Bandipur",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_516",
+      "activityName": "Kabini River Wildlife Boat Safari",
+      "destination": "Nagarhole",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_517",
+      "activityName": "Nagarhole Tiger & Elephant Reserve Jeep Safari",
+      "destination": "Nagarhole",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_518",
+      "activityName": "Iruppu Waterfalls Brahmagiri Trek",
+      "destination": "Nagarhole",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_519",
+      "activityName": "Kabini Dam Reservoir & Wildlife Sunset Viewpoint",
+      "destination": "Nagarhole",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_520",
+      "activityName": "Badami Sandstone Rock-Cut Cave Temples",
+      "destination": "Badami-Pattadakal",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_521",
+      "activityName": "Pattadakal UNESCO Group of Temples Complex",
+      "destination": "Badami-Pattadakal",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_522",
+      "activityName": "Aihole Durga Temple Horseshoe Architecture",
+      "destination": "Badami-Pattadakal",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_523",
+      "activityName": "Agastya Lake & Bhutanatha Temple View",
+      "destination": "Badami-Pattadakal",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_524",
+      "activityName": "Badami Cave Temples",
+      "destination": "Badami-Pattadakal",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_525",
+      "activityName": "Badami Fort",
+      "destination": "Badami-Pattadakal",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_526",
+      "activityName": "Murudeshwar World's 2nd Tallest Shiva Statue",
+      "destination": "Murudeshwar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_527",
+      "activityName": "Raja Gopuram 20-Story Tower Elevator View",
+      "destination": "Murudeshwar",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_528",
+      "activityName": "Murudeshwar Beach Sunset Stroll",
+      "destination": "Murudeshwar",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_529",
+      "activityName": "Netrani Island Scuba Diving Day Trip",
+      "destination": "Murudeshwar",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_530",
+      "activityName": "Kali River White Water Rafting Expedition",
+      "destination": "Dandeli",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_531",
+      "activityName": "Dandeli Wildlife Sanctuary Black Panther Jungle Safari",
+      "destination": "Dandeli",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_532",
+      "activityName": "Syntheri Rocks Monolithic Granite Ravine",
+      "destination": "Dandeli",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_533",
+      "activityName": "Shiroli Peak Sunset Viewpoint",
+      "destination": "Dandeli",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_534",
+      "activityName": "Yercaud Emerald Lake Boat Ride",
+      "destination": "Yercaud",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_535",
+      "activityName": "32-km Loop Road Coffee Estate Drive",
+      "destination": "Yercaud",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_536",
+      "activityName": "Pagoda Point Shevaroy Hills Viewpoint",
+      "destination": "Yercaud",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_537",
+      "activityName": "Killiyur Falls Forest Trek",
+      "destination": "Yercaud",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_538",
+      "activityName": "Yercaud Lake Boating",
+      "destination": "Yercaud",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_539",
+      "activityName": "Lady's Seat",
+      "destination": "Yercaud",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_540",
+      "activityName": "Kiliyur Falls Trek",
+      "destination": "Yercaud",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_541",
+      "activityName": "Sholayar Dam Highest Reservoir View",
+      "destination": "Valparai",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_542",
+      "activityName": "Nallamudi Viewpoint Anamalai Tea Estates",
+      "destination": "Valparai",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_543",
+      "activityName": "Aliyar Dam & Park Gardens Stop",
+      "destination": "Valparai",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_544",
+      "activityName": "Monkey Falls Natural Cascade",
+      "destination": "Valparai",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_545",
+      "activityName": "Chettinad Palace Mansion Heritage Walk",
+      "destination": "Chettinad",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_546",
+      "activityName": "Authentic Chettinad Spicy Culinary Feast",
+      "destination": "Chettinad",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_547",
+      "activityName": "Athangudi Handmade Tile Factory Workshop",
+      "destination": "Chettinad",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_548",
+      "activityName": "Solai Andavar Temple Terracotta Horse Shrine",
+      "destination": "Chettinad",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_549",
+      "activityName": "Kanadukathan Heritage Mansions",
+      "destination": "Chettinad",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_550",
+      "activityName": "The Bangala",
+      "destination": "Chettinad",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_551",
+      "activityName": "Athangudi Tile Artisan Village",
+      "destination": "Chettinad",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_552",
+      "activityName": "Brihadeeswarar UNESCO Big Temple Great Chola Architecture",
+      "destination": "Thanjavur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_553",
+      "activityName": "Thanjavur Maratha Palace & Saraswathi Mahal Library",
+      "destination": "Thanjavur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_554",
+      "activityName": "Art Gallery & Chola Bronze Sculpture Collection",
+      "destination": "Thanjavur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_555",
+      "activityName": "Schwartz Church Colonial Heritage",
+      "destination": "Thanjavur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_556",
+      "activityName": "Brihadisvara Temple",
+      "destination": "Thanjavur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_557",
+      "activityName": "Thanjavur Maratha Palace Complex",
+      "destination": "Thanjavur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_558",
+      "activityName": "Ramanathaswamy Temple World's Longest Hallway",
+      "destination": "Rameswaram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_559",
+      "activityName": "Agni Theertham Holy Bathing Sea Ghat",
+      "destination": "Rameswaram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_560",
+      "activityName": "Dhanushkodi Ghost Town & Ram Setu Beach Point",
+      "destination": "Rameswaram",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_561",
+      "activityName": "Pamban Sea Bridge Train Engineering Viewpoint",
+      "destination": "Rameswaram",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_562",
+      "activityName": "Ramanathaswamy Temple",
+      "destination": "Rameswaram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_563",
+      "activityName": "Dhanushkodi Beach and Ruins",
+      "destination": "Rameswaram",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_564",
+      "activityName": "Pamban Bridge",
+      "destination": "Rameswaram",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_565",
+      "activityName": "Tirumala Venkateswara Swamy Temple Darshan",
+      "destination": "Tirupati",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_566",
+      "activityName": "Sri Bedi Anjaneyaswami Temple Shrine",
+      "destination": "Tirupati",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_567",
+      "activityName": "Kapila Theertham Waterfalls & Shiva Shrine",
+      "destination": "Tirupati",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_568",
+      "activityName": "Silathoranam Natural Geological Arch Rock",
+      "destination": "Tirupati",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_569",
+      "activityName": "Sri Venkateswara Swamy Vaari Temple, Tirumala",
+      "destination": "Tirupati",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_570",
+      "activityName": "Silathoranam (Natural Arch)",
+      "destination": "Tirupati",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_571",
+      "activityName": "Chandragiri Fort",
+      "destination": "Tirupati",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_572",
+      "activityName": "INS Kursura Submarine Museum Beachfront Tour",
+      "destination": "Visakhapatnam",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_573",
+      "activityName": "Kailasagiri Hilltop Park Cable Car View",
+      "destination": "Visakhapatnam",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_574",
+      "activityName": "RK Beach Promenade & Aircraft Museum",
+      "destination": "Visakhapatnam",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_575",
+      "activityName": "Rushikonda Beach Water Sports Bay",
+      "destination": "Visakhapatnam",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_576",
+      "activityName": "INS Kursura Submarine Museum",
+      "destination": "Visakhapatnam",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_577",
+      "activityName": "Rushikonda Beach",
+      "destination": "Visakhapatnam",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_578",
+      "activityName": "Kailasagiri Park",
+      "destination": "Visakhapatnam",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_579",
+      "activityName": "Ramakrishna Mission Beach (RK Beach)",
+      "destination": "Visakhapatnam",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_580",
+      "activityName": "Borra Caves Million-Year Stalactite Formations",
+      "destination": "Araku Valley",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_581",
+      "activityName": "Araku Coffee Plantation & Museum Tasting",
+      "destination": "Araku Valley",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_582",
+      "activityName": "Katiki Waterfalls Jungle Trek",
+      "destination": "Araku Valley",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_583",
+      "activityName": "Tribal Museum Folk Art Displays",
+      "destination": "Araku Valley",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_584",
+      "activityName": "Borra Caves",
+      "destination": "Araku Valley",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_585",
+      "activityName": "Araku Tribal Museum",
+      "destination": "Araku Valley",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_586",
+      "activityName": "Katiki Waterfalls",
+      "destination": "Araku Valley",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_587",
+      "activityName": "Marble Rocks Narmada River Boat Cruise",
+      "destination": "Bhedaghat",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_588",
+      "activityName": "Dhuandhar Falls Water Mist Cascade",
+      "destination": "Bhedaghat",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_589",
+      "activityName": "Chausath Yogini 10th-Century Hilltop Temple",
+      "destination": "Bhedaghat",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_590",
+      "activityName": "Cable Car Ride Over Narmada Gorge",
+      "destination": "Bhedaghat",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_591",
+      "activityName": "Kanha Meadow Open Jeep Tiger Safari",
+      "destination": "Kanha",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_592",
+      "activityName": "Khatia Hardground Barasingha Enclosure Trail",
+      "destination": "Kanha",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_593",
+      "activityName": "Bamni Dadar Sunset Point View",
+      "destination": "Kanha",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_594",
+      "activityName": "Mukki Zone Open Jeep Tiger Safari",
+      "destination": "Kanha",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_595",
+      "activityName": "Tala Zone High-Density Tiger Jeep Safari",
+      "destination": "Bandhavgarh",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_596",
+      "activityName": "Bandhavgarh Fort & Reclining Vishnu Statue Hike",
+      "destination": "Bandhavgarh",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_597",
+      "activityName": "Magdhi Zone High-Density Tiger Safari",
+      "destination": "Bandhavgarh",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_598",
+      "activityName": "Chakradhara Meadow Wildlife Watching",
+      "destination": "Bandhavgarh",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_599",
+      "activityName": "Sundarbans Mangrove Forest Royal Bengal Tiger Boat Safari",
+      "destination": "Sundarbans",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_600",
+      "activityName": "Sajnekhali Watchtower & Turtle Hatchery",
+      "destination": "Sundarbans",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_601",
+      "activityName": "Netidhopani 400-Year-Old Temple Ruins & Watchtower",
+      "destination": "Sundarbans",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_602",
+      "activityName": "Dobanki Canopy Walk Above Mangrove Swamps",
+      "destination": "Sundarbans",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_603",
+      "activityName": "Sundarbans National Park Boat Safari",
+      "destination": "Sundarbans",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_604",
+      "activityName": "Dobanki Watchtower Canopy Walk",
+      "destination": "Sundarbans",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_605",
+      "activityName": "Mahabodhi Temple UNESCO Tree of Enlightenment Complex",
+      "destination": "Bodh Gaya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_606",
+      "activityName": "Sacred Bodhi Tree Meditation Seat",
+      "destination": "Bodh Gaya",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_607",
+      "activityName": "Great Buddha Statue 80ft Monument",
+      "destination": "Bodh Gaya",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_608",
+      "activityName": "Thai & Bhutanese Monastery Architecture Tour",
+      "destination": "Bodh Gaya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_609",
+      "activityName": "Mahabodhi Temple Complex",
+      "destination": "Bodh Gaya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_610",
+      "activityName": "The Great Buddha Statue (80 ft Statue)",
+      "destination": "Bodh Gaya",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_611",
+      "activityName": "Royal Bhutan Monastery",
+      "destination": "Bodh Gaya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_612",
+      "activityName": "Thai Monastery",
+      "destination": "Bodh Gaya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_613",
+      "activityName": "Sula Vineyards Wine Tasting & Vineyard Tour",
+      "destination": "Nashik",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_614",
+      "activityName": "Panchavati Godavari River Holy Ghats",
+      "destination": "Nashik",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_615",
+      "activityName": "Trimbakeshwar Jyotirlinga Temple Day Trip",
+      "destination": "Nashik",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_616",
+      "activityName": "Pandavleni 2nd-Century BC Caves Hike",
+      "destination": "Nashik",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_617",
+      "activityName": "Bibi Ka Maqbara (Tomb of the Lady / Taj of Deccan)",
+      "destination": "Chhatrapati Sambhajinagar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_618",
+      "activityName": "Daulatabad Fort Imposing Hill Fortress & Dark Passage",
+      "destination": "Chhatrapati Sambhajinagar",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_619",
+      "activityName": "Panchakki 17th-Century Water Mill",
+      "destination": "Chhatrapati Sambhajinagar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_620",
+      "activityName": "Aurangabad Caves Rock-Cut Shrines",
+      "destination": "Chhatrapati Sambhajinagar",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_621",
+      "activityName": "Kolaba Sea Fort Sea Walk at Low Tide",
+      "destination": "Alibaug",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_622",
+      "activityName": "Nagaon & Varsoli Beach Water Sports",
+      "destination": "Alibaug",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_623",
+      "activityName": "Kashid White Sand Beach Sunset",
+      "destination": "Alibaug",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_624",
+      "activityName": "Murud-Janjira Island Sea Fort Excursion",
+      "destination": "Alibaug",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_625",
+      "activityName": "Neral-Matheran Toy Train Scenic Ride",
+      "destination": "Matheran",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_626",
+      "activityName": "Panorama Point Sunrise Viewpoint",
+      "destination": "Matheran",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_627",
+      "activityName": "Charlotte Lake Quiet Forest Picnic",
+      "destination": "Matheran",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_628",
+      "activityName": "Louisa Point & Echo Point Cliff Walk",
+      "destination": "Matheran",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_629",
+      "activityName": "Tarkarli Beach Scuba Diving & Snorkeling",
+      "destination": "Tarkarli",
+      "categoryId": "ADVENTURE_SPORTS"
+    },
+    {
+      "activityId": "act_630",
+      "activityName": "Sindhudurg Island Sea Fort Expedition",
+      "destination": "Tarkarli",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_631",
+      "activityName": "Karli Backwaters Houseboat Cruise",
+      "destination": "Tarkarli",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_632",
+      "activityName": "Malvani Seafood & Spice Culinary Trail",
+      "destination": "Tarkarli",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_633",
+      "activityName": "Dwarkadhish Temple 5-Story Jagat Mandir Darshan",
+      "destination": "Dwarka",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_634",
+      "activityName": "Bet Dwarka Island Boat Ferry Pilgrimage",
+      "destination": "Dwarka",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_635",
+      "activityName": "Nageshwar Jyotirlinga Temple Giant Shiva Statue",
+      "destination": "Dwarka",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_636",
+      "activityName": "Rukmini Devi Temple Intricate Carvings",
+      "destination": "Dwarka",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_637",
+      "activityName": "Somnath First Jyotirlinga Coastal Temple Darshan",
+      "destination": "Somnath",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_638",
+      "activityName": "Somnath Beach Promenade & Sound-and-Light Show",
+      "destination": "Somnath",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_639",
+      "activityName": "Bhalka Tirth Sacred Lord Krishna Shrine",
+      "destination": "Somnath",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_640",
+      "activityName": "Triveni Sangam Sea Confluence Dip",
+      "destination": "Somnath",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_641",
+      "activityName": "Gir National Park Asiatic Lion Open Jeep Safari",
+      "destination": "Gir",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_642",
+      "activityName": "Devalia Safari Park Interpretation Zone",
+      "destination": "Gir",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_643",
+      "activityName": "Kamleshwar Dam Crocodile Sanctuary View",
+      "destination": "Gir",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_644",
+      "activityName": "Kankai Mata Temple Wilderness Drive",
+      "destination": "Gir",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_645",
+      "activityName": "Statue of Unity 182m World's Tallest Monument Viewing Gallery",
+      "destination": "Statue of Unity",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_646",
+      "activityName": "Sardar Sarovar Dam Viewpoint & Narmada River Cruise",
+      "destination": "Statue of Unity",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_647",
+      "activityName": "Valley of Flowers Kevadia 17km Botanical Park",
+      "destination": "Statue of Unity",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_648",
+      "activityName": "Glow Garden & Laser Projection Light Show",
+      "destination": "Statue of Unity",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_649",
+      "activityName": "Saputara Lake Boating & Promenade Stroll",
+      "destination": "Saputara",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_650",
+      "activityName": "Sunset Point Cable Car Aerial Ropeway",
+      "destination": "Saputara",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_651",
+      "activityName": "Gira Waterfalls Monsoon Cascade Trail",
+      "destination": "Saputara",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_652",
+      "activityName": "Artist Village Dang Tribal Handicraft Center",
+      "destination": "Saputara",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_653",
+      "activityName": "Manas UNESCO Sanctuary Tiger & Golden Langur Jeep Safari",
+      "destination": "Manas",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_654",
+      "activityName": "Manas River Boat Safari Expedition",
+      "destination": "Manas",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_655",
+      "activityName": "Bhutan Border Royal Manas Elephant Safari",
+      "destination": "Manas",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_656",
+      "activityName": "Mathanguri Border Wildlife Camp View",
+      "destination": "Manas",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_657",
+      "activityName": "Diu Portuguese Sea Fort & Cannon Ramparts",
+      "destination": "Diu",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_658",
+      "activityName": "Nagoa Beach Shell-Shaped Bay Swimming",
+      "destination": "Diu",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_659",
+      "activityName": "St. Paul's Church Baroque Architecture",
+      "destination": "Diu",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_660",
+      "activityName": "Naida Caves Natural Rock Formations",
+      "destination": "Diu",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_661",
+      "activityName": "Diu Fort",
+      "destination": "Diu",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_662",
+      "activityName": "Naida Caves",
+      "destination": "Diu",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_663",
+      "activityName": "Ghoghla Beach",
+      "destination": "Diu",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_664",
+      "activityName": "St. Paul's Church",
+      "destination": "Diu",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_665",
+      "activityName": "Qutub Minar & Mehrauli Archaeological Park",
+      "destination": "Delhi",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_666",
+      "activityName": "Red Fort & Chandni Chowk Food Walk",
+      "destination": "Delhi",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_667",
+      "activityName": "Humayun's Tomb Mughal Gardens",
+      "destination": "Delhi",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_668",
+      "activityName": "India Gate & Kartavya Path Stroll",
+      "destination": "Delhi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_669",
+      "activityName": "Baga & Calangute Beach Water Sports",
+      "destination": "Goa",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_670",
+      "activityName": "Basilica of Bom Jesus UNESCO Church (Old Goa)",
+      "destination": "Goa",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_671",
+      "activityName": "Fort Aguada & Lighthouse Coastal View",
+      "destination": "Goa",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_672",
+      "activityName": "Dudhsagar Waterfalls Jeep Trek",
+      "destination": "Goa",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_673",
+      "activityName": "Fontainhas Latin Quarter",
+      "destination": "Goa",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_674",
+      "activityName": "Our Lady of the Immaculate Conception Church",
+      "destination": "Goa",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_675",
+      "activityName": "Mandovi River Sunset Cruise",
+      "destination": "Goa",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_676",
+      "activityName": "Basilica of Bom Jesus",
+      "destination": "Goa",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_677",
+      "activityName": "S\u00c3\u00a9 Cathedral",
+      "destination": "Goa",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_678",
+      "activityName": "Museum of Christian Art",
+      "destination": "Goa",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_679",
+      "activityName": "Champaner-Pavagadh UNESCO Archaeological Park Citadel",
+      "destination": "Champaner-Pavagadh",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_680",
+      "activityName": "Kalika Mata Temple Hilltop Ropeway Pilgrimage",
+      "destination": "Champaner-Pavagadh",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_681",
+      "activityName": "Jami Masjid Carved Stone Minarets",
+      "destination": "Champaner-Pavagadh",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_682",
+      "activityName": "Kevada Masjid & Helical Stepwell Ruins",
+      "destination": "Champaner-Pavagadh",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_683",
+      "activityName": "Dholavira UNESCO Indus Valley Harappan City Excavation Ruins",
+      "destination": "Dholavira",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_684",
+      "activityName": "World's Oldest Water Reservoir System Tour",
+      "destination": "Dholavira",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_685",
+      "activityName": "Dholavira Archaeological Site Museum",
+      "destination": "Dholavira",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_686",
+      "activityName": "Road to Heaven White Desert Highway Drive",
+      "destination": "Dholavira",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_687",
+      "activityName": "Modhera Sun Temple 11th-Century Surya Kund Stepwell",
+      "destination": "Modhera-Patan",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_688",
+      "activityName": "Rani ki Vav (Queen's Stepwell) UNESCO 7-Tier Subterranean Masterpiece",
+      "destination": "Modhera-Patan",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_689",
+      "activityName": "Patan Patola Silk Weaving Heritage Center",
+      "destination": "Modhera-Patan",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_690",
+      "activityName": "Sahastralinga Talao Medieval Water Tank Ruins",
+      "destination": "Modhera-Patan",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_691",
+      "activityName": "Katra to Holy Bhawan 13km Pilgrimage Trek / Ropeway",
+      "destination": "Vaishno Devi",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_692",
+      "activityName": "Holy Cave Shrine Triple Pindi Darshan",
+      "destination": "Vaishno Devi",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_693",
+      "activityName": "Bhairon Ghati Temple Ropeway Hike",
+      "destination": "Vaishno Devi",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_694",
+      "activityName": "Ardhkuwari Cave Shrine Visit",
+      "destination": "Vaishno Devi",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_695",
+      "activityName": "Shettihalli Drowned Gothic Church Ruins Walk",
+      "destination": "Shettihalli / Sakleshpur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_696",
+      "activityName": "Star-Shaped Manjarabad Fort Star Citadel View",
+      "destination": "Shettihalli / Sakleshpur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_697",
+      "activityName": "Bisle Ghat Viewpoint Western Ghats Panorama",
+      "destination": "Shettihalli / Sakleshpur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_698",
+      "activityName": "Green Route Coffee Plantation Nature Trail",
+      "destination": "Shettihalli / Sakleshpur",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_699",
+      "activityName": "Kochi Fort & Chinese Fishing Nets Stroll",
+      "destination": "Kerala",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_700",
+      "activityName": "Alappuzha Backwaters Houseboat Stay",
+      "destination": "Kerala",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_701",
+      "activityName": "Munnar Tea Plantation Hills Tour",
+      "destination": "Kerala",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_702",
+      "activityName": "Thekkady Wildlife Sanctuary Elephant Safari",
+      "destination": "Kerala",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_703",
+      "activityName": "Periyar Lake Wildlife Sanctuary Boat Safari",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_704",
+      "activityName": "Spice Plantation Guided Walking Tour",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_705",
+      "activityName": "Elephant Junction Feeding & Bathing",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_706",
+      "activityName": "Kalaripayattu Martial Arts Evening Show",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_707",
+      "activityName": "Periyar National Park",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_708",
+      "activityName": "Periyar Lake Boating",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_709",
+      "activityName": "Spice Plantation Tour",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_710",
+      "activityName": "Kadathanadan Kalari Centre",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_711",
+      "activityName": "Kumily Spice Market",
+      "destination": "Thekkady-Periyar",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_712",
+      "activityName": "Kumarakom Bird Sanctuary Migratory Trail",
+      "destination": "Kumarakom",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_713",
+      "activityName": "Vembanad Lake Sunset Cruise",
+      "destination": "Kumarakom",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_714",
+      "activityName": "Traditional Kerala Ayurvedic Wellness Spa",
+      "destination": "Kumarakom",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_715",
+      "activityName": "Aymanam Village Cultural Backwater Stroll",
+      "destination": "Kumarakom",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_716",
+      "activityName": "Vembanad Lake Shikara Cruise",
+      "destination": "Kumarakom",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_717",
+      "activityName": "Kumarakom Bird Sanctuary",
+      "destination": "Kumarakom",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_718",
+      "activityName": "Bay Island Driftwood Museum",
+      "destination": "Kumarakom",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_719",
+      "activityName": "Bekal Keyhole Sea Fort Ramparts",
+      "destination": "Bekal",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_720",
+      "activityName": "Bekal Fort Beach Stroll",
+      "destination": "Bekal",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_721",
+      "activityName": "Kappil Beach & Estuary View",
+      "destination": "Bekal",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_722",
+      "activityName": "Ananthapura Lake Temple",
+      "destination": "Bekal",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_723",
+      "activityName": "Vagamon Pine Forest Canopy Walk",
+      "destination": "Vagamon",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_724",
+      "activityName": "Vagamon Kurisumala Hilltop Meadows",
+      "destination": "Vagamon",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_725",
+      "activityName": "Vagamon Lake Pedal Boating",
+      "destination": "Vagamon",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_726",
+      "activityName": "Marmala Waterfalls Jungle Trek",
+      "destination": "Vagamon",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_727",
+      "activityName": "Kozhikode Beach Sunset & Old Pier Stroll",
+      "destination": "Kozhikode",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_728",
+      "activityName": "Kappad Historic Landing Beach of Vasco da Gama",
+      "destination": "Kozhikode",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_729",
+      "activityName": "Mittai Theruvu (Sweet Street) Halwa Trail",
+      "destination": "Kozhikode",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_730",
+      "activityName": "Mananchira Square Park & Palace Tank",
+      "destination": "Kozhikode",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_731",
+      "activityName": "Kozhikode Beach",
+      "destination": "Kozhikode",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_732",
+      "activityName": "SM Street (Mithai Theruvu)",
+      "destination": "Kozhikode",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_733",
+      "activityName": "Paragon Restaurant",
+      "destination": "Kozhikode",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_734",
+      "activityName": "Great Stupa No. 1 UNESCO Buddhist Dome & Torana Gates",
+      "destination": "Sanchi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_735",
+      "activityName": "Sanchi Archaeological Museum Sculptures",
+      "destination": "Sanchi",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_736",
+      "activityName": "Ashoka Pillar Footprints & Monastery Ruins",
+      "destination": "Sanchi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_737",
+      "activityName": "Stupa No. 2 Carved Balustrades",
+      "destination": "Sanchi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_738",
+      "activityName": "Omkareshwar Jyotirlinga Island Temple Darshan",
+      "destination": "Omkareshwar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_739",
+      "activityName": "Mandhata Island Narmada Parikrama Walk",
+      "destination": "Omkareshwar",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_740",
+      "activityName": "Mamleshwar Temple Historic Twin Shrine",
+      "destination": "Omkareshwar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_741",
+      "activityName": "Narmada River Boat Cruise & Ghats Dip",
+      "destination": "Omkareshwar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_742",
+      "activityName": "Ajanta Cave 1 & 2 Ancient Fresco Murals",
+      "destination": "Ajanta Caves",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_743",
+      "activityName": "Ajanta Cave 26 Reclining Buddha Sculpture",
+      "destination": "Ajanta Caves",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_744",
+      "activityName": "Viewpoint Panorama of Horseshoe Gorge",
+      "destination": "Ajanta Caves",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_745",
+      "activityName": "Ajanta Archaeological Visitor Center",
+      "destination": "Ajanta Caves",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_746",
+      "activityName": "Kailash Temple (Cave 16) World's Largest Monolith Rock-Cut Structure",
+      "destination": "Ellora Caves",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_747",
+      "activityName": "Buddhist Caves 1\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\u015312 Monastic Halls",
+      "destination": "Ellora Caves",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_748",
+      "activityName": "Jain Caves 30\u00c3\u00a2\u00e2\u201a\u00ac\u00e2\u20ac\u015334 Indra Sabha Reliefs",
+      "destination": "Ellora Caves",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_749",
+      "activityName": "Grishneshwar Jyotirlinga Temple Visit",
+      "destination": "Ellora Caves",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_750",
+      "activityName": "Bhimashankar Jyotirlinga Nagara-Style Shrine",
+      "destination": "Bhimashankar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_751",
+      "activityName": "Bhimashankar Wildlife Sanctuary Giant Squirrel Trail",
+      "destination": "Bhimashankar",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_752",
+      "activityName": "Gupt Bhimashankar Stream Walk",
+      "destination": "Bhimashankar",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_753",
+      "activityName": "Hanuman Lake Forest View",
+      "destination": "Bhimashankar",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_754",
+      "activityName": "Lonar Meteorite Impact Crater Lake Rim Trek",
+      "destination": "Lonar",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_755",
+      "activityName": "Daitya Sudan 10th-Century Temple Carvings",
+      "destination": "Lonar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_756",
+      "activityName": "Kamalja Devi Lake Temple",
+      "destination": "Lonar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_757",
+      "activityName": "Gomukh Temple Mineral Spring Stream",
+      "destination": "Lonar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_758",
+      "activityName": "Umngot River Crystal Clear Boat Ride",
+      "destination": "Dawki",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_759",
+      "activityName": "Jaflong Indo-Bangladesh Border Viewpoint",
+      "destination": "Dawki",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_760",
+      "activityName": "Dawki Suspension Bridge Panorama",
+      "destination": "Dawki",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_761",
+      "activityName": "Shnongpdeng Camping & Kayaking Hub",
+      "destination": "Dawki",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_762",
+      "activityName": "Satapada Irrawaddy Dolphin Boat Safari",
+      "destination": "Chilika Lake",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_763",
+      "activityName": "Nalbana Bird Sanctuary Migratory Island Watch",
+      "destination": "Chilika Lake",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_764",
+      "activityName": "Kalijai Temple Island Boat Pilgrimage",
+      "destination": "Chilika Lake",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_765",
+      "activityName": "Chilika Lagoon Sunset & Fresh Seafood Stroll",
+      "destination": "Chilika Lake",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_766",
+      "activityName": "Ajmer Sharif Dargah Pilgrimage",
+      "destination": "Ajmer",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_767",
+      "activityName": "Ana Sagar Lake Boat Cruise & Baradari Gazebos",
+      "destination": "Ajmer",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_768",
+      "activityName": "Taragarh Fort Hilltop Ruins",
+      "destination": "Ajmer",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_769",
+      "activityName": "Adhai Din Ka Jhonpra Ancient Mosque",
+      "destination": "Ajmer",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_770",
+      "activityName": "Mandawa Open-Air Frescoed Haveli Walk",
+      "destination": "Shekhawati",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_771",
+      "activityName": "Nawalgarh Poddar Haveli Museum",
+      "destination": "Shekhawati",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_772",
+      "activityName": "Fatehpur Cultural Art & Painted Mansions",
+      "destination": "Shekhawati",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_773",
+      "activityName": "Jhunjhunu Khetri Mahal Wind Palace",
+      "destination": "Shekhawati",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_774",
+      "activityName": "Ranakpur Chaturmukha 1444 Marble Pillar Temple",
+      "destination": "Ranakpur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_775",
+      "activityName": "Sun Temple Ranakpur Carvings",
+      "destination": "Ranakpur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_776",
+      "activityName": "Aravalli Forest Nature Trail",
+      "destination": "Ranakpur",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_777",
+      "activityName": "Sadri Heritage Village Stroll",
+      "destination": "Ranakpur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_778",
+      "activityName": "Kailasanathar Temple 8th-Century Pallava Architecture",
+      "destination": "Kanchipuram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_779",
+      "activityName": "Ekambareswarar Temple Mango Tree Shrine",
+      "destination": "Kanchipuram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_780",
+      "activityName": "Varadharaja Perumal Temple Golden Lizard Shrine",
+      "destination": "Kanchipuram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_781",
+      "activityName": "Kanchi Silk Weaving Workshop Tour",
+      "destination": "Kanchipuram",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_782",
+      "activityName": "Kailasanathar Temple",
+      "destination": "Kanchipuram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_783",
+      "activityName": "Ekambareswarar Temple",
+      "destination": "Kanchipuram",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_784",
+      "activityName": "Kanchipuram Silk Weaving Centers",
+      "destination": "Kanchipuram",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_785",
+      "activityName": "Dhamek Stupa & Ancient Monastery Ruins",
+      "destination": "Sarnath",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_786",
+      "activityName": "Sarnath Archaeological Museum & Ashoka Lion Capital",
+      "destination": "Sarnath",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_787",
+      "activityName": "Chaukhandi Stupa Monument",
+      "destination": "Sarnath",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_788",
+      "activityName": "Mulagandha Kuti Vihara Temple",
+      "destination": "Sarnath",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_789",
+      "activityName": "Dhikala Zone Open Jeep Tiger Safari",
+      "destination": "Jim Corbett",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_790",
+      "activityName": "Bijrani Zone Open Jeep Tiger Safari",
+      "destination": "Jim Corbett",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_791",
+      "activityName": "Corbett Waterfalls & Nature Trail",
+      "destination": "Jim Corbett",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_792",
+      "activityName": "Kosi River Bank Elephant Safari & Bird Watching",
+      "destination": "Jim Corbett",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_793",
+      "activityName": "Corbett Tiger Reserve",
+      "destination": "Jim Corbett",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_794",
+      "activityName": "Dhikala Zone Jeep Safari",
+      "destination": "Jim Corbett",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_795",
+      "activityName": "Corbett Museum",
+      "destination": "Jim Corbett",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_796",
+      "activityName": "Ghangaria to Valley of Flowers Alpine Meadow Trek",
+      "destination": "Valley of Flowers",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_797",
+      "activityName": "UNESCO Floral Sanctuary Botanical Exploration",
+      "destination": "Valley of Flowers",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_798",
+      "activityName": "Hemkund Sahib High-Altitude Lake Pilgrimage Day Hike",
+      "destination": "Valley of Flowers",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_799",
+      "activityName": "Pushpawati River Cascade Trail",
+      "destination": "Valley of Flowers",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_800",
+      "activityName": "Valley of Flowers National Park Trek",
+      "destination": "Valley of Flowers",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_801",
+      "activityName": "Hemkund Sahib Trek",
+      "destination": "Valley of Flowers",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_802",
+      "activityName": "Kedarnath Jyotirlinga Himalayan Temple Shrine",
+      "destination": "Kedarnath",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_803",
+      "activityName": "Gaurikund to Kedarnath 16km Mountain Trek / Helicopter Ride",
+      "destination": "Kedarnath",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_804",
+      "activityName": "Bhairavnath Temple Hilltop Shrine",
+      "destination": "Kedarnath",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_805",
+      "activityName": "Mandakini River Valley Glacier View",
+      "destination": "Kedarnath",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_806",
+      "activityName": "Badrinath Temple Lord Vishnu Colored Shrine",
+      "destination": "Badrinath",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_807",
+      "activityName": "Tapt Kund Natural Sulphur Hot Springs Dip",
+      "destination": "Badrinath",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_808",
+      "activityName": "Mana Village Last Indian Village Excursion",
+      "destination": "Badrinath",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_809",
+      "activityName": "Vasudhara Falls Alpine Waterfall Trek",
+      "destination": "Badrinath",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_810",
+      "activityName": "Bihar Museum",
+      "destination": "Patna",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_811",
+      "activityName": "Golghar",
+      "destination": "Patna",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_812",
+      "activityName": "Patna Sahib Gurudwara (Takht Sri Patna Sahib)",
+      "destination": "Patna",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_813",
+      "activityName": "Mahavir Mandir & Buddha Smriti Park",
+      "destination": "Patna",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_814",
+      "activityName": "Nalanda Mahavihara Archaeological Site",
+      "destination": "Nalanda",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_815",
+      "activityName": "Nalanda Archaeological Museum",
+      "destination": "Nalanda",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_816",
+      "activityName": "Hiuen Tsang Memorial Hall",
+      "destination": "Nalanda",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_817",
+      "activityName": "Kundalpur Digambar Jain Temple",
+      "destination": "Nalanda",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_818",
+      "activityName": "Vishwa Shanti Stupa",
+      "destination": "Rajgir",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_819",
+      "activityName": "Griddhakot (Vulture Peak)",
+      "destination": "Rajgir",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_820",
+      "activityName": "Rajgir Hot Springs (Brahmakund)",
+      "destination": "Rajgir",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_821",
+      "activityName": "Venu Vana (Bamboo Grove Monastery)",
+      "destination": "Rajgir",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_822",
+      "activityName": "Vishnupad Temple",
+      "destination": "Gaya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_823",
+      "activityName": "Mangla Gauri Temple",
+      "destination": "Gaya",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_824",
+      "activityName": "Barabar Caves Excursion",
+      "destination": "Gaya",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_825",
+      "activityName": "Pretshila Hill & Ramkund Pond",
+      "destination": "Gaya",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_826",
+      "activityName": "Barabati Fort Ruins",
+      "destination": "Cuttack",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_827",
+      "activityName": "Cuttack Chandi Temple",
+      "destination": "Cuttack",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_828",
+      "activityName": "Netaji Birthplace Museum (Janki Nath Bhawan)",
+      "destination": "Cuttack",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_829",
+      "activityName": "Odisha Maritime Museum & Jobra Anicut",
+      "destination": "Cuttack",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_830",
+      "activityName": "Daringbadi Pine Forests and Hill Viewpoints",
+      "destination": "Daringbadi",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_831",
+      "activityName": "Midubandha Waterfall",
+      "destination": "Daringbadi",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_832",
+      "activityName": "Hill View Park & Butterfly Garden",
+      "destination": "Daringbadi",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_833",
+      "activityName": "Doluri River & Organic Coffee Garden Walk",
+      "destination": "Daringbadi",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_834",
+      "activityName": "Samaleswari Temple",
+      "destination": "Sambalpur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_835",
+      "activityName": "Hirakud Dam",
+      "destination": "Sambalpur",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_836",
+      "activityName": "Huma Leaning Temple",
+      "destination": "Sambalpur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_837",
+      "activityName": "Debrigarh Wildlife Sanctuary Safari",
+      "destination": "Sambalpur",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_838",
+      "activityName": "New Digha Sea Beach",
+      "destination": "Digha",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_839",
+      "activityName": "Marine Aquarium and Regional Centre",
+      "destination": "Digha",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_840",
+      "activityName": "Udaipur Beach & Red Crab Shoreline",
+      "destination": "Digha",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_841",
+      "activityName": "Old Digha Casuarina Forest Walk",
+      "destination": "Digha",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_842",
+      "activityName": "Hazarduari Palace",
+      "destination": "Murshidabad",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_843",
+      "activityName": "Imambara of Murshidabad",
+      "destination": "Murshidabad",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_844",
+      "activityName": "Katra Masjid",
+      "destination": "Murshidabad",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_845",
+      "activityName": "Nashipur Rajbari & House of Jagat Seth",
+      "destination": "Murshidabad",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_846",
+      "activityName": "Visva-Bharati University Complex",
+      "destination": "Shantiniketan",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_847",
+      "activityName": "Rabindra Bhavana Museum",
+      "destination": "Shantiniketan",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_848",
+      "activityName": "Sonajhuri Khoai Haat",
+      "destination": "Shantiniketan",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_849",
+      "activityName": "Kopai River Trail & Amar Kutir Crafts Complex",
+      "destination": "Shantiniketan",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_850",
+      "activityName": "Terracotta Temples of Bishnupur",
+      "destination": "Bishnupur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_851",
+      "activityName": "Bishnupur Silk Weavers Village",
+      "destination": "Bishnupur",
+      "categoryId": "MARKETS_SHOPPING"
+    },
+    {
+      "activityId": "act_852",
+      "activityName": "Rasmancha Terracotta Structure",
+      "destination": "Bishnupur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_853",
+      "activityName": "Dalmadal Kaman (Great Iron Cannon)",
+      "destination": "Bishnupur",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_854",
+      "activityName": "Chitrakote Waterfalls",
+      "destination": "Jagdalpur",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_855",
+      "activityName": "Kutumbsakthi Caves (Kutumsar Caves)",
+      "destination": "Jagdalpur",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_856",
+      "activityName": "Bastar Palace",
+      "destination": "Jagdalpur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_857",
+      "activityName": "Teerathgarh Waterfalls & Kanger Valley",
+      "destination": "Jagdalpur",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_858",
+      "activityName": "Ahilya Fort & Palace",
+      "destination": "Maheshwar",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_859",
+      "activityName": "Narmada Ghats & Evening Aarti",
+      "destination": "Maheshwar",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_860",
+      "activityName": "Rewa Society Maheshwari Handloom Weaving",
+      "destination": "Maheshwar",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_861",
+      "activityName": "Baneshwar Temple & Narmada Boat Cruise",
+      "destination": "Maheshwar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_862",
+      "activityName": "Jahaz Mahal (Ship Palace)",
+      "destination": "Mandu",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_863",
+      "activityName": "Rupmati Pavilion & Narmada Viewpoint",
+      "destination": "Mandu",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_864",
+      "activityName": "Hindola Mahal (Swinging Palace)",
+      "destination": "Mandu",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_865",
+      "activityName": "Jami Masjid & Hoshang Shah's Tomb",
+      "destination": "Mandu",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_866",
+      "activityName": "Ram Ghat on Mandakini River",
+      "destination": "Chitrakoot",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_867",
+      "activityName": "Gupt Godavari Caves",
+      "destination": "Chitrakoot",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_868",
+      "activityName": "Kamadgiri Hill Parikrama Walk",
+      "destination": "Chitrakoot",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_869",
+      "activityName": "Hanuman Dhara Cascade Shrine",
+      "destination": "Chitrakoot",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_870",
+      "activityName": "Vadakkunnathan Temple",
+      "destination": "Thrissur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_871",
+      "activityName": "Sakthan Thampuran Palace",
+      "destination": "Thrissur",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_872",
+      "activityName": "Swaraj Round & Cultural Promenade Walk",
+      "destination": "Thrissur",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_873",
+      "activityName": "Punnathoor Kotta (Elephant Palace Camp)",
+      "destination": "Thrissur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_874",
+      "activityName": "St. Angelo Fort",
+      "destination": "Kannur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_875",
+      "activityName": "Muzhappilangad Drive-in Beach",
+      "destination": "Kannur",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_876",
+      "activityName": "Parassinikkadavu Muthappan Temple",
+      "destination": "Kannur",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_877",
+      "activityName": "Theyyam Ritual Art Performance",
+      "destination": "Kannur",
+      "categoryId": "CULTURAL_EXPERIENCES"
+    },
+    {
+      "activityId": "act_878",
+      "activityName": "Poovar Backwater & Mangrove Boat Cruise",
+      "destination": "Poovar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_879",
+      "activityName": "Poovar Golden Sand Beach & Estuary",
+      "destination": "Poovar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_880",
+      "activityName": "Poovar Floating Seafood Dining Experience",
+      "destination": "Poovar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_881",
+      "activityName": "Estuary Canal Eco-Kayaking Trail",
+      "destination": "Poovar",
+      "categoryId": "BACKWATERS_BOATING"
+    },
+    {
+      "activityId": "act_882",
+      "activityName": "Nellaiappar Temple",
+      "destination": "Tirunelveli",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_883",
+      "activityName": "Courtallam Waterfalls",
+      "destination": "Tirunelveli",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_884",
+      "activityName": "Iruttu Kadai Halwa",
+      "destination": "Tirunelveli",
+      "categoryId": "FOOD_CULINARY"
+    },
+    {
+      "activityId": "act_885",
+      "activityName": "Manjolai Hills & Tea Estate Day Excursion",
+      "destination": "Tirunelveli",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_886",
+      "activityName": "Basilica of Our Lady of Good Health",
+      "destination": "Velankanni",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_887",
+      "activityName": "Velankanni Beach & Coastal Esplanade",
+      "destination": "Velankanni",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_888",
+      "activityName": "Our Lady's Tank Church (Holy Water Tank)",
+      "destination": "Velankanni",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_889",
+      "activityName": "Morning Star Church & Basilica Museum",
+      "destination": "Velankanni",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_890",
+      "activityName": "Hogenakkal Falls",
+      "destination": "Hogenakkal",
+      "categoryId": "WATERFALLS"
+    },
+    {
+      "activityId": "act_891",
+      "activityName": "Hogenakkal Coracle Ride",
+      "destination": "Hogenakkal",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_892",
+      "activityName": "Traditional Riverside Herbal Oil Massage",
+      "destination": "Hogenakkal",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_893",
+      "activityName": "Cinnar River Confluence & Suspension Bridge",
+      "destination": "Hogenakkal",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_894",
+      "activityName": "Arichal Munai (Land's End Point)",
+      "destination": "Dhanushkodi",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_895",
+      "activityName": "Ghost Town Ruins of Old Dhanushkodi",
+      "destination": "Dhanushkodi",
+      "categoryId": "DESERT_DUNES"
+    },
+    {
+      "activityId": "act_896",
+      "activityName": "Dhanushkodi Beach & Ram Setu Viewpoint",
+      "destination": "Dhanushkodi",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_897",
+      "activityName": "Kothandaramaswamy Temple",
+      "destination": "Dhanushkodi",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_898",
+      "activityName": "Fort Dansborg (Danish Fort)",
+      "destination": "Tranquebar (Tharangambadi)",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_899",
+      "activityName": "Ziegenbalg House & Danish Cultural Museum",
+      "destination": "Tranquebar (Tharangambadi)",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_900",
+      "activityName": "New Jerusalem Church & Zion Church",
+      "destination": "Tranquebar (Tharangambadi)",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_901",
+      "activityName": "Tharangambadi Coast & Town Gate Stroll",
+      "destination": "Tranquebar (Tharangambadi)",
+      "categoryId": "BEACHES_COASTAL"
+    },
+    {
+      "activityId": "act_902",
+      "activityName": "Nek Chand's Rock Garden",
+      "destination": "Chandigarh",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_903",
+      "activityName": "Capitol Complex",
+      "destination": "Chandigarh",
+      "categoryId": "HERITAGE_ARCHITECTURE"
+    },
+    {
+      "activityId": "act_904",
+      "activityName": "Sukhna Lake",
+      "destination": "Chandigarh",
+      "categoryId": "LAKES_RIVERS"
+    },
+    {
+      "activityId": "act_905",
+      "activityName": "Government Museum and Art Gallery",
+      "destination": "Chandigarh",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_906",
+      "activityName": "Parvati River Walk",
+      "destination": "Kasol",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_907",
+      "activityName": "Kheerganga Trek",
+      "destination": "Kasol",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_908",
+      "activityName": "Manikaran Sahib Gurudwara",
+      "destination": "Kasol",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_909",
+      "activityName": "Tosh Village Alpine Nature Trail",
+      "destination": "Kasol",
+      "categoryId": "TREKKING_HIKING"
+    },
+    {
+      "activityId": "act_910",
+      "activityName": "Kausani Himalayan Viewpoint",
+      "destination": "Kausani",
+      "categoryId": "SCENIC_VIEWPOINTS"
+    },
+    {
+      "activityId": "act_911",
+      "activityName": "Anashakti Ashram",
+      "destination": "Kausani",
+      "categoryId": "MUSEUMS_GALLERIES"
+    },
+    {
+      "activityId": "act_912",
+      "activityName": "Baijnath Temple Complex",
+      "destination": "Kausani",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_913",
+      "activityName": "Kausani Tea Estate",
+      "destination": "Kausani",
+      "categoryId": "GARDENS_PARKS"
+    },
+    {
+      "activityId": "act_914",
+      "activityName": "Gandikota Fort",
+      "destination": "Gandikota",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_915",
+      "activityName": "Pennar River Gorge Viewpoint",
+      "destination": "Gandikota",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_916",
+      "activityName": "Raghunatha Swamy & Madhavaraya Temples",
+      "destination": "Gandikota",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_917",
+      "activityName": "Cliffside Camping Over Pennar River Gorge",
+      "destination": "Gandikota",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_918",
+      "activityName": "Mallikarjuna Swamy Temple",
+      "destination": "Srisailam",
+      "categoryId": "TEMPLES_RELIGIOUS"
+    },
+    {
+      "activityId": "act_919",
+      "activityName": "Srisailam Dam",
+      "destination": "Srisailam",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_920",
+      "activityName": "Nagarjunasagar-Srisailam Tiger Reserve Safari",
+      "destination": "Srisailam",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_921",
+      "activityName": "Pathala Ganga Ropeway & Krishna Boat Ride",
+      "destination": "Srisailam",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_922",
+      "activityName": "Moyar River & Gorge Viewpoint",
+      "destination": "Bandipur",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_923",
+      "activityName": "Nahargarh Biological Park & Tiger Safari",
+      "destination": "Jaipur",
+      "categoryId": "WILDLIFE_SAFARI"
+    },
+    {
+      "activityId": "act_924",
+      "activityName": "Sisodia Rani Garden & Royal Terraced Palaces",
+      "destination": "Jaipur",
+      "categoryId": "FORTS_PALACES"
+    },
+    {
+      "activityId": "act_925",
+      "activityName": "Galtaji Temple & Monkey Palace Gorge",
+      "destination": "Jaipur",
+      "categoryId": "CAVES_ROCK_FORMATIONS"
+    },
+    {
+      "activityId": "act_926",
+      "activityName": "Sajjangarh Monsoon Palace & Biological Sanctuary",
+      "destination": "Udaipur",
+      "categoryId": "WILDLIFE_SAFARI"
+    }
+  ]
+}

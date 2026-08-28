@@ -17,7 +17,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
            "(:search IS NULL OR :search = '' OR LOWER(a.name) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(a.description) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
            "(:category IS NULL OR :category = '' OR LOWER(a.category) = LOWER(:category)) AND " +
            "(:source IS NULL OR :source = '' OR LOWER(a.source) = LOWER(:source)) " +
-           "ORDER BY a.name ASC")
+           "ORDER BY a.destination.isCurated DESC, a.subcategoryId DESC, a.name ASC")
     List<Activity> searchActivities(@Param("destinationId") Long destinationId,
                                     @Param("search") String search,
                                     @Param("category") String category,
