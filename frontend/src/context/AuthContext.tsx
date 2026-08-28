@@ -10,6 +10,7 @@ interface AuthContextType {
   login: (data: LoginRequest) => Promise<void>;
   signup: (data: SignupRequest) => Promise<void>;
   forgotPassword: (data: ForgotPasswordRequest) => Promise<void>;
+  handleOAuthExchange: (code: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -71,6 +72,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     await api.forgotPassword(data);
   };
 
+  const handleOAuthExchange = async (code: string) => {
+    const response = await api.exchangeOAuth2Code(code);
+    localStorage.setItem('globetrotter_token', response.token);
+    localStorage.setItem('globetrotter_user', JSON.stringify(response.user));
+    setToken(response.token);
+    setUser(response.user);
+  };
+
   const logout = () => {
     localStorage.removeItem('globetrotter_token');
     localStorage.removeItem('globetrotter_user');
@@ -88,6 +97,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         login,
         signup,
         forgotPassword,
+        handleOAuthExchange,
         logout,
       }}
     >

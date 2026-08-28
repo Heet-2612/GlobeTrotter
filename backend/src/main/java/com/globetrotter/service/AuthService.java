@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthService {
@@ -25,19 +27,22 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
     private final BrevoEmailService brevoEmailService;
+    private final OAuth2ExchangeService exchangeService;
 
     public AuthService(
             UserRepository userRepository,
             PasswordResetTokenRepository passwordResetTokenRepository,
             PasswordEncoder passwordEncoder,
             JwtTokenProvider tokenProvider,
-            BrevoEmailService brevoEmailService
+            BrevoEmailService brevoEmailService,
+            OAuth2ExchangeService exchangeService
     ) {
         this.userRepository = userRepository;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
         this.brevoEmailService = brevoEmailService;
+        this.exchangeService = exchangeService;
     }
 
     @Transactional
@@ -142,6 +147,52 @@ public class AuthService {
 
         return ForgotPasswordResponse.builder()
                 .message("Your password has been reset successfully.")
+                .build();
+    }
+
+    @Transactional
+    public AuthResponse exchangeOAuth2Code(OAuth2ExchangeRequest request) {
+        Map<String, Object> attributes = exchangeService.exchangeCode(request.getCode());
+        if (attributes == null) {
+            throw new InvalidCredentialsException("Invalid or expired OAuth2 exchange code");
+        }
+
+        String googleId = (String) attributes.get("sub");
+        String email = (String) attributes.get("email");
+        String name = (String) attributes.get("name");
+        String picture = (String) attributes.get("picture");
+
+        if (googleId == null || email == null) {
+            throw new InvalidCredentialsException("Incomplete OAuth2 profile data");
+        }
+
+        String normalizedEmail = email.trim().toLowerCase();
+
+        User user = userRepository.findByGoogleId(googleId).orElseGet(() -> {
+            Optional<User> existingUserByEmail = userRepository.findByEmail(normalizedEmail);
+            if (existingUserByEmail.isPresent()) {
+                User existing = existingUserByEmail.get();
+                existing.setGoogleId(googleId);
+                return userRepository.save(existing);
+            } else {
+                User newUser = User.builder()
+                        .name(name != null ? name.trim() : "Google User")
+                        .email(normalizedEmail)
+                        .passwordHash(passwordEncoder.encode(UUID.randomUUID().toString()))
+                        .profilePhoto(picture)
+                        .languagePreference("en")
+                        .authProvider("GOOGLE")
+                        .googleId(googleId)
+                        .build();
+                return userRepository.save(newUser);
+            }
+        });
+
+        String token = tokenProvider.generateToken(user.getEmail());
+
+        return AuthResponse.builder()
+                .token(token)
+                .user(UserResponse.fromEntity(user))
                 .build();
     }
 }

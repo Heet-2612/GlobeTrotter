@@ -98,6 +98,12 @@ export const api = {
       body: JSON.stringify(data),
     }),
 
+  exchangeOAuth2Code: (code: string) =>
+    request<AuthResponse>('/auth/oauth2/exchange', {
+      method: 'POST',
+      body: JSON.stringify({ code }),
+    }),
+
   signup: (data: SignupRequest) =>
     request<AuthResponse>('/auth/signup', {
       method: 'POST',

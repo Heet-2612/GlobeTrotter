@@ -32,6 +32,12 @@ public class User {
     @Column(name = "preferred_currency", length = 10)
     private String preferredCurrency;
 
+    @Column(name = "auth_provider", length = 20)
+    private String authProvider = "LOCAL";
+
+    @Column(name = "google_id", length = 255, unique = true)
+    private String googleId;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -44,10 +50,10 @@ public class User {
     }
 
     public User(Long id, String name, String email, String passwordHash, String profilePhoto, String languagePreference, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this(id, name, email, passwordHash, profilePhoto, languagePreference, "INR", createdAt, updatedAt);
+        this(id, name, email, passwordHash, profilePhoto, languagePreference, "INR", "LOCAL", null, createdAt, updatedAt);
     }
 
-    public User(Long id, String name, String email, String passwordHash, String profilePhoto, String languagePreference, String preferredCurrency, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long id, String name, String email, String passwordHash, String profilePhoto, String languagePreference, String preferredCurrency, String authProvider, String googleId, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -55,6 +61,8 @@ public class User {
         this.profilePhoto = profilePhoto;
         this.languagePreference = languagePreference;
         this.preferredCurrency = preferredCurrency;
+        this.authProvider = authProvider != null ? authProvider : "LOCAL";
+        this.googleId = googleId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -84,6 +92,12 @@ public class User {
     public String getPreferredCurrency() { return preferredCurrency; }
     public void setPreferredCurrency(String preferredCurrency) { this.preferredCurrency = preferredCurrency; }
 
+    public String getAuthProvider() { return authProvider; }
+    public void setAuthProvider(String authProvider) { this.authProvider = authProvider; }
+
+    public String getGoogleId() { return googleId; }
+    public void setGoogleId(String googleId) { this.googleId = googleId; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
@@ -98,6 +112,8 @@ public class User {
         private String profilePhoto;
         private String languagePreference;
         private String preferredCurrency;
+        private String authProvider = "LOCAL";
+        private String googleId;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
@@ -108,11 +124,13 @@ public class User {
         public UserBuilder profilePhoto(String profilePhoto) { this.profilePhoto = profilePhoto; return this; }
         public UserBuilder languagePreference(String languagePreference) { this.languagePreference = languagePreference; return this; }
         public UserBuilder preferredCurrency(String preferredCurrency) { this.preferredCurrency = preferredCurrency; return this; }
+        public UserBuilder authProvider(String authProvider) { this.authProvider = authProvider; return this; }
+        public UserBuilder googleId(String googleId) { this.googleId = googleId; return this; }
         public UserBuilder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
         public UserBuilder updatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public User build() {
-            return new User(id, name, email, passwordHash, profilePhoto, languagePreference, preferredCurrency, createdAt, updatedAt);
+            return new User(id, name, email, passwordHash, profilePhoto, languagePreference, preferredCurrency, authProvider, googleId, createdAt, updatedAt);
         }
     }
 }

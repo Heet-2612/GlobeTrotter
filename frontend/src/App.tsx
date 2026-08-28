@@ -21,7 +21,7 @@ import { Button, LoadingState } from './components/common/UIComponents';
 import { ArrowLeft } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, loading, handleOAuthExchange } = useAuth();
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
   const [activeParam, setActiveParam] = useState<string | number | undefined>(undefined);
 
@@ -35,6 +35,18 @@ const MainAppContent: React.FC = () => {
         const token = searchParams.get('token') || (hash.includes('token=') ? hash.split('token=')[1]?.split('&')[0] : '');
         setCurrentTab('reset-password');
         setActiveParam(token);
+        return;
+      }
+
+      if (hash.startsWith('oauth2')) {
+        const code = searchParams.get('code') || (hash.includes('code=') ? hash.split('code=')[1]?.split('&')[0] : null);
+        const error = searchParams.get('error') || (hash.includes('error=') ? hash.split('error=')[1]?.split('&')[0] : null);
+        setCurrentTab('oauth-callback');
+        if (error) {
+          setActiveParam(`error:${error}`);
+        } else if (code) {
+          setActiveParam(`code:${code}`);
+        }
         return;
       }
 
@@ -71,10 +83,26 @@ const MainAppContent: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  if (loading) {
+  useEffect(() => {
+    if (currentTab === 'oauth-callback' && activeParam && String(activeParam).startsWith('code:')) {
+      const code = String(activeParam).split('code:')[1];
+      handleOAuthExchange(code)
+        .then(() => {
+          // Clear URL and go to dashboard
+          window.history.replaceState(null, '', window.location.pathname);
+          handleNavigate('dashboard');
+        })
+        .catch((err) => {
+          console.error(err);
+          handleNavigate('oauth-callback', 'error:exchange_failed');
+        });
+    }
+  }, [currentTab, activeParam, handleOAuthExchange]);
+
+  if (loading || (currentTab === 'oauth-callback' && String(activeParam).startsWith('code:'))) {
     return (
       <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex items-center justify-center">
-        <LoadingState message="Initializing GlobeTrotter..." />
+        <LoadingState message={currentTab === 'oauth-callback' ? "Authenticating securely..." : "Initializing GlobeTrotter..."} />
       </div>
     );
   }
@@ -89,6 +117,30 @@ const MainAppContent: React.FC = () => {
         </main>
       </div>
     );
+  }
+
+  // OAuth Callback Handler
+  if (currentTab === 'oauth-callback' && activeParam) {
+    const paramStr = String(activeParam);
+    if (paramStr.startsWith('error:')) {
+      const errorMsg = paramStr.split('error:')[1];
+      return (
+        <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans items-center justify-center">
+          <div className="bg-white p-8 rounded-xl shadow-md text-center max-w-md w-full space-y-4">
+            <h2 className="text-xl font-bold text-rose-600">Authentication Failed</h2>
+            <p className="text-slate-600">
+              {errorMsg === 'unverified_email' 
+                ? 'Your Google account email is not verified. Please verify your email with Google first.'
+                : 'There was an error authenticating with Google.'}
+            </p>
+            <Button variant="outline" onClick={() => {
+              window.history.replaceState(null, '', window.location.pathname);
+              handleNavigate('login');
+            }}>Return to Login</Button>
+          </div>
+        </div>
+      );
+    }
   }
 
   // Public screen (accessible without login)

@@ -1,0 +1,6 @@
+ALTER TABLE users
+ADD COLUMN auth_provider VARCHAR(20) DEFAULT 'LOCAL' NOT NULL,
+ADD COLUMN google_id VARCHAR(255);
+
+ALTER TABLE users
+ADD CONSTRAINT uk_users_google_id UNIQUE (google_id);

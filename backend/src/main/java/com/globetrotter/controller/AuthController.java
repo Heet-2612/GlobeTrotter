@@ -43,4 +43,10 @@ public class AuthController {
         ForgotPasswordResponse response = authService.resetPassword(request);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/oauth2/exchange")
+    public ResponseEntity<AuthResponse> exchangeOAuth2Code(@Valid @RequestBody OAuth2ExchangeRequest request) {
+        AuthResponse response = authService.exchangeOAuth2Code(request);
+        return ResponseEntity.ok(response);
+    }
 }
