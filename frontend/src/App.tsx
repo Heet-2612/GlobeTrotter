@@ -25,7 +25,6 @@ const MainAppContent: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
   const [activeParam, setActiveParam] = useState<string | number | undefined>(undefined);
 
-  // Handle hash & path routing for public share tokens (#public/token) and password reset (#reset-password?token=... or /reset-password?token=...)
   useEffect(() => {
     const handleUrlChange = () => {
       const pathname = window.location.pathname;

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
   MapPin,
   Calendar,
@@ -13,7 +13,8 @@ import {
   Eye,
   Settings,
 } from 'lucide-react';
-import { getCityImageUrl, getActivityImageUrl, getTripCoverUrl, onCityImageError } from '../../utils/imageUtils';
+import { getCityImageUrl, getTripCoverUrl, onCityImageError } from '../../utils/imageUtils';
+import ActivityImage from './ActivityImage';
 
 import { TripResponse, CityResponse, ActivityResponse } from '../../types';
 import { useCurrency } from '../../context/CurrencyContext';
@@ -314,6 +315,42 @@ export const CityCard: React.FC<CityCardProps> = ({ city, onNavigate }) => {
   );
 };
 
+interface ExpandableDescriptionProps {
+  text?: string;
+  maxChars?: number;
+  className?: string;
+}
+
+export const ExpandableDescription: React.FC<ExpandableDescriptionProps> = ({
+  text = '',
+  maxChars = 90,
+  className = 'text-xs text-slate-600 mt-1',
+}) => {
+  const [expanded, setExpanded] = useState(false);
+  const trimmed = text ? text.trim() : '';
+  const isOverflow = trimmed.length > maxChars;
+
+  return (
+    <div className="space-y-0.5">
+      <p className={`${className} ${expanded ? '' : 'line-clamp-2'}`}>
+        {trimmed || 'No description available.'}
+      </p>
+      {isOverflow && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded(!expanded);
+          }}
+          className="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 hover:underline cursor-pointer inline-flex items-center gap-0.5"
+        >
+          {expanded ? 'Read less ↑' : 'Read more ↓'}
+        </button>
+      )}
+    </div>
+  );
+};
+
 // Activity Card Component (Light Mode)
 interface ActivityCardProps {
   activity: ActivityResponse;
@@ -321,15 +358,16 @@ interface ActivityCardProps {
 
 export const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
   const { formatDual } = useCurrency();
-  const imageUrl = getActivityImageUrl(activity.category, activity.imageUrl);
-
   return (
     <Card hoverable className="p-0 overflow-hidden flex flex-col justify-between group bg-white border border-slate-200 shadow-xs">
       <div className="relative h-36 overflow-hidden">
-        <img
-          src={imageUrl}
+        <ActivityImage
+          imageUrl={activity.imageUrl}
+          subcategoryId={activity.subcategoryId}
+          category={activity.category}
           alt={activity.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full rounded-none group-hover:scale-105 transition-transform duration-500"
+          iconSize={36}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent"></div>
         <div className="absolute top-3 left-3">
@@ -346,16 +384,10 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
       <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
         <div>
           <h4 className="font-bold text-slate-900 text-base">{activity.name}</h4>
-          <p className="text-xs text-slate-600 line-clamp-2 mt-1">
-            {activity.description || 'No description available.'}
-          </p>
+          <ExpandableDescription text={activity.description} maxChars={90} />
         </div>
 
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <span className="text-slate-500 flex items-center space-x-1 font-medium">
-            <Clock size={12} />
-            <span>{activity.estimatedDurationMinutes ? `${activity.estimatedDurationMinutes}m` : 'Flexible'}</span>
-          </span>
+        <div className="pt-3 border-t border-slate-100 flex items-center justify-end text-xs">
           <span className="font-extrabold text-emerald-700 text-sm">
             {formatDual(activity.estimatedCost, activity.currency)}
           </span>

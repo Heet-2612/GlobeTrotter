@@ -119,9 +119,9 @@ public class ActivityImageArchitectureIntegrationTest {
     }
 
     @Test
-    @DisplayName("Verify ActivityImageRegistry contains all 69 defined visual concepts")
-    void testRegistryContainsAll69Concepts() {
-        assertThat(activityImageRegistry.getAllConcepts()).hasSize(69);
+    @DisplayName("Verify ActivityImageRegistry contains all 72 defined visual concepts")
+    void testRegistryContainsAll72Concepts() {
+        assertThat(activityImageRegistry.getAllConcepts()).hasSize(72);
 
         ActivityImageRegistry.SubcategoryConcept stepwell = activityImageRegistry.getConcept("STEPWELL_VAV");
         assertThat(stepwell).isNotNull();

@@ -60,9 +60,12 @@ public class GeoapifyDiscoveryService {
         FALLBACK_DESTINATION_COORDINATES.put("rann of kutch", new double[]{23.8329, 69.8398});
     }
 
-    public GeoapifyDiscoveryService(DestinationRepository destinationRepository, GeoapifyClient geoapifyClient) {
+    private final ActivityImageRegistry activityImageRegistry;
+
+    public GeoapifyDiscoveryService(DestinationRepository destinationRepository, GeoapifyClient geoapifyClient, ActivityImageRegistry activityImageRegistry) {
         this.destinationRepository = destinationRepository;
         this.geoapifyClient = geoapifyClient;
+        this.activityImageRegistry = activityImageRegistry;
     }
 
     @Transactional(readOnly = true)
@@ -97,6 +100,18 @@ public class GeoapifyDiscoveryService {
             throw new IllegalStateException("Geoapify API key is not configured. Please set GEOAPIFY_API_KEY in environment configuration.");
         }
 
-        return geoapifyClient.discoverPlaces(lat, lon, query, category, radiusMeters);
+        List<DiscoveredPlaceResponse> places = geoapifyClient.discoverPlaces(lat, lon, query, category, radiusMeters);
+        if (places != null && activityImageRegistry != null) {
+            String cityName = destination.getName();
+            for (DiscoveredPlaceResponse p : places) {
+                String subcat = activityImageRegistry.inferSubcategoryId(p.getName(), p.getCategory(), cityName);
+                p.setSubcategoryId(subcat);
+                String resolvedImg = activityImageRegistry.resolveImageUrlForPlace(p.getName(), p.getCategory(), cityName);
+                if (resolvedImg != null) {
+                    p.setImageUrl(resolvedImg);
+                }
+            }
+        }
+        return places;
     }
 }

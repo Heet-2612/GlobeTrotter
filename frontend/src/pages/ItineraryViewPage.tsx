@@ -4,7 +4,8 @@ import { api } from '../services/api';
 import { Calendar, DollarSign, Globe, Lock, Edit3, Eye, Clock, Share2, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
 import { useCurrency } from '../context/CurrencyContext';
-import { getTripCoverUrl, getCityImageUrl, getActivityImageUrl, onCityImageError } from '../utils/imageUtils';
+import { getTripCoverUrl, getCityImageUrl, onCityImageError } from '../utils/imageUtils';
+import ActivityImage from '../components/common/ActivityImage';
 
 
 interface ItineraryViewPageProps {
@@ -172,11 +173,17 @@ export const ItineraryViewPage: React.FC<ItineraryViewPageProps> = ({ tripId, on
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {stopActivities.map((act) => {
-                        const actImg = getActivityImageUrl(act.activity?.category, act.activity?.imageUrl);
                         return (
                           <div key={act.id} className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex space-x-3 items-center">
                             <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-slate-200">
-                              <img src={actImg} alt={act.activity.name} className="w-full h-full object-cover" />
+                              <ActivityImage
+                                imageUrl={act.activity?.imageUrl}
+                                subcategoryId={act.activity?.subcategoryId}
+                                category={act.activity?.category}
+                                alt={act.activity.name}
+                                className="w-full h-full rounded-none"
+                                iconSize={20}
+                              />
                             </div>
                             <div className="flex-1 space-y-0.5 text-xs">
                               <h5 className="font-bold text-slate-900 line-clamp-1">{act.activity.name}</h5>

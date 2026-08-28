@@ -29,7 +29,6 @@ class GeoapifyDiscoveryServiceTest {
     @Mock
     private GeoapifyClient geoapifyClient;
 
-    @InjectMocks
     private GeoapifyDiscoveryService geoapifyDiscoveryService;
 
     private Destination jaipurWithCoords;
@@ -38,6 +37,11 @@ class GeoapifyDiscoveryServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        geoapifyDiscoveryService = new GeoapifyDiscoveryService(
+                destinationRepository,
+                geoapifyClient,
+                new com.globetrotter.service.ActivityImageRegistry()
+        );
 
         jaipurWithCoords = Destination.builder()
                 .id(1L)

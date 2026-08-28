@@ -12,7 +12,8 @@ import {
   NormalizedPlace,
 } from '../services/placeSearchService';
 import { useCurrency } from '../context/CurrencyContext';
-import { getCityImageUrl, getActivityImageUrl, onCityImageError } from '../utils/imageUtils';
+import { getCityImageUrl, onCityImageError } from '../utils/imageUtils';
+import ActivityImage from '../components/common/ActivityImage';
 
 import {
   MapPin,
@@ -30,7 +31,7 @@ import {
   Navigation,
   X,
 } from 'lucide-react';
-import { Button, Card, Badge, Input, LoadingState } from '../components/common/UIComponents';
+import { Button, Card, Badge, Input, LoadingState, ExpandableDescription } from '../components/common/UIComponents';
 
 interface DestinationDetailsPageProps {
   cityId: number;
@@ -445,12 +446,18 @@ export const DestinationDetailsPage: React.FC<DestinationDetailsPageProps> = ({ 
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {activities.map((act) => {
-              const actImg = getActivityImageUrl(act.category, act.imageUrl);
               return (
                 <Card key={act.id} className="overflow-hidden flex flex-col justify-between hover:shadow-md transition-all bg-white border border-slate-200">
                   <div className="space-y-3 p-5">
                     <div className="h-40 rounded-xl overflow-hidden relative border border-slate-200">
-                      <img src={actImg} alt={act.name} className="w-full h-full object-cover" />
+                      <ActivityImage
+                        imageUrl={act.imageUrl}
+                        subcategoryId={act.subcategoryId}
+                        category={act.category}
+                        alt={act.name}
+                        className="w-full h-full rounded-xl"
+                        iconSize={36}
+                      />
                       <Badge variant="emerald" className="absolute top-3 left-3 shadow-xs">
                         {act.category || 'Attraction'}
                       </Badge>
@@ -458,7 +465,7 @@ export const DestinationDetailsPage: React.FC<DestinationDetailsPageProps> = ({ 
 
                     <div>
                       <h3 className="font-bold text-slate-900 text-base leading-snug">{act.name}</h3>
-                      <p className="text-xs text-slate-500 mt-1 line-clamp-2">{act.description}</p>
+                      <ExpandableDescription text={act.description} maxChars={90} className="text-xs text-slate-500 mt-1" />
                     </div>
                   </div>
 

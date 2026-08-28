@@ -22,8 +22,9 @@ import {
   Landmark,
   Film
 } from 'lucide-react';
-import { Button, Card, Badge } from '../common/UIComponents';
-import { getDestinationImageUrl, getActivityImageUrl, onCityImageError } from '../../utils/imageUtils';
+import { Button, Card, Badge, ExpandableDescription } from '../common/UIComponents';
+import { getDestinationImageUrl, onCityImageError } from '../../utils/imageUtils';
+import ActivityImage from '../common/ActivityImage';
 
 interface DestinationExplorationModalProps {
   tripId: number;
@@ -265,11 +266,13 @@ export const DestinationExplorationModal: React.FC<DestinationExplorationModalPr
                         isAdded ? 'bg-emerald-50/50 border-emerald-300' : 'bg-white border-slate-200 hover:border-slate-300'
                       }`}
                     >
-                      <img
-                        src={getActivityImageUrl(act.category, act.imageUrl)}
+                      <ActivityImage
+                        imageUrl={act.imageUrl}
+                        subcategoryId={act.subcategoryId}
+                        category={act.category}
                         alt={act.name}
-                        onError={onCityImageError}
-                        className="w-16 h-16 rounded-lg object-cover bg-slate-100 shrink-0 border border-slate-200"
+                        className="w-16 h-16 rounded-lg bg-slate-100 shrink-0 border border-slate-200"
+                        iconSize={24}
                       />
                       <div className="flex-1 min-w-0 space-y-1">
                         <div className="flex items-start justify-between gap-1">
@@ -278,13 +281,9 @@ export const DestinationExplorationModal: React.FC<DestinationExplorationModalPr
                             {act.category || 'Highlight'}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-500 line-clamp-2">{act.description || 'Authentic attraction'}</p>
+                        <ExpandableDescription text={act.description || 'Authentic attraction'} maxChars={80} className="text-[11px] text-slate-500 mt-0.5" />
 
-                        <div className="pt-1 flex items-center justify-between">
-                          <span className="text-[10px] text-slate-400 flex items-center gap-1">
-                            <Clock size={11} /> {act.estimatedDurationMinutes || 60} mins
-                          </span>
-
+                        <div className="pt-1 flex items-center justify-end">
                           {isAdded ? (
                             <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">
                               <Check size={12} /> Added
@@ -400,11 +399,13 @@ export const DestinationExplorationModal: React.FC<DestinationExplorationModalPr
                         isAdded ? 'bg-emerald-50/50 border-emerald-300' : 'bg-white border-slate-200 hover:border-slate-300'
                       }`}
                     >
-                      <img
-                        src={getDestinationImageUrl(place.name, place.imageUrl)}
+                      <ActivityImage
+                        imageUrl={place.imageUrl}
+                        subcategoryId={(place as any).subcategoryId}
+                        category={place.category}
                         alt={place.name}
-                        onError={onCityImageError}
-                        className="w-14 h-14 rounded-lg object-cover bg-slate-100 shrink-0 border border-slate-200"
+                        className="w-14 h-14 rounded-lg bg-slate-100 shrink-0 border border-slate-200"
+                        iconSize={20}
                       />
                       <div className="flex-1 min-w-0 space-y-1">
                         <div className="flex items-start justify-between gap-1">
@@ -413,7 +414,7 @@ export const DestinationExplorationModal: React.FC<DestinationExplorationModalPr
                             {place.category || 'Place'}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-500 line-clamp-2">{place.address || place.description || 'Attraction'}</p>
+                        <ExpandableDescription text={place.address || place.description || 'Attraction'} maxChars={80} className="text-[11px] text-slate-500 mt-0.5" />
 
                         <div className="pt-1 flex items-center justify-end">
                           {isAdded ? (

@@ -68,7 +68,11 @@ public class ActivityResponse {
                 resolvedUrl,
                 activity.getGooglePlaceId()
         );
-        response.setSubcategoryId(activity.getSubcategoryId());
+        String subcat = activity.getSubcategoryId();
+        if (subcat == null && registry != null) {
+            subcat = registry.inferSubcategoryId(activity.getName(), activity.getCategory(), destName);
+        }
+        response.setSubcategoryId(subcat);
         response.setImageStrategy(activity.getImageStrategy());
         response.setSource(activity.getSource());
         response.setExternalId(activity.getExternalId());

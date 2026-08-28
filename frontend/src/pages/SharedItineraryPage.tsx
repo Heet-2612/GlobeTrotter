@@ -5,7 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { Globe, Calendar, DollarSign, Copy, Check, Sparkles, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
 import { useCurrency } from '../context/CurrencyContext';
-import { getTripCoverUrl, getCityImageUrl, getActivityImageUrl, onCityImageError } from '../utils/imageUtils';
+import { getTripCoverUrl, getCityImageUrl, onCityImageError } from '../utils/imageUtils';
+import ActivityImage from '../components/common/ActivityImage';
 
 
 interface SharedItineraryPageProps {
@@ -172,11 +173,17 @@ export const SharedItineraryPage: React.FC<SharedItineraryPageProps> = ({ shareT
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {stop.activities.map((act, actIdx) => {
-                        const actImg = getActivityImageUrl(act.category);
                         return (
                           <div key={act.id || actIdx} className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex space-x-3 items-center">
                             <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-slate-200">
-                              <img src={actImg} alt={act.name} className="w-full h-full object-cover" />
+                              <ActivityImage
+                                imageUrl={act.imageUrl}
+                                subcategoryId={(act as any).subcategoryId}
+                                category={act.category}
+                                alt={act.name}
+                                className="w-full h-full rounded-none"
+                                iconSize={20}
+                              />
                             </div>
                             <div className="flex-1 space-y-1 text-xs min-w-0">
                               <div className="flex justify-between items-start">

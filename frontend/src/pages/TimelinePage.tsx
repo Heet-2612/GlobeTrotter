@@ -5,7 +5,7 @@ import { Calendar, Clock, Edit3, Eye, DollarSign, MapPin } from 'lucide-react';
 import { Button, Card, Badge, LoadingState } from '../components/common/UIComponents';
 
 import { useCurrency } from '../context/CurrencyContext';
-import { getActivityImageUrl } from '../utils/imageUtils';
+import ActivityImage from '../components/common/ActivityImage';
 
 interface TimelinePageProps {
   tripId: number;
@@ -132,7 +132,6 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({ tripId, onNavigate }
                       ) : (
                         <div className="space-y-2">
                           {stopActivities.map((act) => {
-                            const actImg = getActivityImageUrl(act.activity?.category, act.activity?.imageUrl);
                             return (
                               <div
                                 key={act.id}
@@ -140,7 +139,14 @@ export const TimelinePage: React.FC<TimelinePageProps> = ({ tripId, onNavigate }
                               >
                                 <div className="flex items-center space-x-3 min-w-0">
                                   <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-slate-200">
-                                    <img src={actImg} alt={act.activity.name} className="w-full h-full object-cover" />
+                                    <ActivityImage
+                                      imageUrl={act.activity?.imageUrl}
+                                      subcategoryId={act.activity?.subcategoryId}
+                                      category={act.activity?.category}
+                                      alt={act.activity.name}
+                                      className="w-full h-full rounded-none"
+                                      iconSize={18}
+                                    />
                                   </div>
                                   <div className="space-y-0.5 min-w-0">
                                     <span className="font-bold text-slate-900 block text-sm truncate">{act.activity.name}</span>

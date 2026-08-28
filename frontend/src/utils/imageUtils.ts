@@ -1,36 +1,12 @@
-import adventureImg from '../assets/activities/activity-adventure.jpg';
-import cultureImg from '../assets/activities/activity-culture.jpg';
-import entertainmentImg from '../assets/activities/activity-entertainment.jpg';
-import foodImg from '../assets/activities/activity-food.jpg';
-import nightlifeImg from '../assets/activities/activity-nightlife.jpg';
-import relaxationImg from '../assets/activities/activity-relaxation.jpg';
-import sightseeingImg from '../assets/activities/activity-sightseeing.jpg';
-import shoppingImg from '../assets/activities/activity-shopping.jpg';
-import spiritualImg from '../assets/activities/activity-spiritual.jpg';
-
 import { cityImages } from '../data/cityImages';
 import { stateImages } from '../data/stateImages';
 
-// Curated travel imagery for destinations & activity categories
+// Curated travel imagery for destinations & trip covers only.
+// Activity images use the 72-concept registry + SVG icon placeholder fallback.
 
 function normalizeKey(name: string): string {
   return name.trim().toLowerCase();
 }
-
-const CATEGORY_IMAGES: Record<string, string> = {
-  attraction: sightseeingImg,
-  sightseeing: sightseeingImg,
-  nature: relaxationImg,
-  food: foodImg,
-  shopping: shoppingImg,
-  culture: cultureImg,
-  entertainment: entertainmentImg,
-  pilgrimage: spiritualImg,
-  relaxation: relaxationImg,
-  adventure: adventureImg,
-  nightlife: nightlifeImg,
-  spiritual: spiritualImg,
-};
 
 const DEFAULT_TRIP_IMAGES = [
   'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80',
@@ -40,11 +16,13 @@ const DEFAULT_TRIP_IMAGES = [
 ];
 
 /**
- * Reliable fallback hierarchy:
+ * Reliable fallback hierarchy for DESTINATION images:
  * 1. Provided explicit fallbackUrl (if valid)
  * 2. Destination-specific landmark image (cityImages)
  * 3. State/Region-specific landscape image (stateImages)
  * 4. General travel fallback
+ *
+ * NOTE: This is NOT used for activity images. Activities use ActivityImage component.
  */
 export function getDestinationImageUrl(destinationName?: string, stateName?: string, fallbackUrl?: string): string {
   // If the 2nd argument is an HTTP/HTTPS image URL string, treat it as fallbackUrl if fallbackUrl is omitted
@@ -84,8 +62,10 @@ export function getCityImageUrl(cityName?: string, stateName?: string, fallbackU
 }
 
 /**
- * Use as `onError` on any <img> displaying a destination image.
+ * Use as `onError` on any <img> displaying a DESTINATION image.
  * Prevents broken-image icons by falling back to the generic travel image.
+ *
+ * NOTE: Do NOT use this for activity images. Use ActivityImage component instead.
  */
 export function onCityImageError(e: any): void {
   const img = e.currentTarget || e.target;
@@ -100,20 +80,15 @@ export function onDestinationImageError(e: any): void {
 }
 
 /**
- * Category-based fallback system for activities.
- * Categories: ATTRACTION, NATURE, FOOD, SHOPPING, CULTURE, ENTERTAINMENT, PILGRIMAGE, RELAXATION
+ * Returns the curated/registry image URL for an activity, or null if none exists.
+ * When this returns null, the caller should render an ActivityIconPlaceholder instead.
  */
-export function getActivityImageUrl(category?: string, fallbackUrl?: string | null): string {
+export function getActivityImageUrl(_category?: string, fallbackUrl?: string | null): string | null {
   if (fallbackUrl && typeof fallbackUrl === 'string' && fallbackUrl.trim().length > 0 && fallbackUrl !== 'null' && fallbackUrl !== 'undefined') {
     return fallbackUrl.trim();
   }
-  if (category) {
-    const key = category.trim().toLowerCase().replace(/[-_\s]/g, '');
-    if (CATEGORY_IMAGES[key]) {
-      return CATEGORY_IMAGES[key];
-    }
-  }
-  return CATEGORY_IMAGES['attraction'];
+  // No generic photo fallback — caller should render SVG icon placeholder
+  return null;
 }
 
 export function getTripCoverUrl(tripId?: number, coverPhoto?: string): string {

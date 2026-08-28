@@ -7,6 +7,7 @@ public class DiscoveredPlaceResponse {
     private String name;
     private String description;
     private String category;
+    private String subcategoryId;
     private Double latitude;
     private Double longitude;
     private String address;
@@ -47,6 +48,9 @@ public class DiscoveredPlaceResponse {
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
+
+    public String getSubcategoryId() { return subcategoryId; }
+    public void setSubcategoryId(String subcategoryId) { this.subcategoryId = subcategoryId; }
 
     public Double getLatitude() { return latitude; }
     public void setLatitude(Double latitude) { this.latitude = latitude; }

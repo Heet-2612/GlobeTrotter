@@ -28,7 +28,8 @@ import {
 } from 'lucide-react';
 import { Button, Card, Badge, Input, LoadingState } from '../components/common/UIComponents';
 import { useCurrency } from '../context/CurrencyContext';
-import { getCityImageUrl, getActivityImageUrl, onCityImageError, getDestinationImageUrl } from '../utils/imageUtils';
+import { getCityImageUrl, onCityImageError, getDestinationImageUrl } from '../utils/imageUtils';
+import ActivityImage from '../components/common/ActivityImage';
 import { DestinationExplorationModal } from '../components/destination/DestinationExplorationModal';
 
 interface ItineraryBuilderPageProps {
@@ -469,11 +470,13 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
                               className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2 relative group hover:bg-white hover:shadow-xs transition-all"
                             >
                               <div className="flex space-x-3 items-start pr-6">
-                                <img
-                                  src={getActivityImageUrl(act?.category, act?.imageUrl)}
+                                <ActivityImage
+                                  imageUrl={act?.imageUrl}
+                                  subcategoryId={act?.subcategoryId}
+                                  category={act?.category}
                                   alt={act?.name || 'Activity'}
-                                  onError={onCityImageError}
-                                  className="w-12 h-12 rounded-lg object-cover bg-white border border-slate-200 shrink-0"
+                                  className="w-12 h-12 rounded-lg bg-white border border-slate-200 shrink-0"
+                                  iconSize={20}
                                 />
                                 <div className="min-w-0 flex-1">
                                   <h5 className="font-bold text-slate-900 text-xs truncate">{act?.name || 'Activity'}</h5>
@@ -572,11 +575,13 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
                           >
                             <div className="flex items-center space-x-3.5 min-w-0">
                               <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-slate-200">
-                                <img
-                                  src={getActivityImageUrl(act?.category, act?.imageUrl)}
+                                <ActivityImage
+                                  imageUrl={act?.imageUrl}
+                                  subcategoryId={act?.subcategoryId}
+                                  category={act?.category}
                                   alt={act?.name || 'Activity'}
-                                  onError={onCityImageError}
-                                  className="w-full h-full object-cover"
+                                  className="w-full h-full rounded-none"
+                                  iconSize={20}
                                 />
                               </div>
                               <div className="min-w-0">
