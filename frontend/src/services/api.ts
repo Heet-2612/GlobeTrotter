@@ -346,6 +346,10 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+  removeTripMember: (tripId: number, memberId: number) =>
+    request<void>(`/trips/${tripId}/members/${memberId}`, {
+      method: 'DELETE',
+    }),
   // Trip Expenses / Bills
   getTripExpenses: (tripId: number) => request<ExpenseResponse[]>(`/trips/${tripId}/expenses`),
   getExpenseById: (tripId: number, expenseId: number) => request<ExpenseResponse>(`/trips/${tripId}/expenses/${expenseId}`),

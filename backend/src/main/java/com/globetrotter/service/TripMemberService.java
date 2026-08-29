@@ -1,18 +1,25 @@
 package com.globetrotter.service;
 
 import com.globetrotter.dto.AddTripMemberRequest;
+import com.globetrotter.dto.MemberBalanceResponse;
 import com.globetrotter.dto.TripMemberResponse;
 import com.globetrotter.entity.Trip;
+import com.globetrotter.entity.TripExpense;
 import com.globetrotter.entity.TripMember;
+import com.globetrotter.entity.TripSettlement;
 import com.globetrotter.entity.User;
 import com.globetrotter.exception.ResourceNotFoundException;
+import com.globetrotter.repository.TripExpenseRepository;
 import com.globetrotter.repository.TripMemberRepository;
 import com.globetrotter.repository.TripRepository;
+import com.globetrotter.repository.TripSettlementRepository;
 import com.globetrotter.repository.UserRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,11 +30,22 @@ public class TripMemberService {
     private final TripRepository tripRepository;
     private final TripMemberRepository tripMemberRepository;
     private final UserRepository userRepository;
+    private final TripExpenseRepository tripExpenseRepository;
+    private final TripSettlementRepository tripSettlementRepository;
+    private final TripBalanceCalculator tripBalanceCalculator;
 
-    public TripMemberService(TripRepository tripRepository, TripMemberRepository tripMemberRepository, UserRepository userRepository) {
+    public TripMemberService(TripRepository tripRepository,
+                             TripMemberRepository tripMemberRepository,
+                             UserRepository userRepository,
+                             TripExpenseRepository tripExpenseRepository,
+                             TripSettlementRepository tripSettlementRepository,
+                             TripBalanceCalculator tripBalanceCalculator) {
         this.tripRepository = tripRepository;
         this.tripMemberRepository = tripMemberRepository;
         this.userRepository = userRepository;
+        this.tripExpenseRepository = tripExpenseRepository;
+        this.tripSettlementRepository = tripSettlementRepository;
+        this.tripBalanceCalculator = tripBalanceCalculator;
     }
 
     @Transactional
@@ -160,6 +178,37 @@ public class TripMemberService {
 
         if ("OWNER".equals(member.getRole())) {
             throw new IllegalArgumentException("Cannot deactivate the trip owner.");
+        }
+
+        if ("INACTIVE".equals(member.getStatus())) {
+            return;
+        }
+
+        // Authoritative balance check using multi-payer aware TripBalanceCalculator
+        List<TripMember> allMembers = tripMemberRepository.findByTripId(tripId);
+        List<TripExpense> allExpenses = tripExpenseRepository.findByTripIdOrderByExpenseDateDescCreatedAtDesc(tripId);
+        List<TripSettlement> allSettlements = tripSettlementRepository.findByTripIdOrderBySettlementDateDescCreatedAtDesc(tripId);
+
+        TripBalanceCalculator.CalculationResult result = tripBalanceCalculator.calculateBalances(allMembers, allExpenses, allSettlements);
+
+        Optional<MemberBalanceResponse> memberBalOpt = result.getMemberBalances().stream()
+                .filter(mb -> mb.getMemberId().equals(memberId))
+                .findFirst();
+
+        if (memberBalOpt.isPresent()) {
+            BigDecimal netBalance = memberBalOpt.get().getNetBalance();
+            if (netBalance.compareTo(BigDecimal.ZERO) != 0) {
+                String formattedAmt = "₹" + netBalance.abs().setScale(2, RoundingMode.HALF_UP);
+                if (netBalance.compareTo(BigDecimal.ZERO) > 0) {
+                    throw new IllegalArgumentException(
+                            "Cannot remove " + member.getFullName() + " because they are owed " + formattedAmt + ". Please settle the balance first."
+                    );
+                } else {
+                    throw new IllegalArgumentException(
+                            "Cannot remove " + member.getFullName() + " because they have an unsettled balance of " + formattedAmt + ". Please settle the balance first."
+                    );
+                }
+            }
         }
 
         member.setStatus("INACTIVE");

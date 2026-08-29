@@ -1,13 +1,17 @@
 package com.globetrotter.service;
 
 import com.globetrotter.dto.AddTripMemberRequest;
+import com.globetrotter.dto.MemberBalanceResponse;
 import com.globetrotter.dto.TripMemberResponse;
+import com.globetrotter.entity.BalanceStatus;
 import com.globetrotter.entity.Trip;
 import com.globetrotter.entity.TripMember;
 import com.globetrotter.entity.User;
 import com.globetrotter.exception.ResourceNotFoundException;
+import com.globetrotter.repository.TripExpenseRepository;
 import com.globetrotter.repository.TripMemberRepository;
 import com.globetrotter.repository.TripRepository;
+import com.globetrotter.repository.TripSettlementRepository;
 import com.globetrotter.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +23,9 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.security.access.AccessDeniedException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +46,14 @@ class TripMemberServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    @InjectMocks
+    @Mock
+    private TripExpenseRepository tripExpenseRepository;
+
+    @Mock
+    private TripSettlementRepository tripSettlementRepository;
+
+    private TripBalanceCalculator tripBalanceCalculator = new TripBalanceCalculator();
+
     private TripMemberService tripMemberService;
 
     private User owner;
@@ -49,6 +62,15 @@ class TripMemberServiceTest {
 
     @BeforeEach
     void setUp() {
+        tripMemberService = new TripMemberService(
+                tripRepository,
+                tripMemberRepository,
+                userRepository,
+                tripExpenseRepository,
+                tripSettlementRepository,
+                tripBalanceCalculator
+        );
+
         owner = User.builder()
                 .id(1L)
                 .name("Aditya Owner")
@@ -236,5 +258,139 @@ class TripMemberServiceTest {
         assertTrue(res.isGtUser());
         assertEquals("MEMBER", res.getRole());
         assertEquals("ACTIVE", res.getStatus());
+    }
+
+    @Test
+    void test13_DeactivateMember_ZeroBalance_Succeeds() {
+        TripMember member = TripMember.builder()
+                .id(200L)
+                .trip(trip)
+                .user(regularUser)
+                .fullName("Rahul Member")
+                .role("MEMBER")
+                .status("ACTIVE")
+                .build();
+
+        when(tripRepository.findById(100L)).thenReturn(Optional.of(trip));
+        when(tripRepository.findByIdAndUserId(100L, 1L)).thenReturn(Optional.of(trip));
+        when(tripMemberRepository.findById(200L)).thenReturn(Optional.of(member));
+        when(tripMemberRepository.findByTripId(100L)).thenReturn(List.of(member));
+        when(tripExpenseRepository.findByTripIdOrderByExpenseDateDescCreatedAtDesc(100L)).thenReturn(Collections.emptyList());
+        when(tripSettlementRepository.findByTripIdOrderBySettlementDateDescCreatedAtDesc(100L)).thenReturn(Collections.emptyList());
+
+        tripMemberService.deactivateMember(100L, 200L, owner);
+
+        assertEquals("INACTIVE", member.getStatus());
+        verify(tripMemberRepository, times(1)).save(member);
+    }
+
+    @Test
+    void test14_DeactivateMember_OwedMoney_ThrowsException() {
+        TripMember ownerMem = TripMember.builder().id(101L).trip(trip).user(owner).fullName("Aditya Owner").role("OWNER").status("ACTIVE").build();
+        TripMember member = TripMember.builder()
+                .id(200L)
+                .trip(trip)
+                .user(regularUser)
+                .fullName("Rahul Member")
+                .role("MEMBER")
+                .status("ACTIVE")
+                .build();
+
+        com.globetrotter.entity.TripExpense exp = com.globetrotter.entity.TripExpense.builder()
+                .id(501L)
+                .trip(trip)
+                .title("Equipment")
+                .amount(new BigDecimal("500.00"))
+                .payerMember(member)
+                .splitType(com.globetrotter.entity.SplitType.EQUAL)
+                .participants(List.of(
+                        com.globetrotter.entity.ExpenseParticipant.builder().id(1L).member(ownerMem).shareAmount(new BigDecimal("500.00")).build()
+                ))
+                .build();
+
+        when(tripRepository.findById(100L)).thenReturn(Optional.of(trip));
+        when(tripRepository.findByIdAndUserId(100L, 1L)).thenReturn(Optional.of(trip));
+        when(tripMemberRepository.findById(200L)).thenReturn(Optional.of(member));
+        when(tripMemberRepository.findByTripId(100L)).thenReturn(List.of(ownerMem, member));
+        when(tripExpenseRepository.findByTripIdOrderByExpenseDateDescCreatedAtDesc(100L)).thenReturn(List.of(exp));
+        when(tripSettlementRepository.findByTripIdOrderBySettlementDateDescCreatedAtDesc(100L)).thenReturn(Collections.emptyList());
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> tripMemberService.deactivateMember(100L, 200L, owner));
+        assertTrue(ex.getMessage().contains("because they are owed ₹500.00"));
+        verify(tripMemberRepository, never()).save(member);
+    }
+
+    @Test
+    void test15_DeactivateMember_OwesMoney_ThrowsException() {
+        TripMember ownerMem = TripMember.builder().id(101L).trip(trip).user(owner).fullName("Aditya Owner").role("OWNER").status("ACTIVE").build();
+        TripMember member = TripMember.builder()
+                .id(200L)
+                .trip(trip)
+                .user(regularUser)
+                .fullName("Rahul Member")
+                .role("MEMBER")
+                .status("ACTIVE")
+                .build();
+
+        com.globetrotter.entity.TripExpense exp = com.globetrotter.entity.TripExpense.builder()
+                .id(502L)
+                .trip(trip)
+                .title("Dinner")
+                .amount(new BigDecimal("450.00"))
+                .payerMember(ownerMem)
+                .splitType(com.globetrotter.entity.SplitType.EQUAL)
+                .participants(List.of(
+                        com.globetrotter.entity.ExpenseParticipant.builder().id(2L).member(member).shareAmount(new BigDecimal("450.00")).build()
+                ))
+                .build();
+
+        when(tripRepository.findById(100L)).thenReturn(Optional.of(trip));
+        when(tripRepository.findByIdAndUserId(100L, 1L)).thenReturn(Optional.of(trip));
+        when(tripMemberRepository.findById(200L)).thenReturn(Optional.of(member));
+        when(tripMemberRepository.findByTripId(100L)).thenReturn(List.of(ownerMem, member));
+        when(tripExpenseRepository.findByTripIdOrderByExpenseDateDescCreatedAtDesc(100L)).thenReturn(List.of(exp));
+        when(tripSettlementRepository.findByTripIdOrderBySettlementDateDescCreatedAtDesc(100L)).thenReturn(Collections.emptyList());
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> tripMemberService.deactivateMember(100L, 200L, owner));
+        assertTrue(ex.getMessage().contains("because they have an unsettled balance of ₹450.00"));
+        verify(tripMemberRepository, never()).save(member);
+    }
+
+    @Test
+    void test16_DeactivateMember_AlreadyInactive_ReturnsCleanly() {
+        TripMember member = TripMember.builder()
+                .id(200L)
+                .trip(trip)
+                .user(regularUser)
+                .fullName("Rahul Member")
+                .role("MEMBER")
+                .status("INACTIVE")
+                .build();
+
+        when(tripRepository.findById(100L)).thenReturn(Optional.of(trip));
+        when(tripRepository.findByIdAndUserId(100L, 1L)).thenReturn(Optional.of(trip));
+        when(tripMemberRepository.findById(200L)).thenReturn(Optional.of(member));
+
+        tripMemberService.deactivateMember(100L, 200L, owner);
+        verify(tripMemberRepository, never()).save(member);
+    }
+
+    @Test
+    void test17_DeactivateMember_CrossTripMember_ThrowsException() {
+        Trip otherTrip = Trip.builder().id(999L).user(owner).build();
+        TripMember member = TripMember.builder()
+                .id(200L)
+                .trip(otherTrip)
+                .user(regularUser)
+                .fullName("Rahul Member")
+                .role("MEMBER")
+                .status("ACTIVE")
+                .build();
+
+        when(tripRepository.findById(100L)).thenReturn(Optional.of(trip));
+        when(tripRepository.findByIdAndUserId(100L, 1L)).thenReturn(Optional.of(trip));
+        when(tripMemberRepository.findById(200L)).thenReturn(Optional.of(member));
+
+        assertThrows(IllegalArgumentException.class, () -> tripMemberService.deactivateMember(100L, 200L, owner));
     }
 }

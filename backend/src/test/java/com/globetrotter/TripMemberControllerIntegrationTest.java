@@ -47,6 +47,12 @@ public class TripMemberControllerIntegrationTest {
     private TripMemberService tripMemberService;
 
     @Autowired
+    private com.globetrotter.service.TripExpenseService tripExpenseService;
+
+    @Autowired
+    private com.globetrotter.service.TripSettlementService tripSettlementService;
+
+    @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
     private User ownerUser;
@@ -167,5 +173,156 @@ public class TripMemberControllerIntegrationTest {
         mockMvc.perform(delete("/api/trips/{tripId}/members/{memberId}", trip.getId(), res.getId())
                         .header("Authorization", "Bearer " + memberToken))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void test9_DeactivateMember_WhoOwesMoney_Returns400() throws Exception {
+        var members = tripMemberService.getTripMembers(trip.getId(), ownerUser.getId());
+        var ownerMem = members.stream().filter(m -> "OWNER".equals(m.getRole())).findFirst().orElseThrow();
+        var guestMem = members.stream().filter(m -> !"OWNER".equals(m.getRole())).findFirst().orElseThrow();
+
+        // Create an expense paid by owner, split equally with guest
+        com.globetrotter.dto.CreateExpenseRequest expReq = new com.globetrotter.dto.CreateExpenseRequest(
+                "Dinner at Fisherman's Wharf",
+                new BigDecimal("2000.00"),
+                "INR",
+                com.globetrotter.entity.ExpenseCategory.FOOD,
+                LocalDate.now(),
+                com.globetrotter.entity.SplitType.EQUAL,
+                ownerMem.getId(),
+                null,
+                null,
+                java.util.List.of(
+                        new com.globetrotter.dto.ExpenseParticipantRequest(ownerMem.getId(), null, null),
+                        new com.globetrotter.dto.ExpenseParticipantRequest(guestMem.getId(), null, null)
+                )
+        );
+        tripExpenseService.createExpense(trip.getId(), expReq, ownerUser);
+
+        // Attempt to remove guestMem who owes ₹1,000.00
+        mockMvc.perform(delete("/api/trips/{tripId}/members/{memberId}", trip.getId(), guestMem.getId())
+                        .header("Authorization", "Bearer " + ownerToken))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("unsettled balance of ₹1000.00. Please settle the balance first.")));
+    }
+
+    @Test
+    void test10_DeactivateMember_WhoIsOwedMoney_Returns400() throws Exception {
+        var members = tripMemberService.getTripMembers(trip.getId(), ownerUser.getId());
+        var ownerMem = members.stream().filter(m -> "OWNER".equals(m.getRole())).findFirst().orElseThrow();
+        var guestMem = members.stream().filter(m -> !"OWNER".equals(m.getRole())).findFirst().orElseThrow();
+
+        // Create an expense paid by guest, split equally
+        com.globetrotter.dto.CreateExpenseRequest expReq = new com.globetrotter.dto.CreateExpenseRequest(
+                "Beach Scuba Diving",
+                new BigDecimal("3000.00"),
+                "INR",
+                com.globetrotter.entity.ExpenseCategory.ACTIVITY,
+                LocalDate.now(),
+                com.globetrotter.entity.SplitType.EQUAL,
+                guestMem.getId(),
+                null,
+                null,
+                java.util.List.of(
+                        new com.globetrotter.dto.ExpenseParticipantRequest(ownerMem.getId(), null, null),
+                        new com.globetrotter.dto.ExpenseParticipantRequest(guestMem.getId(), null, null)
+                )
+        );
+        tripExpenseService.createExpense(trip.getId(), expReq, ownerUser);
+
+        // Attempt to remove guestMem who is owed ₹1,500.00
+        mockMvc.perform(delete("/api/trips/{tripId}/members/{memberId}", trip.getId(), guestMem.getId())
+                        .header("Authorization", "Bearer " + ownerToken))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("are owed ₹1500.00. Please settle the balance first.")));
+    }
+
+    @Test
+    void test11_DeactivateMember_AfterSettlingBalanceToZero_Succeeds() throws Exception {
+        var members = tripMemberService.getTripMembers(trip.getId(), ownerUser.getId());
+        var ownerMem = members.stream().filter(m -> "OWNER".equals(m.getRole())).findFirst().orElseThrow();
+        var guestMem = members.stream().filter(m -> !"OWNER".equals(m.getRole())).findFirst().orElseThrow();
+
+        // Create an expense: owner pays ₹2,000, split equally (guest owes ₹1,000)
+        com.globetrotter.dto.CreateExpenseRequest expReq = new com.globetrotter.dto.CreateExpenseRequest(
+                "Scooter Rental",
+                new BigDecimal("2000.00"),
+                "INR",
+                com.globetrotter.entity.ExpenseCategory.TRANSPORT,
+                LocalDate.now(),
+                com.globetrotter.entity.SplitType.EQUAL,
+                ownerMem.getId(),
+                null,
+                null,
+                java.util.List.of(
+                        new com.globetrotter.dto.ExpenseParticipantRequest(ownerMem.getId(), null, null),
+                        new com.globetrotter.dto.ExpenseParticipantRequest(guestMem.getId(), null, null)
+                )
+        );
+        tripExpenseService.createExpense(trip.getId(), expReq, ownerUser);
+
+        // Record settlement: guest pays owner ₹1,000
+        com.globetrotter.dto.CreateSettlementRequest settleReq = new com.globetrotter.dto.CreateSettlementRequest(
+                guestMem.getId(),
+                ownerMem.getId(),
+                new BigDecimal("1000.00"),
+                "INR",
+                LocalDate.now(),
+                "UPI Transfer"
+        );
+        tripSettlementService.createSettlement(trip.getId(), settleReq, ownerUser);
+
+        // Now guest balance is ₹0.00 -> Deactivation succeeds with 204 No Content
+        mockMvc.perform(delete("/api/trips/{tripId}/members/{memberId}", trip.getId(), guestMem.getId())
+                        .header("Authorization", "Bearer " + ownerToken))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void test12_DeactivateMember_MultiPayerExpenseBalanceCheck() throws Exception {
+        // Add third contributor
+        var thirdMem = tripMemberService.addTripMember(trip.getId(), new AddTripMemberRequest(null, "Charlie Third"), ownerUser);
+        var members = tripMemberService.getTripMembers(trip.getId(), ownerUser.getId());
+        var ownerMem = members.stream().filter(m -> "OWNER".equals(m.getRole())).findFirst().orElseThrow();
+        var guestMem = members.stream().filter(m -> m.getUserId() != null && m.getUserId().equals(memberUser.getId())).findFirst().orElseThrow();
+
+        // Multi-payer expense: ₹1,200 total
+        // Owner pays ₹800, Guest pays ₹400
+        // Split equally between Owner (₹400), Guest (₹400), Charlie (₹400)
+        // Owner net: +₹400
+        // Guest net: ₹0.00
+        // Charlie net: -₹400
+        com.globetrotter.dto.CreateExpenseRequest multiReq = new com.globetrotter.dto.CreateExpenseRequest(
+                "Group Kayaking Tour",
+                new BigDecimal("1200.00"),
+                "INR",
+                com.globetrotter.entity.ExpenseCategory.ACTIVITY,
+                LocalDate.now(),
+                com.globetrotter.entity.SplitType.EQUAL,
+                null,
+                java.util.List.of(
+                        new com.globetrotter.dto.ExpensePayerRequest(ownerMem.getId(), new BigDecimal("800.00")),
+                        new com.globetrotter.dto.ExpensePayerRequest(guestMem.getId(), new BigDecimal("400.00"))
+                ),
+                null,
+                null,
+                java.util.List.of(
+                        new com.globetrotter.dto.ExpenseParticipantRequest(ownerMem.getId(), null, null),
+                        new com.globetrotter.dto.ExpenseParticipantRequest(guestMem.getId(), null, null),
+                        new com.globetrotter.dto.ExpenseParticipantRequest(thirdMem.getId(), null, null)
+                )
+        );
+        tripExpenseService.createExpense(trip.getId(), multiReq, ownerUser);
+
+        // Charlie owes ₹400 -> removal blocked
+        mockMvc.perform(delete("/api/trips/{tripId}/members/{memberId}", trip.getId(), thirdMem.getId())
+                        .header("Authorization", "Bearer " + ownerToken))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("unsettled balance of ₹400.00")));
+
+        // Guest balance is ₹0.00 -> removal succeeds!
+        mockMvc.perform(delete("/api/trips/{tripId}/members/{memberId}", trip.getId(), guestMem.getId())
+                        .header("Authorization", "Bearer " + ownerToken))
+                .andExpect(status().isNoContent());
     }
 }
