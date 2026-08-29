@@ -277,4 +277,84 @@ class TripBalanceServiceTest {
     void test13_CrossTripAccessRejected() {
         assertThrows(AccessDeniedException.class, () -> tripBalanceService.getTripBalances(tripA.getId(), ownerB));
     }
+
+    @Test
+    void test14_TwoPayerExpenseCalculatesBalancesAndDebtSimplificationCorrectly() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(mOwnerA.getId(), new BigDecimal("800.00")),
+                new ExpensePayerRequest(mMemberA1.getId(), new BigDecimal("400.00"))
+        );
+        List<ExpenseParticipantRequest> participants = List.of(
+                new ExpenseParticipantRequest(mOwnerA.getId(), null, null),
+                new ExpenseParticipantRequest(mMemberA1.getId(), null, null),
+                new ExpenseParticipantRequest(mMemberA2.getId(), null, null)
+        );
+
+        CreateExpenseRequest req = new CreateExpenseRequest("Co-paid Villa", new BigDecimal("1200.00"), "INR", ExpenseCategory.ACCOMMODATION, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, participants);
+        tripExpenseService.createExpense(tripA.getId(), req, ownerA);
+
+        TripBalanceResponse res = tripBalanceService.getTripBalances(tripA.getId(), ownerA);
+        assertEquals(new BigDecimal("1200.00"), res.getTotalTripExpenses());
+
+        MemberBalanceResponse ownerBal = res.getMemberBalances().stream().filter(mb -> mb.getMemberId().equals(mOwnerA.getId())).findFirst().get();
+        MemberBalanceResponse m1Bal = res.getMemberBalances().stream().filter(mb -> mb.getMemberId().equals(mMemberA1.getId())).findFirst().get();
+        MemberBalanceResponse m2Bal = res.getMemberBalances().stream().filter(mb -> mb.getMemberId().equals(mMemberA2.getId())).findFirst().get();
+
+        assertEquals(new BigDecimal("800.00"), ownerBal.getTotalPaid());
+        assertEquals(new BigDecimal("400.00"), ownerBal.getTotalOwed());
+        assertEquals(new BigDecimal("400.00"), ownerBal.getNetBalance());
+        assertEquals(BalanceStatus.GETS_BACK, ownerBal.getBalanceStatus());
+
+        assertEquals(new BigDecimal("400.00"), m1Bal.getTotalPaid());
+        assertEquals(new BigDecimal("400.00"), m1Bal.getTotalOwed());
+        assertEquals(new BigDecimal("0.00"), m1Bal.getNetBalance());
+        assertEquals(BalanceStatus.SETTLED, m1Bal.getBalanceStatus());
+
+        assertEquals(new BigDecimal("0.00"), m2Bal.getTotalPaid());
+        assertEquals(new BigDecimal("400.00"), m2Bal.getTotalOwed());
+        assertEquals(new BigDecimal("-400.00"), m2Bal.getNetBalance());
+        assertEquals(BalanceStatus.OWES, m2Bal.getBalanceStatus());
+
+        assertEquals(1, res.getSimplifiedTransfers().size());
+        DebtTransferResponse transfer = res.getSimplifiedTransfers().get(0);
+        assertEquals(mMemberA2.getId(), transfer.getFromMemberId());
+        assertEquals(mOwnerA.getId(), transfer.getToMemberId());
+        assertEquals(new BigDecimal("400.00"), transfer.getAmount());
+
+        BigDecimal sumNet = res.getMemberBalances().stream().map(MemberBalanceResponse::getNetBalance).reduce(BigDecimal.ZERO, BigDecimal::add);
+        assertEquals(new BigDecimal("0.00"), sumNet);
+    }
+
+    @Test
+    void test15_ThreePayerComplexExpenseCalculatesCorrectly() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(mOwnerA.getId(), new BigDecimal("1500.00")),
+                new ExpensePayerRequest(mMemberA1.getId(), new BigDecimal("1000.00")),
+                new ExpensePayerRequest(mMemberA2.getId(), new BigDecimal("500.00"))
+        );
+        List<ExpenseParticipantRequest> participants = List.of(
+                new ExpenseParticipantRequest(mOwnerA.getId(), null, null),
+                new ExpenseParticipantRequest(mMemberA1.getId(), null, null),
+                new ExpenseParticipantRequest(mMemberA2.getId(), null, null)
+        );
+
+        CreateExpenseRequest req = new CreateExpenseRequest("Large Activity", new BigDecimal("3000.00"), "INR", ExpenseCategory.ACTIVITY, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, participants);
+        tripExpenseService.createExpense(tripA.getId(), req, ownerA);
+
+        TripBalanceResponse res = tripBalanceService.getTripBalances(tripA.getId(), ownerA);
+        assertEquals(new BigDecimal("3000.00"), res.getTotalTripExpenses());
+
+        MemberBalanceResponse ownerBal = res.getMemberBalances().stream().filter(mb -> mb.getMemberId().equals(mOwnerA.getId())).findFirst().get();
+        MemberBalanceResponse m1Bal = res.getMemberBalances().stream().filter(mb -> mb.getMemberId().equals(mMemberA1.getId())).findFirst().get();
+        MemberBalanceResponse m2Bal = res.getMemberBalances().stream().filter(mb -> mb.getMemberId().equals(mMemberA2.getId())).findFirst().get();
+
+        assertEquals(new BigDecimal("500.00"), ownerBal.getNetBalance());
+        assertEquals(new BigDecimal("0.00"), m1Bal.getNetBalance());
+        assertEquals(new BigDecimal("-500.00"), m2Bal.getNetBalance());
+
+        assertEquals(1, res.getSimplifiedTransfers().size());
+        assertEquals(mMemberA2.getId(), res.getSimplifiedTransfers().get(0).getFromMemberId());
+        assertEquals(mOwnerA.getId(), res.getSimplifiedTransfers().get(0).getToMemberId());
+        assertEquals(new BigDecimal("500.00"), res.getSimplifiedTransfers().get(0).getAmount());
+    }
 }

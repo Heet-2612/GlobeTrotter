@@ -447,4 +447,150 @@ class TripExpenseServiceTest {
         ExpenseResponse res = tripExpenseService.updateExpense(trip.getId(), created.getId(), updateReq, owner);
         assertEquals("Historical Update", res.getTitle());
     }
+
+    @Test
+    void test30_TwoPayerExpenseCreationSuccess() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("600.00")),
+                new ExpensePayerRequest(gtMember.getId(), new BigDecimal("400.00"))
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null),
+                new ExpenseParticipantRequest(gtMember.getId(), null, null)
+        );
+        CreateExpenseRequest req = new CreateExpenseRequest("Villa Booking", new BigDecimal("1000.00"), "INR", ExpenseCategory.ACCOMMODATION, LocalDate.now(), SplitType.EQUAL, null, payers, null, "Co-paid villa", parts);
+        ExpenseResponse res = tripExpenseService.createExpense(trip.getId(), req, owner);
+
+        assertNotNull(res.getId());
+        assertTrue(res.isMultiplePayers());
+        assertEquals(2, res.getPayers().size());
+        assertEquals(new BigDecimal("1000.00"), res.getAmount());
+    }
+
+    @Test
+    void test31_ThreePayerExpenseCreationSuccess() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("500.00")),
+                new ExpensePayerRequest(gtMember.getId(), new BigDecimal("300.00")),
+                new ExpensePayerRequest(guestMember.getId(), new BigDecimal("200.00"))
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null),
+                new ExpenseParticipantRequest(gtMember.getId(), null, null),
+                new ExpenseParticipantRequest(guestMember.getId(), null, null)
+        );
+        CreateExpenseRequest req = new CreateExpenseRequest("Shared Car Rental", new BigDecimal("1000.00"), "INR", ExpenseCategory.TRANSPORT, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, parts);
+        ExpenseResponse res = tripExpenseService.createExpense(trip.getId(), req, owner);
+
+        assertEquals(3, res.getPayers().size());
+        assertTrue(res.isMultiplePayers());
+    }
+
+    @Test
+    void test32_MismatchedPayerSumRejected() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("600.00")),
+                new ExpensePayerRequest(gtMember.getId(), new BigDecimal("300.00")) // Sum 900 != 1000
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null),
+                new ExpenseParticipantRequest(gtMember.getId(), null, null)
+        );
+        CreateExpenseRequest req = new CreateExpenseRequest("Underpaid Expense", new BigDecimal("1000.00"), "INR", ExpenseCategory.FOOD, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, parts);
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> tripExpenseService.createExpense(trip.getId(), req, owner));
+        assertTrue(ex.getMessage().contains("must exactly match expense total"));
+    }
+
+    @Test
+    void test33_DuplicatePayerEntryRejected() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("500.00")),
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("500.00")) // Duplicate ownerMember
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null)
+        );
+        CreateExpenseRequest req = new CreateExpenseRequest("Duplicate Payer", new BigDecimal("1000.00"), "INR", ExpenseCategory.FOOD, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, parts);
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> tripExpenseService.createExpense(trip.getId(), req, owner));
+        assertTrue(ex.getMessage().contains("Duplicate payer member ID"));
+    }
+
+    @Test
+    void test34_PayerFromAnotherTripRejected() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(otherTripMember.getId(), new BigDecimal("1000.00"))
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null)
+        );
+        CreateExpenseRequest req = new CreateExpenseRequest("Foreign Payer", new BigDecimal("1000.00"), "INR", ExpenseCategory.FOOD, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, parts);
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> tripExpenseService.createExpense(trip.getId(), req, owner));
+        assertTrue(ex.getMessage().contains("does not belong to this trip"));
+    }
+
+    @Test
+    void test35_NonPositivePayerAmountRejected() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("1000.00")),
+                new ExpensePayerRequest(gtMember.getId(), new BigDecimal("0.00"))
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null)
+        );
+        CreateExpenseRequest req = new CreateExpenseRequest("Zero Payer", new BigDecimal("1000.00"), "INR", ExpenseCategory.FOOD, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, parts);
+        assertThrows(IllegalArgumentException.class, () -> tripExpenseService.createExpense(trip.getId(), req, owner));
+    }
+
+    @Test
+    void test36_UpdateMultiPayerExpenseReplacesPayersCleanly() {
+        List<ExpensePayerRequest> initialPayers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("600.00")),
+                new ExpensePayerRequest(gtMember.getId(), new BigDecimal("400.00"))
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null),
+                new ExpenseParticipantRequest(gtMember.getId(), null, null)
+        );
+        CreateExpenseRequest createReq = new CreateExpenseRequest("Shared Tour", new BigDecimal("1000.00"), "INR", ExpenseCategory.ACTIVITY, LocalDate.now(), SplitType.EQUAL, null, initialPayers, null, null, parts);
+        ExpenseResponse created = tripExpenseService.createExpense(trip.getId(), createReq, owner);
+
+        List<ExpensePayerRequest> updatedPayers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("300.00")),
+                new ExpensePayerRequest(gtMember.getId(), new BigDecimal("700.00"))
+        );
+        UpdateExpenseRequest updateReq = new UpdateExpenseRequest("Updated Shared Tour", new BigDecimal("1000.00"), "INR", ExpenseCategory.ACTIVITY, LocalDate.now(), SplitType.EQUAL, null, updatedPayers, null, null, parts);
+        ExpenseResponse updated = tripExpenseService.updateExpense(trip.getId(), created.getId(), updateReq, owner);
+
+        assertEquals(2, updated.getPayers().size());
+        assertEquals(new BigDecimal("300.00"), updated.getPayers().stream().filter(p -> p.getMemberId().equals(ownerMember.getId())).findFirst().get().getPaidAmount());
+        assertEquals(new BigDecimal("700.00"), updated.getPayers().stream().filter(p -> p.getMemberId().equals(gtMember.getId())).findFirst().get().getPaidAmount());
+    }
+
+    @Test
+    void test37_DeleteMultiPayerExpenseRemovesPayerRecords() {
+        List<ExpensePayerRequest> payers = List.of(
+                new ExpensePayerRequest(ownerMember.getId(), new BigDecimal("500.00")),
+                new ExpensePayerRequest(gtMember.getId(), new BigDecimal("500.00"))
+        );
+        List<ExpenseParticipantRequest> parts = List.of(
+                new ExpenseParticipantRequest(ownerMember.getId(), null, null)
+        );
+        CreateExpenseRequest createReq = new CreateExpenseRequest("To Delete", new BigDecimal("1000.00"), "INR", ExpenseCategory.FOOD, LocalDate.now(), SplitType.EQUAL, null, payers, null, null, parts);
+        ExpenseResponse created = tripExpenseService.createExpense(trip.getId(), createReq, owner);
+
+        tripExpenseService.deleteExpense(trip.getId(), created.getId(), owner);
+        assertThrows(ResourceNotFoundException.class, () -> tripExpenseService.getExpenseById(trip.getId(), created.getId(), owner));
+    }
+
+    @Test
+    void test38_SinglePayerExpenseBackwardCompatibility() {
+        CreateExpenseRequest singlePayerReq = new CreateExpenseRequest("Coffee", new BigDecimal("150.00"), "INR", ExpenseCategory.FOOD, LocalDate.now(), SplitType.EQUAL, ownerMember.getId(), null, null, List.of(new ExpenseParticipantRequest(ownerMember.getId(), null, null)));
+        ExpenseResponse created = tripExpenseService.createExpense(trip.getId(), singlePayerReq, owner);
+
+        assertNotNull(created.getId());
+        assertFalse(created.isMultiplePayers());
+        assertEquals(1, created.getPayers().size());
+        assertEquals(ownerMember.getId(), created.getPayers().get(0).getMemberId());
+        assertEquals(new BigDecimal("150.00"), created.getPayers().get(0).getPaidAmount());
+    }
 }

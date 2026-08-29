@@ -93,7 +93,9 @@ public class TripAnalyticsService {
                 return false;
             }
             if (memberId != null) {
-                boolean isPayer = e.getPayerMember() != null && e.getPayerMember().getId().equals(memberId);
+                boolean isPayer = (e.getPayers() != null && e.getPayers().stream()
+                        .anyMatch(p -> p.getMember() != null && p.getMember().getId().equals(memberId)))
+                        || (e.getPayerMember() != null && e.getPayerMember().getId().equals(memberId));
                 boolean isParticipant = e.getParticipants() != null && e.getParticipants().stream()
                         .anyMatch(p -> p.getMember() != null && p.getMember().getId().equals(memberId));
                 if (!isPayer && !isParticipant) {
@@ -145,7 +147,14 @@ public class TripAnalyticsService {
         Map<Long, BigDecimal> memberPaidMap = new HashMap<>();
         Map<Long, BigDecimal> memberOwedMap = new HashMap<>();
         for (TripExpense e : filteredExpenses) {
-            if (e.getPayerMember() != null) {
+            if (e.getPayers() != null && !e.getPayers().isEmpty()) {
+                for (com.globetrotter.entity.TripExpensePayer p : e.getPayers()) {
+                    if (p.getMember() != null) {
+                        Long pId = p.getMember().getId();
+                        memberPaidMap.put(pId, memberPaidMap.getOrDefault(pId, BigDecimal.ZERO).add(p.getPaidAmount()));
+                    }
+                }
+            } else if (e.getPayerMember() != null) {
                 Long pId = e.getPayerMember().getId();
                 memberPaidMap.put(pId, memberPaidMap.getOrDefault(pId, BigDecimal.ZERO).add(e.getAmount()));
             }
@@ -272,15 +281,30 @@ public class TripAnalyticsService {
                     return e1.getId().compareTo(e2.getId());
                 })
                 .limit(5)
-                .map(e -> new TopExpenseAnalytics(
-                        e.getId(),
-                        e.getTitle(),
-                        e.getCategory(),
-                        e.getPayerMember().getFullName(),
-                        e.getAmount().setScale(2, RoundingMode.HALF_UP),
-                        e.getExpenseDate(),
-                        e.getTripActivity() != null && e.getTripActivity().getActivity() != null ? e.getTripActivity().getActivity().getName() : null
-                ))
+                .map(e -> {
+                    String payerName;
+                    if (e.getPayers() != null && e.getPayers().size() > 1) {
+                        payerName = e.getPayers().stream()
+                                .map(p -> p.getMember() != null ? p.getMember().getFullName() : "Member")
+                                .collect(Collectors.joining(", ")) + " (" + e.getPayers().size() + " payers)";
+                    } else if (e.getPayers() != null && !e.getPayers().isEmpty() && e.getPayers().get(0).getMember() != null) {
+                        payerName = e.getPayers().get(0).getMember().getFullName();
+                    } else if (e.getPayerMember() != null) {
+                        payerName = e.getPayerMember().getFullName();
+                    } else {
+                        payerName = "Unknown Payer";
+                    }
+
+                    return new TopExpenseAnalytics(
+                            e.getId(),
+                            e.getTitle(),
+                            e.getCategory(),
+                            payerName,
+                            e.getAmount().setScale(2, RoundingMode.HALF_UP),
+                            e.getExpenseDate(),
+                            e.getTripActivity() != null && e.getTripActivity().getActivity() != null ? e.getTripActivity().getActivity().getName() : null
+                    );
+                })
                 .collect(Collectors.toList());
 
         // Expense Source Breakdown on filteredExpenses

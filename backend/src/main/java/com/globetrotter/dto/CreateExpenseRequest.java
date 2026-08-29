@@ -16,6 +16,7 @@ public class CreateExpenseRequest {
     private LocalDate expenseDate;
     private SplitType splitType = SplitType.EQUAL;
     private Long payerMemberId;
+    private List<ExpensePayerRequest> payers;
     private Long tripActivityId;
     private String notes;
     private List<ExpenseParticipantRequest> participants;
@@ -24,6 +25,10 @@ public class CreateExpenseRequest {
     }
 
     public CreateExpenseRequest(String title, BigDecimal amount, String currency, ExpenseCategory category, LocalDate expenseDate, SplitType splitType, Long payerMemberId, Long tripActivityId, String notes, List<ExpenseParticipantRequest> participants) {
+        this(title, amount, currency, category, expenseDate, splitType, payerMemberId, null, tripActivityId, notes, participants);
+    }
+
+    public CreateExpenseRequest(String title, BigDecimal amount, String currency, ExpenseCategory category, LocalDate expenseDate, SplitType splitType, Long payerMemberId, List<ExpensePayerRequest> payers, Long tripActivityId, String notes, List<ExpenseParticipantRequest> participants) {
         this.title = title;
         this.amount = amount;
         this.currency = currency != null ? currency : "INR";
@@ -31,6 +36,7 @@ public class CreateExpenseRequest {
         this.expenseDate = expenseDate;
         this.splitType = splitType != null ? splitType : SplitType.EQUAL;
         this.payerMemberId = payerMemberId;
+        this.payers = payers;
         this.tripActivityId = tripActivityId;
         this.notes = notes;
         this.participants = participants;
@@ -56,6 +62,9 @@ public class CreateExpenseRequest {
 
     public Long getPayerMemberId() { return payerMemberId; }
     public void setPayerMemberId(Long payerMemberId) { this.payerMemberId = payerMemberId; }
+
+    public List<ExpensePayerRequest> getPayers() { return payers; }
+    public void setPayers(List<ExpensePayerRequest> payers) { this.payers = payers; }
 
     public Long getTripActivityId() { return tripActivityId; }
     public void setTripActivityId(Long tripActivityId) { this.tripActivityId = tripActivityId; }

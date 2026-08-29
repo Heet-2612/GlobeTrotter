@@ -51,8 +51,16 @@ public class TripBalanceCalculator {
             BigDecimal amount = expense.getAmount().setScale(2, RoundingMode.HALF_UP);
             totalTripExpenses = totalTripExpenses.add(amount);
 
-            Long payerId = expense.getPayerMember().getId();
-            paidMap.put(payerId, paidMap.getOrDefault(payerId, BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)).add(amount));
+            if (expense.getPayers() != null && !expense.getPayers().isEmpty()) {
+                for (com.globetrotter.entity.TripExpensePayer payer : expense.getPayers()) {
+                    Long pId = payer.getMember().getId();
+                    BigDecimal pAmt = payer.getPaidAmount().setScale(2, RoundingMode.HALF_UP);
+                    paidMap.put(pId, paidMap.getOrDefault(pId, BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)).add(pAmt));
+                }
+            } else if (expense.getPayerMember() != null) {
+                Long payerId = expense.getPayerMember().getId();
+                paidMap.put(payerId, paidMap.getOrDefault(payerId, BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP)).add(amount));
+            }
 
             if (expense.getParticipants() != null) {
                 for (ExpenseParticipant participant : expense.getParticipants()) {

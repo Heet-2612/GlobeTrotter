@@ -21,6 +21,8 @@ public class ExpenseResponse {
     private LocalDate expenseDate;
     private SplitType splitType;
     private TripMemberResponse payer;
+    private boolean isMultiplePayers;
+    private List<ExpensePayerResponse> payers;
     private Long createdByUserId;
     private String createdByName;
     private boolean isActivityLinked;
@@ -34,7 +36,7 @@ public class ExpenseResponse {
     public ExpenseResponse() {
     }
 
-    public ExpenseResponse(Long id, Long tripId, String title, BigDecimal amount, String currency, ExpenseCategory category, LocalDate expenseDate, SplitType splitType, TripMemberResponse payer, Long createdByUserId, String createdByName, boolean isActivityLinked, Long tripActivityId, String activityName, String notes, List<ExpenseParticipantResponse> participants, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public ExpenseResponse(Long id, Long tripId, String title, BigDecimal amount, String currency, ExpenseCategory category, LocalDate expenseDate, SplitType splitType, TripMemberResponse payer, boolean isMultiplePayers, List<ExpensePayerResponse> payers, Long createdByUserId, String createdByName, boolean isActivityLinked, Long tripActivityId, String activityName, String notes, List<ExpenseParticipantResponse> participants, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.tripId = tripId;
         this.title = title;
@@ -44,6 +46,8 @@ public class ExpenseResponse {
         this.expenseDate = expenseDate;
         this.splitType = splitType;
         this.payer = payer;
+        this.isMultiplePayers = isMultiplePayers;
+        this.payers = payers;
         this.createdByUserId = createdByUserId;
         this.createdByName = createdByName;
         this.isActivityLinked = isActivityLinked;
@@ -60,7 +64,19 @@ public class ExpenseResponse {
             return null;
         }
 
-        TripMemberResponse payerResp = TripMemberResponse.fromEntity(expense.getPayerMember());
+        List<ExpensePayerResponse> payerResps = expense.getPayers() != null
+                ? expense.getPayers().stream().map(ExpensePayerResponse::fromEntity).collect(Collectors.toList())
+                : List.of();
+
+        boolean isMulti = payerResps.size() > 1;
+
+        TripMemberResponse payerResp = null;
+        if (expense.getPayerMember() != null) {
+            payerResp = TripMemberResponse.fromEntity(expense.getPayerMember());
+        } else if (!payerResps.isEmpty() && expense.getPayers().get(0).getMember() != null) {
+            payerResp = TripMemberResponse.fromEntity(expense.getPayers().get(0).getMember());
+        }
+
         Long creatorId = expense.getCreatedByUser() != null ? expense.getCreatedByUser().getId() : null;
         String creatorName = expense.getCreatedByUser() != null ? expense.getCreatedByUser().getName() : "Unknown User";
 
@@ -82,6 +98,8 @@ public class ExpenseResponse {
                 expense.getExpenseDate(),
                 expense.getSplitType(),
                 payerResp,
+                isMulti,
+                payerResps,
                 creatorId,
                 creatorName,
                 linked,
@@ -120,6 +138,12 @@ public class ExpenseResponse {
 
     public TripMemberResponse getPayer() { return payer; }
     public void setPayer(TripMemberResponse payer) { this.payer = payer; }
+
+    public boolean isMultiplePayers() { return isMultiplePayers; }
+    public void setMultiplePayers(boolean multiplePayers) { isMultiplePayers = multiplePayers; }
+
+    public List<ExpensePayerResponse> getPayers() { return payers; }
+    public void setPayers(List<ExpensePayerResponse> payers) { this.payers = payers; }
 
     public Long getCreatedByUserId() { return createdByUserId; }
     public void setCreatedByUserId(Long createdByUserId) { this.createdByUserId = createdByUserId; }

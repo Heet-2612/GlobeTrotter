@@ -72,9 +72,6 @@ public class TripExpenseService {
 
         validateExpenseRequest(trip, request, false);
 
-        TripMember payer = tripMemberRepository.findById(request.getPayerMemberId())
-                .orElseThrow(() -> new ResourceNotFoundException("Payer member not found with id: " + request.getPayerMemberId()));
-
         TripActivity activity = null;
         if (request.getTripActivityId() != null) {
             activity = tripActivityRepository.findById(request.getTripActivityId())
@@ -83,7 +80,6 @@ public class TripExpenseService {
 
         TripExpense expense = TripExpense.builder()
                 .trip(trip)
-                .payerMember(payer)
                 .createdByUser(currentUser)
                 .tripActivity(activity)
                 .title(request.getTitle().trim())
@@ -94,6 +90,12 @@ public class TripExpenseService {
                 .splitType(request.getSplitType() != null ? request.getSplitType() : SplitType.EQUAL)
                 .notes(request.getNotes())
                 .build();
+
+        List<TripExpensePayer> payerEntities = calculateAndBuildPayers(expense, request, false);
+        expense.setPayers(payerEntities);
+        if (!payerEntities.isEmpty()) {
+            expense.setPayerMember(payerEntities.get(0).getMember());
+        }
 
         List<ExpenseParticipant> participantEntities = calculateAndBuildParticipants(expense, request.getParticipants(), request.getSplitType(), request.getAmount(), false);
         expense.setParticipants(participantEntities);
@@ -118,13 +120,10 @@ public class TripExpenseService {
         CreateExpenseRequest validationAdapter = new CreateExpenseRequest(
                 request.getTitle(), request.getAmount(), request.getCurrency(),
                 request.getCategory(), request.getExpenseDate(), request.getSplitType(),
-                request.getPayerMemberId(), request.getTripActivityId(), request.getNotes(),
+                request.getPayerMemberId(), request.getPayers(), request.getTripActivityId(), request.getNotes(),
                 request.getParticipants()
         );
         validateExpenseRequest(trip, validationAdapter, true);
-
-        TripMember payer = tripMemberRepository.findById(request.getPayerMemberId())
-                .orElseThrow(() -> new ResourceNotFoundException("Payer member not found with id: " + request.getPayerMemberId()));
 
         TripActivity activity = null;
         if (request.getTripActivityId() != null) {
@@ -138,9 +137,15 @@ public class TripExpenseService {
         expense.setCategory(request.getCategory() != null ? request.getCategory() : ExpenseCategory.OTHER);
         expense.setExpenseDate(request.getExpenseDate());
         expense.setSplitType(request.getSplitType() != null ? request.getSplitType() : SplitType.EQUAL);
-        expense.setPayerMember(payer);
         expense.setTripActivity(activity);
         expense.setNotes(request.getNotes());
+
+        expense.getPayers().clear();
+        List<TripExpensePayer> newPayers = calculateAndBuildPayers(expense, validationAdapter, true);
+        expense.getPayers().addAll(newPayers);
+        if (!newPayers.isEmpty()) {
+            expense.setPayerMember(newPayers.get(0).getMember());
+        }
 
         expense.getParticipants().clear();
         List<ExpenseParticipant> newParticipants = calculateAndBuildParticipants(expense, request.getParticipants(), request.getSplitType(), request.getAmount(), true);
@@ -178,18 +183,51 @@ public class TripExpenseService {
         if (request.getExpenseDate() == null) {
             throw new IllegalArgumentException("Expense date is required.");
         }
-        if (request.getPayerMemberId() == null) {
+
+        if (request.getPayers() != null && !request.getPayers().isEmpty()) {
+            Set<Long> payerMemberIds = new HashSet<>();
+            BigDecimal totalPaid = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+
+            for (ExpensePayerRequest pReq : request.getPayers()) {
+                if (pReq.getMemberId() == null) {
+                    throw new IllegalArgumentException("Payer member ID is required.");
+                }
+                if (!payerMemberIds.add(pReq.getMemberId())) {
+                    throw new IllegalArgumentException("Duplicate payer member ID: " + pReq.getMemberId());
+                }
+                if (pReq.getPaidAmount() == null || pReq.getPaidAmount().compareTo(BigDecimal.ZERO) <= 0) {
+                    throw new IllegalArgumentException("Paid amount for each payer must be greater than zero.");
+                }
+
+                TripMember payer = tripMemberRepository.findById(pReq.getMemberId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Payer member not found with id: " + pReq.getMemberId()));
+
+                if (!payer.getTrip().getId().equals(trip.getId())) {
+                    throw new IllegalArgumentException("Payer does not belong to this trip.");
+                }
+                if (!allowExistingInactiveParticipant && !"ACTIVE".equals(payer.getStatus())) {
+                    throw new IllegalArgumentException("Payer member is inactive and cannot be selected.");
+                }
+
+                totalPaid = totalPaid.add(pReq.getPaidAmount().setScale(2, RoundingMode.HALF_UP));
+            }
+
+            BigDecimal expectedAmount = request.getAmount().setScale(2, RoundingMode.HALF_UP);
+            if (totalPaid.compareTo(expectedAmount) != 0) {
+                throw new IllegalArgumentException("Sum of payer amounts (" + totalPaid + ") must exactly match expense total (" + expectedAmount + ").");
+            }
+        } else if (request.getPayerMemberId() != null) {
+            TripMember payer = tripMemberRepository.findById(request.getPayerMemberId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Payer member not found with id: " + request.getPayerMemberId()));
+
+            if (!payer.getTrip().getId().equals(trip.getId())) {
+                throw new IllegalArgumentException("Payer does not belong to this trip.");
+            }
+            if (!allowExistingInactiveParticipant && !"ACTIVE".equals(payer.getStatus())) {
+                throw new IllegalArgumentException("Payer member is inactive and cannot be selected.");
+            }
+        } else {
             throw new IllegalArgumentException("Payer member is required.");
-        }
-
-        TripMember payer = tripMemberRepository.findById(request.getPayerMemberId())
-                .orElseThrow(() -> new ResourceNotFoundException("Payer member not found with id: " + request.getPayerMemberId()));
-
-        if (!payer.getTrip().getId().equals(trip.getId())) {
-            throw new IllegalArgumentException("Payer does not belong to this trip.");
-        }
-        if (!allowExistingInactiveParticipant && !"ACTIVE".equals(payer.getStatus())) {
-            throw new IllegalArgumentException("Payer member is inactive and cannot be selected.");
         }
 
         if (request.getTripActivityId() != null) {
@@ -223,6 +261,28 @@ public class TripExpenseService {
                 throw new IllegalArgumentException("Inactive member (" + member.getFullName() + ") cannot be selected for a new expense.");
             }
         }
+    }
+
+    private List<TripExpensePayer> calculateAndBuildPayers(TripExpense expense, CreateExpenseRequest request, boolean isUpdate) {
+        List<TripExpensePayer> result = new ArrayList<>();
+        if (request.getPayers() != null && !request.getPayers().isEmpty()) {
+            for (ExpensePayerRequest pReq : request.getPayers()) {
+                TripMember member = tripMemberRepository.findById(pReq.getMemberId()).orElseThrow();
+                result.add(TripExpensePayer.builder()
+                        .expense(expense)
+                        .member(member)
+                        .paidAmount(pReq.getPaidAmount().setScale(2, RoundingMode.HALF_UP))
+                        .build());
+            }
+        } else if (request.getPayerMemberId() != null) {
+            TripMember member = tripMemberRepository.findById(request.getPayerMemberId()).orElseThrow();
+            result.add(TripExpensePayer.builder()
+                    .expense(expense)
+                    .member(member)
+                    .paidAmount(request.getAmount().setScale(2, RoundingMode.HALF_UP))
+                    .build());
+        }
+        return result;
     }
 
     private List<ExpenseParticipant> calculateAndBuildParticipants(TripExpense expense, List<ExpenseParticipantRequest> pRequests, SplitType splitType, BigDecimal totalAmount, boolean isUpdate) {

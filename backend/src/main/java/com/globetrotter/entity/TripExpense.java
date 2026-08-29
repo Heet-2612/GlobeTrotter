@@ -23,7 +23,7 @@ public class TripExpense {
     private Trip trip;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payer_member_id", nullable = false)
+    @JoinColumn(name = "payer_member_id")
     private TripMember payerMember;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,6 +64,9 @@ public class TripExpense {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TripExpensePayer> payers = new ArrayList<>();
 
     @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExpenseParticipant> participants = new ArrayList<>();
@@ -138,6 +141,9 @@ public class TripExpense {
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
+    public List<TripExpensePayer> getPayers() { return payers; }
+    public void setPayers(List<TripExpensePayer> payers) { this.payers = payers; }
+
     public List<ExpenseParticipant> getParticipants() { return participants; }
     public void setParticipants(List<ExpenseParticipant> participants) { this.participants = participants; }
 
@@ -154,6 +160,8 @@ public class TripExpense {
         private LocalDate expenseDate;
         private SplitType splitType = SplitType.EQUAL;
         private String notes;
+        private List<TripExpensePayer> payers = new ArrayList<>();
+        private List<ExpenseParticipant> participants = new ArrayList<>();
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
 
@@ -169,11 +177,20 @@ public class TripExpense {
         public TripExpenseBuilder expenseDate(LocalDate expenseDate) { this.expenseDate = expenseDate; return this; }
         public TripExpenseBuilder splitType(SplitType splitType) { this.splitType = splitType; return this; }
         public TripExpenseBuilder notes(String notes) { this.notes = notes; return this; }
+        public TripExpenseBuilder payers(List<TripExpensePayer> payers) { this.payers = payers; return this; }
+        public TripExpenseBuilder participants(List<ExpenseParticipant> participants) { this.participants = participants; return this; }
         public TripExpenseBuilder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
         public TripExpenseBuilder updatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public TripExpense build() {
-            return new TripExpense(id, trip, payerMember, createdByUser, tripActivity, title, amount, currency, category, expenseDate, splitType, notes, createdAt, updatedAt);
+            TripExpense expense = new TripExpense(id, trip, payerMember, createdByUser, tripActivity, title, amount, currency, category, expenseDate, splitType, notes, createdAt, updatedAt);
+            if (this.payers != null) {
+                expense.setPayers(this.payers);
+            }
+            if (this.participants != null) {
+                expense.setParticipants(this.participants);
+            }
+            return expense;
         }
     }
 }
