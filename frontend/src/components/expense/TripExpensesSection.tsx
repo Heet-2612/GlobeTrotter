@@ -214,11 +214,18 @@ export const TripExpensesSection: React.FC<TripExpensesSectionProps> = ({
                       </div>
 
                       <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
-                        <div className="flex items-center space-x-2">
-                          <User size={13} className="text-emerald-600" />
-                          <span>Paid by <strong className="text-slate-800">{expense.payer?.fullName}</strong></span>
+                        <div className="flex items-center space-x-2 min-w-0 pr-2">
+                          <User size={13} className="text-emerald-600 shrink-0" />
+                          <span className="truncate">
+                            Paid by{' '}
+                            <strong className="text-slate-800">
+                              {expense.isMultiplePayers && expense.payers && expense.payers.length > 1
+                                ? expense.payers.map((p) => `${p.memberFullName} (₹${p.paidAmount})`).join(' + ')
+                                : expense.payer?.fullName || 'Unknown'}
+                            </strong>
+                          </span>
                         </div>
-                        <span className="text-[11px] text-slate-400">{expense.expenseDate}</span>
+                        <span className="text-[11px] text-slate-400 shrink-0">{expense.expenseDate}</span>
                       </div>
                     </div>
                   );
@@ -260,11 +267,18 @@ export const TripExpensesSection: React.FC<TripExpensesSectionProps> = ({
                       </div>
 
                       <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-100">
-                        <div className="flex items-center space-x-2">
-                          <User size={13} className="text-emerald-600" />
-                          <span>Paid by <strong className="text-slate-800">{expense.payer?.fullName}</strong></span>
+                        <div className="flex items-center space-x-2 min-w-0 pr-2">
+                          <User size={13} className="text-emerald-600 shrink-0" />
+                          <span className="truncate">
+                            Paid by{' '}
+                            <strong className="text-slate-800">
+                              {expense.isMultiplePayers && expense.payers && expense.payers.length > 1
+                                ? expense.payers.map((p) => `${p.memberFullName} (₹${p.paidAmount})`).join(' + ')
+                                : expense.payer?.fullName || 'Unknown'}
+                            </strong>
+                          </span>
                         </div>
-                        <span className="text-[11px] text-slate-400">{expense.expenseDate}</span>
+                        <span className="text-[11px] text-slate-400 shrink-0">{expense.expenseDate}</span>
                       </div>
                     </div>
                   );

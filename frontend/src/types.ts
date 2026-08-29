@@ -321,6 +321,18 @@ export interface ExpenseParticipantRequest {
   percentage?: number;
 }
 
+export interface ExpensePayerRequest {
+  memberId: number;
+  paidAmount: number;
+}
+
+export interface ExpensePayerResponse {
+  id?: number;
+  memberId: number;
+  memberFullName: string;
+  paidAmount: number;
+}
+
 export interface CreateExpenseRequest {
   title: string;
   amount: number;
@@ -328,7 +340,8 @@ export interface CreateExpenseRequest {
   category?: ExpenseCategory;
   expenseDate: string;
   splitType?: SplitType;
-  payerMemberId: number;
+  payerMemberId?: number;
+  payers?: ExpensePayerRequest[];
   tripActivityId?: number;
   notes?: string;
   participants: ExpenseParticipantRequest[];
@@ -341,7 +354,8 @@ export interface UpdateExpenseRequest {
   category?: ExpenseCategory;
   expenseDate: string;
   splitType?: SplitType;
-  payerMemberId: number;
+  payerMemberId?: number;
+  payers?: ExpensePayerRequest[];
   tripActivityId?: number;
   notes?: string;
   participants: ExpenseParticipantRequest[];
@@ -365,7 +379,9 @@ export interface ExpenseResponse {
   category: ExpenseCategory;
   expenseDate: string;
   splitType: SplitType;
-  payer: TripMemberResponse;
+  payer?: TripMemberResponse;
+  isMultiplePayers?: boolean;
+  payers?: ExpensePayerResponse[];
   createdByUserId: number;
   createdByName: string;
   isActivityLinked: boolean;

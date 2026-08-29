@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExpenseResponse } from '../../types';
-import { X, Calendar, DollarSign, User, Receipt, Shield, Tag } from 'lucide-react';
+import { X, Calendar, DollarSign, User, Users, Receipt, Shield, Tag, CreditCard } from 'lucide-react';
 import { Button, Card, Badge } from '../common/UIComponents';
 import { useCurrency } from '../../context/CurrencyContext';
 
@@ -20,10 +20,11 @@ export const ExpenseDetailsModal: React.FC<ExpenseDetailsModalProps> = ({
   canEdit = false,
 }) => {
   const { formatDual } = useCurrency();
+  const isMultiPayer = expense.isMultiplePayers && expense.payers && expense.payers.length > 1;
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-      <Card className="w-full max-w-lg bg-white border border-slate-200 shadow-2xl rounded-2xl p-6 space-y-6 relative animate-in fade-in zoom-in-95 duration-150">
+      <Card className="w-full max-w-lg bg-white border border-slate-200 shadow-2xl rounded-2xl p-6 space-y-5 relative animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-start justify-between border-b border-slate-100 pb-4">
           <div>
@@ -34,6 +35,11 @@ export const ExpenseDetailsModal: React.FC<ExpenseDetailsModalProps> = ({
               {expense.isActivityLinked && (
                 <Badge variant="indigo" className="text-[10px] uppercase font-extrabold">
                   Activity Bill
+                </Badge>
+              )}
+              {isMultiPayer && (
+                <Badge variant="amber" className="text-[10px] uppercase font-extrabold">
+                  Multiple Payers
                 </Badge>
               )}
             </div>
@@ -53,7 +59,7 @@ export const ExpenseDetailsModal: React.FC<ExpenseDetailsModalProps> = ({
           </button>
         </div>
 
-        {/* Total Amount & Payer */}
+        {/* Total Amount & Primary Payer summary */}
         <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
           <div>
             <div className="text-xs font-semibold text-slate-500 uppercase">Total Amount</div>
@@ -62,13 +68,49 @@ export const ExpenseDetailsModal: React.FC<ExpenseDetailsModalProps> = ({
             </div>
           </div>
           <div className="text-right">
-            <div className="text-xs font-semibold text-slate-500 uppercase">Paid By</div>
+            <div className="text-xs font-semibold text-slate-500 uppercase">
+              {isMultiPayer ? 'Payment Source' : 'Paid By'}
+            </div>
             <div className="text-sm font-bold text-emerald-800 flex items-center justify-end space-x-1.5 mt-0.5">
-              <User size={14} className="text-emerald-600" />
-              <span>{expense.payer ? expense.payer.fullName : 'Unknown'}</span>
+              {isMultiPayer ? (
+                <>
+                  <Users size={14} className="text-emerald-600" />
+                  <span>{expense.payers?.length} Contributors</span>
+                </>
+              ) : (
+                <>
+                  <User size={14} className="text-emerald-600" />
+                  <span>{expense.payer ? expense.payer.fullName : 'Unknown'}</span>
+                </>
+              )}
             </div>
           </div>
         </div>
+
+        {/* Multi-Payer Breakdown if applicable */}
+        {isMultiPayer && expense.payers && (
+          <div className="space-y-2">
+            <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <CreditCard size={13} className="text-emerald-600" />
+              Paid By ({expense.payers.length} Payers)
+            </h4>
+            <div className="divide-y divide-slate-100 border border-slate-200 rounded-xl overflow-hidden bg-white">
+              {expense.payers.map((payer) => (
+                <div key={payer.memberId} className="p-3 flex items-center justify-between text-xs">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 rounded-full bg-emerald-50 text-emerald-700 font-bold flex items-center justify-center text-[10px]">
+                      {payer.memberFullName.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="font-bold text-slate-900">{payer.memberFullName}</span>
+                  </div>
+                  <span className="font-extrabold text-emerald-700">
+                    {formatDual(payer.paidAmount, expense.currency)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Expense Info Grid */}
         <div className="grid grid-cols-2 gap-3 text-xs">
@@ -95,7 +137,7 @@ export const ExpenseDetailsModal: React.FC<ExpenseDetailsModalProps> = ({
         )}
 
         {/* Participant Share Breakdown */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
             Split Breakdown ({expense.participants.length} Participant{expense.participants.length !== 1 ? 's' : ''})
           </h4>
