@@ -1,0 +1,485 @@
+{
+  "prototypeVersion": "6A",
+  "model": "gemini-3.6-flash",
+  "totalImagesEvaluated": 10,
+  "successfulEvaluations": 10,
+  "failedEvaluations": 0,
+  "averageLatencyMs": 9892,
+  "destinations": [
+    {
+      "catalogNumber": 1,
+      "destination": "Jaipur",
+      "state": "Rajasthan",
+      "deterministicScorerWinner": "File:Jaipur 03-2016 02 Amber Fort.jpg",
+      "deterministicScorerScore": 75,
+      "geminiVisionWinner": "File:Jaipur 03-2016 02 Amber Fort.jpg",
+      "geminiVisionScore": 61,
+      "candidatesEvaluated": [
+        {
+          "candidateIndex": 1,
+          "title": "File:Jaipur 03-2016 02 Amber Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Jaipur_03-2016_02_Amber_Fort.jpg/1280px-Jaipur_03-2016_02_Amber_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Jaipur_03-2016_02_Amber_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "FAL",
+          "photographer": "A.Savin",
+          "width": 5304,
+          "height": 3315,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSuitability": 13,
+            "landmarkMatch": 14,
+            "composition": 9,
+            "imageQuality": 6,
+            "visualDistinctiveness": 5,
+            "negativeSubjectPenalty": 0,
+            "overall": 61,
+            "decision": "ACCEPTABLE",
+            "reason": "The image captures a wide perspective of Amber Fort above Maota Lake, directly matching primary destination landmarks. Daylight highlights the hilltop sandstone architecture, though the prominent foreground shoreline slightly weakens overall impact.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 10860,
+          "tokenUsage": {
+            "promptTokenCount": 1620,
+            "candidatesTokenCount": 141,
+            "totalTokenCount": 2685,
+            "promptTokensDetails": [
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1092
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 528
+              }
+            ],
+            "thoughtsTokenCount": 924,
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "candidateIndex": 2,
+          "title": "File:Jaipur 03-2016 05 Amber Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Jaipur_03-2016_05_Amber_Fort.jpg/1280px-Jaipur_03-2016_05_Amber_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/Jaipur_03-2016_05_Amber_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "FAL",
+          "photographer": "A.Savin",
+          "width": 5336,
+          "height": 3335,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSuitability": 12,
+            "landmarkMatch": 14,
+            "composition": 9,
+            "imageQuality": 6,
+            "visualDistinctiveness": 6,
+            "negativeSubjectPenalty": 0,
+            "overall": 61,
+            "decision": "ACCEPTABLE",
+            "reason": "The photograph displays a detailed view of Amber Fort's yellow sandstone facade and fortified walls under clear sunlight. It effectively captures Rajputana architecture, though it lacks the broader landscape context of Maota Lake.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 8888,
+          "tokenUsage": {
+            "promptTokenCount": 1620,
+            "candidatesTokenCount": 144,
+            "totalTokenCount": 2670,
+            "promptTokensDetails": [
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1092
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 528
+              }
+            ],
+            "thoughtsTokenCount": 906,
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    },
+    {
+      "catalogNumber": 4,
+      "destination": "Udaipur",
+      "state": "Rajasthan",
+      "deterministicScorerWinner": "File:20191207 City Palace, Mohan Temple and Lake Pichola, Udaipur, 1523 7262.jpg",
+      "deterministicScorerScore": 85,
+      "geminiVisionWinner": "File:City Palace Udaipur Rajasthan India.JPG",
+      "geminiVisionScore": 49,
+      "candidatesEvaluated": [
+        {
+          "candidateIndex": 2,
+          "title": "File:City Palace Udaipur Rajasthan India.JPG",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/City_Palace_Udaipur_Rajasthan_India.JPG/1280px-City_Palace_Udaipur_Rajasthan_India.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/82/City_Palace_Udaipur_Rajasthan_India.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "CC BY 3.0",
+          "photographer": "Hirumon",
+          "width": 4272,
+          "height": 2848,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 13,
+            "heroSuitability": 8,
+            "landmarkMatch": 12,
+            "composition": 8,
+            "imageQuality": 5,
+            "visualDistinctiveness": 5,
+            "negativeSubjectPenalty": -2,
+            "overall": 49,
+            "decision": "WEAK",
+            "reason": "The image features detailed architectural jharokhas of the City Palace from a tight low angle. It lacks the essential wide landscape view and Lake Pichola setting needed for a primary destination image.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 9170,
+          "tokenUsage": {
+            "promptTokenCount": 1560,
+            "candidatesTokenCount": 141,
+            "totalTokenCount": 2726,
+            "promptTokensDetails": [
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1080
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 480
+              }
+            ],
+            "thoughtsTokenCount": 1025,
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "candidateIndex": 1,
+          "title": "File:Blue mural embroidery, Udaipur, Rajasthan, India.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Blue_mural_embroidery%2C_Udaipur%2C_Rajasthan%2C_India.jpg/1280px-Blue_mural_embroidery%2C_Udaipur%2C_Rajasthan%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Blue_mural_embroidery%2C_Udaipur%2C_Rajasthan%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "CC BY-SA 4.0",
+          "photographer": "Yann (talk)",
+          "width": 3000,
+          "height": 4214,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 6,
+            "heroSuitability": 5,
+            "landmarkMatch": 5,
+            "composition": 8,
+            "imageQuality": 6,
+            "visualDistinctiveness": 5,
+            "negativeSubjectPenalty": -3,
+            "overall": 32,
+            "decision": "REJECT",
+            "reason": "The photograph features a close-up of embroidered textile craft rather than establishing scenic landmarks or landscapes of Udaipur. This directly triggers a negative subject penalty for craft close-ups.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 7665,
+          "tokenUsage": {
+            "promptTokenCount": 1580,
+            "candidatesTokenCount": 135,
+            "totalTokenCount": 2532,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 488
+              },
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1092
+              }
+            ],
+            "thoughtsTokenCount": 817,
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    },
+    {
+      "catalogNumber": 150,
+      "destination": "Maheshwar",
+      "state": "Madhya Pradesh",
+      "deterministicScorerWinner": "File:River Narmada from Maheshwar Fort.jpg",
+      "deterministicScorerScore": 80,
+      "geminiVisionWinner": "File:Maheshwar 01.jpg",
+      "geminiVisionScore": 35,
+      "candidatesEvaluated": [
+        {
+          "candidateIndex": 2,
+          "title": "File:Maheshwar 01.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Maheshwar_01.jpg/1280px-Maheshwar_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Maheshwar_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "CC BY-SA 3.0",
+          "photographer": "Bernard Gagnon",
+          "width": 4529,
+          "height": 3133,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 8,
+            "heroSuitability": 6,
+            "landmarkMatch": 6,
+            "composition": 7,
+            "imageQuality": 6,
+            "visualDistinctiveness": 4,
+            "negativeSubjectPenalty": -2,
+            "overall": 35,
+            "decision": "REJECT",
+            "reason": "The image captures a local street scene with modern structures rather than the iconic Ahilya Fort or Narmada ghats. It lacks key historic architectural subjects specified for the destination.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 8984,
+          "tokenUsage": {
+            "promptTokenCount": 1624,
+            "candidatesTokenCount": 136,
+            "totalTokenCount": 2609,
+            "promptTokensDetails": [
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1080
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 544
+              }
+            ],
+            "thoughtsTokenCount": 849,
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "candidateIndex": 1,
+          "title": "File:Maheshwar Palace.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Maheshwar_Palace.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Maheshwar_Palace.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "CC0",
+          "photographer": "Prabhat Kumar",
+          "width": 388,
+          "height": 521,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 6,
+            "heroSuitability": 5,
+            "landmarkMatch": 5,
+            "composition": 4,
+            "imageQuality": 3,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": -2,
+            "overall": 24,
+            "decision": "REJECT",
+            "reason": "The image features a close-up photo of a Hindi inscription board rather than landscape scenery. It lacks any visual depiction of Ahilya Fort, Narmada Ghats, or architectural elements.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 13627,
+          "tokenUsage": {
+            "promptTokenCount": 1598,
+            "candidatesTokenCount": 139,
+            "totalTokenCount": 2687,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 534
+              },
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1064
+              }
+            ],
+            "thoughtsTokenCount": 950,
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    },
+    {
+      "catalogNumber": 155,
+      "destination": "Poovar",
+      "state": "Kerala",
+      "deterministicScorerWinner": "File:Poovar backwaters view, Kerala, India.jpg",
+      "deterministicScorerScore": 85,
+      "geminiVisionWinner": "File:Puvar 20080220-1.jpg",
+      "geminiVisionScore": 48,
+      "candidatesEvaluated": [
+        {
+          "candidateIndex": 1,
+          "title": "File:Puvar 20080220-1.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Puvar_20080220-1.jpg/1280px-Puvar_20080220-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Puvar_20080220-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "CC BY-SA 3.0",
+          "photographer": "Hans A. Rosbach",
+          "width": 4368,
+          "height": 2912,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 12,
+            "heroSuitability": 8,
+            "landmarkMatch": 10,
+            "composition": 8,
+            "imageQuality": 6,
+            "visualDistinctiveness": 5,
+            "negativeSubjectPenalty": -1,
+            "overall": 48,
+            "decision": "WEAK",
+            "reason": "The photograph captures a traditional thatched wooden boat on the beach spit. It lacks the preferred elevated view illustrating the confluence between the backwaters and sea.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 14033,
+          "tokenUsage": {
+            "promptTokenCount": 1603,
+            "candidatesTokenCount": 132,
+            "totalTokenCount": 2720,
+            "promptTokensDetails": [
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1080
+              },
+              {
+                "modality": "TEXT",
+                "tokenCount": 523
+              }
+            ],
+            "thoughtsTokenCount": 985,
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "candidateIndex": 2,
+          "title": "File:Poovar Island, Kerala, India 20140107-DSC 3287.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Poovar_Island%2C_Kerala%2C_India_20140107-DSC_3287.jpg/1280px-Poovar_Island%2C_Kerala%2C_India_20140107-DSC_3287.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Poovar_Island%2C_Kerala%2C_India_20140107-DSC_3287.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "CC BY-SA 3.0",
+          "photographer": "mjoydeep2k",
+          "width": 4928,
+          "height": 3264,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 7,
+            "heroSuitability": 6,
+            "landmarkMatch": 6,
+            "composition": 10,
+            "imageQuality": 6,
+            "visualDistinctiveness": 4,
+            "negativeSubjectPenalty": -2,
+            "overall": 37,
+            "decision": "REJECT",
+            "reason": "The photo shows a close-up of an egret on palm leaves, failing to depict Poovar's iconic estuary, sand spit, or floating cottages. The generic wildlife subject lacks destination-specific landscape context.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 10994,
+          "tokenUsage": {
+            "promptTokenCount": 1640,
+            "candidatesTokenCount": 145,
+            "totalTokenCount": 2413,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 533
+              },
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1107
+              }
+            ],
+            "thoughtsTokenCount": 628,
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    },
+    {
+      "catalogNumber": 160,
+      "destination": "Tranquebar (Tharangambadi)",
+      "state": "Tamil Nadu",
+      "deterministicScorerWinner": "File:A view of Tranquebar - Google Art Project.jpg",
+      "deterministicScorerScore": 60,
+      "geminiVisionWinner": "File:Bungalow on the Beach, Neemrana Hotels, in Tranquebar, Tamil Nadu.jpg",
+      "geminiVisionScore": 44,
+      "candidatesEvaluated": [
+        {
+          "candidateIndex": 2,
+          "title": "File:Bungalow on the Beach, Neemrana Hotels, in Tranquebar, Tamil Nadu.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Bungalow_on_the_Beach%2C_Neemrana_Hotels%2C_in_Tranquebar%2C_Tamil_Nadu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/Bungalow_on_the_Beach%2C_Neemrana_Hotels%2C_in_Tranquebar%2C_Tamil_Nadu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "CC BY 2.0",
+          "photographer": "Koshy Koshy from Faridabad, Haryana, India",
+          "width": 1029,
+          "height": 683,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 12,
+            "heroSuitability": 8,
+            "landmarkMatch": 8,
+            "composition": 8,
+            "imageQuality": 5,
+            "visualDistinctiveness": 5,
+            "negativeSubjectPenalty": -2,
+            "overall": 44,
+            "decision": "WEAK",
+            "reason": "The image features the Bungalow on the Beach rather than the primary yellow Fort Dansborg hero subject. A parked motorcycle and boundary wall obstruct the foreground, reducing visual appeal. Resolution is slightly below ideal hero standards.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 8949,
+          "tokenUsage": {
+            "promptTokenCount": 1662,
+            "candidatesTokenCount": 144,
+            "totalTokenCount": 2564,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 555
+              },
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1107
+              }
+            ],
+            "thoughtsTokenCount": 758,
+            "serviceTier": "standard"
+          }
+        },
+        {
+          "candidateIndex": 1,
+          "title": "File:Tranquebar 1600.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Tranquebar_1600.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Tranquebar_1600.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "license": "Public domain",
+          "photographer": null,
+          "width": 549,
+          "height": 252,
+          "imageFetched": true,
+          "geminiEvaluation": {
+            "destinationRelevance": 10,
+            "heroSuitability": 2,
+            "landmarkMatch": 8,
+            "composition": 4,
+            "imageQuality": 1,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 28,
+            "decision": "REJECT",
+            "reason": "The candidate image is a low-resolution historical painting depicting 17th-century Danish Tranquebar rather than a modern photograph. At 549x252 pixels, the image quality is extremely low, making it completely unsuitable as a primary hero image for a modern travel application.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 5752,
+          "tokenUsage": {
+            "promptTokenCount": 1608,
+            "candidatesTokenCount": 137,
+            "totalTokenCount": 2151,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 530
+              },
+              {
+                "modality": "IMAGE",
+                "tokenCount": 1078
+              }
+            ],
+            "thoughtsTokenCount": 406,
+            "serviceTier": "standard"
+          }
+        }
+      ]
+    }
+  ]
+}

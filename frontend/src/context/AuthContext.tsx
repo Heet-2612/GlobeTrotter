@@ -47,8 +47,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     window.addEventListener('globetrotter_unauthorized', handleUnauthorized);
+    window.addEventListener('auth:unauthorized', handleUnauthorized);
     return () => {
       window.removeEventListener('globetrotter_unauthorized', handleUnauthorized);
+      window.removeEventListener('auth:unauthorized', handleUnauthorized);
     };
   }, []);
 

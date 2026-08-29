@@ -1,0 +1,123 @@
+[
+  {
+    "catalogNumber": 1,
+    "destination": "Jaipur",
+    "currentWinner": {
+      "title": "File:Jaipur 03-2016 02 Amber Fort.jpg",
+      "score": 75
+    },
+    "profileHeroSubjects": [
+      "Amber Fort hill fortification and Maota Lake reflecting facade",
+      "Hawa Mahal (Palace of Winds) honeycomb pink sandstone facade",
+      "City Palace royal courtyards and Chandra Mahal facade"
+    ],
+    "profileRelevant": true,
+    "profileConflict": false,
+    "wouldVisionAiChangeRanking": true,
+    "visionAiReasoning": "Current winner features Amber Fort, which matches Hero Subject #1. Vision AI will re-rank candidate list to prefer photos showing the Amber Fort reflecting over Maota Lake or Hawa Mahal front facade, boosting relevance score to 90+.",
+    "winnerClassification": "A_EXCELLENT",
+    "negativeFilterResults": {
+      "craftsTextilesDetected": false,
+      "foodPlatesDetected": false,
+      "portraitsDetected": false,
+      "negativeFilterPass": true
+    },
+    "profileEffectiveness": "HIGH"
+  },
+  {
+    "catalogNumber": 150,
+    "destination": "Maheshwar",
+    "currentWinner": {
+      "title": "File:River Narmada from Maheshwar Fort.jpg",
+      "score": 80
+    },
+    "profileHeroSubjects": [
+      "Ahilya Fort (Ahilya Wada) overlooking Narmada riverfront ghats",
+      "Wide panoramic view of Narmada River Ghats and stone temple spires at sunset"
+    ],
+    "profileRelevant": true,
+    "profileConflict": false,
+    "wouldVisionAiChangeRanking": true,
+    "visionAiReasoning": "Current winner captures the river view from the fort. Vision AI will evaluate whether 'Royal Palace of Maheshwar.jpg' or 'Maheshwar Palace.jpg' shows the riverfront stone ghat steps more prominently, aligning with Hero Subject #1.",
+    "winnerClassification": "B_ACCEPTABLE_BUT_NOT_IDEAL",
+    "negativeFilterResults": {
+      "craftsTextilesDetected": false,
+      "foodPlatesDetected": false,
+      "portraitsDetected": false,
+      "negativeFilterPass": true
+    },
+    "profileEffectiveness": "HIGH"
+  },
+  {
+    "catalogNumber": 155,
+    "destination": "Poovar",
+    "currentWinner": {
+      "title": "File:Poovar backwaters view, Kerala, India.jpg",
+      "score": 85
+    },
+    "profileHeroSubjects": [
+      "Golden sand beach barrier spit dividing the serene Neyyar backwater estuary from the Arabian Sea",
+      "Floating cottages and backwater mangrove channels"
+    ],
+    "profileRelevant": true,
+    "profileConflict": true,
+    "wouldVisionAiChangeRanking": true,
+    "visionAiReasoning": "Current winner shows generic Kerala backwater foliage. Candidate pool contains 'Poovar Island, Kerala, India 20140107-DSC 3287.jpg' which captures the signature golden sand beach spit separating backwater from sea. Vision AI will promote the sand spit photo to #1.",
+    "winnerClassification": "C_SHOULD_BE_REPLACED",
+    "negativeFilterResults": {
+      "craftsTextilesDetected": false,
+      "foodPlatesDetected": false,
+      "portraitsDetected": false,
+      "negativeFilterPass": true
+    },
+    "profileEffectiveness": "HIGH"
+  },
+  {
+    "catalogNumber": 160,
+    "destination": "Tranquebar (Tharangambadi)",
+    "currentWinner": {
+      "title": "File:A view of Tranquebar - Google Art Project.jpg",
+      "score": 60
+    },
+    "profileHeroSubjects": [
+      "Fort Dansborg (Danish Fort) yellow coastal battlements directly overlooking the Coromandel coastline",
+      "Ziegenbalg Danish Colonial Church and historic King Street gateway"
+    ],
+    "profileRelevant": true,
+    "profileConflict": true,
+    "wouldVisionAiChangeRanking": true,
+    "visionAiReasoning": "Current winner is a historic 17th-century painted artwork ('Google Art Project'). Negative filters reject sketches/paintings. Candidate pool contains real photographic images of Fort Dansborg ('Bungalow on the Beach, Neemrana Hotels, in Tranquebar...'). Vision AI will replace artwork with authentic photo of Fort Dansborg.",
+    "winnerClassification": "C_SHOULD_BE_REPLACED",
+    "negativeFilterResults": {
+      "craftsTextilesDetected": false,
+      "foodPlatesDetected": false,
+      "portraitsDetected": false,
+      "negativeFilterPass": false
+    },
+    "profileEffectiveness": "HIGH"
+  },
+  {
+    "catalogNumber": 165,
+    "destination": "Srisailam",
+    "currentWinner": {
+      "title": "File:Srisailam Dam rear view.jpg",
+      "score": 80
+    },
+    "profileHeroSubjects": [
+      "Srisailam Dam spanning the deep Nallamala forest canyon of Krishna River",
+      "Sri Mallikarjuna Swamy Jyotirlinga Temple complex towers and Prakaram wall"
+    ],
+    "profileRelevant": true,
+    "profileConflict": false,
+    "wouldVisionAiChangeRanking": true,
+    "visionAiReasoning": "Current winner is a 'rear view' close-up of Srisailam Dam. Candidate pool contains 'Srisailam project panorama.jpg' which captures the full dam and Nallamala forest canyon. Vision AI will select the panorama as #1.",
+    "winnerClassification": "B_ACCEPTABLE_BUT_NOT_IDEAL",
+    "negativeFilterResults": {
+      "craftsTextilesDetected": false,
+      "foodPlatesDetected": false,
+      "portraitsDetected": false,
+      "negativeFilterPass": true
+    },
+    "profileEffectiveness": "HIGH"
+  }
+]

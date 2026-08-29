@@ -1,0 +1,70 @@
+# GlobeTrotter Final 165 Image Dataset Validation Worklist
+
+# STATUS: FINAL_IMAGE_DATASET_VALID = PASS
+
+# Total Catalog Destinations: 165
+
+# Valid Matches: 163
+
+# Missing Catalog Destinations: 2 (#138 Patna, #164 Gandikota)
+
+# Extras Removed: 34
+
+
+--- MISSING DESTINATIONS WORKLIST (Action Required) ---
+#138 | Patna | Bihar | ACTION: Sourcing high-res image required
+#164 | Gandikota | Andhra Pradesh | ACTION: Sourcing high-res image required
+
+--- REVIEW DESTINATIONS WORKLIST (Verification Recommended) ---
+#2 | Agra | Uttar Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Taj_Mahal_N-UP-A28-a.jpg/960px-Taj_Mahal_N-UP-A28-a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#14 | Dharamshala | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cricket_Stadium_Dharamshala.jpg/960px-Cricket_Stadium_Dharamshala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#20 | Alappuzha | Kerala | https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Alappuzha_Tourism.jpg/960px-Alappuzha_Tourism.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#23 | Mysuru | Karnataka | https://s3.india.com/wp-content/uploads/2024/06/Things-To-Know-Before-Visiting-Mysuru.jpg##image/jpg | REVIEW: Malformed URL fragment ('##image/jpg')
+#24 | Hampi | Karnataka | https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Hampi%2C_India%2C_Temple_on_top_of_Matanga_Hill.jpg/960px-Hampi%2C_India%2C_Temple_on_top_of_Matanga_Hill.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#26 | Puducherry | Puducherry | https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Basilica_of_the_Sacred_Heart_of_Jesus.jpg/1920px-Basilica_of_the_Sacred_Heart_of_Jesus.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20180308112321 | REVIEW: 2 duplicate candidates in uploaded file; Name variation ('Pondicherry' vs 'Puducherry')
+#27 | Madurai | Tamil Nadu | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAK9-KFFiENcKPhrMiHQVUFjUTuUPy7y8ymop97bvhMA&s=10 | REVIEW: Google thumbnail URL
+#29 | Kanyakumari | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/b/ba/Kanyakumari_Church_1.JPG?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original | REVIEW: 2 duplicate candidates in uploaded file
+#30 | Varkala | Kerala | https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Papanasam_beach%2C_Varkala.jpg/960px-Papanasam_beach%2C_Varkala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#31 | Kodaikanal | Tamil Nadu | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC5jgoz6ym0oNJkahUqZKVuUWgO526c6lgNQrHgG8FIg&s=10 | REVIEW: Google thumbnail URL
+#34 | Hyderabad | Telangana | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKwltC3Hnt3ajAJmz4__hrFCVfbSpmjDDU89VicVMHQ&s | REVIEW: Google thumbnail URL
+#35 | Bengaluru | Karnataka | https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/BANGALORE_PALACE.jpg/960px-BANGALORE_PALACE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#36 | Gokarna | Karnataka | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqoxF3EM5xw8R_jMXFFq2ahRkIBtmCQUH1FX76V8tfwA&s=10 | REVIEW: Google thumbnail URL
+#40 | Shillong | Meghalaya | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzhYA3aO2tLEXN6hWn6Ampv2wq5mBgo0HuTiubWwco5IfKSm5A1L8X-Lvd&s=10 | REVIEW: Google thumbnail URL
+#41 | Cherrapunji (Sohra) | Meghalaya | https://s7ap1.scene7.com/is/image/incredibleindia/double-decker-living-root-bridge-cherrapunjee-meghalaya-city-ff?qlt=82&ts=1742165333655 | REVIEW: Name variation ('Cherrapunji' vs 'Cherrapunji (Sohra)')
+#45 | Mumbai | Maharashtra | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL048p9XXLqghYbIfmyq68nG0HMGnjkY73IPP4RaWWSCdi1VObNMq5lEO&s=10 | REVIEW: Google thumbnail URL
+#47 | Lonavala-Khandala | Maharashtra | https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_lonavala_tv_destination_img_2_l_664_1000.jpg | REVIEW: Name variation ('Lonavala' vs 'Lonavala-Khandala')
+#54 | Orchha | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Jahangir_Mahal%2C_Orchha%2C_Madhya_Pradesh%2C_India.jpg/960px-Jahangir_Mahal%2C_Orchha%2C_Madhya_Pradesh%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#63 | Bundi | Rajasthan | https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQaXsIvrWMh3qr4rF_RR400dkn4ItkrQEQgwfJ7RYPRMU8fGitX | REVIEW: Google thumbnail URL
+#70 | Tawang | Arunachal Pradesh | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuXDX0KXCvbERLGCJ_K5KbwXW-qnIhZ-emGRoxlpl8thFMc0IdTqJPrjU&s=10 | REVIEW: Google thumbnail URL
+#73 | Majuli | Assam | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA_MtJ6zxSdHADlAj0f9KCy9Phnfksl0yveP83sWWMhx_TwDIpY7TCvuMB&s=10 | REVIEW: Google thumbnail URL
+#75 | Andaman Islands | Andaman & Nicobar Islands | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfpJJ-grSO9J7HsRi_pjZG7bUgeLTEhsmzftLdiw1k6-DInw94HqShmlI&s=10 | REVIEW: Google thumbnail URL
+#77 | Chikkamagaluru | Karnataka | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/25/6e/67/caption.jpg?w=1200&h=-1&s=1 | REVIEW: 2 duplicate candidates in uploaded file; Name variation ('Chikmagalur' vs 'Chikkamagaluru')
+#78 | Bandipur | Karnataka | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvawT17926ixgLY-IbsyLIjetdpluQIvOMt0iX-M2sOA&s=10 | REVIEW: Google thumbnail URL
+#79 | Nagarhole | Karnataka | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnnctkTpKGeJpCq760LqnMeHEoX65lvnBegzcU4GRMvg&s=10 | REVIEW: Google thumbnail URL
+#80 | Badami-Pattadakal | Karnataka | https://upload.wikimedia.org/wikipedia/commons/c/cf/BadamiCaves87.JPG?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original | REVIEW: 3 duplicate candidates in uploaded file; Composite / merged destination name
+#82 | Dandeli | Karnataka | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq7jie1eRof7qswpFP8EfrPyMQZvaTwefJXHLColwmXw&s=10 | REVIEW: Google thumbnail URL
+#87 | Rameswaram | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/d/d1/Rameswaram_Railway_Station_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original | REVIEW: 2 duplicate candidates in uploaded file
+#88 | Tirupati | Andhra Pradesh | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShFOP0OMjscPOnxcqt2lyA3G--cRfTfiYNLz46JQpRMg&s=10 | REVIEW: Google thumbnail URL
+#90 | Araku Valley | Andhra Pradesh | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa5IB4-kZTR7momUnDnyGf-LBaMxeUor-OdVLXkmjpMoKw2uf_lZDgSZUs&s=10 | REVIEW: Google thumbnail URL
+#97 | Chhatrapati Sambhajinagar | Maharashtra | https://s7ap1.scene7.com/is/image/incredibleindia/ellora-caves-chhatrapati%20sambhaji%20nagar-maharashtra-hero-HS?qlt=82&ts=1726674928630 | REVIEW: 2 duplicate candidates in uploaded file
+#100 | Tarkarli | Maharashtra | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEbR-tuapQ64A8Wz9RE02KhLgQ7kdJPQl62CXG6WgZTQ&s=10 | REVIEW: Google thumbnail URL
+#102 | Somnath | Gujarat | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz2yRu80mt7sO0CwFIJFgty4SF-Sc9ENCdxHYtGsJYQw&s | REVIEW: Google thumbnail URL
+#105 | Saputara | Gujarat | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS56sn-9vIKzWEAeFXPVeXTokpJkheZr72Yk-3ZppA5og&s=10 | REVIEW: Google thumbnail URL
+#108 | Delhi | Delhi | https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/India_gatee.JPG/960px-India_gatee.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#109 | Goa | Goa | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/goa.jpg?w=1200&h=900&s=1 | REVIEW: 2 duplicate candidates in uploaded file
+#111 | Dholavira | Gujarat | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIbjyrdsYzTZNkr56pFAau9wamxMhN9zcspIKR2QJ9CraUxj9tlAeWEpU&s=10 | REVIEW: Google thumbnail URL
+#114 | Shettihalli / Sakleshpur | Karnataka | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/95/f6/57/20171224-124245-largejpg.jpg?w=1000&h=600&s=1 | REVIEW: 2 duplicate candidates in uploaded file
+#116 | Thekkady-Periyar | Kerala | https://www.keralatravels.com/userfiles/1475817533_Thekkady.jpg | REVIEW: Composite / merged destination name
+#117 | Kumarakom | Kerala | https://upload.wikimedia.org/wikipedia/commons/c/ca/Kumarakom_market_canal_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original | REVIEW: 2 duplicate candidates in uploaded file
+#120 | Kozhikode | Kerala | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdlizxaHu1Gp9ywZICWhWLNOBIowCNc5oTQck1YWUCroTXB-vrMi-Mx5o4&s=10 | REVIEW: Google thumbnail URL
+#123 | Ajanta Caves | Maharashtra | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7HtI_H0F0O4DGuvRt3CFUwgdpFMbQ2oAMvDItmyPphxEgxFfyeGXIYWw&s=10 | REVIEW: Google thumbnail URL; Name variation ('Ajanta' vs 'Ajanta Caves')
+#124 | Ellora Caves | Maharashtra | https://aurangabadtourism.in/images/v2/places-to-visit/ellora-caves-aurangabad-tourism-header.jpg | REVIEW: Name variation ('Ellora' vs 'Ellora Caves')
+#129 | Ajmer | Rajasthan | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/61/bf/cc/caption.jpg?w=300&h=300&s=1 | REVIEW: Low resolution (300px)
+#151 | Mandu | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/c/c4/Jahaz_Mahal_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original | REVIEW: 3 duplicate candidates in uploaded file
+#152 | Chitrakoot | Madhya Pradesh / Uttar Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Government_Polytechnic_-_Bargarh_-_Chitrakoot_2014-07-06_7257.JPG/960px-Government_Polytechnic_-_Bargarh_-_Chitrakoot_2014-07-06_7257.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#153 | Thrissur | Kerala | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY6sO0K3nOPNn2-Rn2g3HTRIPsE8J6sBAQYjnhseOntg&s=10 | REVIEW: Google thumbnail URL
+#154 | Kannur | Kerala | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyIm2XJ9WMLSFYw-BNh7c9AE2EZw-aQ4ps1bRyIyf9Zp9VtxaRPnUg3oW&s=10 | REVIEW: Google thumbnail URL
+#155 | Poovar | Kerala | https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/THE_TRANQUIL_BACKWATERS_OF_POOVAR_-_KERALA.jpg/960px-THE_TRANQUIL_BACKWATERS_OF_POOVAR_-_KERALA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#159 | Dhanushkodi | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Dhanushkodi_Road.jpg/960px-Dhanushkodi_Road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail | REVIEW: 2 duplicate candidates in uploaded file
+#160 | Tranquebar (Tharangambadi) | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/0/0e/Fort_Dansborg_in_Tharangambadi%2C_Tamil_Nadu.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original | REVIEW: 2 duplicate candidates in uploaded file; Composite / merged destination name
+#165 | Srisailam | Andhra Pradesh | https://upload.wikimedia.org/wikipedia/commons/5/5c/Rock_formations_on_the_Telanagana_side_of_Srisailam_Dam.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original | REVIEW: 2 duplicate candidates in uploaded file

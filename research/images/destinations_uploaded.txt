@@ -1,0 +1,247 @@
+#1 | Jaipur | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Hawa_Mahal%2C_Jaipur_5.jpg/960px-Hawa_Mahal%2C_Jaipur_5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#2 | Agra | Uttar Pradesh |https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Taj_Mahal_N-UP-A28-a.jpg/960px-Taj_Mahal_N-UP-A28-a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#3 | Varanasi | Uttar Pradesh |https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Varanasi_2010_Ahilyabai_Ghat.jpg/960px-Varanasi_2010_Ahilyabai_Ghat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#4 | Udaipur | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/20191207_Lake_Pichola%2C_Udaipur%2C_1531_7276.jpg/960px-20191207_Lake_Pichola%2C_Udaipur%2C_1531_7276.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#5 | Jodhpur | Rajasthan |https://www.oyorooms.com/travel-guide/wp-content/uploads/2021/05/Jodhpur-for-a-360-degree-3-1.jpg
+
+#6 | Jaisalmer | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Jaisalmer%2C_India%2C_View_of_Jaisalmer_Fort.jpg/960px-Jaisalmer%2C_India%2C_View_of_Jaisalmer_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#7 | Pushkar | Rajasthan |https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/09/15145809/things-to-do-in-pushkar-1600x900.jpg
+
+#8 | Mount Abu | Rajasthan |https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/bc/5d/2d/mt-abu-observatory-from.jpg?w=600&h=400&s=1
+
+#9 | Ranthambore | Rajasthan |https://assets.cntraveller.in/photos/60ba1a12a1a415b43b10bcfa/master/w_1600,c_limit/Arrows-Girl-Padam-Lake-Ranthambore-1620.jpg
+
+#10 | Bikaner | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bikaner-Junagarh-89-2018-gje.jpg/960px-Bikaner-Junagarh-89-2018-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#11 | Ajmer | Rajasthan |https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/61/bf/cc/caption.jpg?w=300&h=300&s=1
+
+#12 | Bundi | Rajasthan |https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQaXsIvrWMh3qr4rF_RR400dkn4ItkrQEQgwfJ7RYPRMU8fGitX
+
+#13 | Chittorgarh | Rajasthan |https://static.toiimg.com/thumb/50900339.cms?resizemode=75&width=1200&height=900
+
+#14 | Alwar | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Skyline_of_Alwar_City.jpg/1280px-Skyline_of_Alwar_City.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#15 | Bharatpur | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Bharatpur_Fort.JPG/1920px-Bharatpur_Fort.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#16 | Kumbhalgarh | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Kumbhalgarh_055.jpg/960px-Kumbhalgarh_055.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail
+
+#17 | Sawai Madhopur | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sunset_at_Ranthambore_Fort.jpg/1280px-Sunset_at_Ranthambore_Fort.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#18 | Kota | Rajasthan |https://upload.wikimedia.org/wikipedia/commons/1/1c/Chambal-river-gorge.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled
+
+#19 | Neemrana | Rajasthan |https://assets.simplotel.com/simplotel/image/upload/q_80,fl_progressive,w_1500,f_auto,c_fit/neemrana-fort-palace---15th-century-delhi-jaipur-highway/Facade_Premises__Neemrana_Fort_Palace__palace_hotel_in_Rajasthan_14_4_d55b91
+
+#20 | Alappuzha | Kerala |https://www.oyorooms.com/blog/wp-content/uploads/2017/12/Alleppey-min.jpg
+
+#21 | Munnar | Kerala |https://theleafmunnar.com/wp-content/uploads/2024/11/tea-gardens-munnar.jpg
+
+#22 | Kochi | Kerala |https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/de/f0/eb/backwater-tourism.jpg?w=700&h=-1&s=1
+
+#23 | Thekkady | Kerala |https://www.keralatravels.com/userfiles/1475817533_Thekkady.jpg
+
+#24 | Wayanad | Kerala |https://www.ekeralatourism.net/wp-content/uploads/2018/12/things-wayanad2.jpg
+
+#25 | Kovalam | Kerala |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcBpc76JoCRCYrAX0If4zbpgpBdriHdr8qYwuunpJ6DnaiD9zXIhmMRtCa&s=10
+
+#26 | Varkala | Kerala |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvn3w5mBtECYAQptcQpCT3kaB0gnbTwElMjfSUn4YtDA&s=10
+
+#27 | Kumarakom | Kerala |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw_DPj06ItHEZ3m3_GbgJNKxjAvFWaxVdjI0WGItBw7w&s=10
+
+#28 | Thrissur | Kerala |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY6sO0K3nOPNn2-Rn2g3HTRIPsE8J6sBAQYjnhseOntg&s=10
+
+#29 | Kozhikode | Kerala |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdlizxaHu1Gp9ywZICWhWLNOBIowCNc5oTQck1YWUCroTXB-vrMi-Mx5o4&s=10
+
+#30 | Kannur | Kerala |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwyIm2XJ9WMLSFYw-BNh7c9AE2EZw-aQ4ps1bRyIyf9Zp9VtxaRPnUg3oW&s=10
+
+#31 | Bekal | Kerala |https://upload.wikimedia.org/wikipedia/commons/7/74/Bekal.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original
+
+#32 | Athirappilly | Kerala |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdWdm_EjpZ8byo0EZddaJUUclumjet6MHjHbkqd_lS8Q&s=10
+
+#33 | Vagamon | Kerala |https://upload.wikimedia.org/wikipedia/commons/e/eb/Vagamon_meadows.JPG?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original
+
+#34 | Marari | Kerala |https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/1b/5c/46/marari-beach.jpg?w=500&h=-1&s=1
+
+#35 | Thiruvananthapuram | Kerala |https://www.keralatourism.org/_next/image/?url=http%3A%2F%2F127.0.0.1%2Fktadmin%2Fimg%2Fpages%2Fmobile%2Fthiruvananthapuram-1713788259_cc3e007203a550edfaa7.webp&w=3840&q=75
+
+#36 | Mumbai | Maharashtra |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL048p9XXLqghYbIfmyq68nG0HMGnjkY73IPP4RaWWSCdi1VObNMq5lEO&s=10
+
+#37 | Pune | Maharashtra |https://s7ap1.scene7.com/is/image/incredibleindia/shivneri-fort-pune-maharashtra-hero?qlt=82&ts=1742178330918
+
+#38 | Nashik | Maharashtra |https://studytoursindia.com/wp-content/uploads/2023/07/archana-more-AOSm9Cii6P4-unsplash-1300x1300.webp
+
+#39 | Aurangabad | Maharashtra |https://static.toiimg.com/photo/50835666.cms
+
+#40 | Mahabaleshwar | Maharashtra |https://s7ap1.scene7.com/is/image/incredibleindia/pratapgarh-fort-mahabaleshwar-maharashtra-1-attr-nearby?qlt=82&ts=1742177227908
+
+#41 | Lonavala | Maharashtra |https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_lonavala_tv_destination_img_2_l_664_1000.jpg
+
+#42 | Alibaug | Maharashtra |https://www.oyorooms.com/travel-guide/wp-content/uploads/2019/11/murud-janjira-fort-1.jpg
+
+#43 | Kolhapur | Maharashtra |https://tanushreecabs.com/wp-content/uploads/2025/03/New-Palace-Kolhapur--1024x872.webp
+
+#44 | Nagpur | Maharashtra |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeoUI6NsnxWzVzWJKRCFhS8rZWMNXlwVZLM3G0GJB9xPlDExRPC2PSXBhC&s=10
+
+#45 | Ajanta | Maharashtra |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7HtI_H0F0O4DGuvRt3CFUwgdpFMbQ2oAMvDItmyPphxEgxFfyeGXIYWw&s=10
+
+#46 | Ellora | Maharashtra |https://aurangabadtourism.in/images/v2/places-to-visit/ellora-caves-aurangabad-tourism-header.jpg
+
+#47 | Shirdi | Maharashtra |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG8YkiuU6SvZdv-WyJ9lZ01V33G94M0NYVBiXu4KAQfHLzTEQzP6n5i4I&s=10
+
+#48 | Goa | Goa |https://www.oyorooms.com/travel-guide/wp-content/uploads/2022/11/hours-in-goa-beaches-seafood-and-dance.jpg
+
+#49 | Hampi | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJwYM-Q3msFVUAkC9gw1DT0XIvCr4A6iISIAAvI1lQDpNuNuVisnwkd5w&s=10
+
+#50 | Mysuru | Karnataka |https://s3.india.com/wp-content/uploads/2024/06/Things-To-Know-Before-Visiting-Mysuru.jpg##image/jpg
+
+#51 | Coorg | Karnataka |https://c.ndtvimg.com/2025-05/hrgf60uo_coorg_625x300_17_May_25.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=738
+
+#52 | Gokarna | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqoxF3EM5xw8R_jMXFFq2ahRkIBtmCQUH1FX76V8tfwA&s=10
+
+#53 | Bengaluru | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4Z1ARRGc-4MI4MZ2gxzUAmL_PrUtSlSSDL6X3-3WJgoaMXUFfTmEJsJE&s=10
+
+#54 | Chikmagalur | Karnataka |https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/25/6e/67/caption.jpg?w=1200&h=-1&s=1
+
+#55 | Udupi | Karnataka |https://karnatakatourism.org/_next/image/?url=https%3A%2F%2Fweb-cms.karnatakatourism.org%2Fwp-content%2Fuploads%2F2025%2F06%2Fdji_0053.webp&w=3840&q=75
+
+#56 | Badami | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8dGIChmnvhDxpPqYkVyhlzPi8HjBGBP5q6GBfoR9ZrVYbPl7YEs9Nvs8&s=10
+
+#57 | Pattadakal | Karnataka |https://kevinstandagephotography.wordpress.com/wp-content/uploads/2015/04/pattadakal-ksp_5064.jpg
+
+#58 | Aihole | Karnataka |https://assets.architecturaldigest.in/photos/644ea2fb5e459f60aa9509b5/16:9/w_1920,c_limit/Untitled%20design%20(31).png
+
+#59 | Jog Falls | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlNbIlIoFBy7bluVObWBIg_XGxqnKiZLNkPBk_rb0axA&s
+
+#60 | Dandeli | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq7jie1eRof7qswpFP8EfrPyMQZvaTwefJXHLColwmXw&s=10
+
+#61 | Kabini | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRu0J2owT4mJT5OEPMK-1iNbhSZZdsxhYTriE85j-Clj-IWrgy9SgrTQjM&s=10
+
+#62 | Sakleshpur | Karnataka |https://avathioutdoors.gumlet.io/live/sak_6419.jpg?q=85&upscale=true&w=1920&h=400&format=webp&compress=true
+
+#63 | Chitradurga | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtINwpgEK0kBAdo0jOdcvz6zvp9RhMOesl5XIbnb4u9w&s=10
+
+#64 | Hyderabad | Telangana |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKwltC3Hnt3ajAJmz4__hrFCVfbSpmjDDU89VicVMHQ&s
+
+#65 | Warangal | Telangana |https://static.toiimg.com/thumb/59593450.cms?resizemode=75&width=1200&height=900
+
+#66 | Srisailam | Andhra Pradesh |https://static.toiimg.com/thumb/msid-46918850,width-550,height-433.jpg
+
+#67 | Visakhapatnam | Andhra Pradesh |https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_Visakhapatnam_Vizag_tv_destination_img_1_l_673_1077.jpg
+
+#68 | Araku Valley | Andhra Pradesh |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa5IB4-kZTR7momUnDnyGf-LBaMxeUor-OdVLXkmjpMoKw2uf_lZDgSZUs&s=10
+
+#69 | Vijayawada | Andhra Pradesh |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcxSKOJwAYGi7nwNK1izLhxfbO81g0OavB0DF1zxzp9w&s
+
+#70 | Amaravati | Andhra Pradesh |https://dynamic.tourtravelworld.com/zsc-header/10343-header.jpg
+
+#71 | Champhai / Aizawl Circuit | Mizoram |https://s7ap1.scene7.com/is/image/incredibleindia/6-rih-dhdil-lake-champhai-mizoram-city-hero-new?qlt=82&ts=1726674860746
+
+#72 | Shillong | Meghalaya |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzhYA3aO2tLEXN6hWn6Ampv2wq5mBgo0HuTiubWwco5IfKSm5A1L8X-Lvd&s=10
+
+#73 | Cherrapunji | Meghalaya |https://s7ap1.scene7.com/is/image/incredibleindia/double-decker-living-root-bridge-cherrapunjee-meghalaya-city-ff?qlt=82&ts=1742165333655
+
+#74 | Kaziranga | Assam |https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Beauty_of_Kaziranga_National_Park.jpg/1280px-Beauty_of_Kaziranga_National_Park.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+
+#75 | Guwahati | Assam |https://upload.wikimedia.org/wikipedia/commons/1/11/Guwahati_citysky.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original
+
+#76 | Majuli | Assam |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA_MtJ6zxSdHADlAj0f9KCy9Phnfksl0yveP83sWWMhx_TwDIpY7TCvuMB&s=10
+
+#77 | Tawang | Arunachal Pradesh |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuXDX0KXCvbERLGCJ_K5KbwXW-qnIhZ-emGRoxlpl8thFMc0IdTqJPrjU&s=10
+
+#78 | Bandipur | Karnataka |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvawT17926ixgLY-IbsyLIjetdpluQIvOMt0iX-M2sOA&s=10
+
+#79 | Ooty | Tamil Nadu |https://hblimg.mmtcdn.com/content/hubble/img/destimg/mmt/destination/m_Ooty_main_tv_destination_img_1_l_764_1269.jpg
+
+#80 | Kodaikanal | Tamil Nadu |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC5jgoz6ym0oNJkahUqZKVuUWgO526c6lgNQrHgG8FIg&s=10
+
+#81 | Madurai | Tamil Nadu |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAK9-KFFiENcKPhrMiHQVUFjUTuUPy7y8ymop97bvhMA&s=10
+
+#82 | Rameswaram | Tamil Nadu |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTead17LxdbNS4vrnQXAb-4wRbMUUTi2ZUdllrQZGnVQgoqvet-qinJ0QU&s=10
+
+#83 | Kanyakumari | Tamil Nadu |https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw-FxbILxtlotUcJMVz2hMRYL6DjRzxaY2iveZYYWtTXBlpDOFqFJWroE&s=10
+#84 | Chennai | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/7/71/Kapaleeshwarar_Temple_0001.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#85 | Mahabalipuram | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mamallapuram%2C_The_Shore_Temple_2%2C_India.jpg/960px-Mamallapuram%2C_The_Shore_Temple_2%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original
+#86 | Thanjavur | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/c/ce/Brihadisvara_Temple%2C_Thanjavur%2C_Tamil_Nadu%2C_India_%282017%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#87 | Tiruchirappalli | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/0/05/Tiruchi_Jn._Name_board.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#88 | Kanchipuram | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/KailasanatharTemple-Kanchipuram-Tamilnadu-JM10.jpg/1920px-KailasanatharTemple-Kanchipuram-Tamilnadu-JM10.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20200929061613
+#89 | Pondicherry | Puducherry | https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Basilica_of_the_Sacred_Heart_of_Jesus.jpg/1920px-Basilica_of_the_Sacred_Heart_of_Jesus.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20180308112321
+#90 | Tharangambadi | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Fort_Dansborg_in_Tharangambadi%2C_Tamil_Nadu.jpg/960px-Fort_Dansborg_in_Tharangambadi%2C_Tamil_Nadu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#91 | Dhanushkodi | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Dhanushkodi_Road.jpg/960px-Dhanushkodi_Road.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#92 | Bengaluru | Karnataka | https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/BANGALORE_PALACE.jpg/960px-BANGALORE_PALACE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#93 | Delhi | Delhi | https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/India_gatee.JPG/960px-India_gatee.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#94 | Agra | Uttar Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Taj_Mahal%2C_Agra%2C_India.jpg/960px-Taj_Mahal%2C_Agra%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#95 | Lucknow | Uttar Pradesh | https://upload.wikimedia.org/wikipedia/commons/6/69/Chota_Imambada.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#96 | Mathura-Vrindavan | Uttar Pradesh | https://upload.wikimedia.org/wikipedia/commons/f/fc/Prem_mandir_Vrindavan_Mathura_UP.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#97 | Prayagraj | Uttar Pradesh | https://upload.wikimedia.org/wikipedia/commons/b/b3/Khusro_Bagh%2C_Prayagraj.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#98 | Ayodhya | Uttar Pradesh |	https://upload.wikimedia.org/wikipedia/commons/3/31/Pran_Pratishtha_ceremony_of_Shree_Ram_Janmaboomi_Temple_in_Ayodhya%2C_Uttar_Pradesh_on_January_22%2C_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail_unscaled&_=20240122104830
+#99 | Chitrakoot | Uttar Pradesh | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/65/b3/b1/caption.jpg?w=500&h=-1&s=1
+#100 | Khajuraho | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Khajuraho_Dulhadeo_2010.jpg/1920px-Khajuraho_Dulhadeo_2010.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20110117211221
+#101 | Bhopal | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Bhopal_Junction_railway_station.jpg/960px-Bhopal_Junction_railway_station.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#102 | Indore | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Rajwada_Palace%2C_Indore.jpg/1920px-Rajwada_Palace%2C_Indore.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20140515210656
+#103 | Gwalior | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Gwalior_fort_side_view_001.jpg/960px-Gwalior_fort_side_view_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#104 | Orchha | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Jahangir_Mahal%2C_Orchha%2C_Madhya_Pradesh%2C_India.jpg/960px-Jahangir_Mahal%2C_Orchha%2C_Madhya_Pradesh%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#105 | Pachmarhi | Madhya Pradesh | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/95/53/33/pachmarhi.jpg?w=1200&h=-1&s=1
+#106 | Jabalpur | Madhya Pradesh | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/b4/bd/56/view-of-the-waterfall.jpg?w=1200&h=-1&s=1
+#107 | Mandu | Madhya Pradesh | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/64/4f/58/small-pond-in-jahaz-mahal.jpg?w=1200&h=-1&s=1
+#108 | Delhi | Delhi | https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Red_Fort_in_Delhi_03-2016_img3.jpg/960px-Red_Fort_in_Delhi_03-2016_img3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#109 | Goa | Goa | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/goa.jpg?w=1200&h=900&s=1
+#110 | Leh | Ladakh | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/4d/45/b4/leh.jpg?w=1200&h=900&s=1
+#111 | Srinagar | Jammu & Kashmir | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/41/be/c4/beautiful.jpg?w=1200&h=-1&s=1
+#112 | Gulmarg | Jammu & Kashmir | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/1a/2b/ed/gulmarg.jpg?w=1200&h=-1&s=1
+#113 | Pahalgam | Jammu & Kashmir | https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Pahalgam_Valley.jpg/960px-Pahalgam_Valley.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#114 | Shettihalli / Sakleshpur | Karnataka | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/95/f6/57/20171224-124245-largejpg.jpg?w=1000&h=600&s=1
+#115 | Manali | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/9/97/Manali_India_5.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#116 | Shimla | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Longwood_%28Shimla%29.jpg/960px-Longwood_%28Shimla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#117 | Dharamshala | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cricket_Stadium_Dharamshala.jpg/960px-Cricket_Stadium_Dharamshala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#118 | Dalhousie | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/8/8e/Dalhousie_l_Hill_Station_in_Himachal_Pradesh.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#119 | Kasol | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Kasol_mountain_view.jpg/960px-Kasol_mountain_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#120 | Spiti Valley | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/f/f5/Kee_monastery_Spiti_Valley_%28edited%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#121 | Rishikesh | Uttarakhand | https://upload.wikimedia.org/wikipedia/commons/0/06/Sunset_-_Lakshman_Jhula.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#122 | Haridwar | Uttarakhand | https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Ganga_Aarti_in_Haridwar.jpg/960px-Ganga_Aarti_in_Haridwar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#123 | Mussoorie | Uttarakhand | https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Mussoorie_Ridge.jpg/960px-Mussoorie_Ridge.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#124 | Nainital | Uttarakhand | https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Nainital_Lake_07.jpg/960px-Nainital_Lake_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#125 | Auli | Uttarakhand | https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/4e/dd/1f/chenab-lake.jpg?w=1400&h=800&s=1
+#126 | Jim Corbett | Uttarakhand | https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/10/24/ab/6d.jpg
+#127 | Valley of Flowers | Uttarakhand | https://cvsqtgaxsa.cloudimg.io/https://images.prismic.io/indiahike/8d7c7d42-0215-4d28-b711-ae93f3bb3e4a_Valley_of_Flowers+2_Pictures+by+Jothiranjan.JPG?w=1000&q=50&org_if_sml=1
+#128 | Amritsar | Punjab | https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Hamandir_Sahib_%28Golden_Temple%29.jpg/960px-Hamandir_Sahib_%28Golden_Temple%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#129 | Chandigarh | Chandigarh | https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Palace_of_Assembly_Chandigarh_2006.jpg/960px-Palace_of_Assembly_Chandigarh_2006.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#130 | Patiala | Punjab | https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Patiala_station.png/960px-Patiala_station.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#131 | Dharamshala | Himachal Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cricket_Stadium_Dharamshala.jpg/960px-Cricket_Stadium_Dharamshala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#132 | Darjeeling | West Bengal | https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Darjeeling%2C_India%2C_Tea_plantations_on_hills.jpg/960px-Darjeeling%2C_India%2C_Tea_plantations_on_hills.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#133 | Kalimpong | West Bengal | https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Gouripur_House_-_Kalimpong_-_06.jpg/960px-Gouripur_House_-_Kalimpong_-_06.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#134 | Kolkata | West Bengal | https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Victoria_Memorial_situated_in_Kolkata.jpg/960px-Victoria_Memorial_situated_in_Kolkata.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 
+#135 | Sundarbans | West Bengal | https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Purple_Sunbird_%28Cinnyris_asiaticus%29_in_Sundarbans_East_Wildlife_Sanctuary_01.jpg/960px-Purple_Sunbird_%28Cinnyris_asiaticus%29_in_Sundarbans_East_Wildlife_Sanctuary_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#136 | Bodh Gaya | Bihar | https://upload.wikimedia.org/wikipedia/commons/5/57/Great_Buddha_Statue%2C_Bodh_Gaya.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#137 | Nalanda | Bihar | https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Temple_3_-_Sariputta_Stupa_-_Nalanda_Mahavihara_%2810%29.jpg/960px-Temple_3_-_Sariputta_Stupa_-_Nalanda_Mahavihara_%2810%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#138 | Rajgir | Bihar | https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Shanti_Stupa%2C_Rajgir.jpg/960px-Shanti_Stupa%2C_Rajgir.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#139 | Sanchi | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Stupa_1%2C_Sanchi_02.jpg/960px-Stupa_1%2C_Sanchi_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#140 | Bhubaneswar | Odisha | https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Kalinga_Stadium%2C_Bhubaneswar.jpg/960px-Kalinga_Stadium%2C_Bhubaneswar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#141 | Puri | Odisha | https://www.puritaxi.in/images/about.webp
+#142 | Konark | Odisha | https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Konark_10.jpg/960px-Konark_10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#143 | Cuttack | Odisha | https://upload.wikimedia.org/wikipedia/commons/2/2c/Museum_of_Justice_complex%2C_Cuttack_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#144 | Ranchi | Jharkhand | https://upload.wikimedia.org/wikipedia/commons/d/db/Ranchi_Junction_railway_station.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail_unscaled&_=20241030024949
+#145 | Deoghar | Jharkhand | https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Deoghar_District_Court_campus_in_Deoghar_04.jpg/960px-Deoghar_District_Court_campus_in_Deoghar_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#146 | Hazaribagh | Jharkhand | https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Hazaribagh_Town.jpg/960px-Hazaribagh_Town.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#147 | Raipur | Chhattisgarh | https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/The_Rajiv_Lochan_Temple%2C_circa_7th-8th_century%2C_Rajim%2CRaipur%2CChattisgarh.jpg/960px-The_Rajiv_Lochan_Temple%2C_circa_7th-8th_century%2C_Rajim%2CRaipur%2CChattisgarh.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#148 | Jagdalpur | Chhattisgarh | https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Tirathgarh%2C_Jagdalpur%2C_Bastar.jpg/960px-Tirathgarh%2C_Jagdalpur%2C_Bastar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#149 | Amarkantak | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/A_Hindu_temple%2C_Amarkantak_Madhya_Pradesh_India.jpg/960px-A_Hindu_temple%2C_Amarkantak_Madhya_Pradesh_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#150 | Maheshwar | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Maheshwar_Fort_-_Exterior_03.jpg/960px-Maheshwar_Fort_-_Exterior_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#151 | Mandu | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/c/c4/Jahaz_Mahal_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#152 | Chitrakoot | Uttar Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Government_Polytechnic_-_Bargarh_-_Chitrakoot_2014-07-06_7257.JPG/960px-Government_Polytechnic_-_Bargarh_-_Chitrakoot_2014-07-06_7257.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#153 | Orchha | Madhya Pradesh | https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Jahangir_Mahal%2C_Orchha%2C_Madhya_Pradesh%2C_India.jpg/960px-Jahangir_Mahal%2C_Orchha%2C_Madhya_Pradesh%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#154 | Poovar | Kerala | https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/THE_TRANQUIL_BACKWATERS_OF_POOVAR_-_KERALA.jpg/960px-THE_TRANQUIL_BACKWATERS_OF_POOVAR_-_KERALA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#155 | Poovar | Kerala | https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/THE_TRANQUIL_BACKWATERS_OF_POOVAR_-_KERALA.jpg/960px-THE_TRANQUIL_BACKWATERS_OF_POOVAR_-_KERALA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#156 | Varkala | Kerala | https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Papanasam_beach%2C_Varkala.jpg/960px-Papanasam_beach%2C_Varkala.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#157 | Alappuzha | Kerala | https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Alappuzha_Tourism.jpg/960px-Alappuzha_Tourism.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#158 | Kumarakom | Kerala | https://upload.wikimedia.org/wikipedia/commons/c/ca/Kumarakom_market_canal_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#159 | Dhanushkodi | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Police_outpost_Dhanushkodi_1.jpg/960px-Police_outpost_Dhanushkodi_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#160 | Tharangambadi | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/0/0e/Fort_Dansborg_in_Tharangambadi%2C_Tamil_Nadu.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#161 | Rameswaram | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/d/d1/Rameswaram_Railway_Station_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#162 | Kanyakumari | Tamil Nadu | https://upload.wikimedia.org/wikipedia/commons/b/ba/Kanyakumari_Church_1.JPG?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#163 | Hampi | Karnataka | https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Hampi%2C_India%2C_Temple_on_top_of_Matanga_Hill.jpg/960px-Hampi%2C_India%2C_Temple_on_top_of_Matanga_Hill.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail
+#164 | Badami | Karnataka | https://upload.wikimedia.org/wikipedia/commons/c/cf/BadamiCaves87.JPG?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original
+#165 | Srisailam | Andhra Pradesh | https://upload.wikimedia.org/wikipedia/commons/5/5c/Rock_formations_on_the_Telanagana_side_of_Srisailam_Dam.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original

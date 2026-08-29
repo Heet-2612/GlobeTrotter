@@ -276,7 +276,7 @@ export const DestinationDetailsPage: React.FC<DestinationDetailsPageProps> = ({ 
         <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-sm">
           {error || 'Destination not found.'}
         </div>
-        <Button variant="ghost" size="sm" icon={<ArrowLeft size={14} />} onClick={() => onNavigate('search')} className="mt-4">
+        <Button variant="ghost" size="sm" icon={<ArrowLeft size={14} />} onClick={() => onNavigate('city-search')} className="mt-4">
           Back to Search
         </Button>
       </div>
@@ -288,7 +288,7 @@ export const DestinationDetailsPage: React.FC<DestinationDetailsPageProps> = ({ 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Back button */}
-      <Button variant="ghost" size="sm" icon={<ArrowLeft size={14} />} onClick={() => onNavigate('search')}>
+      <Button variant="ghost" size="sm" icon={<ArrowLeft size={14} />} onClick={() => onNavigate('city-search')}>
         Back to Destinations
       </Button>
 

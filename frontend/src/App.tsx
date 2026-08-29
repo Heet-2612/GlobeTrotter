@@ -18,6 +18,7 @@ import { SharedItineraryPage } from './pages/SharedItineraryPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SharingSection } from './components/SharingSection';
 import { Button, LoadingState } from './components/common/UIComponents';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { ArrowLeft } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
@@ -65,6 +66,16 @@ const MainAppContent: React.FC = () => {
           setActiveParam(Number(cId));
           return;
         }
+      }
+
+      if (hash === 'activities' || hash === 'activity-search') {
+        setCurrentTab('activity-search');
+        return;
+      }
+
+      if (hash === 'destinations' || hash === 'cities' || hash === 'city-search') {
+        setCurrentTab('city-search');
+        return;
       }
     };
 
@@ -167,48 +178,72 @@ const MainAppContent: React.FC = () => {
     );
   }
 
+  // Helper to render the active tab component with fallback
+  const renderActiveView = () => {
+    if (currentTab === 'dashboard') {
+      return <DashboardPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'create-trip') {
+      return <CreateTripPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'my-trips') {
+      return <MyTripsPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'builder' && activeParam) {
+      return <ItineraryBuilderPage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'view' && activeParam) {
+      return <ItineraryViewPage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'city-search' || currentTab === 'search' || currentTab === 'cities' || currentTab === 'destinations') {
+      return <CitySearchPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'destination' && activeParam) {
+      return <DestinationDetailsPage cityId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'activity-search' || currentTab === 'activities' || currentTab === 'activities-search') {
+      return <ActivitySearchPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'budget' && activeParam) {
+      return <BudgetPage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'timeline' && activeParam) {
+      return <TimelinePage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'sharing' && activeParam) {
+      return (
+        <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-extrabold text-slate-900">Public Sharing Settings</h2>
+            <Button
+              variant="ghost"
+              size="sm"
+              icon={<ArrowLeft size={14} />}
+              onClick={() => handleNavigate('builder', activeParam)}
+            >
+              Back to Builder
+            </Button>
+          </div>
+          <SharingSection tripId={Number(activeParam)} />
+        </div>
+      );
+    }
+    if (currentTab === 'profile') {
+      return <ProfilePage onNavigate={handleNavigate} />;
+    }
+
+    // Default fallback to dashboard
+    return <DashboardPage onNavigate={handleNavigate} />;
+  };
+
   // Render Protected Views for Authenticated Users
   return (
     <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans">
       <Navbar currentTab={currentTab} onNavigate={handleNavigate} />
       <main className="flex-1 pb-12">
-        {currentTab === 'dashboard' && <DashboardPage onNavigate={handleNavigate} />}
-        {currentTab === 'create-trip' && <CreateTripPage onNavigate={handleNavigate} />}
-        {currentTab === 'my-trips' && <MyTripsPage onNavigate={handleNavigate} />}
-        {currentTab === 'builder' && activeParam && (
-          <ItineraryBuilderPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'view' && activeParam && (
-          <ItineraryViewPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'city-search' && <CitySearchPage onNavigate={handleNavigate} />}
-        {currentTab === 'destination' && activeParam && (
-          <DestinationDetailsPage cityId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'activity-search' && <ActivitySearchPage onNavigate={handleNavigate} />}
-        {currentTab === 'budget' && activeParam && (
-          <BudgetPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'timeline' && activeParam && (
-          <TimelinePage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'sharing' && activeParam && (
-          <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-extrabold text-slate-900">Public Sharing Settings</h2>
-              <Button
-                variant="ghost"
-                size="sm"
-                icon={<ArrowLeft size={14} />}
-                onClick={() => handleNavigate('builder', activeParam)}
-              >
-                Back to Builder
-              </Button>
-            </div>
-            <SharingSection tripId={Number(activeParam)} />
-          </div>
-        )}
-        {currentTab === 'profile' && <ProfilePage onNavigate={handleNavigate} />}
+        <ErrorBoundary onReset={() => handleNavigate('dashboard')}>
+          {renderActiveView()}
+        </ErrorBoundary>
       </main>
     </div>
   );

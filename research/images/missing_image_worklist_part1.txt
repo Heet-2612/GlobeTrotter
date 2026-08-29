@@ -1,0 +1,28 @@
+#12 | Ladakh | Ladakh | 
+#26 | Puducherry | Puducherry | 
+#39 | Gangtok | Sikkim | 
+#49 | Ahmedabad | Gujarat | 
+#50 | Rann of Kutch | Gujarat | 
+#52 | Ujjain | Madhya Pradesh | 
+#65 | Kasauli | Himachal Pradesh | 
+#74 | Ziro Valley | Arunachal Pradesh | 
+#75 | Andaman Islands | Andaman & Nicobar Islands | 
+#76 | Lakshadweep | Lakshadweep | 
+#77 | Chikkamagaluru | Karnataka | 
+#79 | Nagarhole | Karnataka | 
+#81 | Murudeshwar | Karnataka | 
+#83 | Yercaud | Tamil Nadu | 
+#84 | Valparai | Tamil Nadu | 
+#85 | Chettinad | Tamil Nadu | 
+#88 | Tirupati | Andhra Pradesh | 
+#91 | Bhedaghat | Madhya Pradesh | 
+#92 | Kanha | Madhya Pradesh | 
+#93 | Bandhavgarh | Madhya Pradesh | 
+#97 | Chhatrapati Sambhajinagar | Maharashtra | 
+#99 | Matheran | Maharashtra | 
+#100 | Tarkarli | Maharashtra | 
+#101 | Dwarka | Gujarat | 
+#102 | Somnath | Gujarat | 
+#103 | Gir | Gujarat | 
+#104 | Statue of Unity | Gujarat | 
+#105 | Saputara | Gujarat | 

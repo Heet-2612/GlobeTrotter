@@ -134,9 +134,17 @@ public class TripActivityService {
         return TripActivityResponse.fromEntity(saved, activityImageRegistry);
     }
 
+    private TripStop getAccessibleTripStop(Long tripId, Long stopId, User currentUser) {
+        Trip trip = tripRepository.findAccessibleTripById(tripId, currentUser.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Trip not found with id: " + tripId));
+
+        return tripStopRepository.findByIdAndTripId(stopId, trip.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Trip stop not found with id: " + stopId));
+    }
+
     @Transactional(readOnly = true)
     public List<TripActivityResponse> getTripActivities(Long tripId, Long stopId, User currentUser) {
-        getOwnedTripStop(tripId, stopId, currentUser);
+        getAccessibleTripStop(tripId, stopId, currentUser);
         return tripActivityRepository.findByTripStopIdOrderByActivityOrderAsc(stopId)
                 .stream()
                 .map(ta -> TripActivityResponse.fromEntity(ta, activityImageRegistry))

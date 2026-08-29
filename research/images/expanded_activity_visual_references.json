@@ -1,0 +1,134 @@
+{
+  "modern_shopping_malls": [
+    {
+      "id": "MALL_01",
+      "name": "Select Citywalk Mall, New Delhi",
+      "type": "Modern Indoor Shopping Mall",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Select_CITYWALK_Shopping_Mall%2C_Saket%2C_New_Delhi.jpg/1280px-Select_CITYWALK_Shopping_Mall%2C_Saket%2C_New_Delhi.jpg",
+      "description": "Multi-story glass atrium indoor retail mall with designer stores, escalators, and central courtyard."
+    },
+    {
+      "id": "MALL_02",
+      "name": "Phoenix Marketcity, Mumbai",
+      "type": "Modern Mega Mall",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/bf/96/12/phoenix-marketcity-mumbai.jpg?w=1200&h=-1&s=1",
+      "description": "Spacious modern shopping center interior with luxury brand storefronts and lit plazas."
+    },
+    {
+      "id": "MALL_03",
+      "name": "Elante Mall, Chandigarh",
+      "type": "Modern Regional Shopping Center",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Elante_Mall_Chandigarh.jpg/1280px-Elante_Mall_Chandigarh.jpg",
+      "description": "Modern stone & glass shopping mall facade and indoor retail promenades."
+    },
+    {
+      "id": "MALL_04",
+      "name": "DLF Mall of India, Noida",
+      "type": "Modern Multi-Level Retail Complex",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/42/1d/1d/dlf-mall-of-india.jpg?w=1200&h=-1&s=1",
+      "description": "Grand multi-level atrium shopping center with brand flagship stores."
+    },
+    {
+      "id": "MALL_05",
+      "name": "LuLu Mall, Kochi",
+      "type": "Modern Indian Hypermarket & Retail Mall",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lulu_Mall_Kochi.jpg/1280px-Lulu_Mall_Kochi.jpg",
+      "description": "Massive modern shopping mall complex with lit retail corridors and hypermarket."
+    },
+    {
+      "id": "MALL_06",
+      "name": "Forum Courtyard Mall, Kolkata",
+      "type": "Urban Commercial Shopping Complex",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/27/ef/ca/forum-courtyard.jpg?w=1200&h=-1&s=1",
+      "description": "Contemporary urban retail mall interior with fashion brands and atrium lighting."
+    },
+    {
+      "id": "MALL_07",
+      "name": "Ambience Mall, Gurugram",
+      "type": "Modern Luxury Mall Complex",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Ambience_Mall_Gurgaon.jpg/1280px-Ambience_Mall_Gurgaon.jpg",
+      "description": "Wide indoor luxury shopping promenade with marble flooring and multi-brand boutiques."
+    }
+  ],
+  "traditional_dhabas": [
+    {
+      "id": "DHABA_01",
+      "name": "Traditional Punjabi Highway Dhaba with Charpais",
+      "type": "Punjabi Rustic Highway Dhaba",
+      "url": "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/06/18/Pictures/_41d99616-72d6-11e8-9f2d-45305101eb64.jpg",
+      "description": "Rustic Punjabi highway dhaba setting with wooden charpai cots, outdoor seating, and hot rotis."
+    },
+    {
+      "id": "DHABA_02",
+      "name": "GT Road Highway Dhaba Tandoor & Seating",
+      "type": "Punjabi Rustic Highway Dhaba",
+      "url": "https://static.toiimg.com/thumb/msid-65719324,width-748,height-499,resizemode-4,imgsize-234251/65719324.jpg",
+      "description": "Classic roadside tandoori clay oven, charpais, and piping hot parathas with white butter."
+    },
+    {
+      "id": "DHABA_03",
+      "name": "Amrik Sukhdev Highway Dhaba, Murthal",
+      "type": "Modern Highway Dhaba Establishment",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/7c/36/ef/amrik-sukhdev.jpg?w=1200&h=-1&s=1",
+      "description": "Large-scale modern highway dhaba complex with vast open dining area, tandoori parathas, and parking."
+    },
+    {
+      "id": "DHABA_04",
+      "name": "Haveli GT Road Heritage Dhaba, Jalandhar",
+      "type": "Punjabi Heritage Theme Dhaba",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/50/b0/02/haveli-exterior.jpg?w=1200&h=-1&s=1",
+      "description": "Traditional Punjabi village theme dhaba exterior with Punjabi cultural statues, charpais, and tandoor."
+    },
+    {
+      "id": "DHABA_05",
+      "name": "Pahalwan Dhaba, Murthal GT Road",
+      "type": "Classic Roadside Highway Eatery",
+      "url": "https://static.toiimg.com/photo/65719354.cms",
+      "description": "Open roadside seating under canopy with stainless steel thalis, lassi glasses, and tandoori parathas."
+    },
+    {
+      "id": "DHABA_06",
+      "name": "Chokhi Dhani Highway Theme Dhaba",
+      "type": "Rajasthani Village Theme Dhaba",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/17/8d/25/chokhi-dhani.jpg?w=1200&h=-1&s=1",
+      "description": "Traditional open-air village dining setting with low floor cushions and traditional thalis."
+    },
+    {
+      "id": "DHABA_07",
+      "name": "Modern GT Karnal Highway Stop Dhaba",
+      "type": "Modern Highway Dhaba Establishment",
+      "url": "https://images.moneycontrol.com/static-mcnews/2021/08/highway-dhaba.jpg",
+      "description": "Large paved highway roadside restaurant complex serving fresh dhaba thalis and tea to travelers."
+    }
+  ],
+  "generic_roadside_restaurants": [
+    {
+      "id": "RESTAURANT_01",
+      "name": "South Indian Highway Tiffin Stop",
+      "type": "Roadside Tiffin & Meals Restaurant",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/28/62/11/saravana-bhavan.jpg?w=1200&h=-1&s=1",
+      "description": "Roadside South Indian tiffin restaurant serving idlis, dosas, and filter coffee on banana leaves."
+    },
+    {
+      "id": "RESTAURANT_02",
+      "name": "Highway Family Restaurant & Meal Stop",
+      "type": "Casual Roadside Family Restaurant",
+      "url": "https://images.lifestyleasia.com/wp-content/uploads/sites/7/2022/04/18153447/highway-restaurants-india.jpg",
+      "description": "Clean casual roadside family restaurant with dining tables, Indian thalis, and quick service."
+    },
+    {
+      "id": "RESTAURANT_03",
+      "name": "Coastal Highway Seafood Shack & Restaurant",
+      "type": "Coastal Roadside Seafood Restaurant",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/34/09/5d/coastal-dining.jpg?w=1200&h=-1&s=1",
+      "description": "Roadside open-air coastal restaurant serving fresh fish fry, curry meals, and coconut water."
+    },
+    {
+      "id": "RESTAURANT_04",
+      "name": "Highway Hillside Tea & Snack Restaurant",
+      "type": "Mountain Roadside Diner",
+      "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/36/c8/10/hillside-cafe.jpg?w=1200&h=-1&s=1",
+      "description": "Roadside mountain view restaurant serving hot chai, maggi, and parathas overlooking hills."
+    }
+  ]
+}

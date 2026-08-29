@@ -52,6 +52,9 @@ public class Trip {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<TripMember> members = new java.util.ArrayList<>();
+
     public Trip() {
     }
 

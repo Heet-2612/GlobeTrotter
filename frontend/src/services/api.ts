@@ -27,6 +27,14 @@ import {
   ExchangeRateResponse,
   DiscoveredPlaceResponse,
   AddDiscoveredActivityRequest,
+  TripMemberResponse,
+  AddTripMemberRequest,
+  ExpenseResponse,
+  CreateExpenseRequest,
+  UpdateExpenseRequest,
+  TripBalanceResponse,
+  CreateSettlementRequest,
+  SettlementResponse,
 } from '../types';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -329,5 +337,60 @@ export const api = {
     }),
 
   // Exchange Rates
-  getExchangeRates: (baseCurrency: string = 'INR') => request<ExchangeRateResponse>(`/currency/rates?base=${baseCurrency}`),
+  getExchangeRates: (baseCurrency: string = 'INR') => request<ExchangeRateResponse>(`/currencies/rates?base=${baseCurrency}`),
+
+  // Trip Members / Contributors
+  getTripMembers: (tripId: number) => request<TripMemberResponse[]>(`/trips/${tripId}/members`),
+  addTripMember: (tripId: number, data: AddTripMemberRequest) =>
+    request<TripMemberResponse>(`/trips/${tripId}/members`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  // Trip Expenses / Bills
+  getTripExpenses: (tripId: number) => request<ExpenseResponse[]>(`/trips/${tripId}/expenses`),
+  getExpenseById: (tripId: number, expenseId: number) => request<ExpenseResponse>(`/trips/${tripId}/expenses/${expenseId}`),
+  createExpense: (tripId: number, data: CreateExpenseRequest) =>
+    request<ExpenseResponse>(`/trips/${tripId}/expenses`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  updateExpense: (tripId: number, expenseId: number, data: UpdateExpenseRequest) =>
+    request<ExpenseResponse>(`/trips/${tripId}/expenses/${expenseId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+  deleteExpense: (tripId: number, expenseId: number) =>
+    request<void>(`/trips/${tripId}/expenses/${expenseId}`, {
+      method: 'DELETE',
+    }),
+  // Trip Balances / Debt Simplification
+  getTripBalances: (tripId: number) => request<TripBalanceResponse>(`/trips/${tripId}/balances`),
+
+  // Trip Settlements (Phase 4)
+  createSettlement: (tripId: number, data: CreateSettlementRequest) =>
+    request<SettlementResponse>(`/trips/${tripId}/settlements`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getTripSettlements: (tripId: number) => request<SettlementResponse[]>(`/trips/${tripId}/settlements`),
+  deleteSettlement: (tripId: number, settlementId: number) =>
+    request<void>(`/trips/${tripId}/settlements/${settlementId}`, {
+      method: 'DELETE',
+    }),
+
+  // Trip Analytics (Phase 5)
+  getTripAnalytics: (
+    tripId: number,
+    params?: { from?: string; to?: string; category?: string; memberId?: number; source?: string }
+  ) => {
+    const query = new URLSearchParams();
+    if (params?.from) query.append('from', params.from);
+    if (params?.to) query.append('to', params.to);
+    if (params?.category) query.append('category', params.category);
+    if (params?.memberId) query.append('memberId', params.memberId.toString());
+    if (params?.source && params.source !== 'ALL') query.append('source', params.source);
+    const queryString = query.toString();
+    return request<TripAnalyticsResponse>(`/trips/${tripId}/analytics${queryString ? `?${queryString}` : ''}`);
+  },
 };
+

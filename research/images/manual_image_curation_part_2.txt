@@ -1,0 +1,82 @@
+#84 | Valparai | Tamil Nadu | 
+#85 | Chettinad | Tamil Nadu | 
+#86 | Thanjavur | Tamil Nadu | 
+#87 | Rameswaram | Tamil Nadu | 
+#88 | Tirupati | Andhra Pradesh | 
+#89 | Visakhapatnam | Andhra Pradesh | 
+#90 | Araku Valley | Andhra Pradesh | 
+#91 | Bhedaghat | Madhya Pradesh | 
+#92 | Kanha | Madhya Pradesh | 
+#93 | Bandhavgarh | Madhya Pradesh | 
+#94 | Sundarbans | West Bengal | 
+#95 | Bodh Gaya | Bihar | 
+#96 | Nashik | Maharashtra | 
+#97 | Chhatrapati Sambhajinagar | Maharashtra | 
+#98 | Alibaug | Maharashtra | 
+#99 | Matheran | Maharashtra | 
+#100 | Tarkarli | Maharashtra | 
+#101 | Dwarka | Gujarat | 
+#102 | Somnath | Gujarat | 
+#103 | Gir | Gujarat | 
+#104 | Statue of Unity | Gujarat | 
+#105 | Saputara | Gujarat | 
+#106 | Manas | Assam | 
+#107 | Diu | Dadra and Nagar Haveli and Daman and Diu | 
+#108 | Delhi | Delhi | 
+#109 | Goa | Goa | 
+#110 | Champaner-Pavagadh | Gujarat | 
+#111 | Dholavira | Gujarat | 
+#112 | Modhera-Patan | Gujarat | 
+#113 | Vaishno Devi | Jammu & Kashmir | 
+#114 | Shettihalli / Sakleshpur | Karnataka | 
+#115 | Kerala | Kerala | 
+#116 | Thekkady-Periyar | Kerala | 
+#117 | Kumarakom | Kerala | 
+#118 | Bekal | Kerala | 
+#119 | Vagamon | Kerala | 
+#120 | Kozhikode | Kerala | 
+#121 | Sanchi | Madhya Pradesh | 
+#122 | Omkareshwar | Madhya Pradesh | 
+#123 | Ajanta Caves | Maharashtra | 
+#124 | Ellora Caves | Maharashtra | 
+#125 | Bhimashankar | Maharashtra | 
+#126 | Lonar | Maharashtra | 
+#127 | Dawki | Meghalaya | 
+#128 | Chilika Lake | Odisha | 
+#129 | Ajmer | Rajasthan | 
+#130 | Shekhawati | Rajasthan | 
+#131 | Ranakpur | Rajasthan | 
+#132 | Kanchipuram | Tamil Nadu | 
+#133 | Sarnath | Uttar Pradesh | 
+#134 | Jim Corbett | Uttarakhand | 
+#135 | Valley of Flowers | Uttarakhand | 
+#136 | Kedarnath | Uttarakhand | 
+#137 | Badrinath | Uttarakhand | 
+#138 | Patna | Bihar | 
+#139 | Nalanda | Bihar | 
+#140 | Rajgir | Bihar | 
+#141 | Gaya | Bihar | 
+#142 | Cuttack | Odisha | 
+#143 | Daringbadi | Odisha | 
+#144 | Sambalpur | Odisha | 
+#145 | Digha | West Bengal | 
+#146 | Murshidabad | West Bengal | 
+#147 | Shantiniketan | West Bengal | 
+#148 | Bishnupur | West Bengal | 
+#149 | Jagdalpur | Chhattisgarh | 
+#150 | Maheshwar | Madhya Pradesh | 
+#151 | Mandu | Madhya Pradesh | 
+#152 | Chitrakoot | Madhya Pradesh / Uttar Pradesh | 
+#153 | Thrissur | Kerala | 
+#154 | Kannur | Kerala | 
+#155 | Poovar | Kerala | 
+#156 | Tirunelveli | Tamil Nadu | 
+#157 | Velankanni | Tamil Nadu | 
+#158 | Hogenakkal | Tamil Nadu | 
+#159 | Dhanushkodi | Tamil Nadu | 
+#160 | Tranquebar (Tharangambadi) | Tamil Nadu | 
+#161 | Chandigarh | Chandigarh | 
+#162 | Kasol | Himachal Pradesh | 
+#163 | Kausani | Uttarakhand | 
+#164 | Gandikota | Andhra Pradesh | 
+#165 | Srisailam | Andhra Pradesh | 

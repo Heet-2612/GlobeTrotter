@@ -1,0 +1,510 @@
+{
+  "pipelineVersion": "6C",
+  "model": "gemini-3.6-flash",
+  "testDestinationsCount": 5,
+  "totalCandidatesSent": 25,
+  "successfulRequests": 11,
+  "failedRequests": 14,
+  "averageLatencyMs": 4260,
+  "destinations": [
+    {
+      "catalogNumber": 1,
+      "destination": "Jaipur",
+      "state": "Rajasthan",
+      "status": "SELECTED",
+      "deterministicWinner": {
+        "title": "File:Jaipur 03-2016 02 Amber Fort.jpg",
+        "score": 75
+      },
+      "geminiWinner": {
+        "title": "File:Jaipur 03-2016 02 Amber Fort.jpg",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Jaipur_03-2016_02_Amber_Fort.jpg/1280px-Jaipur_03-2016_02_Amber_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jaipur_03-2016_02_Amber_Fort.jpg",
+        "license": "FAL",
+        "artist": "A.Savin",
+        "width": 5304,
+        "height": 3315,
+        "score": 71,
+        "decision": "ACCEPTABLE",
+        "reason": "The image captures a classic wide view of Amber Fort atop the Aravalli ridge beside Maota Lake. Overall clarity and landscape presence align well with Jaipur's visual profile."
+      },
+      "classification": "UNCHANGED",
+      "evaluatedCandidates": [
+        {
+          "candidateRank": 1,
+          "deterministicScore": 75,
+          "title": "File:Jaipur 03-2016 02 Amber Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Jaipur_03-2016_02_Amber_Fort.jpg/1280px-Jaipur_03-2016_02_Amber_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jaipur_03-2016_02_Amber_Fort.jpg",
+          "width": 5304,
+          "height": 3315,
+          "license": "FAL",
+          "artist": "A.Savin",
+          "geminiEvaluation": {
+            "destinationRelevance": 15,
+            "heroSubjectMatch": 14,
+            "landmarkMatch": 15,
+            "landscapeMatch": 11,
+            "composition": 6,
+            "imageQuality": 7,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 71,
+            "decision": "ACCEPTABLE",
+            "reason": "The image captures a classic wide view of Amber Fort atop the Aravalli ridge beside Maota Lake. Overall clarity and landscape presence align well with Jaipur's visual profile.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 7963
+        },
+        {
+          "candidateRank": 3,
+          "deterministicScore": 75,
+          "title": "File:Jaipur 03-2016 20 City Palace complex.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Jaipur_03-2016_20_City_Palace_complex.jpg/1280px-Jaipur_03-2016_20_City_Palace_complex.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jaipur_03-2016_20_City_Palace_complex.jpg",
+          "width": 5350,
+          "height": 3009,
+          "license": "FAL",
+          "artist": "A.Savin",
+          "geminiEvaluation": {
+            "destinationRelevance": 15,
+            "heroSubjectMatch": 14,
+            "landmarkMatch": 15,
+            "landscapeMatch": 9,
+            "composition": 7,
+            "imageQuality": 7,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 70,
+            "decision": "ACCEPTABLE",
+            "reason": "The image features the Diwan-i-Khas pavilion at City Palace, displaying the iconic pink terracotta architecture and open courtyard. While high quality, it lacks the iconic dramatic presence of Amber Fort or Hawa Mahal.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 10439
+        },
+        {
+          "candidateRank": 4,
+          "deterministicScore": 75,
+          "title": "File:Jaipur 03-2016 22 City Palace complex.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Jaipur_03-2016_22_City_Palace_complex.jpg/1280px-Jaipur_03-2016_22_City_Palace_complex.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jaipur_03-2016_22_City_Palace_complex.jpg",
+          "width": 5300,
+          "height": 2650,
+          "license": "FAL",
+          "artist": "A.Savin",
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSubjectMatch": 14,
+            "landmarkMatch": 14,
+            "landscapeMatch": 9,
+            "composition": 6,
+            "imageQuality": 6,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 66,
+            "decision": "STRONG",
+            "reason": "The photograph captures the inner courtyard of the City Palace featuring the multi-tiered Chandra Mahal facade under clear light. It accurately demonstrates traditional Rajput-Mughal architectural elements and distinct terracotta tones.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 10177
+        },
+        {
+          "candidateRank": 2,
+          "deterministicScore": 75,
+          "title": "File:Jaipur 03-2016 05 Amber Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Jaipur_03-2016_05_Amber_Fort.jpg/1280px-Jaipur_03-2016_05_Amber_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jaipur_03-2016_05_Amber_Fort.jpg",
+          "width": 5336,
+          "height": 3335,
+          "license": "FAL",
+          "artist": "A.Savin",
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSubjectMatch": 12,
+            "landmarkMatch": 14,
+            "landscapeMatch": 9,
+            "composition": 6,
+            "imageQuality": 7,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 65,
+            "decision": "ACCEPTABLE",
+            "reason": "The image features a sharp, detailed view of Amber Fort's fortified sandstone facade and gates. It highlights authentic regional architecture, though it lacks the surrounding lake context from the hero profile.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 13640
+        },
+        {
+          "candidateRank": 5,
+          "deterministicScore": 75,
+          "title": "File:Jaipur 03-2016 39 Jal Mahal - Water Palace.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Jaipur_03-2016_39_Jal_Mahal_-_Water_Palace.jpg/1280px-Jaipur_03-2016_39_Jal_Mahal_-_Water_Palace.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jaipur_03-2016_39_Jal_Mahal_-_Water_Palace.jpg",
+          "width": 3959,
+          "height": 2639,
+          "license": "FAL",
+          "artist": "A.Savin",
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSubjectMatch": 11,
+            "landmarkMatch": 14,
+            "landscapeMatch": 10,
+            "composition": 6,
+            "imageQuality": 6,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 64,
+            "decision": "ACCEPTABLE",
+            "reason": "The image features Jal Mahal set centrally in Man Sagar Lake with symmetrical reflections and Aravalli hills in the background. The terracotta architectural details align well with Jaipur's visual profile, making it a good landmark depiction.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 9178
+        }
+      ]
+    },
+    {
+      "catalogNumber": 2,
+      "destination": "Agra",
+      "state": "Uttar Pradesh",
+      "status": "SELECTED",
+      "deterministicWinner": {
+        "title": "File:Agra 03-2016 14 Agra Fort.jpg",
+        "score": 75
+      },
+      "geminiWinner": {
+        "title": "File:El Taj Mahal-Agra India0006.JPG",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/El_Taj_Mahal-Agra_India0006.JPG/1280px-El_Taj_Mahal-Agra_India0006.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:El_Taj_Mahal-Agra_India0006.JPG",
+        "license": "CC BY-SA 4.0",
+        "artist": "Diego Delso",
+        "width": 3656,
+        "height": 2502,
+        "score": 73,
+        "decision": "ACCEPTABLE",
+        "reason": "The image features a classic wide establishing shot of the Taj Mahal framed by its central reflecting pool and Mughal gardens. While well-composed and highly relevant, mild atmospheric haze and muted lighting reduce its visual impact."
+      },
+      "classification": "GEMINI_OVERRULED_METADATA",
+      "evaluatedCandidates": [
+        {
+          "candidateRank": 3,
+          "deterministicScore": 70,
+          "title": "File:El Taj Mahal-Agra India0006.JPG",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/El_Taj_Mahal-Agra_India0006.JPG/1280px-El_Taj_Mahal-Agra_India0006.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:El_Taj_Mahal-Agra_India0006.JPG",
+          "width": 3656,
+          "height": 2502,
+          "license": "CC BY-SA 4.0",
+          "artist": "Diego Delso",
+          "geminiEvaluation": {
+            "destinationRelevance": 15,
+            "heroSubjectMatch": 15,
+            "landmarkMatch": 15,
+            "landscapeMatch": 11,
+            "composition": 7,
+            "imageQuality": 7,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 73,
+            "decision": "ACCEPTABLE",
+            "reason": "The image features a classic wide establishing shot of the Taj Mahal framed by its central reflecting pool and Mughal gardens. While well-composed and highly relevant, mild atmospheric haze and muted lighting reduce its visual impact.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 9453
+        },
+        {
+          "candidateRank": 4,
+          "deterministicScore": 70,
+          "title": "File:Taj Mahal, Agra, India.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Taj_Mahal%2C_Agra%2C_India.jpg/1280px-Taj_Mahal%2C_Agra%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Taj_Mahal,_Agra,_India.jpg",
+          "width": 3840,
+          "height": 2525,
+          "license": "CC BY-SA 4.0",
+          "artist": "Yann (talk)",
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSubjectMatch": 14,
+            "landmarkMatch": 15,
+            "landscapeMatch": 10,
+            "composition": 6,
+            "imageQuality": 6,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 68,
+            "decision": "ACCEPTABLE",
+            "reason": "The photograph captures the iconic white marble facade of the Taj Mahal centered above the long reflecting pool and Mughal gardens. The framing establishing the main mausoleum is clear, though Yamuna river elements are absent.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 11731
+        },
+        {
+          "candidateRank": 2,
+          "deterministicScore": 75,
+          "title": "File:Agra 03-2016 16 Agra Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Agra_03-2016_16_Agra_Fort.jpg/1280px-Agra_03-2016_16_Agra_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Agra_03-2016_16_Agra_Fort.jpg",
+          "width": 5410,
+          "height": 3607,
+          "license": "FAL",
+          "artist": "A.Savin",
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSubjectMatch": 14,
+            "landmarkMatch": 14,
+            "landscapeMatch": 9,
+            "composition": 6,
+            "imageQuality": 6,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": 0,
+            "overall": 66,
+            "decision": "ACCEPTABLE",
+            "reason": "The photograph captures the expansive red sandstone walls and surrounding moat structure of Agra Fort clearly. It effectively represents a primary Mughal fortification landmark, though it lacks the supreme visual recognition of the Taj Mahal.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 9544
+        },
+        {
+          "candidateRank": 1,
+          "deterministicScore": 75,
+          "title": "File:Agra 03-2016 14 Agra Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Agra_03-2016_14_Agra_Fort.jpg/1280px-Agra_03-2016_14_Agra_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Agra_03-2016_14_Agra_Fort.jpg",
+          "width": 5328,
+          "height": 2997,
+          "license": "FAL",
+          "artist": "A.Savin",
+          "geminiEvaluation": {
+            "destinationRelevance": 14,
+            "heroSubjectMatch": 13,
+            "landmarkMatch": 14,
+            "landscapeMatch": 9,
+            "composition": 6,
+            "imageQuality": 7,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": -1,
+            "overall": 65,
+            "decision": "ACCEPTABLE",
+            "reason": "The photograph presents a clean symmetrical view of the Khas Mahal and Anguri Bagh within Agra Fort. Bright daylight and clear detail highlight the Mughal architecture and courtyard gardens effectively.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 7084
+        },
+        {
+          "candidateRank": 5,
+          "deterministicScore": 70,
+          "title": "File:Taj Mahal, Agra, India edit2.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Taj_Mahal%2C_Agra%2C_India_edit2.jpg/1280px-Taj_Mahal%2C_Agra%2C_India_edit2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 5.026807431s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"location\": \"global\",\n              \"model\": \"gemini-3.6-flash\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"5s\"\n      }\n    ]\n  }\n}\n"
+        }
+      ]
+    },
+    {
+      "catalogNumber": 3,
+      "destination": "Varanasi",
+      "state": "Uttar Pradesh",
+      "status": "SELECTED",
+      "deterministicWinner": {
+        "title": "File:Varanasi, India, Varanasi eternal, Panorama.jpg",
+        "score": 75
+      },
+      "geminiWinner": {
+        "title": "File:Varanasi, India, Varanasi eternal, Panorama.jpg",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Varanasi%2C_India%2C_Varanasi_eternal%2C_Panorama.jpg/1280px-Varanasi%2C_India%2C_Varanasi_eternal%2C_Panorama.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "score": 0,
+        "decision": "N/A",
+        "reason": ""
+      },
+      "classification": "UNCHANGED",
+      "evaluatedCandidates": [
+        {
+          "candidateRank": 1,
+          "deterministicScore": 75,
+          "title": "File:Varanasi, India, Varanasi eternal, Panorama.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Varanasi%2C_India%2C_Varanasi_eternal%2C_Panorama.jpg/1280px-Varanasi%2C_India%2C_Varanasi_eternal%2C_Panorama.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 3.382037601s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"location\": \"global\",\n              \"model\": \"gemini-3.6-flash\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"3s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 2,
+          "deterministicScore": 68,
+          "title": "File:Scindia Ghat in morning, Varanasi, Uttar Pradesh, India (2012).jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Scindia_Ghat_in_morning%2C_Varanasi%2C_Uttar_Pradesh%2C_India_%282012%29.jpg/1280px-Scindia_Ghat_in_morning%2C_Varanasi%2C_Uttar_Pradesh%2C_India_%282012%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 1.701870353s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"location\": \"global\",\n              \"model\": \"gemini-3.6-flash\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"1s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 3,
+          "deterministicScore": 67,
+          "title": "File:Varanasi Munshi Ghat3.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Varanasi_Munshi_Ghat3.jpg/1280px-Varanasi_Munshi_Ghat3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 59.805910361s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"location\": \"global\",\n              \"model\": \"gemini-3.6-flash\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"59s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 4,
+          "deterministicScore": 65,
+          "title": "File:Benares (Varanasi, India) - 1922.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Benares_%28Varanasi%2C_India%29_-_1922.jpg/1280px-Benares_%28Varanasi%2C_India%29_-_1922.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 58.247356456s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"model\": \"gemini-3.6-flash\",\n              \"location\": \"global\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"58s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 5,
+          "deterministicScore": 65,
+          "title": "File:India - Varanasi paper bag maker - 0078.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/India_-_Varanasi_paper_bag_maker_-_0078.jpg/1280px-India_-_Varanasi_paper_bag_maker_-_0078.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 56.345243027s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"model\": \"gemini-3.6-flash\",\n              \"location\": \"global\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"56s\"\n      }\n    ]\n  }\n}\n"
+        }
+      ]
+    },
+    {
+      "catalogNumber": 4,
+      "destination": "Udaipur",
+      "state": "Rajasthan",
+      "status": "SELECTED",
+      "deterministicWinner": {
+        "title": "File:20191207 City Palace, Mohan Temple and Lake Pichola, Udaipur, 1523 7262.jpg",
+        "score": 85
+      },
+      "geminiWinner": {
+        "title": "File:20191207 City Palace, Mohan Temple and Lake Pichola, Udaipur, 1523 7262.jpg",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/20191207_City_Palace%2C_Mohan_Temple_and_Lake_Pichola%2C_Udaipur%2C_1523_7262.jpg/1280px-20191207_City_Palace%2C_Mohan_Temple_and_Lake_Pichola%2C_Udaipur%2C_1523_7262.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "score": 0,
+        "decision": "N/A",
+        "reason": ""
+      },
+      "classification": "UNCHANGED",
+      "evaluatedCandidates": [
+        {
+          "candidateRank": 1,
+          "deterministicScore": 85,
+          "title": "File:20191207 City Palace, Mohan Temple and Lake Pichola, Udaipur, 1523 7262.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/20191207_City_Palace%2C_Mohan_Temple_and_Lake_Pichola%2C_Udaipur%2C_1523_7262.jpg/1280px-20191207_City_Palace%2C_Mohan_Temple_and_Lake_Pichola%2C_Udaipur%2C_1523_7262.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 54.866943848s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"model\": \"gemini-3.6-flash\",\n              \"location\": \"global\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"54s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 2,
+          "deterministicScore": 80,
+          "title": "File:City Palace Udaipur Rajasthan India.JPG",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/City_Palace_Udaipur_Rajasthan_India.JPG/1280px-City_Palace_Udaipur_Rajasthan_India.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 53.179249043s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"location\": \"global\",\n              \"model\": \"gemini-3.6-flash\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"53s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 3,
+          "deterministicScore": 80,
+          "title": "File:20191207 Lake Pichola, City Palace, Udaipur, 1516 7254.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/20191207_Lake_Pichola%2C_City_Palace%2C_Udaipur%2C_1516_7254.jpg/1280px-20191207_Lake_Pichola%2C_City_Palace%2C_Udaipur%2C_1516_7254.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 51.511965852s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"location\": \"global\",\n              \"model\": \"gemini-3.6-flash\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"51s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 4,
+          "deterministicScore": 75,
+          "title": "File:20191207 City Palace, Udaipur 1701 7325.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/20191207_City_Palace%2C_Udaipur_1701_7325.jpg/1280px-20191207_City_Palace%2C_Udaipur_1701_7325.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 50.140474303s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"model\": \"gemini-3.6-flash\",\n              \"location\": \"global\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"50s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 5,
+          "deterministicScore": 75,
+          "title": "File:20191207 City Palace, Udaipur, 1422 7187.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/20191207_City_Palace%2C_Udaipur%2C_1422_7187.jpg/1280px-20191207_City_Palace%2C_Udaipur%2C_1422_7187.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 48.685281637s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"model\": \"gemini-3.6-flash\",\n              \"location\": \"global\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"48s\"\n      }\n    ]\n  }\n}\n"
+        }
+      ]
+    },
+    {
+      "catalogNumber": 5,
+      "destination": "Jodhpur",
+      "state": "Rajasthan",
+      "status": "SELECTED",
+      "deterministicWinner": {
+        "title": "File:Jodhpur, India, Jodhpur old city panorama from Mehrangarh Fort.jpg",
+        "score": 85
+      },
+      "geminiWinner": {
+        "title": "File:Jodhpur, India, Mehrangarh Fort, Roof.jpg",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Jodhpur%2C_India%2C_Mehrangarh_Fort%2C_Roof.jpg/1280px-Jodhpur%2C_India%2C_Mehrangarh_Fort%2C_Roof.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jodhpur,_India,_Mehrangarh_Fort,_Roof.jpg",
+        "license": "CC BY 4.0",
+        "artist": "Vyacheslav Argenberg",
+        "width": 3072,
+        "height": 2048,
+        "score": 94,
+        "decision": "STRONG",
+        "reason": "This photograph perfectly captures the designated hero subject: the sandstone ramparts and cannons of Mehrangarh Fort perched high on a cliff edge overlooking the expanse of blue-painted rooftops below. The framing highlights Jodhpur's defining architectural and landscape characteristics with dramatic altitude and clarity. While the upper sky exhibits mild atmospheric haze, the foreground details and clear view of the Blue City make it an exceptional hero candidate."
+      },
+      "classification": "IMPROVED_BY_GEMINI",
+      "evaluatedCandidates": [
+        {
+          "candidateRank": 3,
+          "deterministicScore": 75,
+          "title": "File:Jodhpur, India, Mehrangarh Fort, Roof.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Jodhpur%2C_India%2C_Mehrangarh_Fort%2C_Roof.jpg/1280px-Jodhpur%2C_India%2C_Mehrangarh_Fort%2C_Roof.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jodhpur,_India,_Mehrangarh_Fort,_Roof.jpg",
+          "width": 3072,
+          "height": 2048,
+          "license": "CC BY 4.0",
+          "artist": "Vyacheslav Argenberg",
+          "geminiEvaluation": {
+            "destinationRelevance": 20,
+            "heroSubjectMatch": 20,
+            "landmarkMatch": 19,
+            "landscapeMatch": 14,
+            "composition": 8,
+            "imageQuality": 8,
+            "visualDistinctiveness": 5,
+            "negativeSubjectPenalty": 0,
+            "overall": 94,
+            "decision": "STRONG",
+            "reason": "This photograph perfectly captures the designated hero subject: the sandstone ramparts and cannons of Mehrangarh Fort perched high on a cliff edge overlooking the expanse of blue-painted rooftops below. The framing highlights Jodhpur's defining architectural and landscape characteristics with dramatic altitude and clarity. While the upper sky exhibits mild atmospheric haze, the foreground details and clear view of the Blue City make it an exceptional hero candidate.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 8505
+        },
+        {
+          "candidateRank": 2,
+          "deterministicScore": 75,
+          "title": "File:Jodhpur, India, Old City and Mehrangarh Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Jodhpur%2C_India%2C_Old_City_and_Mehrangarh_Fort.jpg/1280px-Jodhpur%2C_India%2C_Old_City_and_Mehrangarh_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Jodhpur,_India,_Old_City_and_Mehrangarh_Fort.jpg",
+          "width": 3072,
+          "height": 2048,
+          "license": "CC BY 4.0",
+          "artist": "Vyacheslav Argenberg",
+          "geminiEvaluation": {
+            "destinationRelevance": 13,
+            "heroSubjectMatch": 10,
+            "landmarkMatch": 12,
+            "landscapeMatch": 8,
+            "composition": 5,
+            "imageQuality": 5,
+            "visualDistinctiveness": 3,
+            "negativeSubjectPenalty": -2,
+            "overall": 54,
+            "decision": "ACCEPTABLE",
+            "reason": "The image features Mehrangarh Fort on the cliff above the old city buildings, but the foreground is heavily occupied by local children and shadows. It lacks the expansive blue city rooftop view preferred for a hero image.",
+            "confidence": "HIGH"
+          },
+          "latencyMs": 8777
+        },
+        {
+          "candidateRank": 1,
+          "deterministicScore": 85,
+          "title": "File:Jodhpur, India, Jodhpur old city panorama from Mehrangarh Fort.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Jodhpur%2C_India%2C_Jodhpur_old_city_panorama_from_Mehrangarh_Fort.jpg/1280px-Jodhpur%2C_India%2C_Jodhpur_old_city_panorama_from_Mehrangarh_Fort.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 47.18243518s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"location\": \"global\",\n              \"model\": \"gemini-3.6-flash\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"47s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 4,
+          "deterministicScore": 75,
+          "title": "File:Jodhpur, India, Panorama of Jodhpur.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Jodhpur%2C_India%2C_Panorama_of_Jodhpur.jpg/1280px-Jodhpur%2C_India%2C_Panorama_of_Jodhpur.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 22.918598689s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"model\": \"gemini-3.6-flash\",\n              \"location\": \"global\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"22s\"\n      }\n    ]\n  }\n}\n"
+        },
+        {
+          "candidateRank": 5,
+          "deterministicScore": 75,
+          "title": "File:Jodhpur, India, Panorama of Jodhpur 2.jpg",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Jodhpur%2C_India%2C_Panorama_of_Jodhpur_2.jpg/1280px-Jodhpur%2C_India%2C_Panorama_of_Jodhpur_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "error": "Gemini API Error 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 21.189964962s.\",\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.Help\",\n        \"links\": [\n          {\n            \"description\": \"Learn more about Gemini API quotas\",\n            \"url\": \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.QuotaFailure\",\n        \"violations\": [\n          {\n            \"quotaMetric\": \"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\n            \"quotaId\": \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\n            \"quotaDimensions\": {\n              \"model\": \"gemini-3.6-flash\",\n              \"location\": \"global\"\n            },\n            \"quotaValue\": \"20\"\n          }\n        ]\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"21s\"\n      }\n    ]\n  }\n}\n"
+        }
+      ]
+    }
+  ]
+}
