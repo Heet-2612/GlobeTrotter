@@ -287,3 +287,258 @@ export interface ExchangeRateResponse {
   live?: boolean;
   source?: string;
 }
+
+export interface TripMemberResponse {
+  id: number;
+  tripId: number;
+  userId?: number;
+  fullName: string;
+  isGtUser: boolean;
+  role: 'OWNER' | 'MEMBER';
+  status: 'ACTIVE' | 'INACTIVE';
+  createdAt?: string;
+}
+
+export interface AddTripMemberRequest {
+  gtUserId?: number;
+  fullName?: string;
+}
+
+export type ExpenseCategory =
+  | 'FOOD'
+  | 'ACCOMMODATION'
+  | 'TRANSPORT'
+  | 'ACTIVITY'
+  | 'SHOPPING'
+  | 'TICKETS'
+  | 'OTHER';
+
+export type SplitType = 'EQUAL' | 'EXACT' | 'PERCENTAGE';
+
+export interface ExpenseParticipantRequest {
+  memberId: number;
+  shareAmount?: number;
+  percentage?: number;
+}
+
+export interface ExpensePayerRequest {
+  memberId: number;
+  paidAmount: number;
+}
+
+export interface ExpensePayerResponse {
+  id?: number;
+  memberId: number;
+  memberFullName: string;
+  paidAmount: number;
+}
+
+export interface CreateExpenseRequest {
+  title: string;
+  amount: number;
+  currency?: string;
+  category?: ExpenseCategory;
+  expenseDate: string;
+  splitType?: SplitType;
+  payerMemberId?: number;
+  payers?: ExpensePayerRequest[];
+  tripActivityId?: number;
+  notes?: string;
+  participants: ExpenseParticipantRequest[];
+}
+
+export interface UpdateExpenseRequest {
+  title: string;
+  amount: number;
+  currency?: string;
+  category?: ExpenseCategory;
+  expenseDate: string;
+  splitType?: SplitType;
+  payerMemberId?: number;
+  payers?: ExpensePayerRequest[];
+  tripActivityId?: number;
+  notes?: string;
+  participants: ExpenseParticipantRequest[];
+}
+
+export interface ExpenseParticipantResponse {
+  id: number;
+  memberId: number;
+  fullName: string;
+  isGtUser: boolean;
+  userId?: number;
+  shareAmount: number;
+}
+
+export interface ExpenseResponse {
+  id: number;
+  tripId: number;
+  title: string;
+  amount: number;
+  currency: string;
+  category: ExpenseCategory;
+  expenseDate: string;
+  splitType: SplitType;
+  payer?: TripMemberResponse;
+  isMultiplePayers?: boolean;
+  payers?: ExpensePayerResponse[];
+  createdByUserId: number;
+  createdByName: string;
+  isActivityLinked: boolean;
+  tripActivityId?: number;
+  activityName?: string;
+  notes?: string;
+  participants: ExpenseParticipantResponse[];
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type BalanceStatus = 'GETS_BACK' | 'OWES' | 'SETTLED';
+
+export interface MemberBalanceResponse {
+  memberId: number;
+  fullName: string;
+  isGtUser: boolean;
+  gtUserId?: number;
+  role: string;
+  memberStatus: string;
+  totalPaid: number;
+  totalOwed: number;
+  netBalance: number;
+  balanceStatus: BalanceStatus;
+}
+
+export interface DebtTransferResponse {
+  fromMemberId: number;
+  fromMemberName: string;
+  toMemberId: number;
+  toMemberName: string;
+  amount: number;
+}
+
+export interface MyBalanceSummaryResponse {
+  memberId: number;
+  netBalance: number;
+  balanceStatus: BalanceStatus;
+  summaryMessage: string;
+}
+
+export interface TripBalanceResponse {
+  tripId: number;
+  currency: string;
+  totalTripExpenses: number;
+  memberBalances: MemberBalanceResponse[];
+  simplifiedTransfers: DebtTransferResponse[];
+  myBalanceSummary?: MyBalanceSummaryResponse;
+}
+
+export interface CreateSettlementRequest {
+  payerMemberId: number;
+  receiverMemberId: number;
+  amount: number;
+  currency?: string;
+  settlementDate: string;
+  notes?: string;
+}
+
+export interface SettlementResponse {
+  id: number;
+  tripId: number;
+  payerMemberId: number;
+  payerMemberName: string;
+  receiverMemberId: number;
+  receiverMemberName: string;
+  amount: number;
+  currency: string;
+  settlementDate: string;
+  notes?: string;
+  createdByUserId: number;
+  createdByName: string;
+  createdAt: string;
+}
+
+export interface OverviewAnalytics {
+  totalTripExpenses: number;
+  expenseCount: number;
+  averageExpenseAmount: number;
+  totalSettlementVolume: number;
+  settlementCount: number;
+  totalOutstandingBalance: number;
+}
+
+export interface CategoryAnalytics {
+  category: ExpenseCategory;
+  totalAmount: number;
+  expenseCount: number;
+  percentage: number;
+}
+
+export interface MemberAnalytics {
+  memberId: number;
+  fullName: string;
+  isGtUser: boolean;
+  gtUserId?: number;
+  memberStatus: string;
+  totalPaid: number;
+  totalOwed: number;
+  expenseNetBalance: number;
+  finalNetBalance: number;
+  fundingPercentage: number;
+}
+
+export interface BudgetComparisonAnalytics {
+  targetBudget: number | null;
+  plannedItineraryCost: number;
+  actualSpent: number;
+  variance: number;
+}
+
+export interface TimelineAnalytics {
+  date: string;
+  totalAmount: number;
+  expenseCount: number;
+}
+
+export interface TopExpenseAnalytics {
+  id: number;
+  title: string;
+  category: ExpenseCategory;
+  payerName: string;
+  amount: number;
+  expenseDate: string;
+  activityName?: string;
+}
+
+export interface ExpenseSourceAnalytics {
+  source: 'ACTIVITY' | 'CUSTOM';
+  totalAmount: number;
+  expenseCount: number;
+  percentage: number;
+}
+
+export interface ActivitySpendingAnalytics {
+  tripActivityId: number;
+  activityName: string;
+  category: string;
+  plannedCost: number;
+  actualSpent: number;
+  expenseCount: number;
+  variance: number;
+}
+
+export interface TripAnalyticsResponse {
+  tripId: number;
+  currency: string;
+  overview: OverviewAnalytics;
+  categoryBreakdown: CategoryAnalytics[];
+  memberBreakdown: MemberAnalytics[];
+  budgetComparison?: BudgetComparisonAnalytics;
+  timeline: TimelineAnalytics[];
+  topExpenses: TopExpenseAnalytics[];
+  expenseSourceBreakdown: ExpenseSourceAnalytics[];
+  activitySpending: ActivitySpendingAnalytics[];
+  insights: string[];
+}
+
+
+

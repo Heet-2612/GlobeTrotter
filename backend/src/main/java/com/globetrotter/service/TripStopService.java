@@ -69,9 +69,14 @@ public class TripStopService {
         return TripStopResponse.fromEntity(savedStop);
     }
 
+    private Trip getAccessibleTrip(Long tripId, User currentUser) {
+        return tripRepository.findAccessibleTripById(tripId, currentUser.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Trip not found with id: " + tripId));
+    }
+
     @Transactional(readOnly = true)
     public List<TripStopResponse> getTripStops(Long tripId, User currentUser) {
-        getOwnedTrip(tripId, currentUser);
+        getAccessibleTrip(tripId, currentUser);
         return tripStopRepository.findByTripIdOrderByStopOrderAsc(tripId)
                 .stream()
                 .map(TripStopResponse::fromEntity)

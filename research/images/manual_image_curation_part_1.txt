@@ -1,0 +1,83 @@
+#1 | Jaipur | Rajasthan | 
+#2 | Agra | Uttar Pradesh | 
+#3 | Varanasi | Uttar Pradesh | 
+#4 | Udaipur | Rajasthan | 
+#5 | Jodhpur | Rajasthan | 
+#6 | Jaisalmer | Rajasthan | 
+#7 | Pushkar | Rajasthan | 
+#8 | Manali | Himachal Pradesh | 
+#9 | Shimla | Himachal Pradesh | 
+#10 | Rishikesh | Uttarakhand | 
+#11 | Amritsar | Punjab | 
+#12 | Ladakh | Ladakh | 
+#13 | Srinagar | Jammu & Kashmir | 
+#14 | Dharamshala | Himachal Pradesh | 
+#15 | Mussoorie | Uttarakhand | 
+#16 | Nainital | Uttarakhand | 
+#17 | Haridwar | Uttarakhand | 
+#18 | Mathura-Vrindavan | Uttar Pradesh | 
+#19 | Khajuraho | Madhya Pradesh | 
+#20 | Alappuzha | Kerala | 
+#21 | Munnar | Kerala | 
+#22 | Kochi | Kerala | 
+#23 | Mysuru | Karnataka | 
+#24 | Hampi | Karnataka | 
+#25 | Ooty | Tamil Nadu | 
+#26 | Puducherry | Puducherry | 
+#27 | Madurai | Tamil Nadu | 
+#28 | Wayanad | Kerala | 
+#29 | Kanyakumari | Tamil Nadu | 
+#30 | Varkala | Kerala | 
+#31 | Kodaikanal | Tamil Nadu | 
+#32 | Mahabalipuram | Tamil Nadu | 
+#33 | Chennai | Tamil Nadu | 
+#34 | Hyderabad | Telangana | 
+#35 | Bengaluru | Karnataka | 
+#36 | Gokarna | Karnataka | 
+#37 | Kolkata | West Bengal | 
+#38 | Darjeeling | West Bengal | 
+#39 | Gangtok | Sikkim | 
+#40 | Shillong | Meghalaya | 
+#41 | Cherrapunji (Sohra) | Meghalaya | 
+#42 | Kaziranga | Assam | 
+#43 | Puri | Odisha | 
+#44 | Konark | Odisha | 
+#45 | Mumbai | Maharashtra | 
+#46 | Pune | Maharashtra | 
+#47 | Lonavala-Khandala | Maharashtra | 
+#48 | Mahabaleshwar | Maharashtra | 
+#49 | Ahmedabad | Gujarat | 
+#50 | Rann of Kutch | Gujarat | 
+#51 | Bhopal | Madhya Pradesh | 
+#52 | Ujjain | Madhya Pradesh | 
+#53 | Gwalior | Madhya Pradesh | 
+#54 | Orchha | Madhya Pradesh | 
+#55 | Pachmarhi | Madhya Pradesh | 
+#56 | Lucknow | Uttar Pradesh | 
+#57 | Ayodhya | Uttar Pradesh | 
+#58 | Prayagraj | Uttar Pradesh | 
+#59 | Chittorgarh | Rajasthan | 
+#60 | Bikaner | Rajasthan | 
+#61 | Mount Abu | Rajasthan | 
+#62 | Ranthambore | Rajasthan | 
+#63 | Bundi | Rajasthan | 
+#64 | Dalhousie | Himachal Pradesh | 
+#65 | Kasauli | Himachal Pradesh | 
+#66 | Spiti Valley | Himachal Pradesh | 
+#67 | Auli | Uttarakhand | 
+#68 | Gulmarg | Jammu & Kashmir | 
+#69 | Pahalgam | Jammu & Kashmir | 
+#70 | Tawang | Arunachal Pradesh | 
+#71 | Champhai / Aizawl Circuit | Mizoram | 
+#72 | Kalimpong | West Bengal | 
+#73 | Majuli | Assam | 
+#74 | Ziro Valley | Arunachal Pradesh | 
+#75 | Andaman Islands | Andaman & Nicobar Islands | 
+#76 | Lakshadweep | Lakshadweep | 
+#77 | Chikkamagaluru | Karnataka | 
+#78 | Bandipur | Karnataka | 
+#79 | Nagarhole | Karnataka | 
+#80 | Badami-Pattadakal | Karnataka | 
+#81 | Murudeshwar | Karnataka | 
+#82 | Dandeli | Karnataka | 
+#83 | Yercaud | Tamil Nadu | 

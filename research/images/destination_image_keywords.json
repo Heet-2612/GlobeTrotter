@@ -1,0 +1,147 @@
+{
+  "1": {
+    "destination": "Jaipur",
+    "positiveKeywords": ["amber fort", "amer fort", "hawa mahal", "city palace", "jantar mantar", "jal mahal", "nahargarh", "jaigarh", "albert hall", "skyline", "chokhi dhani", "fort", "palace", "architecture"],
+    "negativeKeywords": ["embroidery", "portrait", "food", "dish", "stamp", "map", "logo"]
+  },
+  "2": {
+    "destination": "Agra",
+    "positiveKeywords": ["taj mahal", "agra fort", "fatehpur sikri", "tomb of itimad-ud-daulah", "mehtab bagh", "yamuna", "mausoleum", "monument", "architecture"],
+    "negativeKeywords": ["portrait", "embroidery", "stamp", "map", "logo"]
+  },
+  "3": {
+    "destination": "Varanasi",
+    "positiveKeywords": ["dashashwamedh ghat", "assi ghat", "ganges", "ganga", "kashi vishwanath", "sarnath", "ghat", "aarti", "boat", "river", "temple", "skyline"],
+    "negativeKeywords": ["portrait", "stamp", "map", "logo"]
+  },
+  "4": {
+    "destination": "Udaipur",
+    "positiveKeywords": ["city palace", "lake pichola", "jag mandir", "taj lake palace", "saheliyon ki bari", "fateh sagar", "monsoon palace", "sajjangarh", "lake", "palace", "ghat", "skyline"],
+    "negativeKeywords": ["embroidery", "mural", "fabric", "textile", "product", "portrait", "stamp"]
+  },
+  "5": {
+    "destination": "Jodhpur",
+    "positiveKeywords": ["mehrangarh", "blue city", "jaswant thada", "umaid bhawan", "clock tower", "toorji ka jhalra", "fort", "palace", "cityscape"],
+    "negativeKeywords": ["monkey", "langur", "animal", "portrait", "stamp", "map"]
+  },
+  "6": {
+    "destination": "Jaisalmer",
+    "positiveKeywords": ["jaisalmer fort", "golden fort", "patwon ki haveli", "sam sand dunes", "thar desert", "gadisar lake", "fort", "desert", "dunes", "haveli"],
+    "negativeKeywords": ["portrait", "stamp", "map", "logo"]
+  },
+  "7": {
+    "destination": "Pushkar",
+    "positiveKeywords": ["pushkar lake", "brahma temple", "ghat", "savitri temple", "pushkar camel fair", "desert", "temple", "lake"],
+    "negativeKeywords": ["monkey", "langur", "portrait", "stamp"]
+  },
+  "8": {
+    "destination": "Manali",
+    "positiveKeywords": ["solang valley", "rohtang pass", "beas river", "hadimba temple", "old manali", "snow", "mountain", "valley", "himalayas"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "9": {
+    "destination": "Shimla",
+    "positiveKeywords": ["ridge", "mall road", "christ church", "jakhoo temple", "kufri", "toy train", "snow", "architecture", "landscape"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "10": {
+    "destination": "Rishikesh",
+    "positiveKeywords": ["laxman jhula", "ram jhula", "triveni ghat", "ganges", "ganga", "beatles ashram", "river", "suspension bridge", "yoga"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "11": {
+    "destination": "Amritsar",
+    "positiveKeywords": ["golden temple", "harmandir sahib", "jallianwala bagh", "wagah border", "gurdwara", "pool of nectar", "sarovar", "shrine"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "12": {
+    "destination": "Ladakh",
+    "positiveKeywords": ["pangong tso", "nubra valley", "magnetic hill", "khardung la", "thiksey monastery", "hemis", "diskit", "landscape", "mountains", "stupa"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "13": {
+    "destination": "Srinagar",
+    "positiveKeywords": ["dal lake", "shikara", "houseboat", "shalimar bagh", "nishat bagh", "hazratbal", "shankaracharya", "lake", "gardens", "mountains"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "20": {
+    "destination": "Alappuzha",
+    "positiveKeywords": ["backwaters", "houseboat", "punnamada lake", "alappuzha beach", "lighthouse", "canals", "palm trees", "lake", "boat"],
+    "negativeKeywords": ["medical college", "hospital", "portrait", "stamp"]
+  },
+  "21": {
+    "destination": "Munnar",
+    "positiveKeywords": ["tea garden", "tea plantation", "anamudi", "mattupetty dam", "eravikulam", "top station", "misty hills", "landscape", "greenery"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "22": {
+    "destination": "Kochi",
+    "positiveKeywords": ["chinese fishing nets", "fort kochi", "mattancherry palace", "jew town", "st francis church", "cochin harbor", "marine drive", "waterfront"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "24": {
+    "destination": "Hampi",
+    "positiveKeywords": ["virupaksha temple", "stone chariot", "vittala temple", "hemakuta hill", "lotus mahal", "elephant stables", "tungabhadra", "boulders", "ruins"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "45": {
+    "destination": "Mumbai",
+    "positiveKeywords": ["gateway of india", "marina drive", "taj mahal palace hotel", "bandra worli sea link", "chhatrapati shivaji terminus", "elephanta caves", "skyline", "seafront"],
+    "negativeKeywords": ["slum", "lotus colony", "rubbish", "garbage", "portrait", "stamp"]
+  },
+  "78": {
+    "destination": "Bandipur",
+    "positiveKeywords": ["bandipur tiger reserve", "bandipur national park", "himavad gopalaswamy betta", "tiger", "elephant", "safari", "jungle", "forest", "wildlife", "gorge"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "108": {
+    "destination": "Delhi",
+    "positiveKeywords": ["qutub minar", "red fort", "humayun's tomb", "india gate", "lotus temple", "akshardham", "jama masjid", "rashtrapati bhavan", "monument", "skyline"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "109": {
+    "destination": "Goa",
+    "positiveKeywords": ["calangute", "baga beach", "aguada fort", "basilica of bom jesus", "dudhsagar falls", "anjuna", "palolem", "beach", "sea", "palm trees"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "112": {
+    "destination": "Modhera-Patan",
+    "positiveKeywords": ["modhera sun temple", "rani ki vav", "stepwell", "patola", "sun temple", "architecture", "carvings"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "150": {
+    "destination": "Maheshwar",
+    "positiveKeywords": ["ahilya fort", "narmada ghats", "baneshwar temple", "maheshwari handloom", "ghat", "fort", "river", "temple"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "151": {
+    "destination": "Mandu",
+    "positiveKeywords": ["jahaz mahal", "hindola mahal", "rupmati pavilion", "baz bahadur palace", "jami masjid", "fort", "palace", "monument"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "152": {
+    "destination": "Chitrakoot",
+    "positiveKeywords": ["ram ghat", "mandakini river", "kamadgiri", "sati anusuya", "gupt godavari", "ghat", "river", "temple"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "155": {
+    "destination": "Poovar",
+    "positiveKeywords": ["poovar island", "poovar backwaters", "golden sand beach", "estuary", "mangrove", "floating resort", "beach", "river"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "159": {
+    "destination": "Dhanushkodi",
+    "positiveKeywords": ["dhanushkodi beach", "ghost town", "adam's bridge", "ram setu", "ruins", "ocean", "beach", "pamban"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "160": {
+    "destination": "Tranquebar (Tharangambadi)",
+    "positiveKeywords": ["fort dansborg", "danish fort", "ziegenbalg church", "tharangambadi beach", "colonial architecture", "fort", "beach"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  },
+  "165": {
+    "destination": "Srisailam",
+    "positiveKeywords": ["mallikarjuna temple", "srisailam dam", "krishna river", "srisailam tiger reserve", "pathala ganga", "temple", "dam", "gorge"],
+    "negativeKeywords": ["portrait", "stamp", "map"]
+  }
+}

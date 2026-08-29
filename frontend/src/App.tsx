@@ -18,10 +18,11 @@ import { SharedItineraryPage } from './pages/SharedItineraryPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SharingSection } from './components/SharingSection';
 import { Button, LoadingState } from './components/common/UIComponents';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { ArrowLeft } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
-  const { isAuthenticated, loading } = useAuth();
+  const { isAuthenticated, loading, handleOAuthExchange } = useAuth();
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
   const [activeParam, setActiveParam] = useState<string | number | undefined>(undefined);
 
@@ -35,6 +36,18 @@ const MainAppContent: React.FC = () => {
         const token = searchParams.get('token') || (hash.includes('token=') ? hash.split('token=')[1]?.split('&')[0] : '');
         setCurrentTab('reset-password');
         setActiveParam(token);
+        return;
+      }
+
+      if (hash.startsWith('oauth2')) {
+        const code = searchParams.get('code') || (hash.includes('code=') ? hash.split('code=')[1]?.split('&')[0] : null);
+        const error = searchParams.get('error') || (hash.includes('error=') ? hash.split('error=')[1]?.split('&')[0] : null);
+        setCurrentTab('oauth-callback');
+        if (error) {
+          setActiveParam(`error:${error}`);
+        } else if (code) {
+          setActiveParam(`code:${code}`);
+        }
         return;
       }
 
@@ -54,6 +67,16 @@ const MainAppContent: React.FC = () => {
           return;
         }
       }
+
+      if (hash === 'activities' || hash === 'activity-search') {
+        setCurrentTab('activity-search');
+        return;
+      }
+
+      if (hash === 'destinations' || hash === 'cities' || hash === 'city-search') {
+        setCurrentTab('city-search');
+        return;
+      }
     };
 
     handleUrlChange();
@@ -71,10 +94,26 @@ const MainAppContent: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  if (loading) {
+  useEffect(() => {
+    if (currentTab === 'oauth-callback' && activeParam && String(activeParam).startsWith('code:')) {
+      const code = String(activeParam).split('code:')[1];
+      handleOAuthExchange(code)
+        .then(() => {
+          // Clear URL and go to dashboard
+          window.history.replaceState(null, '', window.location.pathname);
+          handleNavigate('dashboard');
+        })
+        .catch((err) => {
+          console.error(err);
+          handleNavigate('oauth-callback', 'error:exchange_failed');
+        });
+    }
+  }, [currentTab, activeParam, handleOAuthExchange]);
+
+  if (loading || (currentTab === 'oauth-callback' && String(activeParam).startsWith('code:'))) {
     return (
       <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex items-center justify-center">
-        <LoadingState message="Initializing GlobeTrotter..." />
+        <LoadingState message={currentTab === 'oauth-callback' ? "Authenticating securely..." : "Initializing GlobeTrotter..."} />
       </div>
     );
   }
@@ -89,6 +128,30 @@ const MainAppContent: React.FC = () => {
         </main>
       </div>
     );
+  }
+
+  // OAuth Callback Handler
+  if (currentTab === 'oauth-callback' && activeParam) {
+    const paramStr = String(activeParam);
+    if (paramStr.startsWith('error:')) {
+      const errorMsg = paramStr.split('error:')[1];
+      return (
+        <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans items-center justify-center">
+          <div className="bg-white p-8 rounded-xl shadow-md text-center max-w-md w-full space-y-4">
+            <h2 className="text-xl font-bold text-rose-600">Authentication Failed</h2>
+            <p className="text-slate-600">
+              {errorMsg === 'unverified_email' 
+                ? 'Your Google account email is not verified. Please verify your email with Google first.'
+                : 'There was an error authenticating with Google.'}
+            </p>
+            <Button variant="outline" onClick={() => {
+              window.history.replaceState(null, '', window.location.pathname);
+              handleNavigate('login');
+            }}>Return to Login</Button>
+          </div>
+        </div>
+      );
+    }
   }
 
   // Public screen (accessible without login)
@@ -115,48 +178,72 @@ const MainAppContent: React.FC = () => {
     );
   }
 
+  // Helper to render the active tab component with fallback
+  const renderActiveView = () => {
+    if (currentTab === 'dashboard') {
+      return <DashboardPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'create-trip') {
+      return <CreateTripPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'my-trips') {
+      return <MyTripsPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'builder' && activeParam) {
+      return <ItineraryBuilderPage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'view' && activeParam) {
+      return <ItineraryViewPage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'city-search' || currentTab === 'search' || currentTab === 'cities' || currentTab === 'destinations') {
+      return <CitySearchPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'destination' && activeParam) {
+      return <DestinationDetailsPage cityId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'activity-search' || currentTab === 'activities' || currentTab === 'activities-search') {
+      return <ActivitySearchPage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'budget' && activeParam) {
+      return <BudgetPage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'timeline' && activeParam) {
+      return <TimelinePage tripId={Number(activeParam)} onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'sharing' && activeParam) {
+      return (
+        <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-extrabold text-slate-900">Public Sharing Settings</h2>
+            <Button
+              variant="ghost"
+              size="sm"
+              icon={<ArrowLeft size={14} />}
+              onClick={() => handleNavigate('builder', activeParam)}
+            >
+              Back to Builder
+            </Button>
+          </div>
+          <SharingSection tripId={Number(activeParam)} />
+        </div>
+      );
+    }
+    if (currentTab === 'profile') {
+      return <ProfilePage onNavigate={handleNavigate} />;
+    }
+
+    // Default fallback to dashboard
+    return <DashboardPage onNavigate={handleNavigate} />;
+  };
+
   // Render Protected Views for Authenticated Users
   return (
     <div className="min-h-screen bg-[#f5f7f6] text-slate-900 flex flex-col font-sans">
       <Navbar currentTab={currentTab} onNavigate={handleNavigate} />
       <main className="flex-1 pb-12">
-        {currentTab === 'dashboard' && <DashboardPage onNavigate={handleNavigate} />}
-        {currentTab === 'create-trip' && <CreateTripPage onNavigate={handleNavigate} />}
-        {currentTab === 'my-trips' && <MyTripsPage onNavigate={handleNavigate} />}
-        {currentTab === 'builder' && activeParam && (
-          <ItineraryBuilderPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'view' && activeParam && (
-          <ItineraryViewPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'city-search' && <CitySearchPage onNavigate={handleNavigate} />}
-        {currentTab === 'destination' && activeParam && (
-          <DestinationDetailsPage cityId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'activity-search' && <ActivitySearchPage onNavigate={handleNavigate} />}
-        {currentTab === 'budget' && activeParam && (
-          <BudgetPage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'timeline' && activeParam && (
-          <TimelinePage tripId={Number(activeParam)} onNavigate={handleNavigate} />
-        )}
-        {currentTab === 'sharing' && activeParam && (
-          <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-extrabold text-slate-900">Public Sharing Settings</h2>
-              <Button
-                variant="ghost"
-                size="sm"
-                icon={<ArrowLeft size={14} />}
-                onClick={() => handleNavigate('builder', activeParam)}
-              >
-                Back to Builder
-              </Button>
-            </div>
-            <SharingSection tripId={Number(activeParam)} />
-          </div>
-        )}
-        {currentTab === 'profile' && <ProfilePage onNavigate={handleNavigate} />}
+        <ErrorBoundary onReset={() => handleNavigate('dashboard')}>
+          {renderActiveView()}
+        </ErrorBoundary>
       </main>
     </div>
   );

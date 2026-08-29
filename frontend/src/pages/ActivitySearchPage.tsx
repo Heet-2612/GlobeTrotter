@@ -24,9 +24,10 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({ onNaviga
       setLoading(true);
       setError(null);
       const data = await api.searchActivities(undefined, query, categoryFilter);
-      setActivities(data);
+      setActivities(Array.isArray(data) ? data : []);
     } catch (err: any) {
       setError(err.message || 'Failed to search activities');
+      setActivities([]);
     } finally {
       setLoading(false);
     }
@@ -44,9 +45,13 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({ onNaviga
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-semibold mb-2">
+            <Sparkles size={13} />
+            <span>Curated Activity Directory</span>
+          </div>
           <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Discover Activities & Attractions</h1>
           <p className="text-xs text-slate-500 mt-1">
-            Browse tours, landmark visits, food experiences, and outdoor adventures
+            Browse tours, landmark visits, food experiences, and outdoor adventures across India
           </p>
         </div>
       </div>
@@ -60,7 +65,7 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({ onNaviga
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search activities (e.g. Eiffel Tower, Wine Tasting, Museum)..."
+                placeholder="Search activities (e.g. Taj Mahal, Scuba Diving, Temple Tour)..."
               />
             </div>
             <Button type="submit" variant="emerald" size="md" icon={<Search size={16} />}>
@@ -102,7 +107,7 @@ export const ActivitySearchPage: React.FC<ActivitySearchPageProps> = ({ onNaviga
         <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-sm">
           {error}
         </div>
-      ) : activities.length === 0 ? (
+      ) : !activities || activities.length === 0 ? (
         <EmptyState title="No activities found" description="Try selecting a different category or search term." />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

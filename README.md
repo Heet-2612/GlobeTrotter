@@ -96,6 +96,28 @@ Login / Signup
 2. Create a database named `globetrotter`.
 3. Configure the database credentials in `backend/.env` or `backend/src/main/resources/application.properties`.
 
+### 3. Environment Variables
+Create a `.env` file in the `backend` directory (or configure your deployment environment) with the following essential variables:
+
+```properties
+# Database
+DB_URL=jdbc:postgresql://<your-db-host>:<your-db-port>/globetrotter_db
+DB_USERNAME=<your-db-user>
+DB_PASSWORD=<your-db-password>
+
+# JWT Security
+JWT_SECRET=<your-super-secret-jwt-key>
+JWT_EXPIRATION=86400000
+
+# API Keys
+GEOAPIFY_API_KEY=<your-geoapify-key>
+BREVO_API_KEY=<your-brevo-key>
+
+# Google OAuth2 Login (Required for Google Login)
+GOOGLE_CLIENT_ID=<your-google-oauth-client-id>
+GOOGLE_CLIENT_SECRET=<your-google-oauth-client-secret>
+```
+
 ### 2. Backend Setup
 ```bash
 cd backend

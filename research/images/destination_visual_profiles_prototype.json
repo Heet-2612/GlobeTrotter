@@ -1,0 +1,306 @@
+[
+  {
+    "catalogNumber": 1,
+    "destination": "Jaipur",
+    "canonicalName": "jaipur",
+    "state": "Rajasthan",
+    "heroSubjects": [
+      "Amber Fort hill fortification and Maota Lake reflecting facade",
+      "Hawa Mahal (Palace of Winds) honeycomb pink sandstone facade",
+      "City Palace royal courtyards and Chandra Mahal facade"
+    ],
+    "primaryLandmarks": [
+      "Amber Fort (Amer Fort)",
+      "Hawa Mahal",
+      "City Palace Jaipur",
+      "Jantar Mantar Observatory",
+      "Jal Mahal (Water Palace)"
+    ],
+    "secondaryLandmarks": [
+      "Nahargarh Fort",
+      "Jaigarh Fort",
+      "Albert Hall Museum",
+      "Galtaji Monkey Temple",
+      "Sisodia Rani Garden"
+    ],
+    "landscapeSubjects": [
+      "Aravalli Mountain Ridge",
+      "Maota Lake",
+      "Man Sagar Lake",
+      "Pink City urban streetscapes"
+    ],
+    "architectureSubjects": [
+      "Pink Terracotta Sandstone",
+      "Rajputana-Mughal Fusion Architecture",
+      "Jharokha Latticed Windows",
+      "Multi-tiered Terraced Courtyards"
+    ],
+    "experienceSubjects": [
+      "Elephant ride / foot climb to Amber Fort",
+      "Bazaar walking tour (Johari / Bapu Bazaar)",
+      "Jhalana leopard safari"
+    ],
+    "preferredSearchTerms": [
+      "Jaipur Rajasthan India",
+      "Amber Fort Jaipur",
+      "Hawa Mahal Jaipur",
+      "Jal Mahal Jaipur",
+      "City Palace Jaipur"
+    ],
+    "aliases": [
+      "Pink City",
+      "Amer",
+      "Jaipore"
+    ],
+    "negativeSubjects": [
+      "Close-up block prints",
+      "street vendors food dishes",
+      "single person portraits",
+      "monochrome sketches",
+      "modern hotel interiors"
+    ],
+    "visualNotes": [
+      "Prefer iconic wide-angle shots of Amber Fort or Hawa Mahal facade over close-up craft/fabric products.",
+      "Images showing the distinctive pink terracotta sandstone hues are preferred."
+    ],
+    "confidence": "HIGH"
+  },
+  {
+    "catalogNumber": 150,
+    "destination": "Maheshwar",
+    "canonicalName": "maheshwar",
+    "state": "Madhya Pradesh",
+    "heroSubjects": [
+      "Ahilya Fort (Ahilya Wada) overlooking Narmada riverfront ghats",
+      "Wide panoramic view of Narmada River Ghats and stone temple spires at sunset"
+    ],
+    "primaryLandmarks": [
+      "Ahilya Fort (Ahilya Fort & Palace)",
+      "Maheshwar Narmada Ghats",
+      "Baneshwar Temple",
+      "Ahilyabai Holkar Cenotaphs (Chhatris)"
+    ],
+    "secondaryLandmarks": [
+      "Rewa Society Maheshwari Handloom Weaving Center",
+      "Ek Mukhi Datta Temple",
+      "Kashi Vishwanath Temple Maheshwar"
+    ],
+    "landscapeSubjects": [
+      "Narmada River",
+      "Stone Riverfront Steps (Ghats)",
+      "River Islands",
+      "Sunset River Vistas"
+    ],
+    "architectureSubjects": [
+      "Holkar Dynasty Maratha Fortification",
+      "Carved Stone Chhatris (Cenotaphs)",
+      "Riverfront Stone Ghat Architecture",
+      "Traditional Handloom Courtyards"
+    ],
+    "experienceSubjects": [
+      "Narmada River sunset boat ride",
+      "Narmada evening river aarti",
+      "Maheshwari sari handloom weaving"
+    ],
+    "preferredSearchTerms": [
+      "Maheshwar Narmada Ghats",
+      "Ahilya Fort Maheshwar",
+      "Narmada River Maheshwar Madhya Pradesh",
+      "Ahilyabai Holkar Fort"
+    ],
+    "aliases": [
+      "Mahismati",
+      "Maheshwar MP"
+    ],
+    "negativeSubjects": [
+      "Close-up sari threads without background",
+      "food dishes",
+      "single person portraits",
+      "modern concrete structures"
+    ],
+    "visualNotes": [
+      "Prefer expansive riverfront ghat views featuring Ahilya Fort atop the Narmada River over close-up fabric weaves.",
+      "Ensure Narmada river stone steps and temple spires are visually prominent."
+    ],
+    "confidence": "HIGH"
+  },
+  {
+    "catalogNumber": 155,
+    "destination": "Poovar",
+    "canonicalName": "poovar",
+    "state": "Kerala",
+    "heroSubjects": [
+      "Golden sand beach barrier spit dividing the serene Neyyar backwater estuary from the Arabian Sea",
+      "Floating cottages and backwater mangrove channels"
+    ],
+    "primaryLandmarks": [
+      "Poovar Golden Sand Beach Spit",
+      "Poovar Backwater Estuary",
+      "Neyyar River Riverfront Mangrove Trails",
+      "Poovar Floating Cottages"
+    ],
+    "secondaryLandmarks": [
+      "Kovalam Beach Border",
+      "Vizhinjam International Port Outlook",
+      "Pozhiyoor Estuary View"
+    ],
+    "landscapeSubjects": [
+      "Estuary Confluence (River, Lake, Sea)",
+      "Coconut Palm Groves",
+      "Mangrove Backwater Canals",
+      "Golden Sand Spit Dunes"
+    ],
+    "architectureSubjects": [
+      "Traditional Kerala Thatched Wooden Cottages",
+      "Floating Eco-Resort Water Structures",
+      "Wooden Country Motorboats / Kayaks"
+    ],
+    "experienceSubjects": [
+      "Backwater mangrove boat safari",
+      "Estuary kayaking",
+      "Floating seafood dining"
+    ],
+    "preferredSearchTerms": [
+      "Poovar Island Kerala",
+      "Poovar Backwaters Estuary",
+      "Poovar Golden Sand Beach",
+      "Poovar Floating Huts"
+    ],
+    "aliases": [
+      "Poovar Island",
+      "Poovar Estuary"
+    ],
+    "negativeSubjects": [
+      "Generic commercial harbor ships",
+      "city street scenes",
+      "single person portraits",
+      "crowded urban markets"
+    ],
+    "visualNotes": [
+      "Prefer dramatic wide aerial/elevated vistas showing the narrow golden sand beach spit separating calm backwater from ocean waves.",
+      "Avoid generic palm tree close-ups that could be anywhere in Kerala."
+    ],
+    "confidence": "HIGH"
+  },
+  {
+    "catalogNumber": 160,
+    "destination": "Tranquebar (Tharangambadi)",
+    "canonicalName": "tharangambadi",
+    "state": "Tamil Nadu",
+    "heroSubjects": [
+      "Fort Dansborg (Danish Fort) yellow coastal battlements directly overlooking the Coromandel coastline",
+      "Ziegenbalg Danish Colonial Church and historic King Street gateway"
+    ],
+    "primaryLandmarks": [
+      "Fort Dansborg (Danish Fort)",
+      "Ziegenbalg New Jerusalem Church",
+      "Danish King Street Town Gate",
+      "Zion Church Tharangambadi"
+    ],
+    "secondaryLandmarks": [
+      "Masilamani Nathar Temple (14th-century coastal Pandyan temple)",
+      "Danish Governor Bungalow",
+      "Maritime Museum Tharangambadi"
+    ],
+    "landscapeSubjects": [
+      "Coromandel Coast Beach",
+      "Bay of Bengal Seafront",
+      "Coastal Palms & Wave Breakers"
+    ],
+    "architectureSubjects": [
+      "17th-Century Danish Colonial Architecture",
+      "Danish Yellow Ochre Stucco Fortifications",
+      "Pandyan Shore Temple Carvings",
+      "Colonial Arched City Gateways"
+    ],
+    "experienceSubjects": [
+      "Colonial heritage street walking tour",
+      "Fort Dansborg rampart sea view",
+      "Coastal shore temple heritage stroll"
+    ],
+    "preferredSearchTerms": [
+      "Fort Dansborg Tranquebar",
+      "Tharangambadi Danish Fort",
+      "Tranquebar Tamil Nadu",
+      "New Jerusalem Church Tranquebar"
+    ],
+    "aliases": [
+      "Tranquebar",
+      "Tarangambadi",
+      "Trankebar",
+      "Land of the Singing Waves"
+    ],
+    "negativeSubjects": [
+      "Generic modern fishing boats",
+      "crowded city bazaars",
+      "single person portraits",
+      "industrial ports"
+    ],
+    "visualNotes": [
+      "Prefer Fort Dansborg's yellow ochre colonial facade with the Bay of Bengal coastline in the background.",
+      "Distinguish colonial Danish architecture from typical South Indian temple gopurams."
+    ],
+    "confidence": "HIGH"
+  },
+  {
+    "catalogNumber": 165,
+    "destination": "Srisailam",
+    "canonicalName": "srisailam",
+    "state": "Andhra Pradesh",
+    "heroSubjects": [
+      "Srisailam Dam spanning the deep Nallamala forest canyon of Krishna River",
+      "Sri Mallikarjuna Swamy Jyotirlinga Temple complex towers and Prakaram wall"
+    ],
+    "primaryLandmarks": [
+      "Sri Mallikarjuna Swamy Temple (Jyotirlinga & Shakti Peetha)",
+      "Srisailam Dam",
+      "Krishna River Canyon & Pathala Ganga",
+      "Nagarjunasagar-Srisailam Tiger Reserve"
+    ],
+    "secondaryLandmarks": [
+      "Akka Mahadevi Caves",
+      "Phaladhara Panchadhara Waterfalls",
+      "Srisailam Ropeway & Boat Jetty",
+      "Sakshi Ganapati Temple"
+    ],
+    "landscapeSubjects": [
+      "Nallamala Hills & Forest Canyon",
+      "Krishna River Deep Gorge",
+      "Reservoir Waters",
+      "Dense Deciduous Jungle"
+    ],
+    "architectureSubjects": [
+      "Vijayanagara & Reddi Dynasty Temple Architecture",
+      "High Stone Gopurams (Temple Towers)",
+      "Carved Stone Prakaram Wall",
+      "Hydraulic Dam Concrete Architecture"
+    ],
+    "experienceSubjects": [
+      "Pathala Ganga ropeway ride",
+      "Krishna River gorge boat ride to caves",
+      "Tiger reserve wilderness safari"
+    ],
+    "preferredSearchTerms": [
+      "Srisailam Dam Krishna River",
+      "Mallikarjuna Swamy Temple Srisailam",
+      "Srisailam Nallamala Forest Andhra Pradesh",
+      "Pathala Ganga Srisailam"
+    ],
+    "aliases": [
+      "Sri Sailam",
+      "Srisailam Temple",
+      "Srisailam Sanctuary"
+    ],
+    "negativeSubjects": [
+      "Generic dam construction vehicles",
+      "crowded queue complex interiors",
+      "single person portraits",
+      "food plates"
+    ],
+    "visualNotes": [
+      "Prefer dramatic wide-angle views of the Srisailam Dam gorge nestled between Nallamala forested hills, or the Mallikarjuna temple gopuram.",
+      "Avoid close-up queue line scenes."
+    ],
+    "confidence": "HIGH"
+  }
+]

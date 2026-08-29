@@ -48,7 +48,7 @@ public class BudgetService {
 
     @Transactional(readOnly = true)
     public BudgetSummaryResponse getTripBudgetSummary(Long tripId, User currentUser) {
-        Trip trip = tripRepository.findByIdAndUserId(tripId, currentUser.getId())
+        Trip trip = tripRepository.findAccessibleTripById(tripId, currentUser.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Trip not found with id: " + tripId));
 
         return calculateBudgetSummary(trip);

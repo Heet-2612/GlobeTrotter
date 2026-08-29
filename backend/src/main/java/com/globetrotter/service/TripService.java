@@ -18,9 +18,11 @@ import java.util.stream.Collectors;
 public class TripService {
 
     private final TripRepository tripRepository;
+    private final TripMemberService tripMemberService;
 
-    public TripService(TripRepository tripRepository) {
+    public TripService(TripRepository tripRepository, TripMemberService tripMemberService) {
         this.tripRepository = tripRepository;
+        this.tripMemberService = tripMemberService;
     }
 
     @Transactional
@@ -44,12 +46,13 @@ public class TripService {
                 .build();
 
         Trip savedTrip = tripRepository.save(trip);
+        tripMemberService.ensureOwnerIsMember(savedTrip);
         return TripResponse.fromEntity(savedTrip);
     }
 
     @Transactional(readOnly = true)
     public List<TripResponse> getUserTrips(User currentUser) {
-        return tripRepository.findByUserIdOrderByStartDateAsc(currentUser.getId())
+        return tripRepository.findAccessibleTripsForUser(currentUser.getId())
                 .stream()
                 .map(TripResponse::fromEntity)
                 .collect(Collectors.toList());
@@ -57,7 +60,7 @@ public class TripService {
 
     @Transactional(readOnly = true)
     public TripResponse getTripById(Long tripId, User currentUser) {
-        Trip trip = tripRepository.findByIdAndUserId(tripId, currentUser.getId())
+        Trip trip = tripRepository.findAccessibleTripById(tripId, currentUser.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Trip not found with id: " + tripId));
         return TripResponse.fromEntity(trip);
     }

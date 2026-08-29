@@ -5,6 +5,7 @@ import {
   CityResponse,
   ActivityResponse,
   TripActivityResponse,
+  TripMemberResponse,
 } from '../types';
 import { api } from '../services/api';
 import {
@@ -24,13 +25,19 @@ import {
   Compass,
   CheckCircle2,
   Sliders,
-  ChevronRight
+  ChevronRight,
+  Users,
+  Receipt,
+  BarChart3
 } from 'lucide-react';
 import { Button, Card, Badge, Input, LoadingState } from '../components/common/UIComponents';
 import { useCurrency } from '../context/CurrencyContext';
 import { getCityImageUrl, onCityImageError, getDestinationImageUrl } from '../utils/imageUtils';
 import ActivityImage from '../components/common/ActivityImage';
 import { DestinationExplorationModal } from '../components/destination/DestinationExplorationModal';
+import { TripContributorsSection } from '../components/trip/TripContributorsSection';
+import { TripExpensesSection } from '../components/expense/TripExpensesSection';
+import { TripAnalyticsSection } from '../components/expense/TripAnalyticsSection';
 
 interface ItineraryBuilderPageProps {
   tripId: number;
@@ -41,12 +48,13 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
   const { formatDual } = useCurrency();
   const [trip, setTrip] = useState<TripResponse | null>(null);
   const [stops, setStops] = useState<TripStopResponse[]>([]);
+  const [tripMembers, setTripMembers] = useState<TripMemberResponse[]>([]);
   const [activitiesMap, setActivitiesMap] = useState<Record<number, TripActivityResponse[]>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // View Mode: 'destination' (Grouped by Stop) vs 'timeline' (Chronological Day-by-Day)
-  const [viewMode, setViewMode] = useState<'destination' | 'timeline'>('destination');
+  // View Mode: 'destination' | 'timeline' | 'contributors' | 'expenses' | 'analytics'
+  const [viewMode, setViewMode] = useState<'destination' | 'timeline' | 'contributors' | 'expenses' | 'analytics'>('destination');
 
   // Exploration Modal State (Phase 2D Integration)
   const [activeStopForExploration, setActiveStopForExploration] = useState<TripStopResponse | null>(null);
@@ -78,10 +86,10 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
   const [addStopSubmitting, setAddStopSubmitting] = useState(false);
 
   useEffect(() => {
-    loadTripData();
+    fetchTripData();
   }, [tripId]);
 
-  const loadTripData = async () => {
+  const fetchTripData = async () => {
     try {
       setLoading(true);
       setError(null);
@@ -90,6 +98,13 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
 
       const stopsData = await api.getTripStops(tripId);
       setStops(stopsData);
+
+      try {
+        const membersData = await api.getTripMembers(tripId);
+        setTripMembers(membersData);
+      } catch {
+        setTripMembers([]);
+      }
 
       const map: Record<number, TripActivityResponse[]> = {};
       for (const stop of stopsData) {
@@ -107,6 +122,8 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
       setLoading(false);
     }
   };
+
+  const loadTripData = fetchTripData;
 
   // City Search Handler for Add Stop Modal
   useEffect(() => {
@@ -152,7 +169,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
       });
 
       setEditingStop(null);
-      await loadTripData();
+      await fetchTripData();
     } catch (err: any) {
       setStopUpdateError(err.message || 'Failed to update stop dates.');
     } finally {
@@ -182,7 +199,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
       });
 
       setEditingTripActivity(null);
-      await loadTripData();
+      await fetchTripData();
     } catch (err: any) {
       setActivityUpdateError(err.message || 'Failed to update activity schedule.');
     } finally {
@@ -195,7 +212,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
     if (!window.confirm(`Remove ${destName} from your trip itinerary? Underlying destination catalog data will not be deleted.`)) return;
     try {
       await api.deleteTripStop(tripId, stopId);
-      await loadTripData();
+      await fetchTripData();
     } catch (err: any) {
       alert(err.message || 'Failed to delete stop.');
     }
@@ -206,7 +223,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
     if (!window.confirm('Remove this activity from your itinerary?')) return;
     try {
       await api.deleteTripActivity(tripId, stopId, tripActivityId);
-      await loadTripData();
+      await fetchTripData();
     } catch (err: any) {
       alert(err.message || 'Failed to remove activity.');
     }
@@ -233,7 +250,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
       setNewStopStartDate('');
       setNewStopEndDate('');
       setNewStopNotes('');
-      await loadTripData();
+      await fetchTripData();
     } catch (err: any) {
       alert(err.message || 'Failed to add stop');
     } finally {
@@ -335,15 +352,80 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
               <Calendar size={14} className={viewMode === 'timeline' ? 'text-emerald-600' : ''} />
               <span>Chronological Timeline</span>
             </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('contributors')}
+              className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-all ${
+                viewMode === 'contributors'
+                  ? 'bg-white text-emerald-800 shadow-2xs border border-emerald-200'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Users size={14} className={viewMode === 'contributors' ? 'text-emerald-600' : ''} />
+              <span>Trip Contributors</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('expenses')}
+              className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-all ${
+                viewMode === 'expenses'
+                  ? 'bg-white text-emerald-800 shadow-2xs border border-emerald-200'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Receipt size={14} className={viewMode === 'expenses' ? 'text-emerald-600' : ''} />
+              <span>Expenses & Bills</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('analytics')}
+              className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg flex items-center justify-center space-x-2 transition-all ${
+                viewMode === 'analytics'
+                  ? 'bg-white text-emerald-800 shadow-2xs border border-emerald-200'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <BarChart3 size={14} className={viewMode === 'analytics' ? 'text-emerald-600' : ''} />
+              <span>Analytics</span>
+            </button>
           </div>
 
           <span className="text-xs text-slate-500 font-medium">
             {viewMode === 'destination'
               ? 'Organized by destination stops & activities'
-              : 'Chronological day-by-day travel schedule'}
+              : viewMode === 'timeline'
+              ? 'Chronological day-by-day travel schedule'
+              : viewMode === 'contributors'
+              ? 'Trip companion membership & GT contributor management'
+              : viewMode === 'expenses'
+              ? 'Shared travel receipts, activity bills, & expense logging'
+              : 'Financial summary, category breakdown, & member contributions'}
           </span>
         </div>
       </Card>
+
+      {/* VIEW 3 — TRIP CONTRIBUTORS */}
+      {viewMode === 'contributors' && (
+        <TripContributorsSection tripId={tripId} isOwner={true} />
+      )}
+
+      {/* VIEW 4 — TRIP EXPENSES & BILLS */}
+      {viewMode === 'expenses' && (
+        <TripExpensesSection
+          tripId={tripId}
+          members={tripMembers}
+          activities={Object.values(activitiesMap)
+            .flat()
+            .map((ta) => ({ id: ta.id, name: ta.activity?.name || 'Activity' }))}
+          isOwner={true}
+        />
+      )}
+
+      {/* VIEW 5 — TRIP ANALYTICS */}
+      {viewMode === 'analytics' && (
+        <TripAnalyticsSection tripId={tripId} />
+      )}
+
 
       {/* VIEW 1 — BY DESTINATION STOPS */}
       {viewMode === 'destination' && (
@@ -627,7 +709,7 @@ export const ItineraryBuilderPage: React.FC<ItineraryBuilderPageProps> = ({ trip
           stop={activeStopForExploration}
           existingTripActivities={activitiesMap[activeStopForExploration.id] || []}
           onClose={() => setActiveStopForExploration(null)}
-          onActivitiesUpdated={loadTripData}
+          onActivitiesUpdated={fetchTripData}
         />
       )}
 

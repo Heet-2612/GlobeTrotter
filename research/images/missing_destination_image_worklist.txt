@@ -1,0 +1,57 @@
+#12 | Ladakh | Ladakh | 
+#26 | Puducherry | Puducherry | 
+#39 | Gangtok | Sikkim | 
+#49 | Ahmedabad | Gujarat | 
+#50 | Rann of Kutch | Gujarat | 
+#52 | Ujjain | Madhya Pradesh | 
+#65 | Kasauli | Himachal Pradesh | 
+#74 | Ziro Valley | Arunachal Pradesh | 
+#75 | Andaman Islands | Andaman & Nicobar Islands | 
+#76 | Lakshadweep | Lakshadweep | 
+#77 | Chikkamagaluru | Karnataka | 
+#79 | Nagarhole | Karnataka | 
+#81 | Murudeshwar | Karnataka | 
+#83 | Yercaud | Tamil Nadu | 
+#84 | Valparai | Tamil Nadu | 
+#85 | Chettinad | Tamil Nadu | 
+#88 | Tirupati | Andhra Pradesh | 
+#91 | Bhedaghat | Madhya Pradesh | 
+#92 | Kanha | Madhya Pradesh | 
+#93 | Bandhavgarh | Madhya Pradesh | 
+#97 | Chhatrapati Sambhajinagar | Maharashtra | 
+#99 | Matheran | Maharashtra | 
+#100 | Tarkarli | Maharashtra | 
+#101 | Dwarka | Gujarat | 
+#102 | Somnath | Gujarat | 
+#103 | Gir | Gujarat | 
+#104 | Statue of Unity | Gujarat | 
+#105 | Saputara | Gujarat | 
+#106 | Manas | Assam | 
+#107 | Diu | Dadra and Nagar Haveli and Daman and Diu | 
+#110 | Champaner-Pavagadh | Gujarat | 
+#111 | Dholavira | Gujarat | 
+#112 | Modhera-Patan | Gujarat | 
+#113 | Vaishno Devi | Jammu & Kashmir | 
+#115 | Kerala | Kerala | 
+#122 | Omkareshwar | Madhya Pradesh | 
+#125 | Bhimashankar | Maharashtra | 
+#126 | Lonar | Maharashtra | 
+#127 | Dawki | Meghalaya | 
+#128 | Chilika Lake | Odisha | 
+#130 | Shekhawati | Rajasthan | 
+#131 | Ranakpur | Rajasthan | 
+#133 | Sarnath | Uttar Pradesh | 
+#136 | Kedarnath | Uttarakhand | 
+#137 | Badrinath | Uttarakhand | 
+#141 | Gaya | Bihar | 
+#143 | Daringbadi | Odisha | 
+#144 | Sambalpur | Odisha | 
+#145 | Digha | West Bengal | 
+#146 | Murshidabad | West Bengal | 
+#147 | Shantiniketan | West Bengal | 
+#148 | Bishnupur | West Bengal | 
+#156 | Tirunelveli | Tamil Nadu | 
+#157 | Velankanni | Tamil Nadu | 
+#158 | Hogenakkal | Tamil Nadu | 
+#163 | Kausani | Uttarakhand | 
+#164 | Gandikota | Andhra Pradesh | 
