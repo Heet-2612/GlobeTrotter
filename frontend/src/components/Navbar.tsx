@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
-import { Compass, LayoutDashboard, MapPin, Sparkles, User, LogOut, Menu, X, DollarSign, Calendar } from 'lucide-react';
+import { Compass, LayoutDashboard, MapPin, Sparkles, User, LogOut, Menu, X, DollarSign, Calendar, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;
@@ -24,6 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onNavigate }) => {
     { id: 'city-search', label: 'Destinations', icon: <MapPin size={16} /> },
     { id: 'activity-search', label: 'Activities', icon: <Sparkles size={16} /> },
     { id: 'profile', label: 'Profile', icon: <User size={16} /> },
+    ...(user?.admin ? [{ id: 'admin', label: 'Admin', icon: <ShieldCheck size={16} /> }] : []),
   ];
 
   return (

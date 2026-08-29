@@ -392,5 +392,39 @@ export const api = {
     const queryString = query.toString();
     return request<TripAnalyticsResponse>(`/trips/${tripId}/analytics${queryString ? `?${queryString}` : ''}`);
   },
+
+  // Platform Admin (Phase 1, Phase 2 & Phase 3)
+  getAdminProfile: () => request<AdminMeResponse>('/admin/me'),
+  getAdminUsers: (params?: { page?: number; size?: number; search?: string; authProvider?: string }) => {
+    const query = new URLSearchParams();
+    if (params?.page !== undefined) query.append('page', params.page.toString());
+    if (params?.size !== undefined) query.append('size', params.size.toString());
+    if (params?.search && params.search.trim()) query.append('search', params.search.trim());
+    if (params?.authProvider && params.authProvider !== 'ALL') query.append('authProvider', params.authProvider);
+    const queryString = query.toString();
+    return request<AdminUserListPageResponse>(`/admin/users${queryString ? `?${queryString}` : ''}`);
+  },
+  getAdminUserDetail: (userId: number) => request<AdminUserDetailResponse>(`/admin/users/${userId}`),
+  getAdminDestinations: (params?: {
+    page?: number;
+    size?: number;
+    search?: string;
+    region?: string;
+    type?: string;
+    isCurated?: boolean;
+  }) => {
+    const query = new URLSearchParams();
+    if (params?.page !== undefined) query.append('page', params.page.toString());
+    if (params?.size !== undefined) query.append('size', params.size.toString());
+    if (params?.search && params.search.trim()) query.append('search', params.search.trim());
+    if (params?.region && params.region !== 'ALL') query.append('region', params.region);
+    if (params?.type && params.type !== 'ALL') query.append('type', params.type);
+    if (params?.isCurated !== undefined) query.append('isCurated', params.isCurated.toString());
+    const queryString = query.toString();
+    return request<AdminDestinationListPageResponse>(`/admin/destinations${queryString ? `?${queryString}` : ''}`);
+  },
+  getAdminDestinationDetail: (destinationId: number) =>
+    request<AdminDestinationDetailResponse>(`/admin/destinations/${destinationId}`),
+  getAdminDestinationRegions: () => request<string[]>('/admin/destinations/regions'),
 };
 

@@ -4,6 +4,7 @@ import com.globetrotter.dto.UserResponse;
 import com.globetrotter.entity.User;
 import com.globetrotter.exception.ResourceNotFoundException;
 import com.globetrotter.repository.UserRepository;
+import com.globetrotter.security.AdminSecurityService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,15 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AdminSecurityService adminSecurityService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, AdminSecurityService adminSecurityService) {
         this.userRepository = userRepository;
+        this.adminSecurityService = adminSecurityService;
     }
 
     @Transactional(readOnly = true)
     public UserResponse getUserResponseByEmail(String email) {
         User user = getUserByEmail(email);
-        return UserResponse.fromEntity(user);
+        boolean isAdmin = adminSecurityService.isAdminEmail(user.getEmail());
+        return UserResponse.fromEntity(user, isAdmin);
     }
 
     @Transactional(readOnly = true)
@@ -28,3 +32,4 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
     }
 }
+

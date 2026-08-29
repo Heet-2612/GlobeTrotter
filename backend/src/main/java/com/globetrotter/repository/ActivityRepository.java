@@ -29,6 +29,11 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     Optional<Activity> findByDestinationIdAndSourceIgnoreCaseAndExternalId(Long destinationId, String source, String externalId);
 
+    long countByDestinationId(Long destinationId);
+
+    @Query("SELECT a.destination.id, COUNT(a) FROM Activity a WHERE a.destination.id IN :destinationIds GROUP BY a.destination.id")
+    List<Object[]> countActivitiesByDestinationIds(@Param("destinationIds") List<Long> destinationIds);
+
     Optional<Activity> findByDestinationIdAndGooglePlaceId(Long destinationId, String googlePlaceId);
 
     @Deprecated

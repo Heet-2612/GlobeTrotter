@@ -12,22 +12,28 @@ public class UserResponse {
     private String profilePhoto;
     private String languagePreference;
     private String preferredCurrency;
+    private boolean admin;
     private LocalDateTime createdAt;
 
     public UserResponse() {
     }
 
-    public UserResponse(Long id, String name, String email, String profilePhoto, String languagePreference, String preferredCurrency, LocalDateTime createdAt) {
+    public UserResponse(Long id, String name, String email, String profilePhoto, String languagePreference, String preferredCurrency, boolean admin, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.profilePhoto = profilePhoto;
         this.languagePreference = languagePreference;
         this.preferredCurrency = preferredCurrency;
+        this.admin = admin;
         this.createdAt = createdAt;
     }
 
     public static UserResponse fromEntity(User user) {
+        return fromEntity(user, false);
+    }
+
+    public static UserResponse fromEntity(User user, boolean admin) {
         if (user == null) {
             return null;
         }
@@ -38,6 +44,7 @@ public class UserResponse {
                 .profilePhoto(user.getProfilePhoto())
                 .languagePreference(user.getLanguagePreference())
                 .preferredCurrency(user.getPreferredCurrency() != null ? user.getPreferredCurrency() : "INR")
+                .admin(admin)
                 .createdAt(user.getCreatedAt())
                 .build();
     }
@@ -64,6 +71,9 @@ public class UserResponse {
     public String getPreferredCurrency() { return preferredCurrency; }
     public void setPreferredCurrency(String preferredCurrency) { this.preferredCurrency = preferredCurrency; }
 
+    public boolean isAdmin() { return admin; }
+    public void setAdmin(boolean admin) { this.admin = admin; }
+
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
@@ -74,6 +84,7 @@ public class UserResponse {
         private String profilePhoto;
         private String languagePreference;
         private String preferredCurrency;
+        private boolean admin;
         private LocalDateTime createdAt;
 
         public UserResponseBuilder id(Long id) { this.id = id; return this; }
@@ -82,10 +93,11 @@ public class UserResponse {
         public UserResponseBuilder profilePhoto(String profilePhoto) { this.profilePhoto = profilePhoto; return this; }
         public UserResponseBuilder languagePreference(String languagePreference) { this.languagePreference = languagePreference; return this; }
         public UserResponseBuilder preferredCurrency(String preferredCurrency) { this.preferredCurrency = preferredCurrency; return this; }
+        public UserResponseBuilder admin(boolean admin) { this.admin = admin; return this; }
         public UserResponseBuilder createdAt(LocalDateTime createdAt) { this.createdAt = createdAt; return this; }
 
         public UserResponse build() {
-            return new UserResponse(id, name, email, profilePhoto, languagePreference, preferredCurrency, createdAt);
+            return new UserResponse(id, name, email, profilePhoto, languagePreference, preferredCurrency, admin, createdAt);
         }
     }
 }

@@ -4,7 +4,105 @@ export interface UserResponse {
   email: string;
   profilePhoto?: string;
   languagePreference?: string;
+  preferredCurrency?: string;
+  admin?: boolean;
   createdAt?: string;
+}
+
+export interface AdminMeResponse {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  admin: boolean;
+}
+
+export interface AdminUserListItemResponse {
+  id: number;
+  name: string;
+  email: string;
+  authProvider: string;
+  profilePhoto?: string;
+  preferredCurrency?: string;
+  createdAt: string;
+  admin: boolean;
+}
+
+export interface AdminUserDetailResponse {
+  id: number;
+  name: string;
+  email: string;
+  authProvider: string;
+  profilePhoto?: string;
+  languagePreference?: string;
+  preferredCurrency?: string;
+  createdAt: string;
+  updatedAt?: string;
+  admin: boolean;
+  tripsCreatedCount: number;
+  tripMembershipsCount: number;
+}
+
+export interface AdminUserListPageResponse {
+  content: AdminUserListItemResponse[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
+}
+
+export interface AdminDestinationListItemResponse {
+  id: number;
+  name: string;
+  canonicalName: string;
+  country: string;
+  region: string;
+  regionId?: number;
+  destinationType: string;
+  source: string;
+  isCurated: boolean;
+  costIndex: number;
+  popularity: number;
+  imageUrl?: string;
+  currencyCode: string;
+  currencySymbol: string;
+  latitude?: number;
+  longitude?: number;
+  activityCount: number;
+}
+
+export interface AdminDestinationDetailResponse {
+  id: number;
+  name: string;
+  canonicalName: string;
+  country: string;
+  region: string;
+  regionId?: number;
+  regionDescription?: string;
+  destinationType: string;
+  source: string;
+  isCurated: boolean;
+  costIndex: number;
+  popularity: number;
+  imageUrl?: string;
+  currencyCode: string;
+  currencySymbol: string;
+  latitude?: number;
+  longitude?: number;
+  aliases: string[];
+  activityCount: number;
+}
+
+export interface AdminDestinationListPageResponse {
+  content: AdminDestinationListItemResponse[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
 }
 
 export interface AuthResponse {

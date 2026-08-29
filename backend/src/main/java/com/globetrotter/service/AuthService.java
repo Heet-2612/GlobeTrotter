@@ -28,6 +28,7 @@ public class AuthService {
     private final JwtTokenProvider tokenProvider;
     private final BrevoEmailService brevoEmailService;
     private final OAuth2ExchangeService exchangeService;
+    private final com.globetrotter.security.AdminSecurityService adminSecurityService;
 
     public AuthService(
             UserRepository userRepository,
@@ -35,7 +36,8 @@ public class AuthService {
             PasswordEncoder passwordEncoder,
             JwtTokenProvider tokenProvider,
             BrevoEmailService brevoEmailService,
-            OAuth2ExchangeService exchangeService
+            OAuth2ExchangeService exchangeService,
+            com.globetrotter.security.AdminSecurityService adminSecurityService
     ) {
         this.userRepository = userRepository;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
@@ -43,6 +45,7 @@ public class AuthService {
         this.tokenProvider = tokenProvider;
         this.brevoEmailService = brevoEmailService;
         this.exchangeService = exchangeService;
+        this.adminSecurityService = adminSecurityService;
     }
 
     @Transactional
@@ -67,7 +70,7 @@ public class AuthService {
 
         return AuthResponse.builder()
                 .token(token)
-                .user(UserResponse.fromEntity(savedUser))
+                .user(UserResponse.fromEntity(savedUser, adminSecurityService.isAdminEmail(savedUser.getEmail())))
                 .build();
     }
 
@@ -86,7 +89,7 @@ public class AuthService {
 
         return AuthResponse.builder()
                 .token(token)
-                .user(UserResponse.fromEntity(user))
+                .user(UserResponse.fromEntity(user, adminSecurityService.isAdminEmail(user.getEmail())))
                 .build();
     }
 
@@ -192,7 +195,7 @@ public class AuthService {
 
         return AuthResponse.builder()
                 .token(token)
-                .user(UserResponse.fromEntity(user))
+                .user(UserResponse.fromEntity(user, adminSecurityService.isAdminEmail(user.getEmail())))
                 .build();
     }
 }

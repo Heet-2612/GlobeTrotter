@@ -25,4 +25,6 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 
     @Query("SELECT DISTINCT t FROM Trip t LEFT JOIN TripMember tm ON t.id = tm.trip.id WHERE t.id = :id AND (t.user.id = :userId OR (tm.user.id = :userId AND tm.status = 'ACTIVE'))")
     Optional<Trip> findAccessibleTripById(@Param("id") Long id, @Param("userId") Long userId);
+
+    long countByUserId(Long userId);
 }

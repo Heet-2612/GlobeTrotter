@@ -16,6 +16,7 @@ import { BudgetPage } from './pages/BudgetPage';
 import { TimelinePage } from './pages/TimelinePage';
 import { SharedItineraryPage } from './pages/SharedItineraryPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { SharingSection } from './components/SharingSection';
 import { Button, LoadingState } from './components/common/UIComponents';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
@@ -31,6 +32,11 @@ const MainAppContent: React.FC = () => {
       const pathname = window.location.pathname;
       const searchParams = new URLSearchParams(window.location.search);
       const hash = window.location.hash.replace(/^#/, '');
+
+      if (pathname === '/admin' || hash === 'admin' || hash.startsWith('admin/')) {
+        setCurrentTab('admin');
+        return;
+      }
 
       if (pathname === '/reset-password' || hash.startsWith('reset-password')) {
         const token = searchParams.get('token') || (hash.includes('token=') ? hash.split('token=')[1]?.split('&')[0] : '');
@@ -230,6 +236,9 @@ const MainAppContent: React.FC = () => {
     }
     if (currentTab === 'profile') {
       return <ProfilePage onNavigate={handleNavigate} />;
+    }
+    if (currentTab === 'admin') {
+      return <AdminDashboardPage onNavigate={handleNavigate} />;
     }
 
     // Default fallback to dashboard
